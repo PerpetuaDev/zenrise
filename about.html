@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title data-i18n-title="about_title">About — Zenrise</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'srn7uwt',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+
+<style>
+  :root {
+    --bg:      #F7F4EA;
+    --bg-2:    #EDE9E5;
+    --bg-3:    #E4DFD5;
+    --ink:     #294138;
+    --ink-60:  rgba(41,65,56,0.62);
+    --ink-30:  rgba(41,65,56,0.28);
+    --ink-12:  rgba(41,65,56,0.14);
+    --rule:    rgba(0,0,0,0.10);
+
+    --display: "optima-nova-lt-pro", "Optima", serif;
+    --sans:    "gill-sans-nova", "Gill Sans", "Gill Sans MT", sans-serif;
+    --mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --jp:      "yu-gothic-pr6n", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: hidden; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :lang(ja) {
+    --display: "toppan-bunkyu-mincho-pr6n", "Hiragino Mincho ProN", serif;
+    --sans:    "yu-gothic-pr6n", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-synthesis: none;
+  }
+  .stage { width: 1920px; transform-origin: top left; visibility: hidden; }
+  .stage.fitted { visibility: visible; }
+  html.wf-loading .stage { visibility: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ───── Nav (shared with home) ───── */
+  .nav {
+    height: 96px;
+    padding: 0 36px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .logo {
+    font-family: "optima-nova-lt-pro", "Optima", serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .navlinks { display: flex; gap: 78px; font-size: 22px; }
+  :lang(ja) .navlinks { font-size: 18px; }
+  .navlinks a { position: relative; padding: 6px 0; white-space: nowrap; }
+  .navlinks a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: var(--ink);
+  }
+  .navlinks a:hover { opacity: 0.7; }
+  .lang {
+    justify-self: end; font-size: 22px;
+    display: inline-flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+  }
+  .lang::after { content: "↓"; }
+
+  /* ───── Page header ───── */
+  .ph {
+    padding: 80px 36px 96px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 96px;
+    align-items: end;
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .ph .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    display: block;
+  }
+  .ph h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 0.92;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+  .ph h1 .jp {
+    display: block;
+    font-family: var(--jp);
+    font-weight: 400;
+    font-size: 64px;
+    color: var(--ink-60);
+    margin-top: 22px;
+    letter-spacing: 0.08em;
+  }
+  .ph .intro p {
+    font-family: var(--display);
+    font-size: 28px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 22px;
+    max-width: 640px;
+    text-wrap: pretty;
+  }
+  .ph .intro p.muted {
+    font-size: 20px;
+    color: var(--ink-60);
+    font-family: var(--sans);
+    line-height: 1.6;
+  }
+
+  /* ───── Hero image ───── */
+  .about-hero {
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+  }
+  .about-hero .frame {
+    width: 100%;
+    height: 820px;
+    background: url("assets/hero-kamakura.png") center 38% / cover no-repeat;
+    position: relative;
+  }
+  .about-hero .frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.25) 100%);
+    pointer-events: none;
+  }
+  .about-hero .credit {
+    position: absolute;
+    left: 36px;
+    bottom: 24px;
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+    opacity: 0.95;
+    z-index: 2;
+  }
+  .about-hero .credit .n {
+    opacity: 0.7;
+    margin-right: 18px;
+  }
+  .about-hero .meta-row {
+    padding: 18px 36px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .about-hero .meta-row .right { display: flex; gap: 28px; }
+
+  /* ───── Section frame ───── */
+  .section { padding: 0 36px; }
+  .section-head {
+    padding: 96px 0 56px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 96px;
+    align-items: baseline;
+  }
+  .section-head .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .section-head .label .num { color: var(--ink); margin-right: 18px; }
+  .section-head h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 0.98;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .section-head h2 .jp {
+    display: block;
+    font-family: var(--jp);
+    font-size: 32px;
+    color: var(--ink-60);
+    margin-top: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ───── 会社概要 table ───── */
+  .gaiyo {
+    padding-bottom: 120px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 96px;
+    align-items: start;
+  }
+  .gaiyo .note {
+    position: sticky;
+    top: 40px;
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-60);
+    max-width: 380px;
+    text-wrap: pretty;
+  }
+  .gaiyo table {
+    grid-column: 2;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+  }
+  .gaiyo tr {
+    border-top: 1px solid var(--ink-12);
+  }
+  .gaiyo tr:last-child { border-bottom: 1px solid var(--ink-12); }
+  .gaiyo th, .gaiyo td {
+    text-align: left;
+    vertical-align: top;
+    padding: 28px 24px 28px 0;
+    font-weight: 400;
+  }
+  .gaiyo th {
+    width: 280px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 20px;
+    letter-spacing: 0.04em;
+  }
+  .gaiyo th .en {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .gaiyo td {
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 19px;
+    padding-right: 0;
+  }
+  .gaiyo td .sub {
+    display: block;
+    color: var(--ink-60);
+    font-size: 15px;
+    margin-top: 6px;
+  }
+
+  /* ───── Founders ───── */
+  .founders-2 {
+    padding-bottom: 120px;
+    display: grid;
+    row-gap: 96px;
+  }
+  .fbio {
+    display: grid;
+    grid-template-columns: 580px 1fr;
+    column-gap: 80px;
+    align-items: start;
+  }
+  .fbio.reverse { grid-template-columns: 1fr 580px; }
+  .fbio .photo {
+    width: 580px;
+    aspect-ratio: 4 / 5;
+    background:
+      repeating-linear-gradient(135deg, rgba(41,65,56,0.05) 0 1px, transparent 1px 14px),
+      var(--bg-3);
+    position: relative;
+  }
+  .fbio .photo .pl {
+    position: absolute;
+    left: 24px; top: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .fbio .photo .pl2 {
+    position: absolute;
+    right: 24px; bottom: 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .fbio .text { padding-top: 12px; }
+  .fbio .role {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.26em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .fbio h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 0.96;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .fbio h3 .jp {
+    font-family: var(--jp);
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--ink-60);
+    margin-left: 18px;
+    letter-spacing: 0.08em;
+    vertical-align: 18px;
+  }
+  .fbio .text p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 18px;
+    max-width: 620px;
+    text-wrap: pretty;
+  }
+  .fbio .text p.lead {
+    font-family: var(--display);
+    font-size: 28px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 28px 0 32px;
+  }
+  .fbio .quote {
+    margin-top: 36px;
+    padding: 28px 0 0;
+    border-top: 1px solid var(--ink-12);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-60);
+    line-height: 1.5;
+    max-width: 580px;
+  }
+  .fbio .facts {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 36px;
+  }
+  .fbio .facts li {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-60);
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--ink-12);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .fbio .facts li span:first-child {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .fbio .facts li span:last-child { color: var(--ink); }
+
+  /* ───── Footer (cream / inline — matches home v2) ───── */
+  .rule { height: 1px; background: var(--rule); width: 100%; }
+  footer.foot-v2 { padding: 0 36px; margin-top: 40px; }
+  .foot-v2-top {
+    padding: 96px 0 72px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 64px;
+  }
+  .foot-brand .mark {
+    font-family: "optima-nova-lt-pro", "Optima", serif;
+    font-size: 40px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 26px;
+    display: block;
+  }
+  .foot-brand p {
+    font-family: var(--display);
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--ink-60);
+    margin: 0;
+    max-width: 380px;
+    text-wrap: pretty;
+  }
+  .foot-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin: 0 0 22px;
+    font-weight: 500;
+  }
+  .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  .foot-col li { font-size: 18px; line-height: 1.45; color: var(--ink); }
+  .foot-col li a:hover { opacity: 0.6; }
+  .foot-col .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .foot-v2-bottom {
+    border-top: 1px solid var(--ink-12);
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .foot-v2-bottom .legal { display: flex; gap: 32px; }
+
+  /* ───── Responsive ───── */
+  @media (max-width: 1023px) {
+    .stage { width: 100% !important; }
+
+    /* Nav */
+    .nav { height: 64px; padding: 0 20px; }
+    .logo { font-size: 22px; }
+    .navlinks { gap: 28px; font-size: 16px; }
+    .lang { font-size: 16px; }
+
+    /* Page header */
+    .ph { padding: 48px 20px 56px; grid-template-columns: 1fr; row-gap: 36px; }
+    .ph h1 { font-size: 72px; }
+    .ph h1 .jp { font-size: 32px; }
+    .ph .intro p { font-size: 20px; max-width: 100%; }
+    .ph .intro p.muted { font-size: 16px; }
+
+    /* Hero image */
+    .about-hero .frame { height: 52vw; min-height: 240px; }
+    .about-hero .meta-row { padding: 14px 20px 0; }
+
+    /* Section frame */
+    .section { padding: 0 20px; }
+    .section-head { padding: 56px 0 36px; grid-template-columns: 1fr; row-gap: 16px; }
+    .section-head h2 { font-size: 48px; }
+
+    /* Company profile table — stack label/value */
+    .gaiyo { grid-template-columns: 1fr; row-gap: 24px; }
+    .gaiyo .note { position: static; font-size: 18px; }
+    .gaiyo table { grid-column: 1; }
+    .gaiyo tr { display: block; padding: 16px 0; }
+    .gaiyo th { display: block; width: auto; padding: 0 0 4px; font-size: 17px; }
+    .gaiyo td { display: block; padding: 0; font-size: 16px; }
+
+    /* Founders */
+    .founders-2 { row-gap: 64px; }
+    .fbio, .fbio.reverse { grid-template-columns: 1fr !important; }
+    .fbio .photo { width: 100%; }
+    .fbio h3 { font-size: 52px; }
+    .fbio .text p { font-size: 17px; max-width: 100%; }
+    .fbio .text p.lead { font-size: 22px; }
+    .fbio .facts { font-size: 15px; }
+
+    /* Footer */
+    .foot-v2 { padding: 0 20px; }
+    .foot-v2-top { padding: 56px 0 48px; grid-template-columns: 1fr; gap: 40px; }
+    .foot-v2-bottom { flex-direction: column; gap: 12px; padding: 20px 0; text-align: center; }
+    .foot-v2-bottom .legal { gap: 20px; }
+  }
+
+  @media (max-width: 599px) {
+    .navlinks { display: none; }
+    .ph h1 { font-size: 52px; }
+    .fbio h3 { font-size: 40px; }
+    .section-head h2 { font-size: 36px; }
+  }
+</style>
+</head>
+
+<body>
+<div class="stage" id="stage">
+
+  <!-- ───── Header ───── -->
+  <header class="nav">
+    <a class="logo" href="index.html">ZENRISE</a>
+    <nav class="navlinks">
+      <a href="index.html" data-i18n="nav_home">home</a>
+      <a href="about.html" class="active" data-i18n="nav_about">about us</a>
+      <a href="contact.html" data-i18n="nav_contact">contact</a>
+    </nav>
+    <a class="lang" href="#">english</a>
+  </header>
+
+  <!-- ───── Page header ───── -->
+  <section class="ph" data-screen-label="02 About — Header">
+    <div>
+      <span class="eyebrow" data-i18n="about_eyebrow">About us</span>
+      <h1 data-i18n-html="about_h1">About<br/>Zenrise.</h1>
+    </div>
+    <div class="intro">
+      <p data-i18n="about_intro_1">We are a two-person walking tour business based in Fujisawa. We design quiet, locally-led walking tours through the lesser-known corners of the Shonan coast.</p>
+      <p class="muted" data-i18n="about_intro_2">Founded in 2024, we're on a journey to discover and share the hidden gems of Japan — the quiet, beautiful places that travellers usually miss.</p>
+    </div>
+  </section>
+
+  <!-- ───── About hero image ───── -->
+  <section class="about-hero" data-screen-label="02 About — Hero photo">
+    <div class="frame">
+      <div class="credit"><span class="n" data-i18n="about_hero_credit_n">No. 01</span><span data-i18n="about_hero_credit">Komachi-dori storefront, Kamakura &middot; late spring</span></div>
+    </div>
+    <div class="meta-row">
+      <span data-i18n="about_hero_meta_left">Photograph &mdash; Akari Usuda, 2024</span>
+      <div class="right">
+        <span data-i18n="about_hero_meta_1">35mm</span>
+        <span data-i18n="about_hero_meta_2">Natural light</span>
+        <span data-i18n="about_hero_meta_3">06:42 JST</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── 会社概要 ───── -->
+  <section class="section" data-screen-label="02 About — 会社概要">
+    <div class="section-head">
+      <div class="label"><span class="num">01</span><span data-i18n="about_cp_label">Company profile</span></div>
+      <h2 data-i18n="about_cp_h2">Company profile.</h2>
+    </div>
+
+    <div class="gaiyo">
+      <table>
+        <tr>
+          <th data-i18n="about_cp_name">Company name</th>
+          <td data-i18n="about_cp_name_v">Intercommunicate K. K.</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_founded">Founded</th>
+          <td data-i18n="about_cp_founded_v">April 2019</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_reps">Representatives</th>
+          <td><span data-i18n-html="about_cp_reps_v">Akari Usuda &amp; Kentaro Usuda</span><span class="sub" data-i18n="about_cp_reps_sub">Co-founders</span></td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_address">Address</th>
+          <td data-i18n-html="about_cp_address_v">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_business">Business</th>
+          <td data-i18n="about_cp_business_v">Curation and operation of small-group walking tours across Kamakura, Fujisawa, Enoshima, and Yokohama.</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_team">Team</th>
+          <td data-i18n="about_cp_team_v">Two co-founders, plus a network of twelve partner guides, chefs, and craftspeople.</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_hours">Hours</th>
+          <td><span data-i18n="about_cp_hours_v">Tuesday – Saturday, 10:00 – 17:00 JST</span><span class="sub" data-i18n="about_cp_hours_sub">Closed Sundays, Mondays, and Japanese national holidays.</span></td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_contact">Contact</th>
+          <td data-i18n-html="about_cp_contact_v">hello@zenrise.jp<br/>+81 (0)466 00 0000</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_license">Travel agency license</th>
+          <td data-i18n="about_cp_license_v">Kanagawa Prefecture Registered Travel Agency No. 3-XXXX</td>
+        </tr>
+        <tr>
+          <th data-i18n="about_cp_bank">Bank</th>
+          <td data-i18n="about_cp_bank_v">Bank of Yokohama, Kamakura Branch</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ───── Founders ───── -->
+  <section class="section" data-screen-label="02 About — Founders">
+    <div class="section-head">
+      <div class="label"><span class="num">02</span><span data-i18n="about_team_label">The team</span></div>
+    </div>
+
+    <div class="founders-2">
+
+      <article class="fbio">
+        <div class="photo">
+          <span class="pl" data-i18n="about_aiko_photo_pl"></span>
+          <span class="pl2" data-i18n="about_aiko_photo_pl2"></span>
+        </div>
+        <div class="text">
+          <span class="role" data-i18n="about_aiko_role">Founder · Tour Guide</span>
+          <h3 data-i18n="about_aiko_name">Akari Usuda</h3>
+          <p class="lead" data-i18n="about_aiko_lead">[Introduce Akari — her background, her personal connection to the Kamakura area, and the experience and training that led her to co-founding Zenrise. Replace with accurate content.]</p>
+          <p data-i18n="about_aiko_p1">[Describe the tours and experiences Akari leads — the specific places she visits, her areas of expertise, and the languages she speaks. Give a sense of who she is and how guests experience the tours through her. Replace with accurate content.]</p>
+          <p data-i18n="about_aiko_p2">[A personal note — what Akari does when she's not on tour. Something small and specific. Replace with accurate content.]</p>
+
+          <ul class="facts">
+            <li><span data-i18n="about_aiko_fact1_l">Based</span><span data-i18n="about_aiko_fact1_v">Kamakura</span></li>
+            <li><span data-i18n="about_aiko_fact2_l">Languages</span><span data-i18n="about_aiko_fact2_v">JP · EN</span></li>
+            <li><span data-i18n="about_aiko_fact3_l">Favourite Spots</span><span data-i18n="about_aiko_fact3_v">La Petite Boulangerie, Sasuke Inari</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="fbio reverse">
+        <div class="text">
+          <span class="role" data-i18n="about_daichi_role">Registered Travel Agent · Tour Guide</span>
+          <h3 data-i18n="about_daichi_name">Kentaro Usuda</h3>
+          <p class="lead" data-i18n-html="about_daichi_lead">[Introduce Kentaro — his career before Zenrise, how he came to know the Shonan coast so well, and what brought him to co-found the company with Akari. Replace with accurate content.]</p>
+          <p data-i18n="about_daichi_p1">[Describe Kentaro's role in designing routes, making bookings, and running the operational side of Zenrise. Give a sense of his personality and particular knowledge of the region — the kind of detail only someone who has spent years exploring it would know. Replace with accurate content.]</p>
+          <p data-i18n="about_daichi_p2">[A closing note on Kentaro's day-to-day — the practical side of keeping Zenrise running. Replace with accurate content.]</p>
+
+          <ul class="facts">
+            <li><span data-i18n="about_daichi_fact1_l">Based</span><span data-i18n="about_daichi_fact1_v">Kamakura</span></li>
+            <li><span data-i18n="about_daichi_fact2_l">Languages</span><span data-i18n="about_daichi_fact2_v">JP</span></li>
+            <li><span data-i18n="about_daichi_fact3_l">Favourite Spots</span><span data-i18n="about_daichi_fact3_v">Yamashita Park, Nami to Kaze</span></li>
+          </ul>
+        </div>
+        <div class="photo">
+          <span class="pl" data-i18n-html="about_daichi_photo_pl"></span>
+          <span class="pl2" data-i18n="about_aiko_photo_pl2"></span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ───── Footer ───── -->
+  <footer class="foot-v2" data-screen-label="02 About — Footer">
+    <div class="rule"></div>
+    <div class="foot-v2-top">
+      <div class="foot-brand">
+        <span class="mark">ZENRISE</span>
+        <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="footer_visit">Visit</h4>
+        <ul>
+          <li>
+            <span class="label" data-i18n="footer_studio">Office</span>
+            <span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
+          </li>
+          <li style="margin-top: 8px">
+            <span class="label" data-i18n="footer_hours">Hours</span>
+            <span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="footer_contact">Contact</h4>
+        <ul>
+          <li>
+            <span class="label" data-i18n="footer_bookings">Bookings</span>
+            <a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
+          </li>
+          <li>
+            <span class="label" data-i18n="footer_telephone">Telephone</span>
+            +81 (0)466&nbsp;00&nbsp;0000
+          </li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="footer_follow">Follow</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/zenrise_tours/" data-i18n="footer_instagram">Instagram &nbsp;→</a></li>
+          <li><a href="https://www.youtube.com/@zenrisejapan" data-i18n="footer_youtube">YouTube &nbsp;→</a></li>
+          <li><a href="https://www.tiktok.com/@zenrise_tours" data-i18n="footer_tiktok">TikTok &nbsp;→</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-v2-bottom">
+      <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
+      <div class="legal">
+        <a href="#" data-i18n="footer_privacy">Privacy</a>
+        <a href="#" data-i18n="footer_terms">Terms</a>
+        <a href="#" data-i18n="footer_cookies">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scale the 1920px stage to fit the viewer's window width.
+  (function () {
+    var stage = document.getElementById('stage');
+    function fit() {
+      var vw = document.documentElement.clientWidth;
+      if (vw < 1024) {
+        stage.style.zoom = '';
+        stage.style.width = '';
+        stage.style.margin = '';
+        stage.classList.add('fitted');
+        return;
+      }
+      var vh = document.documentElement.clientHeight;
+      var HERO_DESIGN_HEIGHT = 1100;
+      var scale = Math.min(1, vw / 1920, vh / HERO_DESIGN_HEIGHT);
+      // 'zoom' (unlike transform:scale) scales BOTH layout and visual, so
+      // the document's scroll area tracks the visible content exactly.
+      stage.style.zoom = scale;
+      // With zoom shrinking layout width, margin auto centers horizontally.
+      stage.style.margin = '0 auto';
+      // Clear anything left over from earlier transform-based versions.
+      stage.style.transform = '';
+      stage.style.width = '1920px';
+      stage.style.height = '';
+      document.body.style.height = '';
+      stage.classList.add('fitted');
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    setTimeout(fit, 200);
+    setTimeout(fit, 600);
+  })();
+</script>
+<script src="lang.js"></script>
+</body>
+</html>

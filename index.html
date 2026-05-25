@@ -1,0 +1,1533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title data-i18n-title="home_title">Zenrise — Quiet journeys through Japan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'srn7uwt',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+
+<style>
+  :root {
+    --bg:      #F7F4EA;
+    --bg-2:    #EDE9E5;
+    --bg-3:    #E4DFD5;
+    --ink:     #294138;
+    --ink-60:  rgba(41,65,56,0.62);
+    --ink-30:  rgba(41,65,56,0.28);
+    --ink-12:  rgba(41,65,56,0.14);
+    --rule:    rgba(0,0,0,0.10);
+    --paper:   #ffffff;
+
+    --display: "optima-nova-lt-pro", "Optima", serif;
+    --sans:    "gill-sans-nova", "Gill Sans", "Gill Sans MT", sans-serif;
+    --mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: hidden; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :lang(ja) {
+    --display: "toppan-bunkyu-mincho-pr6n", "Hiragino Mincho ProN", serif;
+    --sans:    "yu-gothic-pr6n", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-synthesis: none;
+  }
+
+  /* Stage: keep the 1920 design width, scale to fit viewer's window. */
+  .stage {
+    width: 1920px;
+    transform-origin: top left;
+    visibility: hidden;
+  }
+  .stage.fitted { visibility: visible; }
+  html.wf-loading .stage { visibility: hidden; }
+
+  @keyframes hero-fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .hero-photo { opacity: 0; }
+  .hero-card  { opacity: 0; }
+  .stage.hero-in .hero-photo {
+    animation: hero-fade 0.9s ease forwards;
+  }
+  .stage.hero-in .hero-card {
+    animation: hero-fade 0.9s ease 0.35s forwards;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ───── Header ───── */
+  .nav {
+    height: 96px;
+    padding: 0 36px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .logo {
+    font-family: "optima-nova-lt-pro", "Optima", serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .navlinks {
+    display: flex;
+    gap: 78px;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  :lang(ja) .navlinks { font-size: 18px; }
+  .navlinks a { position: relative; padding: 6px 0; white-space: nowrap; }
+  .navlinks a.active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+  .navlinks a:hover { opacity: 0.7; }
+  .lang {
+    justify-self: end;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .lang::after { content: "↓"; }
+
+  /* ───── Hero ───── */
+  .hero {
+    position: relative;
+    padding: 26px 36px 120px;
+  }
+  .hero-grid {
+    position: relative;
+  }
+  .hero-photo {
+    width: 1450px;
+    height: 823px;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .slide-bg.active { opacity: 1; }
+  .slide-bg-1 { background-image: url("assets/hero-kamakura.png"); }
+  .slide-bg-2 { background-image: url("assets/nami-to-kaze.jpg"); }
+  .slide-bg-3 { background-image: url("assets/zeniarai-benten-reduced.jpg"); }
+  .slide-dots {
+    position: absolute;
+    bottom: 22px;
+    right: 24px;
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+  }
+  .slide-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .slide-dot.active { background: #fff; }
+  .hero-photo .photo-meta {
+    position: absolute;
+    left: 24px;
+    bottom: 22px;
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+    opacity: 0.92;
+  }
+  .hero-side {
+    position: absolute;
+    left: 1088px;
+    top: 480px;
+    width: 760px;
+    z-index: 2;
+  }
+  .hero-card {
+    width: 760px;
+    max-width: none;
+    background: var(--bg-2);
+    padding: 40px 56px 56px;
+    position: relative;
+  }
+  .hero-card .num {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+    margin: 0 0 32px;
+  }
+  .hero-card .ttl {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 58px;
+    line-height: 1.04;
+    color: var(--ink);
+    margin: 0 0 24px;
+    letter-spacing: -0.005em;
+  }
+  .hero-card .copy {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-60);
+    margin: 0 0 36px;
+    max-width: 460px;
+    text-wrap: pretty;
+  }
+  .hero-card .more {
+    display: inline-block;
+    font-size: 22px;
+    color: var(--ink);
+    padding-bottom: 4px;
+    letter-spacing: 0.01em;
+    position: relative;
+  }
+  .hero-card .more::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+  .hero-card .tag {
+    position: absolute;
+    left: 56px; top: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+
+  /* ───── Find your perfect place ───── */
+  .find {
+    margin-top: 120px;
+    padding: 0 36px;
+  }
+  .rule {
+    height: 1px;
+    background: var(--rule);
+    width: 100%;
+  }
+  .find-head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 88px 0 96px;
+  }
+  .find-head .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    justify-self: start;
+  }
+  .find-head h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+  }
+  .find-head .count {
+    justify-self: end;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+  }
+
+  .dest-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+  .dest-expanded {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: var(--bg-3);
+    overflow: hidden;
+  }
+  .dest-expanded .exp-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .dest-expanded .exp-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0) 50%);
+    pointer-events: none;
+  }
+  .dest-expanded .exp-meta {
+    position: absolute;
+    bottom: 64px;
+    left: 64px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease 0.45s, transform 0.4s ease 0.45s;
+  }
+  .dest-expanded.open .exp-meta { opacity: 1; transform: none; }
+  .dest-expanded .exp-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 16px;
+  }
+  .dest-expanded.is-placeholder .exp-num { color: var(--ink-60); }
+  .dest-expanded .exp-name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: #fff;
+    max-width: 1400px;
+  }
+  .dest-expanded.is-placeholder .exp-name { color: var(--ink); }
+  .dest-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 52px;
+    height: 52px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.5s, background 0.2s ease;
+  }
+  .dest-expanded.is-placeholder .dest-close {
+    background: rgba(41,65,56,0.06);
+    border-color: var(--ink-30);
+    color: var(--ink);
+  }
+  .dest-expanded.open .dest-close { opacity: 1; }
+  .dest-close:hover { background: rgba(255,255,255,0.22); }
+  .dest-expanded.is-placeholder .dest-close:hover { background: rgba(41,65,56,0.1); }
+  .dest {
+    position: relative;
+    aspect-ratio: 446 / 558;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--bg-3);
+  }
+  .dest .pic {
+    position: absolute; inset: 0;
+    transition: transform 700ms cubic-bezier(.2,.6,.2,1);
+  }
+  .dest:hover .pic { transform: scale(1.04); }
+  .dest .pic.photo {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .dest .pic.placeholder {
+    background:
+      repeating-linear-gradient(135deg, rgba(41,65,56,0.05) 0 1px, transparent 1px 14px),
+      var(--bg-3);
+  }
+  .dest .ph-label {
+    position: absolute;
+    left: 24px; top: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .dest .scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 38%, transparent 62%);
+  }
+  .dest .meta {
+    position: absolute;
+    left: 28px; right: 28px; bottom: 28px;
+    color: #fff;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .dest .meta .name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 39px;
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+  }
+  .dest .meta .kanji {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 16px;
+    opacity: 0.85;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    display: block;
+  }
+  .dest .meta .arrow { display: none; }
+  .dest .num-tag {
+    position: absolute;
+    right: 24px; top: 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: #fff;
+    opacity: 0.9;
+  }
+  .dest.placeholder .num-tag { color: var(--ink-60); }
+
+  /* ───── About ───── */
+  .about {
+    margin-top: 160px;
+    padding: 0 36px;
+  }
+  .about-inner {
+    padding: 96px 0 120px;
+    display: grid;
+    grid-template-columns: 560px 1fr;
+    column-gap: 120px;
+  }
+  .about-left {
+    position: sticky;
+    top: 40px;
+  }
+  .about-left .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: block;
+  }
+  .about-left h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 0.96;
+    color: var(--ink);
+    margin: 0 0 36px;
+    letter-spacing: -0.01em;
+  }
+  .about-left .sig {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 18px;
+    color: var(--ink-60);
+  }
+  .about-left .sig::before {
+    content: "";
+    width: 32px; height: 1px;
+    background: var(--ink);
+  }
+  .about-right p {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 32px;
+    text-wrap: pretty;
+    max-width: 880px;
+  }
+  .about-right p.lead {
+    font-size: 36px;
+    line-height: 1.35;
+    margin-bottom: 48px;
+  }
+
+  .principles {
+    margin-top: 88px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+    padding-top: 56px;
+    border-top: 1px solid var(--ink-12);
+  }
+  .principle .n {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .principle h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    margin: 0 0 14px;
+    letter-spacing: -0.005em;
+  }
+  .principle p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-60);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* ───── Footer ───── */
+  footer {
+    background: var(--ink);
+    color: var(--bg);
+    margin-top: 80px;
+  }
+  .foot-top {
+    padding: 96px 36px 72px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 64px;
+  }
+  .foot-brand .mark {
+    font-family: "optima-nova-lt-pro", "Optima", serif;
+    font-size: 36px;
+    letter-spacing: 0.06em;
+    color: var(--bg);
+    line-height: 1;
+    margin-bottom: 26px;
+    display: block;
+  }
+  .foot-brand p {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.4;
+    color: rgba(247,244,234,0.78);
+    margin: 0;
+    max-width: 380px;
+    text-wrap: pretty;
+  }
+  .foot-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(247,244,234,0.55);
+    text-transform: uppercase;
+    margin: 0 0 22px;
+    font-weight: 500;
+  }
+  .foot-col ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column;
+    gap: 12px;
+  }
+  .foot-col li {
+    font-size: 18px;
+    line-height: 1.45;
+    color: rgba(247,244,234,0.92);
+  }
+  .foot-col li a:hover { opacity: 0.7; }
+  .foot-col .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: rgba(247,244,234,0.45);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .foot-bottom {
+    border-top: 1px solid rgba(247,244,234,0.12);
+    padding: 28px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: rgba(247,244,234,0.55);
+    text-transform: uppercase;
+  }
+  .foot-bottom .legal { display: flex; gap: 32px; }
+  .foot-bottom a:hover { color: var(--bg); }
+
+  /* Subtle entrance */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 700ms ease, transform 700ms ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ───────────────────────────────────────────────────────────── */
+  /* Alt variants — toggled via Tweaks                            */
+  /* ───────────────────────────────────────────────────────────── */
+
+  /* ─ About v2: founder portrait ─ */
+  .about-v2 {
+    margin-top: 160px;
+    padding: 0 36px;
+  }
+  .about-v2-inner {
+    padding: 96px 0 120px;
+    display: grid;
+    grid-template-columns: 760px 1fr;
+    column-gap: 96px;
+    align-items: start;
+  }
+  .about-v2-photo {
+    position: relative;
+  }
+  .about-v2-photo image-slot {
+    width: 760px;
+    height: 880px;
+    display: block;
+    --slot-bg: #e4dfd5;
+    --slot-fg: rgba(41,65,56,0.55);
+  }
+  .about-v2-photo .caption {
+    display: block;
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+  }
+  .about-v2-text {
+    padding-top: 12px;
+  }
+  .about-v2-text .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: block;
+  }
+  .about-v2-text h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 92px;
+    line-height: 0.96;
+    color: var(--ink);
+    margin: 0 0 44px;
+    letter-spacing: -0.01em;
+  }
+  .about-v2-text .amp {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-60);
+  }
+  .about-v2-text p.lead {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0 0 32px;
+    max-width: 680px;
+    text-wrap: pretty;
+  }
+  .about-v2-text p {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink-60);
+    margin: 0 0 22px;
+    max-width: 620px;
+    text-wrap: pretty;
+  }
+  .founders {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--ink-12);
+  }
+  .founder .role {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .founder h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 14px;
+    letter-spacing: -0.005em;
+  }
+  .founder p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-60);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* ─ Footer v2: inline / cream ─ */
+  footer.foot-v2 {
+    background: transparent;
+    color: var(--ink);
+    margin-top: 80px;
+    padding: 0 36px;
+  }
+  .foot-v2 .foot-v2-top {
+    padding: 96px 0 72px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 64px;
+  }
+  .foot-v2 .foot-brand .mark {
+    font-family: var(--display);
+    font-size: 40px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 26px;
+    display: block;
+  }
+  .foot-v2 .foot-brand p {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--ink-60);
+    margin: 0;
+    max-width: 380px;
+    text-wrap: pretty;
+  }
+  .foot-v2 .foot-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    margin: 0 0 22px;
+    font-weight: 500;
+  }
+  .foot-v2 .foot-col ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column;
+    gap: 14px;
+  }
+  .foot-v2 .foot-col li {
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .foot-v2 .foot-col li a:hover { opacity: 0.6; }
+  .foot-v2 .foot-col .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .foot-v2 .foot-v2-bottom {
+    border-top: 1px solid var(--ink-12);
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-60);
+    text-transform: uppercase;
+  }
+  .foot-v2 .foot-v2-bottom .legal { display: flex; gap: 32px; }
+  .foot-v2 .foot-v2-bottom a:hover { color: var(--ink); }
+
+  /* ─ Tweaks panel (only visible when host activates it) ─ */
+  #tweaks-panel {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 280px;
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--ink-12);
+    border-radius: 4px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    font-family: var(--sans);
+    font-size: 14px;
+    z-index: 9999;
+    display: none;
+  }
+  #tweaks-panel.open { display: block; }
+  #tweaks-panel .tp-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    margin-bottom: 16px;
+  }
+  #tweaks-panel .tp-close {
+    cursor: pointer; padding: 2px 6px; border-radius: 3px;
+    border: 1px solid var(--ink-12);
+    background: transparent;
+    color: var(--ink-60);
+    font: inherit;
+  }
+  #tweaks-panel .tp-close:hover { color: var(--ink); }
+  #tweaks-panel .tp-section { margin-bottom: 18px; }
+  #tweaks-panel .tp-section:last-child { margin-bottom: 0; }
+  #tweaks-panel .tp-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    margin-bottom: 8px;
+  }
+  #tweaks-panel .tp-radio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    background: var(--bg-2);
+    border-radius: 3px;
+    padding: 3px;
+  }
+  #tweaks-panel .tp-radio button {
+    border: none;
+    background: transparent;
+    color: var(--ink-60);
+    padding: 7px 10px;
+    border-radius: 2px;
+    font: inherit;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #tweaks-panel .tp-radio button.on {
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  /* ───────────────────────────────────────────────────────────── */
+  /* Responsive — below 1024px the stage zoom is disabled and     */
+  /* these rules take over layout.                                 */
+  /* ───────────────────────────────────────────────────────────── */
+  @media (max-width: 1023px) {
+    .stage { width: 100% !important; }
+
+    /* Nav */
+    .nav { height: 64px; padding: 0 20px; }
+    .logo { font-size: 22px; }
+    .navlinks { gap: 28px; font-size: 16px; }
+    .lang { font-size: 16px; }
+
+    /* Hero — stack image above card */
+    .hero { padding: 16px 20px 48px; }
+    .hero-grid { display: flex; flex-direction: column; }
+    .hero-photo { width: 100%; height: 56vw; min-height: 220px; }
+    .hero-side { position: static; width: 100%; }
+    .hero-card { width: 100%; max-width: 100%; padding: 24px 24px 32px; }
+    .hero-card .ttl { font-size: 40px; }
+    .hero-card .num { font-size: 28px; margin-bottom: 20px; }
+    .hero-card .copy { font-size: 16px; max-width: 100%; }
+    .hero-card .more { font-size: 18px; }
+
+    /* Find / destinations */
+    .find { margin-top: 56px; padding: 0 20px; }
+    .find-head { grid-template-columns: 1fr; padding: 48px 0 56px; }
+    .find-head h2 { font-size: 36px; white-space: normal; margin-top: 10px; }
+    .find-head .count { display: none; }
+    .dest-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .dest-expanded .exp-name { font-size: 48px; }
+    .dest-expanded .exp-meta { bottom: 32px; left: 32px; }
+
+    /* About v2 (founder portrait — the active variant) */
+    .about-v2 { margin-top: 72px; padding: 0 20px; }
+    .about-v2-inner { padding: 48px 0 64px; grid-template-columns: 1fr; row-gap: 36px; }
+    .about-v2-photo image-slot { width: 100%; height: 70vw; min-height: 260px; }
+    .about-v2-text h2 { font-size: 56px; }
+    .about-v2-text p.lead { font-size: 22px; max-width: 100%; }
+    .about-v2-text p { font-size: 17px; max-width: 100%; }
+    .founders { grid-template-columns: 1fr; gap: 28px; margin-top: 48px; }
+
+    /* About (editorial variant — hidden by default but kept responsive) */
+    .about { margin-top: 72px; padding: 0 20px; }
+    .about-inner { padding: 48px 0 64px; grid-template-columns: 1fr; row-gap: 32px; }
+    .about-left { position: static; }
+    .about-left h2 { font-size: 52px; }
+    .about-right p { font-size: 20px; max-width: 100%; }
+    .about-right p.lead { font-size: 26px; }
+    .principles { grid-template-columns: 1fr; gap: 32px; }
+
+    /* Footer (inline/cream — active variant) */
+    footer.foot-v2 { padding: 0 20px; }
+    .foot-v2 .foot-v2-top { padding: 56px 0 48px; grid-template-columns: 1fr; gap: 40px; }
+    .foot-v2 .foot-brand p { font-size: 18px; max-width: 100%; }
+    .foot-v2 .foot-v2-bottom { flex-direction: column; gap: 12px; padding: 20px 0; text-align: center; }
+    .foot-v2 .foot-v2-bottom .legal { gap: 20px; }
+
+    /* Footer (dark/moss variant) */
+    .foot-top { padding: 56px 20px 48px; grid-template-columns: 1fr; gap: 40px; }
+    .foot-bottom { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+    .foot-bottom .legal { gap: 20px; }
+  }
+
+  /* Very small screens — hide nav links, tighten further */
+  @media (max-width: 599px) {
+    .navlinks { display: none; }
+    .hero-photo { height: 62vw; }
+    .hero-card .ttl { font-size: 32px; }
+    .dest-grid { gap: 8px; }
+    .about-v2-text h2 { font-size: 44px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="stage" id="stage">
+
+    <!-- ───── Header ───── -->
+    <header class="nav" data-screen-label="01 Home — Header">
+      <a class="logo" href="#">ZENRISE</a>
+      <nav class="navlinks">
+        <a href="index.html" class="active" data-i18n="nav_home">home</a>
+        <a href="about.html" data-i18n="nav_about">about us</a>
+        <a href="contact.html" data-i18n="nav_contact">contact</a>
+      </nav>
+      <a class="lang" href="#">english</a>
+    </header>
+
+    <!-- ───── Hero ───── -->
+    <section class="hero" data-screen-label="01 Home — Hero">
+      <div class="hero-grid">
+        <div class="hero-photo">
+          <div class="slide-bg slide-bg-1"></div>
+          <div class="slide-bg slide-bg-2"></div>
+          <div class="slide-bg slide-bg-3"></div>
+          <span class="photo-meta" data-i18n="home_hero_photo_meta">Yuigahama Beach, late spring</span>
+          <div class="slide-dots">
+            <button class="slide-dot" aria-label="Slide 1"></button>
+            <button class="slide-dot" aria-label="Slide 2"></button>
+            <button class="slide-dot" aria-label="Slide 3"></button>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <article class="hero-card">
+            <p class="num" data-i18n="home_hero_num">01</p>
+            <h1 class="ttl" data-i18n-html="home_hero_title">Discover the<br/>hidden Japan.</h1>
+            <p class="copy" data-i18n="home_hero_copy">Small-group walks through the towns the guidebooks leave behind — tea houses, salt fields, mountain shrines.</p>
+            <a class="more" href="#" data-i18n="home_hero_more">Read more&nbsp;&nbsp;→</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───── Find your perfect place ───── -->
+    <section class="find" data-screen-label="01 Home — Destinations">
+      <div class="rule"></div>
+      <div class="find-head">
+        <h2 data-i18n="home_find_title">Find your perfect place</h2>
+      </div>
+
+      <div class="dest-grid">
+
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/zeniarai-benten-reduced.jpg')"></div>
+          <div class="scrim"></div>
+          <span class="num-tag">01 / 08</span>
+          <div class="meta">
+            <div><div class="name" data-i18n="home_dest_1_name">Zeniarai Benten</div></div>
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/tokei-ji-reduced.png')"></div>
+          <div class="scrim"></div>
+          <span class="num-tag">02 / 08</span>
+          <div class="meta">
+            <div><div class="name" data-i18n="home_dest_2_name">Tokei-ji</div></div>
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/nami-to-kaze.jpg')"></div>
+          <div class="scrim"></div>
+          <span class="num-tag">03 / 08</span>
+          <div class="meta">
+            <div><div class="name" data-i18n="home_dest_3_name">Nami to Kaze</div></div>
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/jochi-ji-reduced.png')"></div>
+          <div class="scrim"></div>
+          <span class="num-tag">04 / 08</span>
+          <div class="meta">
+            <div><div class="name" data-i18n="home_dest_4_name">Jochi-ji</div></div>
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="dest placeholder" href="#">
+          <div class="pic placeholder"></div>
+          <span class="ph-label">photo — yuigahama beach</span>
+          <div class="scrim"></div>
+          <span class="num-tag">05 / 08</span>
+          <div class="meta">
+            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_5_name">Yuigahama Beach</div></div>
+            <div class="arrow" style="border-color: var(--ink-30); color: var(--ink)">→</div>
+          </div>
+        </a>
+
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/wikipedia-example-la-petite-boulangerie.jpg')"></div>
+          <div class="scrim"></div>
+          <span class="num-tag">06 / 08</span>
+          <div class="meta">
+            <div><div class="name" data-i18n="home_dest_6_name">La Petite Boulangerie</div></div>
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/sasuke-inari-reduced.png')"></div>
+          <div class="scrim"></div>
+          <span class="num-tag">07 / 08</span>
+          <div class="meta">
+            <div><div class="name" data-i18n="home_dest_7_name">Sasuke Inari</div></div>
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="dest placeholder" href="#">
+          <div class="pic placeholder"></div>
+          <span class="ph-label">photo — zuisen-ji</span>
+          <div class="scrim"></div>
+          <span class="num-tag">08 / 08</span>
+          <div class="meta">
+            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_8_name">Zuisen-ji</div></div>
+            <div class="arrow" style="border-color: var(--ink-30); color: var(--ink)">→</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ───── About v2 (founder portrait — DEFAULT) ───── -->
+    <section class="about-v2" data-about="founder" data-screen-label="01 Home — About">
+      <div class="rule"></div>
+      <div class="about-v2-inner">
+        <div class="about-v2-photo">
+          <image-slot
+            id="founders-portrait"
+            shape="rect"
+            src="assets/akari-kentaro-placeholder.jpg"
+            placeholder="Drop a casual photo of Akari & Kentaro here" data-i18n-placeholder="home_about_image_placeholder"
+          ></image-slot>
+          <span class="caption" data-i18n-html="home_about_caption">Akari &amp; Kentaro — Komachi-dori, Kamakura</span>
+        </div>
+        <div class="about-v2-text">
+          <span class="eyebrow" data-i18n="home_about_eyebrow">Your Hosts</span>
+          <h2 data-i18n-html="home_about_title">Akari <span class="amp">&amp;</span><br/>Kentaro.</h2>
+          <p class="lead" data-i18n="home_about_lead">[Opening line &mdash; a sentence or two about who they are and what brought them to this work. Replace with accurate content.]</p>
+          <p data-i18n="home_about_p1">[Akari background &mdash; her connection to the area, what she brings to the tours, what she cares about. Two to three sentences. Replace with accurate content.]</p>
+          <p data-i18n="home_about_p2">[Kentaro background &mdash; his background, his role in the company, what draws him to this work. Two to three sentences. Replace with accurate content.]</p>
+
+          <div class="founders">
+            <div class="founder">
+              <span class="role" data-i18n="home_about_aiko_role">Founder &middot; Tour Guide</span>
+              <h3 data-i18n="home_about_aiko_name">Akari Usuda</h3>
+              <p data-i18n="home_about_aiko_desc">[Short description of Akari — one or two sentences. Replace with accurate content.]</p>
+            </div>
+            <div class="founder">
+              <span class="role" data-i18n="home_about_daichi_role">Registered Travel Agent &middot; Tour Guide</span>
+              <h3 data-i18n="home_about_daichi_name">Kentaro Usuda</h3>
+              <p data-i18n="home_about_daichi_desc">[Short description of Kentaro — one or two sentences. Replace with accurate content.]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───── About v1 (editorial — alt) ───── -->
+    <section class="about" data-about="editorial" data-screen-label="01 Home — About (editorial)">
+      <div class="rule"></div>
+      <div class="about-inner">
+        <div class="about-left">
+          <span class="eyebrow" data-i18n="about_eyebrow">About us</span>
+          <h2>A slower<br/>way to see<br/>Japan.</h2>
+          <div class="sig">Founded in Kamakura, 2019</div>
+        </div>
+        <div class="about-right">
+          <p class="lead">Zenrise was started by two friends &mdash; one a tea ceremony apprentice, one a tired travel editor &mdash; who kept finding the country they loved hiding just off the main route.</p>
+          <p>We design unhurried journeys for travelers who&rsquo;d rather stay one night longer than rush to the next stop. Every itinerary is led by a small team who actually lives where we send you &mdash; chefs, monks, ceramicists, fishermen.</p>
+          <p>Groups never exceed six. The mornings are long. The trains are local. The point isn&rsquo;t to see more of Japan, but to see Japan more closely.</p>
+
+          <div class="principles">
+            <div class="principle">
+              <span class="n">01</span>
+              <h3>Slow by design</h3>
+              <p>Two to three places per trip, never the highlight reel. Walking when we can, local trains when we can&rsquo;t.</p>
+            </div>
+            <div class="principle">
+              <span class="n">02</span>
+              <h3>Hosted by locals</h3>
+              <p>Every day is led by someone whose family has lived in that town for at least three generations.</p>
+            </div>
+            <div class="principle">
+              <span class="n">03</span>
+              <h3>Small groups</h3>
+              <p>Maximum six travelers. Often four. Sometimes just you and a guide.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───── Footer v2 (inline / cream — DEFAULT) ───── -->
+    <footer class="foot-v2" data-footer="inline" data-screen-label="01 Home — Footer">
+      <div class="rule"></div>
+      <div class="foot-v2-top">
+        <div class="foot-brand">
+          <span class="mark">ZENRISE</span>
+          <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+        </div>
+
+        <div class="foot-col">
+          <h4 data-i18n="footer_visit">Visit</h4>
+          <ul>
+            <li>
+              <span class="label" data-i18n="footer_studio">Office</span>
+              <span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
+            </li>
+            <li style="margin-top: 8px">
+              <span class="label" data-i18n="footer_hours">Hours</span>
+              <span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul>
+            <li>
+              <span class="label" data-i18n="footer_bookings">Bookings</span>
+              <a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
+            </li>
+            <li>
+              <span class="label" data-i18n="footer_telephone">Telephone</span>
+              +81 (0)466&nbsp;00&nbsp;0000
+            </li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4 data-i18n="footer_follow">Follow</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/zenrise_tours/" data-i18n="footer_instagram">Instagram &nbsp;→</a></li>
+            <li><a href="https://www.youtube.com/@zenrisejapan" data-i18n="footer_youtube">YouTube &nbsp;→</a></li>
+            <li><a href="https://www.tiktok.com/@zenrise_tours" data-i18n="footer_tiktok">TikTok &nbsp;→</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-v2-bottom">
+        <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
+        <div class="legal">
+          <a href="#" data-i18n="footer_privacy">Privacy</a>
+          <a href="#" data-i18n="footer_terms">Terms</a>
+          <a href="#" data-i18n="footer_cookies">Cookies</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ───── Footer v1 (moss — alt) ───── -->
+    <footer data-footer="moss" data-screen-label="01 Home — Footer (moss)">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <span class="mark">ZENRISE</span>
+          <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+        </div>
+
+        <div class="foot-col">
+          <h4 data-i18n="footer_visit">Visit</h4>
+          <ul>
+            <li>
+              <span class="label" data-i18n="footer_studio">Office</span>
+              <span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
+            </li>
+            <li style="margin-top: 8px">
+              <span class="label" data-i18n="footer_hours">Hours</span>
+              <span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul>
+            <li>
+              <span class="label" data-i18n="footer_bookings">Bookings</span>
+              <a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
+            </li>
+            <li>
+              <span class="label" data-i18n="footer_telephone">Telephone</span>
+              +81 (0)466&nbsp;00&nbsp;0000
+            </li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4 data-i18n="footer_follow">Follow</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/zenrise_tours/" data-i18n="footer_instagram">Instagram &nbsp;→</a></li>
+            <li><a href="https://www.youtube.com/@zenrisejapan" data-i18n="footer_youtube">YouTube &nbsp;→</a></li>
+            <li><a href="https://www.tiktok.com/@zenrise_tours" data-i18n="footer_tiktok">TikTok &nbsp;→</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
+        <div class="legal">
+          <a href="#" data-i18n="footer_privacy">Privacy</a>
+          <a href="#" data-i18n="footer_terms">Terms</a>
+          <a href="#" data-i18n="footer_cookies">Cookies</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ───── Tweaks panel (hidden until host activates) ───── -->
+  <div id="tweaks-panel" role="dialog" aria-label="Tweaks">
+    <div class="tp-head">
+      <span>Tweaks</span>
+      <button class="tp-close" id="tp-close" aria-label="Close tweaks">×</button>
+    </div>
+    <div class="tp-section">
+      <div class="tp-label">About section</div>
+      <div class="tp-radio" data-key="about">
+        <button data-val="founder">Founder portrait</button>
+        <button data-val="editorial">Editorial</button>
+      </div>
+    </div>
+    <div class="tp-section">
+      <div class="tp-label">Footer</div>
+      <div class="tp-radio" data-key="footer">
+        <button data-val="inline">Inline / cream</button>
+        <button data-val="moss">Moss / inverted</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="image-slot.js"></script>
+
+<script>
+  // ───── Tweaks state + variant toggling ─────
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "about": "founder",
+    "footer": "inline"
+  }/*EDITMODE-END*/;
+
+  function applyTweaks(t) {
+    document.querySelectorAll('[data-about]').forEach(el => {
+      el.style.display = (el.dataset.about === t.about) ? '' : 'none';
+    });
+    document.querySelectorAll('[data-footer]').forEach(el => {
+      el.style.display = (el.dataset.footer === t.footer) ? '' : 'none';
+    });
+    // refresh button states
+    document.querySelectorAll('#tweaks-panel .tp-radio').forEach(group => {
+      const key = group.dataset.key;
+      group.querySelectorAll('button').forEach(btn => {
+        btn.classList.toggle('on', btn.dataset.val === t[key]);
+      });
+    });
+    // re-fit stage since content height may have changed
+    if (window.__fitStage) window.__fitStage();
+  }
+
+  function setTweak(key, val) {
+    TWEAKS[key] = val;
+    applyTweaks(TWEAKS);
+    try {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+    } catch (e) { /* not in host */ }
+  }
+
+  // wire up the panel buttons
+  document.querySelectorAll('#tweaks-panel .tp-radio').forEach(group => {
+    const key = group.dataset.key;
+    group.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => setTweak(key, btn.dataset.val));
+    });
+  });
+
+  // host-protocol: listener FIRST, then announce availability
+  const panel = document.getElementById('tweaks-panel');
+  function showPanel() { panel.classList.add('open'); }
+  function hidePanel() { panel.classList.remove('open'); }
+  window.addEventListener('message', (e) => {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.type === '__activate_edit_mode') showPanel();
+    if (e.data.type === '__deactivate_edit_mode') hidePanel();
+  });
+  document.getElementById('tp-close').addEventListener('click', () => {
+    hidePanel();
+    try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch (e) {}
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+
+  applyTweaks(TWEAKS);
+
+  // Scale the 1920px stage down to fit the viewer's window width.
+  (function () {
+    var stage = document.getElementById('stage');
+    function fit() {
+      var vw = document.documentElement.clientWidth;
+      if (vw < 1024) {
+        stage.style.zoom = '';
+        stage.style.width = '';
+        stage.style.margin = '';
+        stage.classList.add('fitted');
+        return;
+      }
+      var vh = document.documentElement.clientHeight;
+      var HERO_DESIGN_HEIGHT = 1100;
+      var scale = Math.min(1, vw / 1920, vh / HERO_DESIGN_HEIGHT);
+      // 'zoom' (unlike transform:scale) scales BOTH layout and visual, so
+      // the document's scroll area tracks the visible content exactly.
+      stage.style.zoom = scale;
+      // With zoom shrinking layout width, margin auto centers horizontally.
+      stage.style.margin = '0 auto';
+      // Clear anything left over from earlier transform-based versions.
+      stage.style.transform = '';
+      stage.style.width = '1920px';
+      stage.style.height = '';
+      document.body.style.height = '';
+      stage.classList.add('fitted');
+    }
+    fit();
+    window.__fitStage = fit;
+    window.addEventListener('resize', fit);
+    // re-fit after fonts / images settle
+    window.addEventListener('load', fit);
+    setTimeout(fit, 200);
+    setTimeout(fit, 600);
+  })();
+
+  // Hero slideshow.
+  (function () {
+    var slides = [
+      { num: '01', meta: 'Yuigahama Beach, late spring' },
+      { num: '02', meta: 'Kita-Kamakura, autumn' },
+      { num: '03', meta: 'Enoshima, early morning' }
+    ];
+    var current = 0;
+    var numEl   = document.querySelector('.hero-card .num');
+    var metaEl  = document.querySelector('.hero-photo .photo-meta');
+    var bgEls   = document.querySelectorAll('.slide-bg');
+    var dotEls  = document.querySelectorAll('.slide-dot');
+
+    function goTo(n) {
+      bgEls[current].classList.remove('active');
+      dotEls[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      bgEls[current].classList.add('active');
+      dotEls[current].classList.add('active');
+      numEl.textContent  = slides[current].num;
+      metaEl.textContent = slides[current].meta;
+    }
+
+    goTo(0);
+
+    dotEls.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { clearInterval(timer); goTo(i); });
+    });
+
+    var timer = setInterval(function () { goTo(current + 1); }, 5000);
+  })();
+
+  // Hero intro animation — fires once fonts are active (wf-loading removed).
+  (function () {
+    var stage = document.getElementById('stage');
+    function startHero() {
+      requestAnimationFrame(function () { stage.classList.add('hero-in'); });
+    }
+    if (!document.documentElement.classList.contains('wf-loading')) {
+      startHero();
+    } else {
+      var obs = new MutationObserver(function () {
+        if (!document.documentElement.classList.contains('wf-loading')) {
+          obs.disconnect();
+          startHero();
+        }
+      });
+      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
+  })();
+
+  // gentle reveal on scroll
+  (function () {
+    var els = document.querySelectorAll('.dest, .principle, .about-left, .about-right > p');
+    els.forEach(function (el) { el.classList.add('reveal'); });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+    } else {
+      els.forEach(function (el) { el.classList.add('in'); });
+    }
+  })();
+
+  // Destination card expand.
+  (function () {
+    var grid = document.querySelector('.dest-grid');
+    if (!grid) return;
+    var expanded = null;
+
+    function clip(cardRect, gridRect) {
+      var t = (cardRect.top    - gridRect.top)    / gridRect.height * 100;
+      var r = (gridRect.right  - cardRect.right)  / gridRect.width  * 100;
+      var b = (gridRect.bottom - cardRect.bottom) / gridRect.height * 100;
+      var l = (cardRect.left   - gridRect.left)   / gridRect.width  * 100;
+      return 'inset(' + t.toFixed(3) + '% ' + r.toFixed(3) + '% ' + b.toFixed(3) + '% ' + l.toFixed(3) + '%)';
+    }
+
+    function openCard(card) {
+      if (expanded) return;
+      var gridRect = grid.getBoundingClientRect();
+      var cardRect = card.getBoundingClientRect();
+      var isPlaceholder = card.classList.contains('placeholder');
+      var picEl = card.querySelector('.pic');
+      var bgImg = picEl.classList.contains('photo') ? getComputedStyle(picEl).backgroundImage : '';
+      var name  = card.querySelector('.name').textContent;
+      var num   = card.querySelector('.num-tag').textContent;
+
+      var overlay = document.createElement('div');
+      overlay.className = 'dest-expanded' + (isPlaceholder ? ' is-placeholder' : '');
+      overlay.innerHTML =
+        '<div class="exp-bg"></div>' +
+        '<div class="exp-scrim"></div>' +
+        '<div class="exp-meta">' +
+          '<div class="exp-num">' + num + '</div>' +
+          '<div class="exp-name">' + name + '</div>' +
+        '</div>' +
+        '<button class="dest-close" aria-label="Close">&#x2715;</button>';
+
+      if (bgImg) overlay.querySelector('.exp-bg').style.backgroundImage = bgImg;
+      overlay._origCard = card;
+      overlay.style.clipPath = clip(cardRect, gridRect);
+      grid.appendChild(overlay);
+      expanded = overlay;
+
+      // Force the browser to commit the initial clip-path before animating.
+      overlay.getBoundingClientRect();
+      overlay.style.transition = 'clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1)';
+      overlay.style.clipPath = 'inset(0%)';
+      setTimeout(function () { overlay.classList.add('open'); }, 10);
+
+      overlay.querySelector('.dest-close').addEventListener('click', closeCard);
+    }
+
+    function closeCard() {
+      if (!expanded) return;
+      var overlay = expanded;
+      expanded = null;
+      overlay.classList.remove('open');
+
+      requestAnimationFrame(function () {
+        var gridRect = grid.getBoundingClientRect();
+        var cardRect = overlay._origCard.getBoundingClientRect();
+        overlay.style.transition = 'clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        overlay.style.clipPath = clip(cardRect, gridRect);
+        setTimeout(function () {
+          if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        }, 550);
+      });
+    }
+
+    grid.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (expanded) {
+        if (!e.target.closest('.dest-close')) closeCard();
+        return;
+      }
+      var card = e.target.closest('.dest');
+      if (card) openCard(card);
+    });
+  })();
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
