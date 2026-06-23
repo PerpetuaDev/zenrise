@@ -46,11 +46,13 @@
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Never synthesize bold/oblique — prevents faux-bold flash while the
+       async Typekit JP fonts load (esp. before :lang(ja) takes effect). */
+    font-synthesis: none;
   }
   :lang(ja) {
     --display: "toppan-bunkyu-mincho-pr6n", "Hiragino Mincho ProN", serif;
     --sans:    "yu-gothic-pr6n", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif;
-    font-synthesis: none;
   }
   .stage { width: 1920px; transform-origin: top left; visibility: hidden; }
   .stage.fitted { visibility: visible; }
@@ -919,11 +921,7 @@
             <a class="v" href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
           </div>
           <div class="row">
-            <span class="lbl" data-i18n="contact_hero_tel">Telephone</span>
-            <a class="v" href="tel:+81467000000">+81 (0)467 00 0000</a>
-          </div>
-          <div class="row">
-            <span class="lbl" data-i18n="contact_hero_visit">Visit</span>
+            <span class="lbl" data-i18n="contact_hero_visit">Office</span>
             <span class="v" data-i18n-html="contact_hero_visit_v">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
           </div>
         </div>
@@ -957,7 +955,7 @@
       <!-- Step 1: Region (multi-select) -->
       <div class="step cur" data-step="0">
         <div class="meta"><span data-i18n="booking_s1_meta">Step 01 / 05</span><span id="m-count-1">0 selected</span></div>
-        <h2 data-i18n-html="booking_s1_h">Where would you<br/>like to walk?</h2>
+        <h2 data-i18n-html="booking_s1_h">Where would you<br/>like to go?</h2>
         <p class="lede" data-i18n="booking_s1_lede">Pick one or more. We can string two towns together on a full-day route, or stay in one all morning.</p>
 
         <div class="grid-4">
@@ -979,12 +977,12 @@
             </div>
             <span class="tick"></span>
           </div>
-          <div class="card region" data-multi="region" data-val="Fujisawa">
+          <div class="card region" data-multi="region" data-val="Other Destinations">
             <div class="pic"></div>
             <div class="body">
               <span class="num">03 / 04</span>
-              <h3 data-i18n="home_dest_fujisawa_name">Fujisawa</h3>
-              <span class="sub" data-i18n="booking_s1_fujisawa_sub">Tokaido · Letterpress · Soba</span>
+              <h3 data-i18n="home_dest_fujisawa_name">Other Destinations</h3>
+              <span class="sub" data-i18n="booking_s1_fujisawa_sub">Tokyo · Mt. Fuji · Hakone</span>
             </div>
             <span class="tick"></span>
           </div>
@@ -1009,20 +1007,20 @@
       <div class="step" data-step="1">
         <div class="meta"><span data-i18n="booking_s2_meta">Step 02 / 05</span><span data-i18n="booking_s2_sub">Tour length</span></div>
         <h2 data-i18n="booking_s2_h">Half day or full?</h2>
-        <p class="lede" data-i18n="booking_s2_lede">Half-days run roughly 09:00–13:00. Full-days end with a late lunch or harbour walk around 17:00.</p>
+        <p class="lede" data-i18n="booking_s2_lede">Half-days run roughly 09:00–13:00. Full-days end with a late lunch or a harbourside visit around 17:00.</p>
 
         <div class="grid-2">
           <div class="card format" data-radio="length" data-val="Half day">
             <span class="num" data-i18n="booking_s2_opt1">Option 01</span>
             <h3 data-i18n="booking_s2_half">Half day</h3>
-            <p data-i18n="booking_s2_half_p">One town, one neighbourhood. A long morning of walking, one workshop or tea stop, and a quiet lunch.</p>
+            <p data-i18n="booking_s2_half_p">One town, one neighbourhood. A long morning of exploring, one workshop or tea stop, and a quiet lunch.</p>
             <div class="price"><span data-i18n="booking_s2_half_t">≈ 4 hrs</span><span data-i18n="booking_s2_half_price">¥18,000 / pers.</span></div>
             <span class="tick"></span>
           </div>
           <div class="card format" data-radio="length" data-val="Full day">
             <span class="num" data-i18n="booking_s2_opt2">Option 02</span>
             <h3 data-i18n="booking_s2_full">Full day</h3>
-            <p data-i18n="booking_s2_full_p">Two towns linked by local train or our van. Morning walk, lunch with the day's host, an afternoon stop.</p>
+            <p data-i18n="booking_s2_full_p">Two towns linked by local train. A morning exploring, lunch with the day's host, an afternoon stop.</p>
             <div class="price"><span data-i18n="booking_s2_full_t">≈ 8 hrs</span><span data-i18n="booking_s2_full_price">¥32,000 / pers.</span></div>
             <span class="tick"></span>
           </div>
@@ -1110,7 +1108,7 @@
               <button type="button" class="chip" data-multi="interests" data-val="Food" data-i18n="booking_s4_int_food">Food</button>
               <button type="button" class="chip" data-multi="interests" data-val="History" data-i18n="booking_s4_int_history">History</button>
               <button type="button" class="chip" data-multi="interests" data-val="Photography" data-i18n="booking_s4_int_photo">Photography</button>
-              <button type="button" class="chip" data-multi="interests" data-val="Coast walks" data-i18n="booking_s4_int_coast">Coast walks</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Coastline" data-i18n="booking_s4_int_coast">Coastline</button>
               <button type="button" class="chip" data-multi="interests" data-val="Quiet temples" data-i18n="booking_s4_int_temples">Quiet temples</button>
               <button type="button" class="chip" data-multi="interests" data-val="Crafts" data-i18n="booking_s4_int_crafts">Crafts</button>
             </div>

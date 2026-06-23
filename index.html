@@ -46,11 +46,13 @@
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Never synthesize bold/oblique — prevents faux-bold flash while the
+       async Typekit JP fonts load (esp. before :lang(ja) takes effect). */
+    font-synthesis: none;
   }
   :lang(ja) {
     --display: "toppan-bunkyu-mincho-pr6n", "Hiragino Mincho ProN", serif;
     --sans:    "yu-gothic-pr6n", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif;
-    font-synthesis: none;
   }
 
   /* Stage: keep the 1920 design width, scale to fit viewer's window. */
@@ -603,7 +605,7 @@
     <section class="find" data-screen-label="01 Home — Destinations">
       <div class="rule"></div>
       <div class="find-head">
-        <h2 data-i18n="home_find_title">Find your perfect place</h2>
+        <h2 data-i18n="home_find_title">Find your travel inspiration</h2>
       </div>
 
       <div class="dest-grid">
@@ -613,7 +615,7 @@
           <div class="scrim"></div>
           <span class="num-tag">01 / 08</span>
           <div class="meta">
-            <div><div class="name" data-i18n="home_dest_1_name">Zeniarai Benten</div></div>
+            <div><div class="name" data-i18n="home_dest_1_name">Shrines & Temples</div></div>
             <div class="arrow">→</div>
           </div>
         </a>
@@ -623,7 +625,7 @@
           <div class="scrim"></div>
           <span class="num-tag">02 / 08</span>
           <div class="meta">
-            <div><div class="name" data-i18n="home_dest_2_name">Tokei-ji</div></div>
+            <div><div class="name" data-i18n="home_dest_2_name">Cultural Experiences</div></div>
             <div class="arrow">→</div>
           </div>
         </a>
@@ -633,7 +635,7 @@
           <div class="scrim"></div>
           <span class="num-tag">03 / 08</span>
           <div class="meta">
-            <div><div class="name" data-i18n="home_dest_3_name">Nami to Kaze</div></div>
+            <div><div class="name" data-i18n="home_dest_3_name">Local Food</div></div>
             <div class="arrow">→</div>
           </div>
         </a>
@@ -643,7 +645,7 @@
           <div class="scrim"></div>
           <span class="num-tag">04 / 08</span>
           <div class="meta">
-            <div><div class="name" data-i18n="home_dest_4_name">Jochi-ji</div></div>
+            <div><div class="name" data-i18n="home_dest_4_name">Hidden Views</div></div>
             <div class="arrow">→</div>
           </div>
         </a>
@@ -654,7 +656,7 @@
           <div class="scrim"></div>
           <span class="num-tag">05 / 08</span>
           <div class="meta">
-            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_5_name">Yuigahama Beach</div></div>
+            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_5_name">Everyday Local Life</div></div>
             <div class="arrow" style="border-color: var(--ink-30); color: var(--ink)">→</div>
           </div>
         </a>
@@ -664,7 +666,7 @@
           <div class="scrim"></div>
           <span class="num-tag">06 / 08</span>
           <div class="meta">
-            <div><div class="name" data-i18n="home_dest_6_name">La Petite Boulangerie</div></div>
+            <div><div class="name" data-i18n="home_dest_6_name">Get to Know Japan</div></div>
             <div class="arrow">→</div>
           </div>
         </a>
@@ -674,7 +676,7 @@
           <div class="scrim"></div>
           <span class="num-tag">07 / 08</span>
           <div class="meta">
-            <div><div class="name" data-i18n="home_dest_7_name">Sasuke Inari</div></div>
+            <div><div class="name" data-i18n="home_dest_7_name">Travel Support</div></div>
             <div class="arrow">→</div>
           </div>
         </a>
@@ -685,7 +687,7 @@
           <div class="scrim"></div>
           <span class="num-tag">08 / 08</span>
           <div class="meta">
-            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_8_name">Zuisen-ji</div></div>
+            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_8_name">Travel Concierge</div></div>
             <div class="arrow" style="border-color: var(--ink-30); color: var(--ink)">→</div>
           </div>
         </a>

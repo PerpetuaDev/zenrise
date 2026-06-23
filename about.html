@@ -45,11 +45,13 @@
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Never synthesize bold/oblique — prevents faux-bold flash while the
+       async Typekit JP fonts load (esp. before :lang(ja) takes effect). */
+    font-synthesis: none;
   }
   :lang(ja) {
     --display: "toppan-bunkyu-mincho-pr6n", "Hiragino Mincho ProN", serif;
     --sans:    "yu-gothic-pr6n", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif;
-    font-synthesis: none;
   }
   .stage { width: 1920px; transform-origin: top left; visibility: hidden; }
   .stage.fitted { visibility: visible; }
