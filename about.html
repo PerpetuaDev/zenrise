@@ -284,125 +284,7 @@
     margin-top: 6px;
   }
 
-  /* ───── Founders ───── */
-  .founders-2 {
-    padding-bottom: 120px;
-    display: grid;
-    row-gap: 96px;
-  }
-  .fbio {
-    display: grid;
-    grid-template-columns: 580px 1fr;
-    column-gap: 80px;
-    align-items: start;
-  }
-  .fbio.reverse { grid-template-columns: 1fr 580px; }
-  .fbio .photo {
-    width: 580px;
-    aspect-ratio: 4 / 5;
-    background:
-      repeating-linear-gradient(135deg, rgba(41,65,56,0.05) 0 1px, transparent 1px 14px),
-      var(--bg-3);
-    position: relative;
-  }
-  .fbio .photo .pl {
-    position: absolute;
-    left: 24px; top: 24px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-  }
-  .fbio .photo .pl2 {
-    position: absolute;
-    right: 24px; bottom: 22px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-  }
-  .fbio .text { padding-top: 12px; }
-  .fbio .role {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.26em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    display: block;
-  }
-  .fbio h3 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 80px;
-    line-height: 0.96;
-    margin: 0 0 8px;
-    letter-spacing: -0.01em;
-  }
-  .fbio h3 .jp {
-    font-family: var(--jp);
-    font-weight: 400;
-    font-size: 28px;
-    color: var(--ink-60);
-    margin-left: 18px;
-    letter-spacing: 0.08em;
-    vertical-align: 18px;
-  }
-  .fbio .text p {
-    font-size: 19px;
-    line-height: 1.7;
-    color: var(--ink);
-    margin: 0 0 18px;
-    max-width: 620px;
-    text-wrap: pretty;
-  }
-  .fbio .text p.lead {
-    font-family: var(--display);
-    font-size: 28px;
-    line-height: 1.45;
-    color: var(--ink);
-    margin: 28px 0 32px;
-  }
-  .fbio .quote {
-    margin-top: 36px;
-    padding: 28px 0 0;
-    border-top: 1px solid var(--ink-12);
-    font-family: var(--display);
-    font-style: italic;
-    font-size: 22px;
-    color: var(--ink-60);
-    line-height: 1.5;
-    max-width: 580px;
-  }
-  .fbio .facts {
-    list-style: none;
-    margin: 32px 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 36px;
-  }
-  .fbio .facts li {
-    font-size: 14px;
-    line-height: 1.4;
-    color: var(--ink-60);
-    padding: 6px 0;
-    border-bottom: 1px dotted var(--ink-12);
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .fbio .facts li span:first-child {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-  .fbio .facts li span:last-child { color: var(--ink); }
-
-  /* ───── Footer (cream / inline — matches home v2) ───── */
+  /* ───── Footer ───── */
   .rule { height: 1px; background: var(--rule); width: 100%; }
   footer.foot-v2 { padding: 0 36px; margin-top: 40px; }
   .foot-v2-top {
@@ -440,15 +322,6 @@
   .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
   .foot-col li { font-size: 18px; line-height: 1.45; color: var(--ink); }
   .foot-col li a:hover { opacity: 0.6; }
-  .foot-col .label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 4px;
-  }
   .foot-v2-bottom {
     border-top: 1px solid var(--ink-12);
     padding: 28px 0;
@@ -497,15 +370,6 @@
     .gaiyo th { display: block; width: auto; padding: 0 0 4px; font-size: 17px; }
     .gaiyo td { display: block; padding: 0; font-size: 16px; }
 
-    /* Founders */
-    .founders-2 { row-gap: 64px; }
-    .fbio, .fbio.reverse { grid-template-columns: 1fr !important; }
-    .fbio .photo { width: 100%; }
-    .fbio h3 { font-size: 52px; }
-    .fbio .text p { font-size: 17px; max-width: 100%; }
-    .fbio .text p.lead { font-size: 22px; }
-    .fbio .facts { font-size: 15px; }
-
     /* Footer */
     .foot-v2 { padding: 0 20px; }
     .foot-v2-top { padding: 56px 0 48px; grid-template-columns: 1fr; gap: 40px; }
@@ -516,7 +380,6 @@
   @media (max-width: 599px) {
     .navlinks { display: none; }
     .ph h1 { font-size: 52px; }
-    .fbio h3 { font-size: 40px; }
     .section-head h2 { font-size: 36px; }
   }
 </style>
@@ -543,7 +406,7 @@
       <h1 data-i18n-html="about_h1">About<br/>Zenrise.</h1>
     </div>
     <div class="intro">
-      <p data-i18n="about_intro_1">We are a two-person walking tour business based in Fujisawa. We design thoughtful, locally-led walking tours through the lesser-known corners of the Shonan coast.</p>
+      <p data-i18n="about_intro_1">We are a travel agency based in Kamakura, Fujisawa, and Yokohama. We design thoughtful, locally-led journeys through the lesser-known corners of the Kamakura area.</p>
       <p class="muted" data-i18n="about_intro_2">Founded in 2024, we're on a journey to discover and share the hidden gems of Japan — the quiet, beautiful places that travellers usually miss.</p>
     </div>
   </section>
@@ -573,16 +436,16 @@
     <div class="gaiyo">
       <table>
         <tr>
-          <th data-i18n="about_cp_name">Company name</th>
+          <th data-i18n="about_cp_name">Company Name</th>
           <td data-i18n="about_cp_name_v">Intercommunicate K. K.</td>
         </tr>
         <tr>
           <th data-i18n="about_cp_founded">Founded</th>
-          <td data-i18n="about_cp_founded_v">April 2019</td>
+          <td data-i18n="about_cp_founded_v">April 2024</td>
         </tr>
         <tr>
           <th data-i18n="about_cp_reps">Representatives</th>
-          <td><span data-i18n-html="about_cp_reps_v">Akari Usuda &amp; Kentaro Usuda</span><span class="sub" data-i18n="about_cp_reps_sub">Co-founders</span></td>
+          <td><span data-i18n-html="about_cp_reps_v">Akari Usuda</span></td>
         </tr>
         <tr>
           <th data-i18n="about_cp_address">Address</th>
@@ -590,80 +453,21 @@
         </tr>
         <tr>
           <th data-i18n="about_cp_business">Business</th>
-          <td data-i18n="about_cp_business_v">Curation and operation of small-group walking tours across Kamakura, Fujisawa, Enoshima, and Yokohama.</td>
-        </tr>
-        <tr>
-          <th data-i18n="about_cp_team">Team</th>
-          <td data-i18n="about_cp_team_v">Two co-founders, plus a network of twelve partner guides, chefs, and craftspeople.</td>
-        </tr>
-        <tr>
-          <th data-i18n="about_cp_hours">Hours</th>
-          <td><span data-i18n="about_cp_hours_v">Tuesday – Saturday, 10:00 – 17:00 JST</span><span class="sub" data-i18n="about_cp_hours_sub">Closed Sundays, Mondays, and Japanese national holidays.</span></td>
+          <td data-i18n-html="about_cp_business_v">Curation &amp; operation of original tours across the Kamakura, Fujisawa &amp; Yokohama areas.<br/>Curation &amp; operation of bespoke, private tours.</td>
         </tr>
         <tr>
           <th data-i18n="about_cp_contact">Contact</th>
-          <td data-i18n-html="about_cp_contact_v">hello@zenrise.jp<br/>+81 (0)466 00 0000</td>
+          <td data-i18n-html="about_cp_contact_v">hello@zenrise.jp</td>
         </tr>
         <tr>
-          <th data-i18n="about_cp_license">Travel agency license</th>
+          <th data-i18n="about_cp_license">Travel Agency License</th>
           <td data-i18n="about_cp_license_v">Kanagawa Prefecture Registered Travel Agency No. 3-XXXX</td>
         </tr>
         <tr>
-          <th data-i18n="about_cp_bank">Bank</th>
-          <td data-i18n="about_cp_bank_v">Bank of Yokohama, Kamakura Branch</td>
+          <th data-i18n="about_cp_bank">Certified Domestic Travel Services Manager</th>
+          <td data-i18n="about_cp_bank_v">Kentaro Usuda</td>
         </tr>
       </table>
-    </div>
-  </section>
-
-  <!-- ───── Founders ───── -->
-  <section class="section" data-screen-label="02 About — Founders">
-    <div class="section-head">
-      <div class="label"><span class="num">02</span><span data-i18n="about_team_label">The team</span></div>
-    </div>
-
-    <div class="founders-2">
-
-      <article class="fbio">
-        <div class="photo">
-          <span class="pl" data-i18n="about_aiko_photo_pl"></span>
-          <span class="pl2" data-i18n="about_aiko_photo_pl2"></span>
-        </div>
-        <div class="text">
-          <span class="role" data-i18n="about_aiko_role">Founder · Tour Guide</span>
-          <h3 data-i18n="about_aiko_name">Akari Usuda</h3>
-          <p class="lead" data-i18n="about_aiko_lead">[Introduce Akari — her background, her personal connection to the Kamakura area, and the experience and training that led her to co-founding Zenrise. Replace with accurate content.]</p>
-          <p data-i18n="about_aiko_p1">[Describe the tours and experiences Akari leads — the specific places she visits, her areas of expertise, and the languages she speaks. Give a sense of who she is and how guests experience the tours through her. Replace with accurate content.]</p>
-          <p data-i18n="about_aiko_p2">[A personal note — what Akari does when she's not on tour. Something small and specific. Replace with accurate content.]</p>
-
-          <ul class="facts">
-            <li><span data-i18n="about_aiko_fact1_l">Based</span><span data-i18n="about_aiko_fact1_v">Kamakura</span></li>
-            <li><span data-i18n="about_aiko_fact2_l">Languages</span><span data-i18n="about_aiko_fact2_v">JP · EN</span></li>
-            <li><span data-i18n="about_aiko_fact3_l">Favourite Spots</span><span data-i18n="about_aiko_fact3_v">La Petite Boulangerie, Sasuke Inari</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="fbio reverse">
-        <div class="text">
-          <span class="role" data-i18n="about_daichi_role">Registered Travel Agent · Tour Guide</span>
-          <h3 data-i18n="about_daichi_name">Kentaro Usuda</h3>
-          <p class="lead" data-i18n-html="about_daichi_lead">[Introduce Kentaro — his career before Zenrise, how he came to know the Shonan coast so well, and what brought him to co-found the company with Akari. Replace with accurate content.]</p>
-          <p data-i18n="about_daichi_p1">[Describe Kentaro's role in designing routes, making bookings, and running the operational side of Zenrise. Give a sense of his personality and particular knowledge of the region — the kind of detail only someone who has spent years exploring it would know. Replace with accurate content.]</p>
-          <p data-i18n="about_daichi_p2">[A closing note on Kentaro's day-to-day — the practical side of keeping Zenrise running. Replace with accurate content.]</p>
-
-          <ul class="facts">
-            <li><span data-i18n="about_daichi_fact1_l">Based</span><span data-i18n="about_daichi_fact1_v">Kamakura</span></li>
-            <li><span data-i18n="about_daichi_fact2_l">Languages</span><span data-i18n="about_daichi_fact2_v">JP</span></li>
-            <li><span data-i18n="about_daichi_fact3_l">Favourite Spots</span><span data-i18n="about_daichi_fact3_v">Yamashita Park, Nami to Kaze</span></li>
-          </ul>
-        </div>
-        <div class="photo">
-          <span class="pl" data-i18n-html="about_daichi_photo_pl"></span>
-          <span class="pl2" data-i18n="about_aiko_photo_pl2"></span>
-        </div>
-      </article>
-
     </div>
   </section>
 
@@ -677,30 +481,16 @@
       </div>
 
       <div class="foot-col">
-        <h4 data-i18n="footer_visit">Visit</h4>
+        <h4 data-i18n="footer_visit">Office</h4>
         <ul>
-          <li>
-            <span class="label" data-i18n="footer_studio">Office</span>
-            <span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
-          </li>
-          <li style="margin-top: 8px">
-            <span class="label" data-i18n="footer_hours">Hours</span>
-            <span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span>
-          </li>
+          <li><span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span></li>
         </ul>
       </div>
 
       <div class="foot-col">
         <h4 data-i18n="footer_contact">Contact</h4>
         <ul>
-          <li>
-            <span class="label" data-i18n="footer_bookings">Bookings</span>
-            <a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
-          </li>
-          <li>
-            <span class="label" data-i18n="footer_telephone">Telephone</span>
-            +81 (0)466&nbsp;00&nbsp;0000
-          </li>
+          <li><a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a></li>
         </ul>
       </div>
 

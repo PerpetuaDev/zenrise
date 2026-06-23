@@ -436,295 +436,11 @@
   }
   .dest.placeholder .num-tag { color: var(--ink-60); }
 
-  /* ───── About ───── */
-  .about {
-    margin-top: 160px;
-    padding: 0 36px;
-  }
-  .about-inner {
-    padding: 96px 0 120px;
-    display: grid;
-    grid-template-columns: 560px 1fr;
-    column-gap: 120px;
-  }
-  .about-left {
-    position: sticky;
-    top: 40px;
-  }
-  .about-left .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.28em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    display: block;
-  }
-  .about-left h2 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 80px;
-    line-height: 0.96;
-    color: var(--ink);
-    margin: 0 0 36px;
-    letter-spacing: -0.01em;
-  }
-  .about-left .sig {
-    margin-top: 64px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    font-size: 18px;
-    color: var(--ink-60);
-  }
-  .about-left .sig::before {
-    content: "";
-    width: 32px; height: 1px;
-    background: var(--ink);
-  }
-  .about-right p {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 1.45;
-    color: var(--ink);
-    margin: 0 0 32px;
-    text-wrap: pretty;
-    max-width: 880px;
-  }
-  .about-right p.lead {
-    font-size: 36px;
-    line-height: 1.35;
-    margin-bottom: 48px;
-  }
-
-  .principles {
-    margin-top: 88px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 56px;
-    padding-top: 56px;
-    border-top: 1px solid var(--ink-12);
-  }
-  .principle .n {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.28em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 14px;
-  }
-  .principle h3 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 1.1;
-    margin: 0 0 14px;
-    letter-spacing: -0.005em;
-  }
-  .principle p {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink-60);
-    margin: 0;
-    text-wrap: pretty;
-  }
-
-  /* ───── Footer ───── */
-  footer {
-    background: var(--ink);
-    color: var(--bg);
-    margin-top: 80px;
-  }
-  .foot-top {
-    padding: 96px 36px 72px;
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
-    gap: 64px;
-  }
-  .foot-brand .mark {
-    font-family: "optima-nova-lt-pro", "Optima", serif;
-    font-size: 36px;
-    letter-spacing: 0.06em;
-    color: var(--bg);
-    line-height: 1;
-    margin-bottom: 26px;
-    display: block;
-  }
-  .foot-brand p {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 1.4;
-    color: rgba(247,244,234,0.78);
-    margin: 0;
-    max-width: 380px;
-    text-wrap: pretty;
-  }
-  .foot-col h4 {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: rgba(247,244,234,0.55);
-    text-transform: uppercase;
-    margin: 0 0 22px;
-    font-weight: 500;
-  }
-  .foot-col ul {
-    list-style: none;
-    padding: 0; margin: 0;
-    display: flex; flex-direction: column;
-    gap: 12px;
-  }
-  .foot-col li {
-    font-size: 18px;
-    line-height: 1.45;
-    color: rgba(247,244,234,0.92);
-  }
-  .foot-col li a:hover { opacity: 0.7; }
-  .foot-col .label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    color: rgba(247,244,234,0.45);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .foot-bottom {
-    border-top: 1px solid rgba(247,244,234,0.12);
-    padding: 28px 36px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    color: rgba(247,244,234,0.55);
-    text-transform: uppercase;
-  }
-  .foot-bottom .legal { display: flex; gap: 32px; }
-  .foot-bottom a:hover { color: var(--bg); }
-
   /* Subtle entrance */
   .reveal { opacity: 0; transform: translateY(12px); transition: opacity 700ms ease, transform 700ms ease; }
   .reveal.in { opacity: 1; transform: none; }
 
-  /* ───────────────────────────────────────────────────────────── */
-  /* Alt variants — toggled via Tweaks                            */
-  /* ───────────────────────────────────────────────────────────── */
-
-  /* ─ About v2: founder portrait ─ */
-  .about-v2 {
-    margin-top: 160px;
-    padding: 0 36px;
-  }
-  .about-v2-inner {
-    padding: 96px 0 120px;
-    display: grid;
-    grid-template-columns: 760px 1fr;
-    column-gap: 96px;
-    align-items: start;
-  }
-  .about-v2-photo {
-    position: relative;
-  }
-  .about-v2-photo image-slot {
-    width: 760px;
-    height: 880px;
-    display: block;
-    --slot-bg: #e4dfd5;
-    --slot-fg: rgba(41,65,56,0.55);
-  }
-  .about-v2-photo .caption {
-    display: block;
-    margin-top: 18px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-60);
-  }
-  .about-v2-text {
-    padding-top: 12px;
-  }
-  .about-v2-text .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.28em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    display: block;
-  }
-  .about-v2-text h2 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 92px;
-    line-height: 0.96;
-    color: var(--ink);
-    margin: 0 0 44px;
-    letter-spacing: -0.01em;
-  }
-  .about-v2-text .amp {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--ink-60);
-  }
-  .about-v2-text p.lead {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 1.35;
-    color: var(--ink);
-    margin: 0 0 32px;
-    max-width: 680px;
-    text-wrap: pretty;
-  }
-  .about-v2-text p {
-    font-size: 19px;
-    line-height: 1.65;
-    color: var(--ink-60);
-    margin: 0 0 22px;
-    max-width: 620px;
-    text-wrap: pretty;
-  }
-  .founders {
-    margin-top: 72px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    padding-top: 48px;
-    border-top: 1px solid var(--ink-12);
-  }
-  .founder .role {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.26em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 14px;
-  }
-  .founder h3 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 1;
-    margin: 0 0 14px;
-    letter-spacing: -0.005em;
-  }
-  .founder p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--ink-60);
-    margin: 0;
-    text-wrap: pretty;
-  }
-
-  /* ─ Footer v2: inline / cream ─ */
+  /* ─ Footer ─ */
   footer.foot-v2 {
     background: transparent;
     color: var(--ink);
@@ -777,15 +493,6 @@
     color: var(--ink);
   }
   .foot-v2 .foot-col li a:hover { opacity: 0.6; }
-  .foot-v2 .foot-col .label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 4px;
-  }
   .foot-v2 .foot-v2-bottom {
     border-top: 1px solid var(--ink-12);
     padding: 28px 0;
@@ -800,75 +507,6 @@
   }
   .foot-v2 .foot-v2-bottom .legal { display: flex; gap: 32px; }
   .foot-v2 .foot-v2-bottom a:hover { color: var(--ink); }
-
-  /* ─ Tweaks panel (only visible when host activates it) ─ */
-  #tweaks-panel {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 280px;
-    background: #fff;
-    color: var(--ink);
-    border: 1px solid var(--ink-12);
-    border-radius: 4px;
-    padding: 18px 18px 16px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-    font-family: var(--sans);
-    font-size: 14px;
-    z-index: 9999;
-    display: none;
-  }
-  #tweaks-panel.open { display: block; }
-  #tweaks-panel .tp-head {
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--ink-60);
-    margin-bottom: 16px;
-  }
-  #tweaks-panel .tp-close {
-    cursor: pointer; padding: 2px 6px; border-radius: 3px;
-    border: 1px solid var(--ink-12);
-    background: transparent;
-    color: var(--ink-60);
-    font: inherit;
-  }
-  #tweaks-panel .tp-close:hover { color: var(--ink); }
-  #tweaks-panel .tp-section { margin-bottom: 18px; }
-  #tweaks-panel .tp-section:last-child { margin-bottom: 0; }
-  #tweaks-panel .tp-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-60);
-    margin-bottom: 8px;
-  }
-  #tweaks-panel .tp-radio {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    background: var(--bg-2);
-    border-radius: 3px;
-    padding: 3px;
-  }
-  #tweaks-panel .tp-radio button {
-    border: none;
-    background: transparent;
-    color: var(--ink-60);
-    padding: 7px 10px;
-    border-radius: 2px;
-    font: inherit;
-    cursor: pointer;
-    font-size: 13px;
-  }
-  #tweaks-panel .tp-radio button.on {
-    background: #fff;
-    color: var(--ink);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
 
   /* ───────────────────────────────────────────────────────────── */
   /* Responsive — below 1024px the stage zoom is disabled and     */
@@ -903,35 +541,12 @@
     .dest-expanded .exp-name { font-size: 48px; }
     .dest-expanded .exp-meta { bottom: 32px; left: 32px; }
 
-    /* About v2 (founder portrait — the active variant) */
-    .about-v2 { margin-top: 72px; padding: 0 20px; }
-    .about-v2-inner { padding: 48px 0 64px; grid-template-columns: 1fr; row-gap: 36px; }
-    .about-v2-photo image-slot { width: 100%; height: 70vw; min-height: 260px; }
-    .about-v2-text h2 { font-size: 56px; }
-    .about-v2-text p.lead { font-size: 22px; max-width: 100%; }
-    .about-v2-text p { font-size: 17px; max-width: 100%; }
-    .founders { grid-template-columns: 1fr; gap: 28px; margin-top: 48px; }
-
-    /* About (editorial variant — hidden by default but kept responsive) */
-    .about { margin-top: 72px; padding: 0 20px; }
-    .about-inner { padding: 48px 0 64px; grid-template-columns: 1fr; row-gap: 32px; }
-    .about-left { position: static; }
-    .about-left h2 { font-size: 52px; }
-    .about-right p { font-size: 20px; max-width: 100%; }
-    .about-right p.lead { font-size: 26px; }
-    .principles { grid-template-columns: 1fr; gap: 32px; }
-
     /* Footer (inline/cream — active variant) */
     footer.foot-v2 { padding: 0 20px; }
     .foot-v2 .foot-v2-top { padding: 56px 0 48px; grid-template-columns: 1fr; gap: 40px; }
     .foot-v2 .foot-brand p { font-size: 18px; max-width: 100%; }
     .foot-v2 .foot-v2-bottom { flex-direction: column; gap: 12px; padding: 20px 0; text-align: center; }
     .foot-v2 .foot-v2-bottom .legal { gap: 20px; }
-
-    /* Footer (dark/moss variant) */
-    .foot-top { padding: 56px 20px 48px; grid-template-columns: 1fr; gap: 40px; }
-    .foot-bottom { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
-    .foot-bottom .legal { gap: 20px; }
   }
 
   /* Very small screens — hide nav links, tighten further */
@@ -940,7 +555,6 @@
     .hero-photo { height: 62vw; }
     .hero-card .ttl { font-size: 32px; }
     .dest-grid { gap: 8px; }
-    .about-v2-text h2 { font-size: 44px; }
   }
 </style>
 </head>
@@ -978,7 +592,7 @@
           <article class="hero-card">
             <p class="num" data-i18n="home_hero_num">01</p>
             <h1 class="ttl" data-i18n-html="home_hero_title">Discover the<br/>hidden Japan.</h1>
-            <p class="copy" data-i18n="home_hero_copy">Small-group walks through the towns the guidebooks leave behind — tea houses, salt fields, mountain shrines.</p>
+            <p class="copy" data-i18n="home_hero_copy">From iconic highlights to the secret spots the guidebooks leave behind — personalized tours through local eyes, crafted just for you.</p>
             <a class="more" href="#" data-i18n="home_hero_more">Read more&nbsp;&nbsp;→</a>
           </article>
         </div>
@@ -1079,79 +693,8 @@
       </div>
     </section>
 
-    <!-- ───── About v2 (founder portrait — DEFAULT) ───── -->
-    <section class="about-v2" data-about="founder" data-screen-label="01 Home — About">
-      <div class="rule"></div>
-      <div class="about-v2-inner">
-        <div class="about-v2-photo">
-          <image-slot
-            id="founders-portrait"
-            shape="rect"
-            src="assets/akari-kentaro-placeholder.jpg"
-            placeholder="Drop a casual photo of Akari & Kentaro here" data-i18n-placeholder="home_about_image_placeholder"
-          ></image-slot>
-          <span class="caption" data-i18n-html="home_about_caption">Akari &amp; Kentaro — Komachi-dori, Kamakura</span>
-        </div>
-        <div class="about-v2-text">
-          <span class="eyebrow" data-i18n="home_about_eyebrow">Your Hosts</span>
-          <h2 data-i18n-html="home_about_title">Akari <span class="amp">&amp;</span><br/>Kentaro.</h2>
-          <p class="lead" data-i18n="home_about_lead">[Opening line &mdash; a sentence or two about who they are and what brought them to this work. Replace with accurate content.]</p>
-          <p data-i18n="home_about_p1">[Akari background &mdash; her connection to the area, what she brings to the tours, what she cares about. Two to three sentences. Replace with accurate content.]</p>
-          <p data-i18n="home_about_p2">[Kentaro background &mdash; his background, his role in the company, what draws him to this work. Two to three sentences. Replace with accurate content.]</p>
-
-          <div class="founders">
-            <div class="founder">
-              <span class="role" data-i18n="home_about_aiko_role">Founder &middot; Tour Guide</span>
-              <h3 data-i18n="home_about_aiko_name">Akari Usuda</h3>
-              <p data-i18n="home_about_aiko_desc">[Short description of Akari — one or two sentences. Replace with accurate content.]</p>
-            </div>
-            <div class="founder">
-              <span class="role" data-i18n="home_about_daichi_role">Registered Travel Agent &middot; Tour Guide</span>
-              <h3 data-i18n="home_about_daichi_name">Kentaro Usuda</h3>
-              <p data-i18n="home_about_daichi_desc">[Short description of Kentaro — one or two sentences. Replace with accurate content.]</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ───── About v1 (editorial — alt) ───── -->
-    <section class="about" data-about="editorial" data-screen-label="01 Home — About (editorial)">
-      <div class="rule"></div>
-      <div class="about-inner">
-        <div class="about-left">
-          <span class="eyebrow" data-i18n="about_eyebrow">About us</span>
-          <h2>A slower<br/>way to see<br/>Japan.</h2>
-          <div class="sig">Founded in Kamakura, 2019</div>
-        </div>
-        <div class="about-right">
-          <p class="lead">Zenrise was started by two friends &mdash; one a tea ceremony apprentice, one a tired travel editor &mdash; who kept finding the country they loved hiding just off the main route.</p>
-          <p>We design unhurried journeys for travelers who&rsquo;d rather stay one night longer than rush to the next stop. Every itinerary is led by a small team who actually lives where we send you &mdash; chefs, monks, ceramicists, fishermen.</p>
-          <p>Groups never exceed six. The mornings are long. The trains are local. The point isn&rsquo;t to see more of Japan, but to see Japan more closely.</p>
-
-          <div class="principles">
-            <div class="principle">
-              <span class="n">01</span>
-              <h3>Slow by design</h3>
-              <p>Two to three places per trip, never the highlight reel. Walking when we can, local trains when we can&rsquo;t.</p>
-            </div>
-            <div class="principle">
-              <span class="n">02</span>
-              <h3>Hosted by locals</h3>
-              <p>Every day is led by someone whose family has lived in that town for at least three generations.</p>
-            </div>
-            <div class="principle">
-              <span class="n">03</span>
-              <h3>Small groups</h3>
-              <p>Maximum six travelers. Often four. Sometimes just you and a guide.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ───── Footer v2 (inline / cream — DEFAULT) ───── -->
-    <footer class="foot-v2" data-footer="inline" data-screen-label="01 Home — Footer">
+    <!-- ───── Footer ───── -->
+    <footer class="foot-v2" data-screen-label="01 Home — Footer">
       <div class="rule"></div>
       <div class="foot-v2-top">
         <div class="foot-brand">
@@ -1160,30 +703,16 @@
         </div>
 
         <div class="foot-col">
-          <h4 data-i18n="footer_visit">Visit</h4>
+          <h4 data-i18n="footer_visit">Office</h4>
           <ul>
-            <li>
-              <span class="label" data-i18n="footer_studio">Office</span>
-              <span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
-            </li>
-            <li style="margin-top: 8px">
-              <span class="label" data-i18n="footer_hours">Hours</span>
-              <span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span>
-            </li>
+            <li><span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span></li>
           </ul>
         </div>
 
         <div class="foot-col">
           <h4 data-i18n="footer_contact">Contact</h4>
           <ul>
-            <li>
-              <span class="label" data-i18n="footer_bookings">Bookings</span>
-              <a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
-            </li>
-            <li>
-              <span class="label" data-i18n="footer_telephone">Telephone</span>
-              +81 (0)466&nbsp;00&nbsp;0000
-            </li>
+            <li><a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a></li>
           </ul>
         </div>
 
@@ -1207,146 +736,11 @@
       </div>
     </footer>
 
-    <!-- ───── Footer v1 (moss — alt) ───── -->
-    <footer data-footer="moss" data-screen-label="01 Home — Footer (moss)">
-      <div class="foot-top">
-        <div class="foot-brand">
-          <span class="mark">ZENRISE</span>
-          <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
-        </div>
-
-        <div class="foot-col">
-          <h4 data-i18n="footer_visit">Visit</h4>
-          <ul>
-            <li>
-              <span class="label" data-i18n="footer_studio">Office</span>
-              <span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
-            </li>
-            <li style="margin-top: 8px">
-              <span class="label" data-i18n="footer_hours">Hours</span>
-              <span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="foot-col">
-          <h4 data-i18n="footer_contact">Contact</h4>
-          <ul>
-            <li>
-              <span class="label" data-i18n="footer_bookings">Bookings</span>
-              <a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
-            </li>
-            <li>
-              <span class="label" data-i18n="footer_telephone">Telephone</span>
-              +81 (0)466&nbsp;00&nbsp;0000
-            </li>
-          </ul>
-        </div>
-
-        <div class="foot-col">
-          <h4 data-i18n="footer_follow">Follow</h4>
-          <ul>
-            <li><a href="https://www.instagram.com/zenrise_tours/" data-i18n="footer_instagram">Instagram &nbsp;→</a></li>
-            <li><a href="https://www.youtube.com/@zenrisejapan" data-i18n="footer_youtube">YouTube &nbsp;→</a></li>
-            <li><a href="https://www.tiktok.com/@zenrise_tours" data-i18n="footer_tiktok">TikTok &nbsp;→</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="foot-bottom">
-        <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
-        <div class="legal">
-          <a href="#" data-i18n="footer_privacy">Privacy</a>
-          <a href="#" data-i18n="footer_terms">Terms</a>
-          <a href="#" data-i18n="footer_cookies">Cookies</a>
-        </div>
-      </div>
-    </footer>
-
-  </div>
-
-  <!-- ───── Tweaks panel (hidden until host activates) ───── -->
-  <div id="tweaks-panel" role="dialog" aria-label="Tweaks">
-    <div class="tp-head">
-      <span>Tweaks</span>
-      <button class="tp-close" id="tp-close" aria-label="Close tweaks">×</button>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">About section</div>
-      <div class="tp-radio" data-key="about">
-        <button data-val="founder">Founder portrait</button>
-        <button data-val="editorial">Editorial</button>
-      </div>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">Footer</div>
-      <div class="tp-radio" data-key="footer">
-        <button data-val="inline">Inline / cream</button>
-        <button data-val="moss">Moss / inverted</button>
-      </div>
-    </div>
   </div>
 
   <script src="image-slot.js"></script>
 
 <script>
-  // ───── Tweaks state + variant toggling ─────
-  const TWEAKS = /*EDITMODE-BEGIN*/{
-    "about": "founder",
-    "footer": "inline"
-  }/*EDITMODE-END*/;
-
-  function applyTweaks(t) {
-    document.querySelectorAll('[data-about]').forEach(el => {
-      el.style.display = (el.dataset.about === t.about) ? '' : 'none';
-    });
-    document.querySelectorAll('[data-footer]').forEach(el => {
-      el.style.display = (el.dataset.footer === t.footer) ? '' : 'none';
-    });
-    // refresh button states
-    document.querySelectorAll('#tweaks-panel .tp-radio').forEach(group => {
-      const key = group.dataset.key;
-      group.querySelectorAll('button').forEach(btn => {
-        btn.classList.toggle('on', btn.dataset.val === t[key]);
-      });
-    });
-    // re-fit stage since content height may have changed
-    if (window.__fitStage) window.__fitStage();
-  }
-
-  function setTweak(key, val) {
-    TWEAKS[key] = val;
-    applyTweaks(TWEAKS);
-    try {
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
-    } catch (e) { /* not in host */ }
-  }
-
-  // wire up the panel buttons
-  document.querySelectorAll('#tweaks-panel .tp-radio').forEach(group => {
-    const key = group.dataset.key;
-    group.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => setTweak(key, btn.dataset.val));
-    });
-  });
-
-  // host-protocol: listener FIRST, then announce availability
-  const panel = document.getElementById('tweaks-panel');
-  function showPanel() { panel.classList.add('open'); }
-  function hidePanel() { panel.classList.remove('open'); }
-  window.addEventListener('message', (e) => {
-    if (!e.data || typeof e.data !== 'object') return;
-    if (e.data.type === '__activate_edit_mode') showPanel();
-    if (e.data.type === '__deactivate_edit_mode') hidePanel();
-  });
-  document.getElementById('tp-close').addEventListener('click', () => {
-    hidePanel();
-    try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch (e) {}
-  });
-  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
-
-  applyTweaks(TWEAKS);
-
   // Scale the 1920px stage down to fit the viewer's window width.
   (function () {
     var stage = document.getElementById('stage');
@@ -1436,7 +830,7 @@
 
   // gentle reveal on scroll
   (function () {
-    var els = document.querySelectorAll('.dest, .principle, .about-left, .about-right > p');
+    var els = document.querySelectorAll('.dest');
     els.forEach(function (el) { el.classList.add('reveal'); });
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {

@@ -84,59 +84,6 @@
   .rule { height: 1px; background: var(--rule); width: 100%; }
 
   /* ───── Contact hero ───── */
-  .hero {
-    padding: 60px 36px 88px;
-    border-bottom: 1px solid var(--ink-12);
-  }
-  .hero .meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.28em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    margin-bottom: 56px;
-  }
-  .hero h1 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 200px;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    margin: 0 0 96px;
-    max-width: 1500px;
-  }
-  .hero .info {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr 1fr;
-    column-gap: 80px;
-    padding-top: 44px;
-    border-top: 1px solid var(--ink-12);
-  }
-  .hero .info .lbl {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.28em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    margin-bottom: 22px;
-    display: block;
-  }
-  .hero .info .v {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 44px;
-    line-height: 1.15;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-    text-wrap: pretty;
-  }
-  .hero .info a.v { display: block; }
-  .hero .info a.v:hover { opacity: 0.65; }
-
-  /* ─ Hero v2: letterhead ─ */
   .hero-v2 {
     padding: 60px 36px 80px;
   }
@@ -217,45 +164,6 @@
   .hero-v2 .lh a.v { display: inline-block; }
   .hero-v2 .lh a.v:hover { opacity: 0.65; }
 
-  /* ─ Tweaks panel ─ */
-  #tweaks-panel {
-    position: fixed; right: 20px; bottom: 20px; width: 260px;
-    background: #fff; color: var(--ink);
-    border: 1px solid var(--ink-12); border-radius: 4px;
-    padding: 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-    font-family: var(--sans); font-size: 14px; z-index: 9999;
-    display: none;
-  }
-  #tweaks-panel.open { display: block; }
-  #tweaks-panel .tp-head {
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em;
-    text-transform: uppercase; color: var(--ink-60); margin-bottom: 16px;
-  }
-  #tweaks-panel .tp-close {
-    cursor: pointer; padding: 2px 6px; border-radius: 3px;
-    border: 1px solid var(--ink-12); background: transparent;
-    color: var(--ink-60); font: inherit;
-  }
-  #tweaks-panel .tp-close:hover { color: var(--ink); }
-  #tweaks-panel .tp-label {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--ink-60); margin-bottom: 8px;
-  }
-  #tweaks-panel .tp-radio {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
-    background: var(--bg-2); border-radius: 3px; padding: 3px;
-  }
-  #tweaks-panel .tp-radio button {
-    border: none; background: transparent; color: var(--ink-60);
-    padding: 7px 10px; border-radius: 2px; font: inherit;
-    cursor: pointer; font-size: 13px;
-  }
-  #tweaks-panel .tp-radio button.on {
-    background: #fff; color: var(--ink);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-
   /* ───── Booking-flow intro ───── */
   .booking-intro {
     padding: 96px 36px 0;
@@ -289,48 +197,6 @@
     margin: 0;
     max-width: 600px;
     text-wrap: pretty;
-  }
-
-  /* ───── Page header ───── */
-  .ph {
-    padding: 80px 36px 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 96px;
-    align-items: end;
-    border-bottom: 1px solid var(--ink-12);
-  }
-  .ph .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.28em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-    margin-bottom: 36px;
-    display: block;
-  }
-  .ph h1 {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 140px;
-    line-height: 0.92;
-    margin: 0;
-    letter-spacing: -0.015em;
-  }
-  .ph .intro p {
-    font-family: var(--display);
-    font-size: 28px;
-    line-height: 1.45;
-    color: var(--ink);
-    margin: 0 0 22px;
-    max-width: 640px;
-    text-wrap: pretty;
-  }
-  .ph .intro p.muted {
-    font-size: 20px;
-    color: var(--ink-60);
-    font-family: var(--sans);
-    line-height: 1.6;
   }
 
   /* ───── Booking layout ───── */
@@ -961,10 +827,6 @@
   .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
   .foot-col li { font-size: 18px; line-height: 1.45; color: var(--ink); }
   .foot-col li a:hover { opacity: 0.6; }
-  .foot-col .label {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em;
-    color: var(--ink-60); text-transform: uppercase; display: block; margin-bottom: 4px;
-  }
   .foot-v2-bottom {
     border-top: 1px solid var(--ink-12);
     padding: 28px 0;
@@ -984,25 +846,13 @@
     .navlinks { gap: 28px; font-size: 16px; }
     .lang { font-size: 16px; }
 
-    /* Contact hero (full-width variant) */
-    .hero { padding: 40px 20px 56px; }
-    .hero .meta-row { margin-bottom: 32px; }
-    .hero h1 { font-size: 80px; margin-bottom: 48px; }
-    .hero .info { grid-template-columns: 1fr; row-gap: 36px; padding-top: 32px; }
-    .hero .info .v { font-size: 28px; }
-
-    /* Hero v2 (letterhead variant) */
+    /* Contact hero */
     .hero-v2 { padding: 40px 20px 56px; }
     .hero-v2 .body { grid-template-columns: 1fr; row-gap: 36px; }
     .hero-v2 .photo { width: 100%; height: 56vw; min-height: 200px; }
     .hero-v2 .lh .row { gap: 24px; padding: 20px 0; }
     .hero-v2 .lh .lbl { width: 110px; font-size: 11px; }
     .hero-v2 .lh .v { font-size: 30px; }
-
-    /* Page header */
-    .ph { padding: 48px 20px 48px; grid-template-columns: 1fr; row-gap: 28px; }
-    .ph h1 { font-size: 80px; }
-    .ph .intro p { font-size: 20px; max-width: 100%; }
 
     /* Booking layout — stack sidebar above form */
     .booking { padding: 56px 20px 80px; grid-template-columns: 1fr; row-gap: 48px; }
@@ -1031,8 +881,6 @@
 
   @media (max-width: 599px) {
     .navlinks { display: none; }
-    .hero h1 { font-size: 52px; }
-    .ph h1 { font-size: 52px; }
     .booking-intro h2 { font-size: 40px; }
     .step h2 { font-size: 36px; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
@@ -1054,8 +902,8 @@
     <a class="lang" href="#">english</a>
   </header>
 
-  <!-- ───── Contact hero v2 — letterhead (DEFAULT) ───── -->
-  <section class="hero-v2" data-hero="letterhead" data-screen-label="03 Contact — Hero (letterhead)">
+  <!-- ───── Contact hero ───── -->
+  <section class="hero-v2" data-screen-label="03 Contact — Hero">
     <div class="body">
       <div class="photo">
         <span class="credit" data-i18n="contact_hero_credit">Komachi-dori &middot; Kamakura</span>
@@ -1083,45 +931,10 @@
     </div>
   </section>
 
-  <!-- ───── Contact hero v1 — display (alt) ───── -->
-  <section class="hero" data-hero="display" data-screen-label="03 Contact — Hero (display)">
-    <div class="meta-row">
-      <span data-i18n="contact_hero_eyebrow">Contact</span>
-      <span data-i18n="contact_hero_d_meta_loc">Kamakura &middot; Japan</span>
-    </div>
-    <h1 data-i18n="contact_hero_d_title">Get in touch.</h1>
-    <div class="info">
-      <div>
-        <span class="lbl" data-i18n="contact_hero_email">Email</span>
-        <a class="v" href="mailto:hello@zenrise.jp">hello@zenrise.jp</a>
-      </div>
-      <div>
-        <span class="lbl" data-i18n="contact_hero_visit">Visit</span>
-        <span class="v" data-i18n-html="contact_hero_visit_v">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span>
-      </div>
-      <div>
-        <span class="lbl" data-i18n="contact_hero_tel">Telephone</span>
-        <a class="v" href="tel:+81467000000">+81 (0)467 00 0000</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ───── Booking-flow intro ───── -->
   <section class="booking-intro" data-screen-label="03 Contact — Booking intro">
     <div>
       <h2 data-i18n-html="contact_bi_title">Plan<br/>your trip.</h2>
-    </div>
-  </section>
-
-  <!-- ───── Page header ───── -->
-  <section class="ph" style="display:none" data-screen-label="03 Contact — Header (legacy)">
-    <div>
-      <span class="eyebrow">Contact</span>
-      <h1>Plan<br/>your trip.</h1>
-    </div>
-    <div class="intro">
-      <p>Tell us a little about the kind of day you'd like &mdash; we'll write back within two working days with two or three itineraries that fit.</p>
-      <p class="muted">There's no booking platform behind this form. Every reply comes from Akari or Kentaro, in plain English. Takes about three minutes.</p>
     </div>
   </section>
 
@@ -1331,7 +1144,7 @@
 
         <div class="step-nav">
           <button class="btn-back" data-back><span class="arrow">←</span> <span data-i18n="booking_btn_back">Back</span></button>
-          <button class="btn-next send" id="send-btn" disabled><span data-i18n-html="booking_btn_send">Send to Akari &amp; Kentaro</span> <span class="arrow">→</span></button>
+          <button class="btn-next send" id="send-btn" disabled><span data-i18n-html="booking_btn_send">Send to Zenrise</span> <span class="arrow">→</span></button>
         </div>
       </div>
 
@@ -1367,17 +1180,15 @@
         <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
       </div>
       <div class="foot-col">
-        <h4 data-i18n="footer_visit">Visit</h4>
+        <h4 data-i18n="footer_visit">Office</h4>
         <ul>
-          <li><span class="label" data-i18n="footer_studio">Office</span><span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span></li>
-          <li style="margin-top: 8px"><span class="label" data-i18n="footer_hours">Hours</span><span data-i18n="footer_hours_v">Tue&ndash;Sat, 10:00&ndash;17:00 JST</span></li>
+          <li><span data-i18n-html="footer_address">me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan</span></li>
         </ul>
       </div>
       <div class="foot-col">
         <h4 data-i18n="footer_contact">Contact</h4>
         <ul>
-          <li><span class="label" data-i18n="footer_bookings">Bookings</span><a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a></li>
-          <li><span class="label" data-i18n="footer_telephone">Telephone</span>+81 (0)466&nbsp;00&nbsp;0000</li>
+          <li><a href="mailto:hello@zenrise.jp">hello@zenrise.jp</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -1401,65 +1212,9 @@
 
 </div>
 
-<!-- ───── Tweaks panel ───── -->
-<div id="tweaks-panel" role="dialog" aria-label="Tweaks">
-  <div class="tp-head">
-    <span>Tweaks</span>
-    <button class="tp-close" id="tp-close" aria-label="Close">×</button>
-  </div>
-  <div>
-    <div class="tp-label">Contact hero</div>
-    <div class="tp-radio" data-key="hero">
-      <button data-val="letterhead">Letterhead</button>
-      <button data-val="display">Display</button>
-    </div>
-  </div>
-</div>
-
 <script src="lang.js"></script>
 <script src="datepicker.js"></script>
 
-<script>
-  // Tweaks: pick a contact hero
-  const TWEAKS = /*EDITMODE-BEGIN*/{
-    "hero": "letterhead"
-  }/*EDITMODE-END*/;
-  function applyTweaks(t) {
-    document.querySelectorAll('[data-hero]').forEach(function (el) {
-      el.style.display = (el.dataset.hero === t.hero) ? '' : 'none';
-    });
-    document.querySelectorAll('#tweaks-panel .tp-radio').forEach(function (group) {
-      var key = group.dataset.key;
-      group.querySelectorAll('button').forEach(function (btn) {
-        btn.classList.toggle('on', btn.dataset.val === t[key]);
-      });
-    });
-    if (window.__fit) window.__fit();
-  }
-  function setTweak(key, val) {
-    TWEAKS[key] = val;
-    applyTweaks(TWEAKS);
-    try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*'); } catch (e) {}
-  }
-  document.querySelectorAll('#tweaks-panel .tp-radio').forEach(function (group) {
-    var key = group.dataset.key;
-    group.querySelectorAll('button').forEach(function (btn) {
-      btn.addEventListener('click', function () { setTweak(key, btn.dataset.val); });
-    });
-  });
-  var panel = document.getElementById('tweaks-panel');
-  window.addEventListener('message', function (e) {
-    if (!e.data || typeof e.data !== 'object') return;
-    if (e.data.type === '__activate_edit_mode') panel.classList.add('open');
-    if (e.data.type === '__deactivate_edit_mode') panel.classList.remove('open');
-  });
-  document.getElementById('tp-close').addEventListener('click', function () {
-    panel.classList.remove('open');
-    try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch (e) {}
-  });
-  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
-  applyTweaks(TWEAKS);
-</script>
 
 <script>
   // ───── Stage scale (shared pattern) ─────
