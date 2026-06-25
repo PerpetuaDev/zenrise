@@ -38,7 +38,7 @@
   }
 
   * { box-sizing: border-box; }
-  html { overflow-x: hidden; }
+  html { overflow-x: hidden; scroll-behavior: smooth; }
   html, body { margin: 0; padding: 0; }
   body {
     background: var(--bg);
@@ -731,14 +731,14 @@
             <p class="num">01</p>
             <h1 class="ttl" data-i18n-html="home_hero_title">Discover the<br/>hidden Japan.</h1>
             <p class="copy" data-i18n="home_hero_copy">From iconic highlights to the secret spots the guidebooks leave behind — personalized tours through local eyes, crafted just for you.</p>
-            <a class="more" href="#" data-i18n="home_hero_more">Read more&nbsp;&nbsp;→</a>
+            <a class="more" href="#find" data-i18n="home_hero_more">Read more&nbsp;&nbsp;→</a>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ───── Find your perfect place ───── -->
-    <section class="find" data-screen-label="01 Home — Destinations">
+    <section class="find" id="find" data-screen-label="01 Home — Destinations">
       <div class="rule"></div>
       <div class="find-head">
         <h2 data-i18n="home_find_title">Find your travel inspiration</h2>

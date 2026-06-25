@@ -428,6 +428,15 @@
   .card.region.kamakura .pic {
     background: url("assets/shrines/kamakura-tsurugaoka-hachimangu.jpg") center / cover no-repeat;
   }
+  .card.region.enoshima .pic {
+    background: url("assets/views/coastal-road-ocean.jpg") center / cover no-repeat;
+  }
+  .card.region.yokohama .pic {
+    background: url("assets/everyday/retro-street-corner.jpg") center / cover no-repeat;
+  }
+  .card.region.other .pic {
+    background: url("assets/views/mount-fuji-ocean.jpg") center / cover no-repeat;
+  }
   .card.region .body {
     padding: 22px 24px 24px;
   }
@@ -940,9 +949,9 @@
   <section class="booking" data-screen-label="03 Contact — Booking flow">
 
     <aside class="progress">
-      <span class="ttl" data-i18n="booking_progress_title">Booking — 05 steps</span>
+      <span class="ttl" data-i18n="booking_progress_title">Booking</span>
       <ol id="steps-nav">
-        <li data-go="0" class="cur"><span class="n">01</span><span class="lbl" data-i18n="booking_step1_lbl">Where to go</span></li>
+        <li data-go="0" class="cur"><span class="n">01</span><span class="lbl" data-i18n="booking_step1_lbl">Where</span></li>
         <li data-go="1"><span class="n">02</span><span class="lbl" data-i18n="booking_step2_lbl">How long</span></li>
         <li data-go="2"><span class="n">03</span><span class="lbl" data-i18n-html="booking_step3_lbl">When &amp; who</span></li>
         <li data-go="3"><span class="n">04</span><span class="lbl" data-i18n="booking_step4_lbl">About you</span></li>
@@ -968,7 +977,7 @@
             </div>
             <span class="tick"></span>
           </div>
-          <div class="card region" data-multi="region" data-val="Enoshima">
+          <div class="card region enoshima" data-multi="region" data-val="Enoshima">
             <div class="pic"></div>
             <div class="body">
               <span class="num">02 / 04</span>
@@ -977,21 +986,21 @@
             </div>
             <span class="tick"></span>
           </div>
-          <div class="card region" data-multi="region" data-val="Other Destinations">
+          <div class="card region yokohama" data-multi="region" data-val="Yokohama">
             <div class="pic"></div>
             <div class="body">
               <span class="num">03 / 04</span>
-              <h3 data-i18n="home_dest_fujisawa_name">Other Destinations</h3>
-              <span class="sub" data-i18n="booking_s1_fujisawa_sub">Tokyo · Mt. Fuji · Hakone</span>
+              <h3 data-i18n="home_dest_yokohama_name">Yokohama</h3>
+              <span class="sub" data-i18n="booking_s1_yokohama_sub">Old harbour · Chinatown · Dusk</span>
             </div>
             <span class="tick"></span>
           </div>
-          <div class="card region" data-multi="region" data-val="Yokohama">
+          <div class="card region other" data-multi="region" data-val="Other Destinations">
             <div class="pic"></div>
             <div class="body">
               <span class="num">04 / 04</span>
-              <h3 data-i18n="home_dest_yokohama_name">Yokohama</h3>
-              <span class="sub" data-i18n="booking_s1_yokohama_sub">Old harbour · Chinatown · Dusk</span>
+              <h3 data-i18n="home_dest_fujisawa_name">Other Destinations</h3>
+              <span class="sub" data-i18n="booking_s1_fujisawa_sub">Tokyo · Mt. Fuji · Hakone</span>
             </div>
             <span class="tick"></span>
           </div>
@@ -1036,7 +1045,7 @@
       <div class="step" data-step="2">
         <div class="meta"><span data-i18n="booking_s3_meta">Step 03 / 05</span><span data-i18n-html="booking_s3_sub">Dates &amp; party</span></div>
         <h2 data-i18n-html="booking_s3_h">When, and how<br/>many of you?</h2>
-        <p class="lede" data-i18n-html="booking_s3_lede">A rough window is fine &mdash; we'll come back with two or three open dates near it. Groups never exceed six.</p>
+        <p class="lede" data-i18n-html="booking_s3_lede">A rough window is fine &mdash; we'll come back with two or three open dates near it.</p>
 
         <div class="row-2">
           <div class="field">
@@ -1059,7 +1068,7 @@
             </div>
             <button type="button" data-step-act="inc" aria-label="More">+</button>
           </div>
-          <p class="hint" data-i18n="booking_s3_party_hint">Most of our groups are two to four. We rarely take six.</p>
+          <p class="hint" data-i18n="booking_s3_party_hint">We like to keep groups intimate. Most are two to four, and six at most.</p>
         </div>
 
         <div class="field">
@@ -1111,7 +1120,13 @@
               <button type="button" class="chip" data-multi="interests" data-val="Coastline" data-i18n="booking_s4_int_coast">Coastline</button>
               <button type="button" class="chip" data-multi="interests" data-val="Quiet temples" data-i18n="booking_s4_int_temples">Quiet temples</button>
               <button type="button" class="chip" data-multi="interests" data-val="Crafts" data-i18n="booking_s4_int_crafts">Crafts</button>
-            </div>
+              <button type="button" class="chip" data-multi="interests" data-val="Zen meditation" data-i18n="booking_s4_int_zen">Zen meditation</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Nature" data-i18n="booking_s4_int_nature">Nature</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Local life" data-i18n="booking_s4_int_local">Local life</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Cafés" data-i18n="booking_s4_int_cafes">Cafés</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Gardens" data-i18n="booking_s4_int_gardens">Gardens</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Markets" data-i18n="booking_s4_int_markets">Markets</button>
+              <button type="button" class="chip" data-multi="interests" data-val="Calligraphy" data-i18n="booking_s4_int_calligraphy">Calligraphy</button>            </div>
           </div>
         </div>
 
