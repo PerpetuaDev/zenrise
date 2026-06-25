@@ -145,9 +145,6 @@
     transition: opacity 1s ease;
   }
   .slide-bg.active { opacity: 1; }
-  .slide-bg-1 { background-image: url("assets/hero-kamakura.png"); }
-  .slide-bg-2 { background-image: url("assets/nami-to-kaze.jpg"); }
-  .slide-bg-3 { background-image: url("assets/zeniarai-benten-reduced.jpg"); }
   .slide-dots {
     position: absolute;
     bottom: 22px;
@@ -365,6 +362,152 @@
   .dest-expanded.open .dest-close { opacity: 1; }
   .dest-close:hover { background: rgba(255,255,255,0.22); }
   .dest-expanded.is-placeholder .dest-close:hover { background: rgba(41,65,56,0.1); }
+
+  /* ─ Expanded split layout (image + offerings) ─ */
+  .dest-expanded { --exp-panel-w: 42%; }
+  /* Photo fills the whole overlay; the cream panel is layered on top at the right.
+     This keeps the photo behind the panel, so closing reveals photo (not white)
+     no matter which column the card sits in. */
+  .dest-expanded .exp-bg { transition: opacity 0.35s ease; }
+  .dest-expanded.is-placeholder .exp-bg {
+    background:
+      repeating-linear-gradient(135deg, rgba(41,65,56,0.05) 0 1px, transparent 1px 14px),
+      var(--bg-3);
+  }
+
+  .dest-expanded .exp-panel {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: var(--exp-panel-w);
+    background: var(--bg);
+    color: var(--ink);
+    padding: 72px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    transition: opacity 0.32s ease;
+  }
+  .dest-expanded.closing .exp-panel { opacity: 0; }
+  .dest-expanded .exp-panel > * {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .dest-expanded.open .exp-panel > * { opacity: 1; transform: none; }
+  .dest-expanded.open .exp-panel > *:nth-child(1) { transition-delay: 0.40s; }
+  .dest-expanded.open .exp-panel > *:nth-child(2) { transition-delay: 0.46s; }
+  .dest-expanded.open .exp-panel > *:nth-child(3) { transition-delay: 0.52s; }
+  .dest-expanded.open .exp-panel > *:nth-child(4) { transition-delay: 0.58s; }
+
+  .dest-expanded .exp-panel .exp-num { color: var(--ink-60); margin-bottom: 20px; }
+  .dest-expanded .exp-panel .exp-name {
+    color: var(--ink);
+    font-size: clamp(40px, 4.2vw, 68px);
+    line-height: 0.98;
+    margin: 0 0 22px;
+  }
+  .dest-expanded .exp-lead {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-60);
+    margin: 0 0 36px;
+    max-width: 46ch;
+  }
+  .dest-expanded .exp-items { list-style: none; margin: 0; padding: 0; }
+  .dest-expanded .exp-items li {
+    font-family: var(--display);
+    font-size: 26px;
+    color: var(--ink);
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .dest-expanded .exp-items li:last-child { border-bottom: 1px solid var(--rule); }
+  .dest-expanded .exp-items li .it-arrow {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink-30);
+  }
+  .dest-expanded .exp-cta {
+    align-self: flex-start;
+    margin-top: 40px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--sans);
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    padding: 20px 34px;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(14px);
+    /* reveal (opacity/transform) is delayed to follow the list; background stays instant for hover */
+    transition: opacity 0.5s ease 0.70s, transform 0.5s ease 0.70s, background 0.18s ease;
+  }
+  .dest-expanded.open .exp-cta { opacity: 1; transform: none; }
+  .dest-expanded .exp-cta:hover { background: #1f3129; }
+
+  /* Slideshow controls on the image side */
+  .dest-expanded .exp-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px; height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.5s, background 0.2s ease;
+  }
+  .dest-expanded.open .exp-arrow { opacity: 1; }
+  .dest-expanded .exp-arrow:hover { background: rgba(255,255,255,0.26); }
+  .dest-expanded .exp-arrow.prev { left: 24px; }
+  .dest-expanded .exp-arrow.next { right: calc(var(--exp-panel-w) + 24px); }
+  .dest-expanded .exp-counter {
+    position: absolute;
+    left: 28px; bottom: 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: rgba(255,255,255,0.9);
+    opacity: 0;
+    transition: opacity 0.3s ease 0.55s;
+  }
+  .dest-expanded.open .exp-counter { opacity: 1; }
+
+  /* Close button now sits over the cream panel — keep it ink-on-cream always */
+  .dest-expanded .dest-close {
+    background: rgba(41,65,56,0.06);
+    border-color: var(--ink-30);
+    color: var(--ink);
+  }
+  .dest-expanded .dest-close:hover { background: rgba(41,65,56,0.12); }
+
+  @media (max-width: 860px) {
+    /* Stack: photo fills the top, cream panel docks to the bottom (full width). */
+    .dest-expanded { --exp-panel-w: 100%; }
+    .dest-expanded .exp-panel {
+      top: auto;
+      height: 58%;
+      padding: 36px 28px;
+      justify-content: flex-start;
+    }
+    .dest-expanded .exp-panel .exp-name { font-size: 40px; }
+    .dest-expanded .exp-lead { font-size: 15px; margin-bottom: 28px; }
+    .dest-expanded .exp-items li { font-size: 20px; padding: 14px 0; }
+    .dest-expanded .exp-cta { margin-top: 28px; padding: 16px 26px; font-size: 15px; }
+    .dest-expanded .exp-arrow { width: 44px; height: 44px; top: 21%; }
+    .dest-expanded .exp-arrow.next { right: 24px; }
+    .dest-expanded .exp-counter { bottom: auto; top: 24px; }
+  }
   .dest {
     position: relative;
     aspect-ratio: 446 / 558;
@@ -579,20 +722,13 @@
     <section class="hero" data-screen-label="01 Home — Hero">
       <div class="hero-grid">
         <div class="hero-photo">
-          <div class="slide-bg slide-bg-1"></div>
-          <div class="slide-bg slide-bg-2"></div>
-          <div class="slide-bg slide-bg-3"></div>
-          <span class="photo-meta" data-i18n="home_hero_photo_meta">Yuigahama Beach, late spring</span>
-          <div class="slide-dots">
-            <button class="slide-dot" aria-label="Slide 1"></button>
-            <button class="slide-dot" aria-label="Slide 2"></button>
-            <button class="slide-dot" aria-label="Slide 3"></button>
-          </div>
+          <span class="photo-meta">Meigetsuin, Hydrangea Season</span>
+          <div class="slide-dots"></div>
         </div>
 
         <div class="hero-side">
           <article class="hero-card">
-            <p class="num" data-i18n="home_hero_num">01</p>
+            <p class="num">01</p>
             <h1 class="ttl" data-i18n-html="home_hero_title">Discover the<br/>hidden Japan.</h1>
             <p class="copy" data-i18n="home_hero_copy">From iconic highlights to the secret spots the guidebooks leave behind — personalized tours through local eyes, crafted just for you.</p>
             <a class="more" href="#" data-i18n="home_hero_more">Read more&nbsp;&nbsp;→</a>
@@ -611,7 +747,7 @@
       <div class="dest-grid">
 
         <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/zeniarai-benten-reduced.jpg')"></div>
+          <div class="pic photo" style="background-image: url('assets/shrines/kamakura-tsurugaoka-hachimangu.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">01 / 08</span>
           <div class="meta">
@@ -621,7 +757,7 @@
         </a>
 
         <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/tokei-ji-reduced.png')"></div>
+          <div class="pic photo" style="background-image: url('assets/cultural/zazen-meditation-hall.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">02 / 08</span>
           <div class="meta">
@@ -631,7 +767,7 @@
         </a>
 
         <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/nami-to-kaze.jpg')"></div>
+          <div class="pic photo" style="background-image: url('assets/food/ramen.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">03 / 08</span>
           <div class="meta">
@@ -641,7 +777,7 @@
         </a>
 
         <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/jochi-ji-reduced.png')"></div>
+          <div class="pic photo" style="background-image: url('assets/views/mount-fuji-ocean.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">04 / 08</span>
           <div class="meta">
@@ -650,19 +786,18 @@
           </div>
         </a>
 
-        <a class="dest placeholder" href="#">
-          <div class="pic placeholder"></div>
-          <span class="ph-label">photo — yuigahama beach</span>
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/everyday/noren-shopfront.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">05 / 08</span>
           <div class="meta">
-            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_5_name">Everyday Local Life</div></div>
-            <div class="arrow" style="border-color: var(--ink-30); color: var(--ink)">→</div>
+            <div><div class="name" data-i18n="home_dest_5_name">Everyday Local Life</div></div>
+            <div class="arrow">→</div>
           </div>
         </a>
 
         <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/wikipedia-example-la-petite-boulangerie.jpg')"></div>
+          <div class="pic photo" style="background-image: url('assets/japan/sutra-copying-sheet.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">06 / 08</span>
           <div class="meta">
@@ -672,7 +807,7 @@
         </a>
 
         <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/sasuke-inari-reduced.png')"></div>
+          <div class="pic photo" style="background-image: url('assets/support/railway-crossing-hills.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">07 / 08</span>
           <div class="meta">
@@ -681,14 +816,13 @@
           </div>
         </a>
 
-        <a class="dest placeholder" href="#">
-          <div class="pic placeholder"></div>
-          <span class="ph-label">photo — zuisen-ji</span>
+        <a class="dest" href="#">
+          <div class="pic photo" style="background-image: url('assets/concierge/coastal-town-view.jpg')"></div>
           <div class="scrim"></div>
           <span class="num-tag">08 / 08</span>
           <div class="meta">
-            <div><div class="name" style="color: var(--ink)" data-i18n="home_dest_8_name">Travel Concierge</div></div>
-            <div class="arrow" style="border-color: var(--ink-30); color: var(--ink)">→</div>
+            <div><div class="name" data-i18n="home_dest_8_name">Travel Concierge</div></div>
+            <div class="arrow">→</div>
           </div>
         </a>
 
@@ -781,16 +915,50 @@
 
   // Hero slideshow.
   (function () {
+    // Hero slides — add/remove entries here and the backgrounds, dots and number
+    // all follow. Captions are i18n keys (defined in lang.js).
     var slides = [
-      { num: '01', meta: 'Yuigahama Beach, late spring' },
-      { num: '02', meta: 'Kita-Kamakura, autumn' },
-      { num: '03', meta: 'Enoshima, early morning' }
+      { img: 'assets/shrines/kamakura-meigetsuin-hydrangea-steps.jpg', metaKey: 'home_hero_slide_1_meta' },
+      { img: 'assets/views/coastal-hillside-view.jpg',                 metaKey: 'home_hero_slide_2_meta' },
+      { img: 'assets/views/train-tracks-dusk.jpg',                     metaKey: 'home_hero_slide_3_meta' },
+      { img: 'assets/shrines/kamakura-tsurugaoka-hachimangu.jpg',      metaKey: 'home_hero_slide_4_meta' },
+      { img: 'assets/shrines/kamakura-daibutsu-great-buddha.jpg',      metaKey: 'home_hero_slide_5_meta' }
     ];
-    var current = 0;
-    var numEl   = document.querySelector('.hero-card .num');
-    var metaEl  = document.querySelector('.hero-photo .photo-meta');
-    var bgEls   = document.querySelectorAll('.slide-bg');
-    var dotEls  = document.querySelectorAll('.slide-dot');
+    var photo = document.querySelector('.hero-photo');
+    if (!photo || !slides.length) return;
+    var metaEl   = photo.querySelector('.photo-meta');
+    var numEl    = document.querySelector('.hero-card .num');
+    var dotsWrap = photo.querySelector('.slide-dots');
+    var current  = 0;
+    var bgEls = [], dotEls = [];
+
+    function t(key) {
+      return (window.ZenriseI18n && ZenriseI18n.t) ? ZenriseI18n.t(key) : key;
+    }
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    // Build a background layer and a dot for each slide.
+    slides.forEach(function (s, i) {
+      var bg = document.createElement('div');
+      bg.className = 'slide-bg';
+      bg.style.backgroundImage = "url('" + s.img + "')";
+      photo.insertBefore(bg, metaEl);
+      bgEls.push(bg);
+
+      var dot = document.createElement('button');
+      dot.className = 'slide-dot';
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', function () { clearInterval(timer); goTo(i); });
+      dotsWrap.appendChild(dot);
+      dotEls.push(dot);
+    });
+
+    // Don't write a raw key if the dictionary isn't loaded yet — keep the
+    // HTML fallback caption instead of flashing "home_hero_slide_1_meta".
+    function renderMeta() {
+      var m = t(slides[current].metaKey);
+      if (m !== slides[current].metaKey) metaEl.textContent = m;
+    }
 
     function goTo(n) {
       bgEls[current].classList.remove('active');
@@ -798,15 +966,21 @@
       current = (n + slides.length) % slides.length;
       bgEls[current].classList.add('active');
       dotEls[current].classList.add('active');
-      numEl.textContent  = slides[current].num;
-      metaEl.textContent = slides[current].meta;
+      numEl.textContent = pad(current + 1);
+      renderMeta();
     }
 
     goTo(0);
 
-    dotEls.forEach(function (dot, i) {
-      dot.addEventListener('click', function () { clearInterval(timer); goTo(i); });
-    });
+    // lang.js loads after this inline script, so hook the caption up once the
+    // dictionary exists: render the current slide and follow language switches.
+    function hookI18n() {
+      if (!(window.ZenriseI18n && ZenriseI18n.onChange)) return;
+      renderMeta();
+      ZenriseI18n.onChange(renderMeta);
+    }
+    if (window.ZenriseI18n) hookI18n();
+    else document.addEventListener('DOMContentLoaded', hookI18n);
 
     var timer = setInterval(function () { goTo(current + 1); }, 5000);
   })();
@@ -846,11 +1020,81 @@
     }
   })();
 
-  // Destination card expand.
+  // Destination card expand + per-category slideshow.
   (function () {
     var grid = document.querySelector('.dest-grid');
     if (!grid) return;
     var expanded = null;
+
+    // Per-category image sets (PLACEHOLDER — swap with client photo sets).
+    // Categories 5 & 8 are intentionally photo-less; they stay as placeholders.
+    var DEST = {
+      1: { images: [
+        'assets/shrines/kamakura-tsurugaoka-hachimangu.jpg',
+        'assets/shrines/kamakura-daibutsu-great-buddha.jpg',
+        'assets/shrines/kamakura-meigetsuin-hydrangea-steps.jpg',
+        'assets/shrines/kamakura-meigetsuin-round-window.jpg',
+        'assets/shrines/kamakura-toshoji-bridge.jpg',
+        'assets/shrines/cherry-blossom-temple-approach.jpg',
+        'assets/shrines/temple-moss-garden.jpg',
+        'assets/shrines/hidden-shrine-komainu.jpg'
+      ] },
+      2: { images: [
+        'assets/cultural/zazen-meditation-hall.jpg',
+        'assets/cultural/matcha-tea-bowl.jpg',
+        'assets/cultural/sutra-copying-hand.jpg',
+        'assets/cultural/temple-garden-suikinkutsu.jpg'
+      ] },
+      3: { images: [
+        'assets/food/ramen.jpg',
+        'assets/food/zaru-soba.jpg',
+        'assets/food/tempura-soba-set.jpg',
+        'assets/food/teishoku-set.jpg',
+        'assets/food/curry-plate.jpg',
+        'assets/food/izakaya-table.jpg',
+        'assets/food/cafe-lunch.jpg',
+        'assets/food/parfait-dessert.jpg'
+      ] },
+      4: { images: [
+        'assets/views/mount-fuji-ocean.jpg',
+        'assets/views/mount-fuji-sunset.jpg',
+        'assets/views/coastal-hillside-view.jpg',
+        'assets/views/ocean-headland-view.jpg',
+        'assets/views/coastal-road-ocean.jpg',
+        'assets/views/town-bay-view.jpg',
+        'assets/views/train-tracks-dusk.jpg',
+        'assets/views/monorail-street.jpg'
+      ] },
+      5: { images: [
+        'assets/everyday/noren-shopfront.jpg',
+        'assets/everyday/retro-street-corner.jpg',
+        'assets/everyday/seaside-alley.jpg',
+        'assets/everyday/tatami-room-garden-view.jpg'
+      ] },
+      6: { images: ['assets/japan/sutra-copying-sheet.jpg'] },
+      7: { images: ['assets/support/railway-crossing-hills.jpg'] },
+      8: { images: ['assets/concierge/coastal-town-view.jpg'] }
+    };
+
+    function t(key) {
+      return (window.ZenriseI18n && ZenriseI18n.t) ? ZenriseI18n.t(key) : key;
+    }
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function catOf(card) { return parseInt(card.querySelector('.num-tag').textContent, 10); }
+
+    // On each page load, give every photo category a random starting image.
+    Array.prototype.forEach.call(grid.querySelectorAll('.dest'), function (card) {
+      var cfg = DEST[catOf(card)];
+      if (!cfg || !cfg.images.length) return;
+      var idx = Math.floor(Math.random() * cfg.images.length);
+      card._imgIdx = idx;
+      var pic = card.querySelector('.pic');
+      if (pic) {
+        pic.classList.add('photo');
+        pic.classList.remove('placeholder');
+        pic.style.backgroundImage = "url('" + cfg.images[idx] + "')";
+      }
+    });
 
     function clip(cardRect, gridRect) {
       var t = (cardRect.top    - gridRect.top)    / gridRect.height * 100;
@@ -860,29 +1104,94 @@
       return 'inset(' + t.toFixed(3) + '% ' + r.toFixed(3) + '% ' + b.toFixed(3) + '% ' + l.toFixed(3) + '%)';
     }
 
+    // Fill the cream panel's text from the dictionary (reused on language change).
+    function render(overlay) {
+      var cat = overlay._cat;
+      overlay.querySelector('.exp-name').textContent = t('home_dest_' + cat + '_name');
+      var leadEl = overlay.querySelector('.exp-lead');
+      if (leadEl) {
+        var leadKey = 'home_dest_' + cat + '_lead';
+        var leadVal = t(leadKey);
+        leadEl.textContent = leadVal === leadKey ? '' : leadVal;
+        leadEl.style.display = leadVal === leadKey ? 'none' : '';
+      }
+      overlay.querySelector('.exp-cta').innerHTML = t('home_dest_cta');
+      var ul = overlay.querySelector('.exp-items');
+      ul.innerHTML = '';
+      for (var i = 1; i <= 8; i++) {
+        var key = 'home_dest_' + cat + '_item_' + i;
+        var val = t(key);
+        if (val === key) break;            // missing key → end of list
+        var li = document.createElement('li');
+        var label = document.createElement('span');
+        label.textContent = val;
+        var arr = document.createElement('span');
+        arr.className = 'it-arrow';
+        arr.textContent = '→';
+        li.appendChild(label);
+        li.appendChild(arr);
+        ul.appendChild(li);
+      }
+    }
+
+    function showSlide(overlay, animate) {
+      var imgs = overlay._slides;
+      if (!imgs || !imgs.length) return;
+      var bg = overlay.querySelector('.exp-bg');
+      var counter = overlay.querySelector('.exp-counter');
+      if (counter) counter.textContent = pad(overlay._idx + 1) + ' / ' + pad(imgs.length);
+      var url = "url('" + imgs[overlay._idx] + "')";
+      if (animate) {
+        bg.style.opacity = '0';
+        setTimeout(function () { bg.style.backgroundImage = url; bg.style.opacity = '1'; }, 180);
+      } else {
+        bg.style.backgroundImage = url;
+      }
+    }
+
+    function step(overlay, dir) {
+      var n = overlay._slides.length;
+      if (n < 2) return;
+      overlay._idx = (overlay._idx + dir + n) % n;
+      showSlide(overlay, true);
+    }
+
     function openCard(card) {
       if (expanded) return;
       var gridRect = grid.getBoundingClientRect();
       var cardRect = card.getBoundingClientRect();
-      var isPlaceholder = card.classList.contains('placeholder');
-      var picEl = card.querySelector('.pic');
-      var bgImg = picEl.classList.contains('photo') ? getComputedStyle(picEl).backgroundImage : '';
-      var name  = card.querySelector('.name').textContent;
-      var num   = card.querySelector('.num-tag').textContent;
+      var cat = catOf(card);
+      var images = (DEST[cat] && DEST[cat].images) || [];
+      var hasImages = images.length > 0;
+      var num = card.querySelector('.num-tag').textContent;
+      var multi = images.length > 1;
 
       var overlay = document.createElement('div');
-      overlay.className = 'dest-expanded' + (isPlaceholder ? ' is-placeholder' : '');
+      overlay.className = 'dest-expanded' + (hasImages ? '' : ' is-placeholder');
       overlay.innerHTML =
         '<div class="exp-bg"></div>' +
         '<div class="exp-scrim"></div>' +
-        '<div class="exp-meta">' +
+        (multi
+          ? '<button class="exp-arrow prev" aria-label="Previous image">&#8592;</button>' +
+            '<button class="exp-arrow next" aria-label="Next image">&#8594;</button>' +
+            '<div class="exp-counter"></div>'
+          : '') +
+        '<div class="exp-panel">' +
           '<div class="exp-num">' + num + '</div>' +
-          '<div class="exp-name">' + name + '</div>' +
+          '<div class="exp-name"></div>' +
+          '<p class="exp-lead"></p>' +
+          '<ul class="exp-items"></ul>' +
+          '<a class="exp-cta" href="contact.html#booking"></a>' +
         '</div>' +
         '<button class="dest-close" aria-label="Close">&#x2715;</button>';
 
-      if (bgImg) overlay.querySelector('.exp-bg').style.backgroundImage = bgImg;
       overlay._origCard = card;
+      overlay._cat = cat;
+      overlay._slides = images;
+      overlay._idx = card._imgIdx || 0;
+      render(overlay);
+      if (hasImages) showSlide(overlay, false);
+
       overlay.style.clipPath = clip(cardRect, gridRect);
       grid.appendChild(overlay);
       expanded = overlay;
@@ -893,7 +1202,10 @@
       overlay.style.clipPath = 'inset(0%)';
       setTimeout(function () { overlay.classList.add('open'); }, 10);
 
-      overlay.querySelector('.dest-close').addEventListener('click', closeCard);
+      var prev = overlay.querySelector('.exp-arrow.prev');
+      var next = overlay.querySelector('.exp-arrow.next');
+      if (prev) prev.addEventListener('click', function (e) { e.stopPropagation(); step(overlay, -1); });
+      if (next) next.addEventListener('click', function (e) { e.stopPropagation(); step(overlay, 1); });
     }
 
     function closeCard() {
@@ -901,6 +1213,9 @@
       var overlay = expanded;
       expanded = null;
       overlay.classList.remove('open');
+      // Fade the cream panel away so the full-bleed photo is revealed before the
+      // clip-path shrinks back — otherwise right-column cards close over the panel.
+      overlay.classList.add('closing');
 
       requestAnimationFrame(function () {
         var gridRect = grid.getBoundingClientRect();
@@ -914,13 +1229,32 @@
     }
 
     grid.addEventListener('click', function (e) {
-      e.preventDefault();
       if (expanded) {
-        if (!e.target.closest('.dest-close')) closeCard();
+        if (e.target.closest('.exp-cta')) return;      // let the CTA navigate
+        e.preventDefault();
+        if (e.target.closest('.exp-arrow')) return;    // cycling, not closing
+        if (e.target.closest('.exp-panel')) return;    // reading the offerings
+        closeCard();                                   // × button or image area
         return;
       }
+      e.preventDefault();
       var card = e.target.closest('.dest');
       if (card) openCard(card);
+    });
+
+    // Keyboard: Esc closes, ←/→ cycle the slideshow while open.
+    document.addEventListener('keydown', function (e) {
+      if (!expanded) return;
+      if (e.key === 'Escape') closeCard();
+      else if (e.key === 'ArrowLeft') step(expanded, -1);
+      else if (e.key === 'ArrowRight') step(expanded, 1);
+    });
+
+    // Re-render the open panel if the visitor switches language.
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.ZenriseI18n && ZenriseI18n.onChange) {
+        ZenriseI18n.onChange(function () { if (expanded) render(expanded); });
+      }
     });
   })();
 </script>
