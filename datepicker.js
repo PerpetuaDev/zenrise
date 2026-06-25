@@ -75,7 +75,7 @@
       '.zp-trigger.empty { color: rgba(41,65,56,0.35); }',
 
       // popup — cream surface, sharp corners
-      '.zp-pop { position: absolute; left: 0; top: calc(100% + 12px); width: 380px; background: #F7F4EA; border: 1px solid rgba(41,65,56,0.14); box-shadow: 0 32px 64px -12px rgba(41,65,56,0.22), 0 4px 12px rgba(41,65,56,0.04); padding: 28px 28px 24px; z-index: 100; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 200ms cubic-bezier(.2,.6,.2,1), transform 200ms cubic-bezier(.2,.6,.2,1); border-radius: 0; }',
+      '.zp-pop { position: absolute; left: 0; top: calc(100% + 12px); width: 380px; max-width: calc(100vw - 40px); box-sizing: border-box; background: #F7F4EA; border: 1px solid rgba(41,65,56,0.14); box-shadow: 0 32px 64px -12px rgba(41,65,56,0.22), 0 4px 12px rgba(41,65,56,0.04); padding: 28px 28px 24px; z-index: 100; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 200ms cubic-bezier(.2,.6,.2,1), transform 200ms cubic-bezier(.2,.6,.2,1); border-radius: 0; }',
       '.zp.open .zp-pop { opacity: 1; transform: none; pointer-events: auto; }',
 
       // header — month label between prev/next nav

@@ -616,7 +616,29 @@
       '.lang-menu .code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(41,65,56,0.5); }',
       '.lang-menu .name { font-family: "Optima Nova LT Pro","Optima",serif; font-size: 24px; color: #294138; letter-spacing: -0.005em; line-height: 1; }',
       '.lang-menu button.on .code { color: rgba(41,65,56,0.85); }',
-      '.lang-menu button.on::after { content: ""; width: 6px; height: 6px; background: #294138; align-self: center; justify-self: end; }'
+      '.lang-menu button.on::after { content: ""; width: 6px; height: 6px; background: #294138; align-self: center; justify-self: end; }',
+      // ── mobile hamburger nav (shared, phone widths only) ──
+      '.nav-burger, .mobile-nav { display: none; }',
+      '@media (max-width: 599px) {',
+      '  .nav { position: relative; }',
+      '  .navlinks { display: none !important; }',
+      '  .lang-switcher { display: none !important; }',
+      '  .nav-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; position: absolute; right: 20px; top: 0; bottom: 0; margin: auto 0; width: 30px; height: 22px; background: none; border: none; padding: 0; cursor: pointer; z-index: 5; }',
+      '  .nav-burger span { display: block; height: 2px; width: 100%; background: #294138; }',
+      '  .mobile-nav { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 1200; background: #F7F4EA; padding: 20px 28px 40px; opacity: 0; pointer-events: none; transition: opacity 240ms ease; }',
+      '  html.menu-open { overflow: hidden; }',
+      '  html.menu-open .mobile-nav { opacity: 1; pointer-events: auto; }',
+      '  .mobile-nav-close { align-self: flex-end; background: none; border: none; font-size: 26px; line-height: 1; color: #294138; cursor: pointer; padding: 4px; }',
+      '  .mobile-nav-links { display: flex; flex-direction: column; gap: 6px; margin-top: 10vh; }',
+      '  .mobile-nav-links a { font-family: "optima-nova-lt-pro","Optima",serif; font-size: 40px; line-height: 1.25; color: #294138; text-decoration: none; }',
+      '  .mobile-nav-links a.active { opacity: 0.4; }',
+      '  .mobile-nav-lang { margin-top: auto; border-top: 1px solid rgba(41,65,56,0.14); padding-top: 22px; }',
+      '  .mobile-nav-lang .mnl-h { display: block; font-family: "JetBrains Mono",ui-monospace,monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(41,65,56,0.55); margin-bottom: 14px; }',
+      '  .mobile-nav-lang button { display: inline-flex; align-items: baseline; gap: 10px; background: none; border: none; padding: 6px 0; margin-right: 32px; cursor: pointer; }',
+      '  .mobile-nav-lang button .code { font-family: "JetBrains Mono",ui-monospace,monospace; font-size: 10px; letter-spacing: 0.24em; color: rgba(41,65,56,0.5); }',
+      '  .mobile-nav-lang button .name { font-family: "optima-nova-lt-pro","Optima",serif; font-size: 22px; color: #294138; }',
+      '  .mobile-nav-lang button.on .name { text-decoration: underline; text-underline-offset: 4px; }',
+      '}'
     ].join('\n');
     document.head.appendChild(s);
   }
@@ -668,6 +690,53 @@
           wrapper.classList.remove('open');
           trigger.setAttribute('aria-expanded', 'false');
         }
+      });
+    }
+
+    // ── Mobile hamburger nav (shared across pages) ──
+    var navEl = document.querySelector('.nav');
+    var navLinksEl = navEl && navEl.querySelector('.navlinks');
+    if (navEl && navLinksEl) {
+      var burger = document.createElement('button');
+      burger.className = 'nav-burger';
+      burger.type = 'button';
+      burger.setAttribute('aria-label', 'Open menu');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.innerHTML = '<span></span><span></span><span></span>';
+      navEl.appendChild(burger);
+
+      var menu = document.createElement('div');
+      menu.className = 'mobile-nav';
+      menu.innerHTML =
+        '<button class="mobile-nav-close" type="button" aria-label="Close">✕</button>' +
+        '<nav class="mobile-nav-links">' + navLinksEl.innerHTML + '</nav>' +
+        '<div class="mobile-nav-lang">' +
+          '<span class="mnl-h" data-i18n="lang_menu_header">Language</span>' +
+          '<button type="button" data-lang-option="en"><span class="code">EN</span><span class="name">English</span></button>' +
+          '<button type="button" data-lang-option="ja"><span class="code">JP</span><span class="name">日本語</span></button>' +
+        '</div>';
+      document.body.appendChild(menu);
+
+      function closeMenu() {
+        document.documentElement.classList.remove('menu-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+      burger.addEventListener('click', function () {
+        document.documentElement.classList.add('menu-open');
+        burger.setAttribute('aria-expanded', 'true');
+      });
+      menu.querySelector('.mobile-nav-close').addEventListener('click', closeMenu);
+      menu.querySelectorAll('.mobile-nav-links a').forEach(function (a) {
+        a.addEventListener('click', closeMenu);
+      });
+      menu.querySelectorAll('[data-lang-option]').forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          setLang(opt.getAttribute('data-lang-option'));
+          closeMenu();
+        });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
       });
     }
 

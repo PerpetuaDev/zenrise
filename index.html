@@ -507,6 +507,16 @@
     .dest-expanded .exp-arrow { width: 44px; height: 44px; top: 21%; }
     .dest-expanded .exp-arrow.next { right: 24px; }
     .dest-expanded .exp-counter { bottom: auto; top: 24px; }
+    /* Close button now sits over the image (top) — make it white & smaller */
+    .dest-expanded .dest-close {
+      width: 38px; height: 38px;
+      top: 16px; right: 24px;
+      font-size: 14px;
+      background: rgba(255,255,255,0.16);
+      border-color: rgba(255,255,255,0.55);
+      color: #fff;
+    }
+    .dest-expanded .dest-close:hover { background: rgba(255,255,255,0.28); }
   }
   .dest {
     position: relative;
@@ -599,7 +609,8 @@
     gap: 64px;
   }
   .foot-v2 .foot-brand .mark {
-    font-family: var(--display);
+    /* Latin wordmark — pin to the display face so :lang(ja) doesn't swap it to Mincho */
+    font-family: "optima-nova-lt-pro", "Optima", serif;
     font-size: 40px;
     letter-spacing: 0.05em;
     color: var(--ink);
@@ -683,8 +694,20 @@
     .find-head h2 { font-size: 36px; white-space: normal; margin-top: 10px; }
     .find-head .count { display: none; }
     .dest-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .dest-expanded .exp-name { font-size: 48px; }
-    .dest-expanded .exp-meta { bottom: 32px; left: 32px; }
+    .dest .meta { left: 18px; right: 18px; bottom: 18px; gap: 8px; }
+    .dest .meta .name { font-size: 24px; }
+    /* Expanded card becomes a true full-screen modal (not grid-boxed) and
+       fades in — the desktop clip-path morph is grid-relative, so it's
+       overridden here in favour of a simple opacity fade. */
+    .dest-expanded {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      clip-path: none !important;
+      transition: opacity 0.3s ease !important;
+      opacity: 0;
+    }
+    .dest-expanded.open { opacity: 1; }
 
     /* Footer (inline/cream — active variant) */
     footer.foot-v2 { padding: 0 20px; }
@@ -700,6 +723,8 @@
     .hero-photo { height: 62vw; }
     .hero-card .ttl { font-size: 32px; }
     .dest-grid { gap: 8px; }
+    .dest .meta { left: 14px; right: 14px; bottom: 14px; }
+    .dest .meta .name { font-size: 18px; }
   }
 </style>
 </head>

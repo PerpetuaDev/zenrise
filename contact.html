@@ -878,6 +878,8 @@
     /* Form step headings */
     .step h2 { font-size: 48px; }
     .step .lede { font-size: 18px; max-width: 100%; }
+    .sent h2 { font-size: 48px; }
+    .sent p { font-size: 18px; }
 
     /* Card grids */
     .grid-3 { grid-template-columns: 1fr 1fr; }
@@ -894,7 +896,14 @@
     .navlinks { display: none; }
     .booking-intro h2 { font-size: 40px; }
     .step h2 { font-size: 36px; }
+    .sent h2 { font-size: 40px; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    /* Paired fields (date range, contact details) stack */
+    .row-2 { grid-template-columns: 1fr; gap: 24px; }
+    /* Review summary: stack label above value, single separator per row */
+    .summary { grid-template-columns: 1fr; }
+    .summary dt { padding: 16px 0 4px; }
+    .summary dd { padding: 0 0 16px; border-top: none; }
   }
 </style>
 </head>
