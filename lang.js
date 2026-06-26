@@ -268,8 +268,8 @@
       // booking sent
       booking_sent_n: 'Sent — thank you',
       booking_sent_h: 'That\u2019s with us.',
-      booking_sent_p1: 'One of us — usually whoever\u2019s not on a tour that morning — will write back within two working days with two or three itinerary sketches that fit your dates.',
-      booking_sent_p2: 'If you don\u2019t hear from us by the third day, it almost certainly means an email got lost. Just call.',
+      booking_sent_p1: 'Thank you for reaching out. We\u2019ll write back within two business days with two or three itinerary sketches that fit your dates.',
+      booking_sent_p2: 'If you haven\u2019t heard from us by then, an email may have gone astray \u2014 please write to hello@zenrise.jp and quote your reference below.',
       booking_sent_ref: 'Your reference',
       booking_sent_back_home: 'Back to homepage  →',
       booking_sent_back_about: 'Read more about us  →'
@@ -525,8 +525,8 @@
       // booking sent
       booking_sent_n: '送信完了 — ありがとうございます',
       booking_sent_h: '承りました。',
-      booking_sent_p1: '私たちのどちらか — その朝ツアーに出ていない方 — が、二営業日以内に、ご希望の日付に合う二、三の行程案をお送りします。',
-      booking_sent_p2: '三日経ってもご連絡がない場合は、ほぼ間違いなくメールが届いていません。お電話ください。',
+      booking_sent_p1: 'お問い合わせいただきありがとうございます。二営業日以内に、ご希望の日付に合う二、三の行程案をお送りします。',
+      booking_sent_p2: '万が一ご連絡がない場合は、メールが届いていない可能性がございます。お手数ですが、下記の受付番号を添えて hello@zenrise.jp までご連絡ください。',
       booking_sent_ref: '受付番号',
       booking_sent_back_home: 'ホームへ戻る  →',
       booking_sent_back_about: '私たちについてもっと読む  →'
