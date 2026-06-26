@@ -288,7 +288,7 @@
       nav_contact: 'お問い合わせ',
 
       // footer
-      footer_tagline: '日本の知られざる場所を、地元の人と巡る静かな旅。',
+      footer_tagline: '日本の知られざる場所を巡る、静かな旅',
       footer_visit: 'オフィス',
       footer_contact: '連絡先',
       footer_follow: 'フォロー',
@@ -376,7 +376,7 @@
       about_title: '私たちについて — Zenrise',
       about_eyebrow: '私たちについて',
       about_h1: 'Zenrise<br/>について。',
-      about_intro_1: '鎌倉・藤沢・横浜を拠点とする旅行会社です。鎌倉エリアの知られざる場所を、地元の目線で巡る丁寧な旅を企画しています。',
+      about_intro_1: '鎌倉・藤沢・横浜を拠点とする旅行会社です。鎌倉エリアを中心に、地元目線であなただけの特別な体験を企画しています。',
       about_intro_2: '2024年設立。私たちは今、日本の隠れた名所を発見し、分かち合う旅の途中です — 旅人がいつも見逃してしまう、静かで美しい場所を。',
       about_hero_credit: '長谷寺 山門、鎌倉',
       about_hero_meta_left: '撮影 — 臼田　亜香麗、2024年',
@@ -399,7 +399,7 @@
       about_cp_contact: '連絡先',
       about_cp_contact_v: 'hello@zenrise.jp',
       about_cp_license: '旅行業登録',
-      about_cp_license_v: '神奈川県知事登録旅行業 第1314号',
+      about_cp_license_v: '神奈川県知事登録旅行業 地域-第1314号',
       about_cp_bank: '国内旅行業務取扱管理者',
       about_cp_bank_v: '臼田　健太郎',
 
