@@ -145,27 +145,6 @@
     transition: opacity 1s ease;
   }
   .slide-bg.active { opacity: 1; }
-  .slide-dots {
-    position: absolute;
-    bottom: 22px;
-    right: 24px;
-    /* Hidden on desktop — the hero card overlaps this corner. The dots
-       come back in the sub-1024px layout where they're the only slide UI. */
-    display: none;
-    gap: 10px;
-    z-index: 2;
-  }
-  .slide-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.45);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .slide-dot.active { background: #fff; }
   .hero-photo .photo-meta {
     position: absolute;
     left: 24px;
@@ -175,7 +154,6 @@
     font-size: 13px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    text-shadow: 0 1px 12px rgba(0,0,0,0.4);
     opacity: 0.92;
   }
   .hero-side {
@@ -604,12 +582,12 @@
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: rgba(255,255,255,0.65);
-    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
     pointer-events: none;
     z-index: 2;
   }
-  .hero-photo::after { right: 24px; top: 22px; text-shadow: none; color: #fff; }
+  .hero-photo::after { right: 24px; top: 22px; color: #fff; }
   .dest .scrim::after { left: 24px; top: 22px; }
   .dest-expanded:not(.is-placeholder) .exp-scrim::after {
     right: calc(var(--exp-panel-w) + 28px);
@@ -725,11 +703,17 @@
       height: calc(100dvh - 64px);
     }
     .hero-photo { width: 100%; height: auto; flex: 1; min-height: 180px; }
-    .slide-dots { display: flex; }
+    /* no attribution over the full-bleed mobile hero */
+    .hero-photo::after { display: none; }
+    /* EN caption runs uppercase wide-tracked mono — louder than the JP
+       equivalent at the same size, so EN steps down on small screens */
+    .hero-photo .photo-meta { font-size: 10px; }
+    .hero-photo .photo-meta:lang(ja) { font-size: 13px; }
     .hero-side { position: static; width: 100%; }
-    .hero-card { width: 100%; max-width: 100%; padding: 24px 20px 32px; }
-    .hero-card .ttl { font-size: 40px; }
-    .hero-card .num { font-size: 28px; margin-bottom: 20px; }
+    .hero-card { width: 100%; max-width: 100%; padding: 32px 20px; }
+    .hero-card .ttl { font-size: 46px; }
+    /* slide number adds little at phone size and crowds the JP headline */
+    .hero-card .num { display: none; }
     .hero-card .copy { font-size: 16px; max-width: 100%; }
     .hero-card .more { font-size: 18px; }
     .hero-card .more .dir-r { display: none; }
@@ -739,21 +723,25 @@
        slides over it on scroll */
     .find {
       margin-top: 0;
-      padding: 56px 20px 0;
+      padding: 28px 20px 0;
       position: relative;
       z-index: 1;
       background: var(--bg);
     }
+    /* the divider reads as clutter right under the full-screen hero */
+    .find > .rule { display: none; }
     footer.foot-v2 { position: relative; z-index: 1; background: var(--bg); }
-    .find-head { grid-template-columns: 1fr; padding: 48px 0 56px; }
+    .find-head { grid-template-columns: 1fr; padding: 0 0 40px; }
     .find-head h2 { font-size: 36px; white-space: normal; margin-top: 10px; }
     .find-head .count { display: none; }
-    .dest-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    /* full-bleed grid: pull out of the section's side padding so tiles
+       run edge-to-edge, with gaps only between tiles */
+    .dest-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 -20px; }
     .dest .meta { left: 18px; right: 18px; bottom: 18px; gap: 8px; }
     .dest .meta .name { font-size: 24px; }
-    /* narrow tiles: shrink both top-corner tags so they don't collide */
     .dest .num-tag { right: 12px; top: 12px; font-size: 10px; letter-spacing: 0.18em; }
-    .dest .scrim::after { left: 12px; top: 13px; font-size: 8px; letter-spacing: 0.15em; }
+    /* no attribution on the small mobile tiles — too cramped */
+    .dest .scrim::after { display: none; }
     /* Expanded card becomes a true full-screen modal (not grid-boxed) and
        fades in — the desktop clip-path morph is grid-relative, so it's
        overridden here in favour of a simple opacity fade. */
@@ -767,18 +755,26 @@
     }
     .dest-expanded.open { opacity: 1; }
 
-    /* Footer (inline/cream — active variant) */
-    footer.foot-v2 { padding: 0 20px; }
-    .foot-v2 .foot-v2-top { padding: 56px 0 48px; grid-template-columns: 1fr; gap: 40px; }
-    .foot-v2 .foot-brand p { font-size: 18px; max-width: 100%; }
-    .foot-v2 .foot-v2-bottom { flex-direction: column; gap: 12px; padding: 20px 0; text-align: center; }
+    /* Footer (inline/cream — active variant). Top gap is PADDING, not
+       margin — margins are transparent and would let the pinned hero
+       show through between the tile grid and the footer. */
+    footer.foot-v2 { padding: 40px 20px 0; margin-top: 0; }
+    /* no divider at the top of the footer on mobile */
+    .foot-v2 > .rule { display: none; }
+    .foot-v2 .foot-v2-top { padding: 16px 0 40px; grid-template-columns: 1fr; gap: 32px; }
+    .foot-v2 .foot-brand .mark { font-size: 26px; margin-bottom: 16px; }
+    .foot-v2 .foot-brand p { font-size: 15px; max-width: 100%; }
+    .foot-v2 .foot-col h4 { font-size: 10px; margin-bottom: 14px; }
+    .foot-v2 .foot-col ul { gap: 10px; }
+    .foot-v2 .foot-col li { font-size: 15px; }
+    .foot-v2 .foot-v2-bottom { font-size: 10px; letter-spacing: 0.16em; padding: 20px 0; }
     .foot-v2 .foot-v2-bottom .legal { gap: 20px; }
   }
 
   /* Very small screens — hide nav links, tighten further */
   @media (max-width: 599px) {
     .navlinks { display: none; }
-    .hero-card .ttl { font-size: 32px; }
+    .hero-card .ttl { font-size: 38px; }
     .dest-grid { gap: 8px; }
     .dest .meta { left: 14px; right: 14px; bottom: 14px; }
     .dest .meta .name { font-size: 18px; }
@@ -805,7 +801,6 @@
       <div class="hero-grid">
         <div class="hero-photo">
           <span class="photo-meta">Meigetsuin, Hydrangea Season</span>
-          <div class="slide-dots"></div>
         </div>
 
         <div class="hero-side">
@@ -1008,29 +1003,21 @@
     if (!photo || !slides.length) return;
     var metaEl   = photo.querySelector('.photo-meta');
     var numEl    = document.querySelector('.hero-card .num');
-    var dotsWrap = photo.querySelector('.slide-dots');
     var current  = 0;
-    var bgEls = [], dotEls = [];
+    var bgEls = [];
 
     function t(key) {
       return (window.ZenriseI18n && ZenriseI18n.t) ? ZenriseI18n.t(key) : key;
     }
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
-    // Build a background layer and a dot for each slide.
-    slides.forEach(function (s, i) {
+    // Build a background layer for each slide.
+    slides.forEach(function (s) {
       var bg = document.createElement('div');
       bg.className = 'slide-bg';
       bg.style.backgroundImage = "url('" + s.img + "')";
       photo.insertBefore(bg, metaEl);
       bgEls.push(bg);
-
-      var dot = document.createElement('button');
-      dot.className = 'slide-dot';
-      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-      dot.addEventListener('click', function () { clearInterval(timer); goTo(i); });
-      dotsWrap.appendChild(dot);
-      dotEls.push(dot);
     });
 
     // Don't write a raw key if the dictionary isn't loaded yet — keep the
@@ -1042,10 +1029,8 @@
 
     function goTo(n) {
       bgEls[current].classList.remove('active');
-      dotEls[current].classList.remove('active');
       current = (n + slides.length) % slides.length;
       bgEls[current].classList.add('active');
-      dotEls[current].classList.add('active');
       numEl.textContent = pad(current + 1);
       renderMeta();
     }

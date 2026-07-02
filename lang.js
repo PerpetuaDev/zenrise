@@ -745,15 +745,32 @@
       '  .nav { position: relative; }',
       '  .navlinks { display: none !important; }',
       '  .lang-switcher { display: none !important; }',
-      '  .nav-burger { display: flex; flex-direction: column; justify-content: center; gap: 6px; position: absolute; right: 20px; top: 0; bottom: 0; margin: auto 0; width: 30px; height: 22px; background: none; border: none; padding: 0; cursor: pointer; z-index: 5; }',
-      '  .nav-burger span { display: block; height: 2px; width: 100%; background: #294138; }',
-      '  .mobile-nav { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 1200; background: #F7F4EA; padding: 20px 28px 40px; opacity: 0; pointer-events: none; transition: opacity 240ms ease; }',
+      '  .nav-burger { display: flex; flex-direction: column; justify-content: center; gap: 7px; position: absolute; right: 20px; top: 0; bottom: 0; margin: auto 0; width: 26px; height: 22px; background: none; border: none; padding: 0; cursor: pointer; z-index: 5; }',
+      '  .nav-burger span { display: block; height: 1px; width: 100%; background: #294138; }',
+      '  .mobile-nav { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 1200; background: #F7F4EA; padding: 56px 28px 40px; opacity: 0; pointer-events: none; transition: opacity 240ms ease; }',
       '  html.menu-open { overflow: hidden; }',
       '  html.menu-open .mobile-nav { opacity: 1; pointer-events: auto; }',
-      '  .mobile-nav-close { align-self: flex-end; background: none; border: none; font-size: 26px; line-height: 1; color: #294138; cursor: pointer; padding: 4px; }',
+      // close button — two 1px hairlines, same weight as the burger, and
+      // pinned so its glyph sits exactly where the burger sits in the nav
+      // (26px glyph right-aligned to 20px, centred in the 64px bar) — no
+      // jump between the two on open/close
+      '  .mobile-nav-close { position: absolute; top: 14px; right: 15px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 0; }',
+      '  .mobile-nav-close span { position: absolute; left: 5px; top: 50%; width: 26px; height: 1px; background: #294138; }',
+      '  .mobile-nav-close span:first-child { transform: rotate(45deg); }',
+      '  .mobile-nav-close span:last-child { transform: rotate(-45deg); }',
       '  .mobile-nav-links { display: flex; flex-direction: column; gap: 6px; margin-top: 10vh; }',
       '  .mobile-nav-links a { font-family: "optima-nova-lt-pro","Optima",serif; font-size: 40px; line-height: 1.25; color: #294138; text-decoration: none; }',
       '  .mobile-nav-links a.active { opacity: 0.4; }',
+      // opening choreography — links rise & fade in with a stagger, the
+      // language block follows; closing snaps back with the menu fade
+      '  .mobile-nav-links a { opacity: 0; transform: translateY(14px); transition: opacity 500ms ease, transform 500ms ease; }',
+      '  html.menu-open .mobile-nav-links a { opacity: 1; transform: none; }',
+      '  html.menu-open .mobile-nav-links a.active { opacity: 0.4; }',
+      '  html.menu-open .mobile-nav-links a:nth-child(1) { transition-delay: 120ms; }',
+      '  html.menu-open .mobile-nav-links a:nth-child(2) { transition-delay: 200ms; }',
+      '  html.menu-open .mobile-nav-links a:nth-child(3) { transition-delay: 280ms; }',
+      '  .mobile-nav-lang { opacity: 0; transition: opacity 500ms ease; }',
+      '  html.menu-open .mobile-nav-lang { opacity: 1; transition-delay: 380ms; }',
       '  .mobile-nav-lang { margin-top: auto; border-top: 1px solid rgba(41,65,56,0.14); padding-top: 22px; }',
       '  .mobile-nav-lang .mnl-h { display: block; font-family: "JetBrains Mono",ui-monospace,monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(41,65,56,0.55); margin-bottom: 14px; }',
       '  .mobile-nav-lang button { display: inline-flex; align-items: baseline; gap: 10px; background: none; border: none; padding: 6px 0; margin-right: 32px; cursor: pointer; }',
@@ -830,7 +847,7 @@
       var menu = document.createElement('div');
       menu.className = 'mobile-nav';
       menu.innerHTML =
-        '<button class="mobile-nav-close" type="button" aria-label="Close">✕</button>' +
+        '<button class="mobile-nav-close" type="button" aria-label="Close"><span></span><span></span></button>' +
         '<nav class="mobile-nav-links">' + navLinksEl.innerHTML + '</nav>' +
         '<div class="mobile-nav-lang">' +
           '<span class="mnl-h" data-i18n="lang_menu_header">Language</span>' +
