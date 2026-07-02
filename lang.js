@@ -28,7 +28,7 @@
       nav_contact: 'contact',
 
       // footer (shared across pages)
-      footer_tagline: 'Quiet, locally-led journeys through the lesser-known corners of Japan.',
+      footer_tagline: 'Quiet, locally-led journeys through the<br class="brk"/>lesser-known corners of Japan.',
       footer_visit: 'Office',
       footer_contact: 'Contact',
       footer_follow: 'Follow',
@@ -745,8 +745,13 @@
       '  .nav { position: relative; }',
       '  .navlinks { display: none !important; }',
       '  .lang-switcher { display: none !important; }',
-      '  .nav-burger { display: flex; flex-direction: column; justify-content: center; gap: 7px; position: absolute; right: 20px; top: 0; bottom: 0; margin: auto 0; width: 26px; height: 22px; background: none; border: none; padding: 0; cursor: pointer; z-index: 5; }',
-      '  .nav-burger span { display: block; height: 1px; width: 100%; background: #294138; }',
+      // the three lines are an SVG background, not CSS boxes: layout snaps
+      // each box edge to device pixels independently (so under fractional
+      // zoom/DPR one bar can rasterize thicker than its siblings), while SVG
+      // strokes get identical smooth anti-aliasing at any scale
+      '  .nav-burger { display: block; position: absolute; right: 20px; top: 24px; width: 26px; height: 17px; border: none; padding: 0; cursor: pointer; z-index: 5; background: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'26\' height=\'17\'%3E%3Cpath d=\'M0 .5h26M0 8.5h26M0 16.5h26\' stroke=\'%23294138\'/%3E%3C/svg%3E") center / 26px 17px no-repeat; }',
+      '  .nav-burger::before { content: ""; position: absolute; inset: -16px; }',
+      '  .nav-burger span { display: none; }',
       '  .mobile-nav { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 1200; background: #F7F4EA; padding: 56px 28px 40px; opacity: 0; pointer-events: none; transition: opacity 240ms ease; }',
       '  html.menu-open { overflow: hidden; }',
       '  html.menu-open .mobile-nav { opacity: 1; pointer-events: auto; }',

@@ -474,29 +474,44 @@
   .dest-expanded .dest-close:hover { background: rgba(41,65,56,0.12); }
 
   @media (max-width: 860px) {
-    /* Stack: photo fills the top, cream panel docks to the bottom (full width). */
-    .dest-expanded { --exp-panel-w: 100%; }
+    /* Pinned-photo parallax, same logic as the home hero: the photo is
+       fixed full-screen behind, and the cream panel sits in the overlay's
+       scroll flow, riding up OVER the pinned image as you scroll. */
+    .dest-expanded { --exp-panel-w: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+    .dest-expanded .exp-bg,
+    .dest-expanded .exp-scrim { position: fixed; inset: 0; }
     .dest-expanded .exp-panel {
+      position: relative;
       top: auto;
-      height: 58%;
-      padding: 36px 28px;
+      width: 100%;
+      height: auto;
+      min-height: 46vh;
+      margin-top: 62vh;
+      padding: 36px 28px 48px;
       justify-content: flex-start;
+      overflow: visible;
+      z-index: 1;
     }
+    /* cloned site footer rides in the same scroll, straight after the card */
+    .dest-expanded .exp-foot { display: block; position: relative; z-index: 1; }
     .dest-expanded .exp-panel .exp-name { font-size: 40px; }
     .dest-expanded .exp-lead { font-size: 15px; margin-bottom: 28px; }
     .dest-expanded .exp-items li { font-size: 20px; padding: 14px 0; }
     .dest-expanded .exp-cta { margin-top: 28px; padding: 16px 26px; font-size: 15px; }
-    .dest-expanded .exp-arrow { width: 44px; height: 44px; top: 21%; }
-    .dest-expanded .exp-arrow.next { right: 24px; }
-    .dest-expanded .exp-counter { bottom: auto; top: 24px; }
-    /* Close button now sits over the image (top) — make it white & smaller */
+    /* no arrow buttons on small screens — the photo is swipeable instead */
+    .dest-expanded .exp-arrow { display: none; }
+    /* counter and close stay pinned with the photo; close floats above
+       the panel so the view is always dismissable */
+    .dest-expanded .exp-counter { position: fixed; bottom: auto; top: 24px; }
     .dest-expanded .dest-close {
+      position: fixed;
       width: 38px; height: 38px;
       top: 16px; right: 24px;
       font-size: 14px;
       background: rgba(255,255,255,0.16);
       border-color: rgba(255,255,255,0.55);
       color: #fff;
+      z-index: 3;
     }
     .dest-expanded .dest-close:hover { background: rgba(255,255,255,0.28); }
   }
@@ -594,11 +609,8 @@
     bottom: 28px;
   }
   @media (max-width: 860px) {
-    .dest-expanded:not(.is-placeholder) .exp-scrim::after {
-      right: 74px;
-      bottom: auto;
-      top: 30px;
-    }
+    /* no attribution in the full-screen expanded view — too cramped */
+    .dest-expanded:not(.is-placeholder) .exp-scrim::after { display: none; }
   }
 
   /* Subtle entrance */
@@ -606,6 +618,9 @@
   .reveal.in { opacity: 1; transform: none; }
 
   /* ─ Footer ─ */
+  .foot-brand .brk { display: none; }
+  /* footer clone inside the expanded overlay is a mobile-only device */
+  .dest-expanded .exp-foot { display: none; }
   footer.foot-v2 {
     background: transparent;
     color: var(--ink);
@@ -681,19 +696,26 @@
   @media (max-width: 1023px) {
     .stage { width: 100% !important; }
 
-    /* Nav */
+    /* Nav — pinned like the hero, so the whole first screen holds still
+       as one unit and the content below scrolls over all of it. Without
+       this the nav is the only moving thing at scroll start, which reads
+       as an abrupt vanish. header.nav (not .nav) so the shared hamburger
+       styles injected later by lang.js (.nav { position: relative }) can't
+       clobber the stickiness at ≤599px. */
     .nav { height: 64px; padding: 0 20px; }
+    header.nav { position: sticky; top: 0; z-index: 0; background: var(--bg); }
     .logo { font-size: 22px; }
     .navlinks { gap: 28px; font-size: 16px; }
     .lang { font-size: 16px; }
 
     /* Hero — full-bleed, pinned to the viewport: image flexes to fill,
        card keeps its natural height so the text is never clipped. The
-       section is sticky so the content below scrolls OVER it. */
+       section is sticky (below the pinned nav) so the content below
+       scrolls OVER it. */
     .hero {
       padding: 0;
       position: sticky;
-      top: 0;
+      top: 64px;
       z-index: 0;
     }
     .hero-grid {
@@ -764,6 +786,7 @@
     .foot-v2 .foot-v2-top { padding: 16px 0 40px; grid-template-columns: 1fr; gap: 32px; }
     .foot-v2 .foot-brand .mark { font-size: 26px; margin-bottom: 16px; }
     .foot-v2 .foot-brand p { font-size: 15px; max-width: 100%; }
+    .foot-v2 .foot-brand .brk { display: inline; }
     .foot-v2 .foot-col h4 { font-size: 10px; margin-bottom: 14px; }
     .foot-v2 .foot-col ul { gap: 10px; }
     .foot-v2 .foot-col li { font-size: 15px; }
@@ -912,7 +935,7 @@
       <div class="foot-v2-top">
         <div class="foot-brand">
           <span class="mark">ZENRISE</span>
-          <p data-i18n-html="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+          <p data-i18n-html="footer_tagline">Quiet, locally-led journeys through the<br class="brk"/>lesser-known corners of Japan.</p>
         </div>
 
         <div class="foot-col">
@@ -1250,6 +1273,16 @@
         '</div>' +
         '<button class="dest-close" aria-label="Close">&#x2715;</button>';
 
+      // Mobile scrolls the overlay itself (pinned-photo parallax) — clone
+      // the site footer in after the panel so the card's scroll runs
+      // straight into the footer as one surface. display:none'd on desktop.
+      var siteFoot = document.querySelector('footer.foot-v2');
+      if (siteFoot) {
+        var footClone = siteFoot.cloneNode(true);
+        footClone.classList.add('exp-foot');
+        overlay.appendChild(footClone);
+      }
+
       overlay._origCard = card;
       overlay._cat = cat;
       overlay._slides = images;
@@ -1271,6 +1304,23 @@
       var next = overlay.querySelector('.exp-arrow.next');
       if (prev) prev.addEventListener('click', function (e) { e.stopPropagation(); step(overlay, -1); });
       if (next) next.addEventListener('click', function (e) { e.stopPropagation(); step(overlay, 1); });
+
+      // Touch swipe on the photo cycles slides (the arrows are hidden on
+      // small screens). Horizontal-dominant moves over 40px only, so vertical
+      // scrolling and simple taps (tap = close) are unaffected.
+      var bgEl = overlay.querySelector('.exp-bg');
+      var tX = null, tY = null;
+      bgEl.addEventListener('touchstart', function (e) {
+        if (e.touches.length !== 1) return;
+        tX = e.touches[0].clientX; tY = e.touches[0].clientY;
+      }, { passive: true });
+      bgEl.addEventListener('touchend', function (e) {
+        if (tX === null) return;
+        var dx = e.changedTouches[0].clientX - tX;
+        var dy = e.changedTouches[0].clientY - tY;
+        tX = tY = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) step(overlay, dx < 0 ? 1 : -1);
+      }, { passive: true });
     }
 
     function closeCard() {
@@ -1296,6 +1346,7 @@
     grid.addEventListener('click', function (e) {
       if (expanded) {
         if (e.target.closest('.exp-cta')) return;      // let the CTA navigate
+        if (e.target.closest('.exp-foot')) return;     // cloned footer: links work, no close
         e.preventDefault();
         if (e.target.closest('.exp-arrow')) return;    // cycling, not closing
         if (e.target.closest('.exp-panel')) return;    // reading the offerings
