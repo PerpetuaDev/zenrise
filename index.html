@@ -243,6 +243,8 @@
     color: var(--ink-60);
     text-transform: uppercase;
   }
+  /* → on desktop, ↓ on the pinned mobile hero */
+  .hero-card .more .dir-d { display: none; }
 
   /* ───── Find your perfect place ───── */
   .find {
@@ -707,26 +709,51 @@
     .navlinks { gap: 28px; font-size: 16px; }
     .lang { font-size: 16px; }
 
-    /* Hero — stack image above card */
-    .hero { padding: 16px 20px 48px; }
-    .hero-grid { display: flex; flex-direction: column; }
-    .hero-photo { width: 100%; height: 56vw; min-height: 220px; }
+    /* Hero — full-bleed, pinned to the viewport: image flexes to fill,
+       card keeps its natural height so the text is never clipped. The
+       section is sticky so the content below scrolls OVER it. */
+    .hero {
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 0;
+    }
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 64px);
+      height: calc(100dvh - 64px);
+    }
+    .hero-photo { width: 100%; height: auto; flex: 1; min-height: 180px; }
     .slide-dots { display: flex; }
     .hero-side { position: static; width: 100%; }
-    .hero-card { width: 100%; max-width: 100%; padding: 24px 24px 32px; }
+    .hero-card { width: 100%; max-width: 100%; padding: 24px 20px 32px; }
     .hero-card .ttl { font-size: 40px; }
     .hero-card .num { font-size: 28px; margin-bottom: 20px; }
     .hero-card .copy { font-size: 16px; max-width: 100%; }
     .hero-card .more { font-size: 18px; }
+    .hero-card .more .dir-r { display: none; }
+    .hero-card .more .dir-d { display: inline; }
 
-    /* Find / destinations */
-    .find { margin-top: 56px; padding: 0 20px; }
+    /* Find / destinations — opaque and above the pinned hero so it
+       slides over it on scroll */
+    .find {
+      margin-top: 0;
+      padding: 56px 20px 0;
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
+    }
+    footer.foot-v2 { position: relative; z-index: 1; background: var(--bg); }
     .find-head { grid-template-columns: 1fr; padding: 48px 0 56px; }
     .find-head h2 { font-size: 36px; white-space: normal; margin-top: 10px; }
     .find-head .count { display: none; }
     .dest-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .dest .meta { left: 18px; right: 18px; bottom: 18px; gap: 8px; }
     .dest .meta .name { font-size: 24px; }
+    /* narrow tiles: shrink both top-corner tags so they don't collide */
+    .dest .num-tag { right: 12px; top: 12px; font-size: 10px; letter-spacing: 0.18em; }
+    .dest .scrim::after { left: 12px; top: 13px; font-size: 8px; letter-spacing: 0.15em; }
     /* Expanded card becomes a true full-screen modal (not grid-boxed) and
        fades in — the desktop clip-path morph is grid-relative, so it's
        overridden here in favour of a simple opacity fade. */
@@ -751,7 +778,6 @@
   /* Very small screens — hide nav links, tighten further */
   @media (max-width: 599px) {
     .navlinks { display: none; }
-    .hero-photo { height: 62vw; }
     .hero-card .ttl { font-size: 32px; }
     .dest-grid { gap: 8px; }
     .dest .meta { left: 14px; right: 14px; bottom: 14px; }
@@ -787,7 +813,7 @@
             <p class="num">01</p>
             <h1 class="ttl" data-i18n-html="home_hero_title">Discover the<br/>hidden Japan.</h1>
             <p class="copy" data-i18n="home_hero_copy">From iconic highlights to the secret spots the guidebooks leave behind — personalized tours through local eyes, crafted just for you.</p>
-            <a class="more" href="#find" data-i18n="home_hero_more">Read more&nbsp;&nbsp;→</a>
+            <a class="more" href="#find"><span data-i18n="home_hero_more_label">Read more</span><span class="dir dir-r">&nbsp;&nbsp;→</span><span class="dir dir-d">&nbsp;&nbsp;↓</span></a>
           </article>
         </div>
       </div>
