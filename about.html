@@ -158,6 +158,20 @@
     background: linear-gradient(to bottom, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.25) 100%);
     pointer-events: none;
   }
+  /* photo credit — required on all photography */
+  .about-hero .frame::before {
+    content: "© Zenrise";
+    position: absolute;
+    right: 36px;
+    bottom: 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.65);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    pointer-events: none;
+    z-index: 2;
+  }
   .about-hero .credit {
     position: absolute;
     left: 36px;
@@ -175,18 +189,6 @@
     opacity: 0.7;
     margin-right: 18px;
   }
-  .about-hero .meta-row {
-    padding: 18px 36px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-  }
-  .about-hero .meta-row .right { display: flex; gap: 28px; }
 
   /* ───── Section frame ───── */
   .section { padding: 0 36px; }
@@ -195,7 +197,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     column-gap: 96px;
-    align-items: baseline;
+    align-items: start;
   }
   .section-head .label {
     font-family: var(--mono);
@@ -203,7 +205,10 @@
     letter-spacing: 0.28em;
     color: var(--ink-60);
     text-transform: uppercase;
+    /* top of the slug ≈ cap-top of the display h2 beside it */
+    padding-top: 10px;
   }
+  :lang(ja) .section-head .label { padding-top: 8px; }
   .section-head .label .num { color: var(--ink); margin-right: 18px; }
   .section-head h2 {
     font-family: var(--display);
@@ -357,7 +362,6 @@
 
     /* Hero image */
     .about-hero .frame { height: 52vw; min-height: 240px; }
-    .about-hero .meta-row { padding: 14px 20px 0; }
 
     /* Section frame */
     .section { padding: 0 20px; }
@@ -404,7 +408,6 @@
   <!-- ───── Page header ───── -->
   <section class="ph" data-screen-label="02 About — Header">
     <div>
-      <span class="eyebrow" data-i18n="about_eyebrow">About us</span>
       <h1 data-i18n-html="about_h1">About<br/>Zenrise.</h1>
     </div>
     <div class="intro">
@@ -417,14 +420,6 @@
   <section class="about-hero" data-screen-label="02 About — Hero photo">
     <div class="frame">
       <div class="credit"><span data-i18n="about_hero_credit">Hase-dera Gate, Kamakura</span></div>
-    </div>
-    <div class="meta-row">
-      <span data-i18n="about_hero_meta_left">Photograph &mdash; Akari Usuda, 2024</span>
-      <div class="right">
-        <span data-i18n="about_hero_meta_1">35mm</span>
-        <span data-i18n="about_hero_meta_2">Natural light</span>
-        <span data-i18n="about_hero_meta_3">06:42 JST</span>
-      </div>
     </div>
   </section>
 
@@ -479,7 +474,7 @@
     <div class="foot-v2-top">
       <div class="foot-brand">
         <span class="mark">ZENRISE</span>
-        <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+        <p data-i18n-html="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
       </div>
 
       <div class="foot-col">
@@ -509,9 +504,7 @@
     <div class="foot-v2-bottom">
       <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
       <div class="legal">
-        <a href="#" data-i18n="footer_privacy">Privacy</a>
-        <a href="#" data-i18n="footer_terms">Terms</a>
-        <a href="#" data-i18n="footer_cookies">Cookies</a>
+        <a href="terms.html" data-i18n="footer_terms">Terms</a>
       </div>
     </div>
   </footer>

@@ -118,6 +118,21 @@
     background: url("assets/views/mount-fuji-ocean.jpg") center 40% / cover no-repeat;
     position: relative;
   }
+  /* photo credit — hero only; the booking-flow region thumbnails are too
+     small to carry an attribution */
+  .hero-v2 .photo::after {
+    content: "© Zenrise";
+    position: absolute;
+    right: 20px;
+    bottom: 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.65);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    pointer-events: none;
+    z-index: 2;
+  }
   .hero-v2 .photo .credit {
     position: absolute;
     left: 20px; bottom: 18px;
@@ -420,6 +435,7 @@
     min-height: 240px;
   }
   .card.region .pic {
+    position: relative;
     height: 140px;
     background:
       repeating-linear-gradient(135deg, rgba(41,65,56,0.06) 0 1px, transparent 1px 14px),
@@ -465,6 +481,18 @@
     text-transform: uppercase;
   }
   .card.format.on .price { color: rgba(247,244,234,0.65); }
+
+  /* base-price + additional-fees notes under the format cards */
+  .price-notes {
+    margin-top: 22px;
+    max-width: 720px;
+  }
+  .price-notes p {
+    margin: 0 0 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-60);
+  }
 
   /* steppers + inputs */
   .field {
@@ -1032,16 +1060,21 @@
             <span class="num" data-i18n="booking_s2_opt1">Option 01</span>
             <h3 data-i18n="booking_s2_half">Half day</h3>
             <p data-i18n="booking_s2_half_p">One town, one neighbourhood. A long morning of exploring, one workshop or tea stop, and a quiet lunch.</p>
-            <div class="price"><span data-i18n="booking_s2_half_t">≈ 4 hrs</span><span data-i18n="booking_s2_half_price">¥18,000 / pers.</span></div>
+            <div class="price"><span data-i18n="booking_s2_half_t">≈ 4 hrs</span><span data-i18n="booking_s2_half_price">¥65,000 (tax incl.) / group</span></div>
             <span class="tick"></span>
           </div>
           <div class="card format" data-radio="length" data-val="Full day">
             <span class="num" data-i18n="booking_s2_opt2">Option 02</span>
             <h3 data-i18n="booking_s2_full">Full day</h3>
             <p data-i18n="booking_s2_full_p">Two towns linked by local train. A morning exploring, lunch with the day's host, an afternoon stop.</p>
-            <div class="price"><span data-i18n="booking_s2_full_t">≈ 8 hrs</span><span data-i18n="booking_s2_full_price">¥32,000 / pers.</span></div>
+            <div class="price"><span data-i18n="booking_s2_full_t">≈ 8 hrs</span><span data-i18n="booking_s2_full_price">¥95,000 (tax incl.) / group</span></div>
             <span class="tick"></span>
           </div>
+        </div>
+
+        <div class="price-notes">
+          <p data-i18n="booking_s2_note_base">※ Base prices, per group of 1–6 people. Bookings start from one group.</p>
+          <p data-i18n="booking_s2_note_fees">+ Additional fees apply for what the base price doesn’t cover: hotel pick-up &amp; drop-off transport, taxi or private-hire arrangements, hotel &amp; ryokan bookings, activities and experiences, admission to attractions, and food &amp; drink.</p>
         </div>
 
         <div class="step-nav">
@@ -1077,7 +1110,7 @@
             </div>
             <button type="button" data-step-act="inc" aria-label="More">+</button>
           </div>
-          <p class="hint" data-i18n="booking_s3_party_hint">We like to keep groups intimate. Most are two to four, and six at most.</p>
+          <p class="hint" data-i18n="booking_s3_party_hint">Groups are 1 to 6 people at most. For 7 or more we can plan a custom tour for an additional surcharge — just mention it in your notes.</p>
         </div>
 
         <div class="field">
@@ -1161,7 +1194,7 @@
         <label class="consent">
           <input type="checkbox" id="consent" />
           <span class="box"></span>
-          <span data-i18n-html="booking_s5_consent">I'm happy for Zenrise to email me about the trip and any follow-up &mdash; nothing else, no list, no marketing. <a href="#" style="text-decoration: underline">Privacy</a>.</span>
+          <span data-i18n-html="booking_s5_consent">I'm happy for Zenrise to email me about the trip and any follow-up, and I've read and understood the <a href="terms.html" target="_blank" style="text-decoration: underline">booking terms &amp; conditions</a>, including the cancellation and privacy policies.</span>
         </label>
 
         <div class="step-nav">
@@ -1199,7 +1232,7 @@
     <div class="foot-v2-top">
       <div class="foot-brand">
         <span class="mark">ZENRISE</span>
-        <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+        <p data-i18n-html="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
       </div>
       <div class="foot-col">
         <h4 data-i18n="footer_visit">Office</h4>
@@ -1225,9 +1258,7 @@
     <div class="foot-v2-bottom">
       <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
       <div class="legal">
-        <a href="#" data-i18n="footer_privacy">Privacy</a>
-        <a href="#" data-i18n="footer_terms">Terms</a>
-        <a href="#" data-i18n="footer_cookies">Cookies</a>
+        <a href="terms.html" data-i18n="footer_terms">Terms</a>
       </div>
     </div>
   </footer>

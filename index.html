@@ -149,7 +149,9 @@
     position: absolute;
     bottom: 22px;
     right: 24px;
-    display: flex;
+    /* Hidden on desktop — the hero card overlaps this corner. The dots
+       come back in the sub-1024px layout where they're the only slide UI. */
+    display: none;
     gap: 10px;
     z-index: 2;
   }
@@ -591,6 +593,34 @@
   }
   .dest.placeholder .num-tag { color: var(--ink-60); }
 
+  /* photo credits — required on all photography */
+  .hero-photo::after,
+  .dest .scrim::after,
+  .dest-expanded:not(.is-placeholder) .exp-scrim::after {
+    content: "© Zenrise";
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.65);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-photo::after { right: 24px; top: 22px; text-shadow: none; color: #fff; }
+  .dest .scrim::after { left: 24px; top: 22px; }
+  .dest-expanded:not(.is-placeholder) .exp-scrim::after {
+    right: calc(var(--exp-panel-w) + 28px);
+    bottom: 28px;
+  }
+  @media (max-width: 860px) {
+    .dest-expanded:not(.is-placeholder) .exp-scrim::after {
+      right: 74px;
+      bottom: auto;
+      top: 30px;
+    }
+  }
+
   /* Subtle entrance */
   .reveal { opacity: 0; transform: translateY(12px); transition: opacity 700ms ease, transform 700ms ease; }
   .reveal.in { opacity: 1; transform: none; }
@@ -681,6 +711,7 @@
     .hero { padding: 16px 20px 48px; }
     .hero-grid { display: flex; flex-direction: column; }
     .hero-photo { width: 100%; height: 56vw; min-height: 220px; }
+    .slide-dots { display: flex; }
     .hero-side { position: static; width: 100%; }
     .hero-card { width: 100%; max-width: 100%; padding: 24px 24px 32px; }
     .hero-card .ttl { font-size: 40px; }
@@ -860,7 +891,7 @@
       <div class="foot-v2-top">
         <div class="foot-brand">
           <span class="mark">ZENRISE</span>
-          <p data-i18n="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
+          <p data-i18n-html="footer_tagline">Quiet, locally-led journeys through the lesser-known corners of Japan.</p>
         </div>
 
         <div class="foot-col">
@@ -890,9 +921,7 @@
       <div class="foot-v2-bottom">
         <span data-i18n="footer_copyright">© 2026 Intercommunicate K. K.</span>
         <div class="legal">
-          <a href="#" data-i18n="footer_privacy">Privacy</a>
-          <a href="#" data-i18n="footer_terms">Terms</a>
-          <a href="#" data-i18n="footer_cookies">Cookies</a>
+          <a href="terms.html" data-i18n="footer_terms">Terms</a>
         </div>
       </div>
     </footer>
