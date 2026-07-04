@@ -890,8 +890,11 @@
     .hero-v2 .body { grid-template-columns: 1fr; row-gap: 36px; }
     .hero-v2 .photo { width: 100%; height: 56vw; min-height: 200px; }
     .hero-v2 .lh .row { gap: 24px; padding: 20px 0; }
-    .hero-v2 .lh .lbl { width: 110px; font-size: 11px; }
-    .hero-v2 .lh .v { font-size: 30px; }
+    .hero-v2 .lh .lbl { width: 72px; font-size: 11px; padding-top: 6px; }
+    .hero-v2 .lh .v { font-size: 26px; }
+    /* the email is the display moment; the 3-line office address drops to
+       reading size — at display size it wraps into a wall of serif */
+    .hero-v2 .lh .row:last-child .v { font-size: 17px; line-height: 1.6; }
 
     /* Booking layout — stack sidebar above form */
     .booking { padding: 56px 20px 80px; grid-template-columns: 1fr; row-gap: 48px; }
@@ -1383,6 +1386,17 @@
       });
       save();
       if (window.__fit) window.__fit();
+      // Mobile: the steps are tall and Continue sits at their bottom — the
+      // swapped-in step appears ABOVE the viewport, so tapping Continue
+      // looks like nothing happened. Bring the new step's top into view.
+      // Desktop keeps its position (booking area is one screen there).
+      if (window.matchMedia('(max-width: 1023px)').matches) {
+        var cur = document.querySelector('.step.cur');
+        if (cur) {
+          var y = cur.getBoundingClientRect().top + window.scrollY - 20;
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        }
+      }
     }
     function canAdvance() {
       if (state.step === 0) return state.region.length > 0;
