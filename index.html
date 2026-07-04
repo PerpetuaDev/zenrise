@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#F7F4EA" />
 <title data-i18n-title="home_title">Zenrise — Quiet journeys through Japan</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,7 +39,49 @@
   }
 
   * { box-sizing: border-box; }
-  html { overflow-x: hidden; scroll-behavior: smooth; }
+</style>
+<script>
+  /* --vh-px: the viewport height FROZEN at load, in pixels. Mobile browsers
+     change every CSS viewport unit when their toolbar hides (Firefox iOS
+     resizes the whole webview, so even svh/lvh move) — anything sized with
+     those units jumps mid-scroll. Layout that must hold still (pinned hero,
+     expanded-view photo/panel geometry) sizes from this instead. Re-measured
+     only when the width changes (rotation), never on height-only jitter. */
+  (function () {
+    var docEl = document.documentElement;
+    function set() { docEl.style.setProperty('--vh-px', window.innerHeight + 'px'); }
+    set();
+    var w = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth !== w) { w = window.innerWidth; set(); }
+    });
+    /* When the toolbar hides, the viewport grows and the browser can be
+       left scrolled past the (now relatively shorter) document — showing
+       the canvas past the footer. Clamp back inside. Firefox iOS resizes
+       the webview itself (plain window resize, visualViewport may not
+       fire), and the resize animates — so listen to both events and
+       re-check while it settles. */
+    function clamp() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (window.scrollY > max)
+        window.scrollTo({ top: Math.max(0, max), behavior: 'instant' });
+    }
+    function clampSoon() {
+      clamp();
+      setTimeout(clamp, 120);
+      setTimeout(clamp, 360);
+    }
+    window.addEventListener('resize', clampSoon);
+    if (window.visualViewport)
+      window.visualViewport.addEventListener('resize', clampSoon);
+  })();
+</script>
+<style>
+  /* background on the ROOT: browsers paint the root's background across
+     any canvas beyond the document (overscroll, toolbar-resize races) —
+     unset it defaults to browser grey, which read as a strip past the
+     footer on mobile. Cream makes those areas invisible. */
+  html { overflow-x: hidden; scroll-behavior: smooth; background: var(--bg); }
   html, body { margin: 0; padding: 0; }
   body {
     background: var(--bg);
@@ -478,22 +521,46 @@
        fixed full-screen behind, and the cream panel sits in the overlay's
        scroll flow, riding up OVER the pinned image as you scroll. */
     .dest-expanded { --exp-panel-w: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+    /* Photo + scrim pin via sticky INSIDE the overlay's own scroll (position:
+       fixed would hand the touch gesture to the page behind instead). Each
+       spans one viewport but contributes zero flow height (negative bottom
+       margin), so the panel's 62vh offset works out the same as before and
+       the panel rides over the pinned photo in ONE scroll. */
     .dest-expanded .exp-bg,
-    .dest-expanded .exp-scrim { position: fixed; inset: 0; }
+    .dest-expanded .exp-scrim {
+      position: sticky;
+      inset: auto; /* drop the base rule's bottom:0 — a second sticky
+                      constraint fights top:0 in Safari */
+      top: 0;
+      /* frozen pixel height for the same reason as the hero: the photo
+         must never resize when the toolbar collapses. The overlay's
+         measured --exp-vvh keeps the visible area COVERED; any strip
+         below the photo is overlay cream, and in practice the panel
+         (min 46% of the frozen height, starting at 62%) overlaps it. */
+      height: 100vh;
+      height: var(--vh-px, 100svh);
+      margin-bottom: -100vh;
+      margin-bottom: calc(0px - var(--vh-px, 100svh));
+    }
     .dest-expanded .exp-panel {
       position: relative;
       top: auto;
       width: 100%;
       height: auto;
       min-height: 46vh;
+      min-height: calc(var(--vh-px, 100vh) * 0.46);
       margin-top: 62vh;
+      margin-top: calc(var(--vh-px, 100vh) * 0.62);
       padding: 36px 28px 48px;
+      /* breathing room for the collapsible browser toolbar: lvh−svh is
+         exactly its height, so the CTA can always scroll clear of it even
+         while it's expanded (resolves to the plain 48px where there is no
+         dynamic toolbar). */
+      padding-bottom: calc(48px + (100lvh - 100svh));
       justify-content: flex-start;
       overflow: visible;
       z-index: 1;
     }
-    /* cloned site footer rides in the same scroll, straight after the card */
-    .dest-expanded .exp-foot { display: block; position: relative; z-index: 1; }
     .dest-expanded .exp-panel .exp-name { font-size: 40px; }
     .dest-expanded .exp-lead { font-size: 15px; margin-bottom: 28px; }
     .dest-expanded .exp-items li { font-size: 20px; padding: 14px 0; }
@@ -620,7 +687,6 @@
   /* ─ Footer ─ */
   .foot-brand .brk { display: none; }
   /* footer clone inside the expanded overlay is a mobile-only device */
-  .dest-expanded .exp-foot { display: none; }
   footer.foot-v2 {
     background: transparent;
     color: var(--ink);
@@ -721,8 +787,14 @@
     .hero-grid {
       display: flex;
       flex-direction: column;
+      /* frozen pixel height (see --vh-px in head), NOT viewport units:
+         Firefox iOS resizes the webview when its toolbar hides, so even
+         svh/lvh jump mid-scroll — which grew the hero ~77px on first
+         scroll, jarring the layout and racing the document height (the
+         grey band past the footer). Frozen px = first screen never
+         re-lays-out; a hidden toolbar just reveals the content below. */
       height: calc(100vh - 64px);
-      height: calc(100dvh - 64px);
+      height: calc(var(--vh-px, 100svh) - 64px);
     }
     .hero-photo { width: 100%; height: auto; flex: 1; min-height: 180px; }
     /* no attribution over the full-bleed mobile hero */
@@ -742,12 +814,14 @@
     .hero-card .more .dir-d { display: inline; }
 
     /* Find / destinations — opaque and above the pinned hero so it
-       slides over it on scroll */
+       slides over it on scroll. Above the footer's z-index:1 too: the
+       expanded overlay lives inside this stacking context, and the real
+       footer must never paint over it. */
     .find {
       margin-top: 0;
       padding: 28px 20px 0;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       background: var(--bg);
     }
     /* the divider reads as clutter right under the full-screen hero */
@@ -768,14 +842,44 @@
        fades in — the desktop clip-path morph is grid-relative, so it's
        overridden here in favour of a simple opacity fade. */
     .dest-expanded {
-      position: fixed;
-      inset: 0;
+      /* NOT position: fixed — iOS re-clips fixed layers a beat behind the
+         collapsing toolbar, leaving an unpaintable strip where the page
+         shows through. Instead the overlay is ordinary page content:
+         absolute at the locked scroll offset (JS sets top on open, page
+         scroll is exp-lock'd) and a full LARGE viewport tall, so the strip
+         the collapsing toolbar reveals is already-painted overlay. While
+         the toolbar is expanded the overlay's bottom edge simply hangs
+         behind it. */
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: auto;
+      left: 0;
+      /* --exp-vvh is the MEASURED visible height (visualViewport, set and
+         live-updated by openCard) — CSS viewport units are exactly what
+         misbehaves around the collapsing iOS toolbar, so we don't rely on
+         them beyond the no-JS fallback. +2px with a -1px JS top: subpixel
+         scroll offsets make the JS-set top fractional, which can leave a
+         hairline of page peeking out at either edge — overshoot both. */
+      height: calc(100vh + 2px);
+      height: calc(var(--exp-vvh, 100vh) + 2px);
       z-index: 1000;
       clip-path: none !important;
       transition: opacity 0.3s ease !important;
       opacity: 0;
     }
     .dest-expanded.open { opacity: 1; }
+    /* while the full-screen overlay is open it is the ONLY scroller — the
+       page behind must not move under a stray touch. The body is PINNED
+       (position:fixed at the recorded scroll offset, set as an inline top
+       by openCard) rather than relying on overflow:hidden alone: WebKit
+       resets the root scroll position to 0 the moment the root stops
+       being scrollable, which teleported the page to the top behind the
+       overlay. The body must also stay unclipped — the overlay legally
+       extends past the document's end when a tile near the page bottom
+       is opened. */
+    html.exp-lock { overflow: hidden; }
+    html.exp-lock body { position: fixed; left: 0; right: 0; overflow: visible; }
 
     /* Footer (inline/cream — active variant). Top gap is PADDING, not
        margin — margins are transparent and would let the pinned hero
@@ -1273,16 +1377,6 @@
         '</div>' +
         '<button class="dest-close" aria-label="Close">&#x2715;</button>';
 
-      // Mobile scrolls the overlay itself (pinned-photo parallax) — clone
-      // the site footer in after the panel so the card's scroll runs
-      // straight into the footer as one surface. display:none'd on desktop.
-      var siteFoot = document.querySelector('footer.foot-v2');
-      if (siteFoot) {
-        var footClone = siteFoot.cloneNode(true);
-        footClone.classList.add('exp-foot');
-        overlay.appendChild(footClone);
-      }
-
       overlay._origCard = card;
       overlay._cat = cat;
       overlay._slides = images;
@@ -1291,8 +1385,30 @@
       if (hasImages) showSlide(overlay, false);
 
       overlay.style.clipPath = clip(cardRect, gridRect);
+      // Mobile overlay is absolute page content, not fixed (see the ≤1023
+      // CSS) — align its top with the viewport at the locked scroll offset.
+      if (window.matchMedia('(max-width: 1023px)').matches) {
+        overlay.style.top = (-gridRect.top - 1) + 'px';
+        // pin the page at its current offset (see html.exp-lock body CSS)
+        overlay._lockY = window.scrollY;
+        document.body.style.top = -overlay._lockY + 'px';
+        // Measure the real visible height and keep it current while the
+        // toolbar collapses/expands — the overlay and pinned photo size
+        // from --exp-vvh instead of CSS viewport units.
+        var vv = window.visualViewport;
+        var size = function () {
+          var h = vv ? vv.height : window.innerHeight;
+          overlay.style.setProperty('--exp-vvh', h + 'px');
+        };
+        size();
+        if (vv) {
+          vv.addEventListener('resize', size);
+          overlay._unsize = function () { vv.removeEventListener('resize', size); };
+        }
+      }
       grid.appendChild(overlay);
       expanded = overlay;
+      document.documentElement.classList.add('exp-lock');
 
       // Force the browser to commit the initial clip-path before animating.
       overlay.getBoundingClientRect();
@@ -1327,6 +1443,12 @@
       if (!expanded) return;
       var overlay = expanded;
       expanded = null;
+      document.documentElement.classList.remove('exp-lock');
+      if (overlay._lockY !== undefined) {
+        document.body.style.top = '';
+        window.scrollTo({ top: overlay._lockY, behavior: 'instant' });
+      }
+      if (overlay._unsize) overlay._unsize();
       overlay.classList.remove('open');
       // Fade the cream panel away so the full-bleed photo is revealed before the
       // clip-path shrinks back — otherwise right-column cards close over the panel.
@@ -1346,7 +1468,6 @@
     grid.addEventListener('click', function (e) {
       if (expanded) {
         if (e.target.closest('.exp-cta')) return;      // let the CTA navigate
-        if (e.target.closest('.exp-foot')) return;     // cloned footer: links work, no close
         e.preventDefault();
         if (e.target.closest('.exp-arrow')) return;    // cycling, not closing
         if (e.target.closest('.exp-panel')) return;    // reading the offerings
@@ -1375,5 +1496,24 @@
   })();
 </script>
 <script src="lang.js"></script>
+<!-- DEV ONLY — version badge + live viewport readout for phone testing. REMOVE BEFORE DEPLOY. -->
+<div id="devbadge" style="position:fixed;top:2px;left:2px;z-index:99999;font:10px/1.4 monospace;background:#000;color:#0f0;padding:2px 5px;pointer-events:none;">v11</div>
+<script>
+(function () {
+  var b = document.getElementById('devbadge');
+  function upd() {
+    var vv = window.visualViewport;
+    b.textContent = 'v11 ih:' + window.innerHeight
+      + ' vv:' + (vv ? Math.round(vv.height) : '-')
+      + ' doc:' + Math.round(document.documentElement.scrollHeight)
+      + ' y:' + Math.round(window.scrollY);
+  }
+  upd();
+  window.addEventListener('resize', upd);
+  window.addEventListener('scroll', upd, { passive: true });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', upd);
+  setInterval(upd, 500);
+})();
+</script>
 </body>
 </html>
