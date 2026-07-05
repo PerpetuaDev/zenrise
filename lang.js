@@ -213,7 +213,7 @@
       contact_hero_visit_v: 'me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan',
       // display hero (alt)
       // booking intro
-      contact_bi_title: 'Plan<br/>your trip.',
+      contact_bi_title: 'Plan <br/>your trip.',
 
       // booking flow — sidebar
       booking_progress_title: 'Booking',
@@ -234,10 +234,10 @@
       booking_s1_meta: 'Step 01 / 05',
       booking_s1_h: 'Where would you<br/>like to go?',
       booking_s1_lede: 'Pick one or more. We can string two towns together on a full-day route, or stay in one all morning.',
-      booking_s1_kamakura_sub: 'Temples · Tea · Kilns',
-      booking_s1_enoshima_sub: 'Coast · Caves · Seafood',
-      booking_s1_fujisawa_sub: 'Tokyo · Mt. Fuji · Hakone',
-      booking_s1_yokohama_sub: 'Port · Chinatown · Lights',
+      booking_s1_kamakura_sub: 'Temples · Tea<span class="s3"> · Kilns</span>',
+      booking_s1_enoshima_sub: 'Coast · Caves<span class="s3"> · Seafood</span>',
+      booking_s1_fujisawa_sub: 'Tokyo<span class="s3"> · Mt. Fuji</span> · Hakone',
+      booking_s1_yokohama_sub: 'Port · Chinatown<span class="s3"> · Lights</span>',
       booking_s1_count_suffix: 'selected',
 
       // booking step 2: length
@@ -251,11 +251,12 @@
       booking_s2_full_p: 'Two towns linked by local train. A morning exploring, lunch with the day\u2019s host, an afternoon stop.',
       booking_s2_half_t: '≈ 4 hrs',
       booking_s2_full_t: '≈ 8 hrs',
-      booking_s2_half_price: '¥65,000 (tax incl.) / group',
-      booking_s2_full_price: '¥95,000 (tax incl.) / group',
+      booking_s2_half_price: '¥65,000 / group',
+      booking_s2_full_price: '¥95,000 / group',
       booking_s2_opt1: 'Option 01',
       booking_s2_opt2: 'Option 02',
-      booking_s2_note_base: '※ Base prices, per group of 1–6 people. Bookings start from one group.',
+      booking_s2_notes_ttl: 'Terms',
+      booking_s2_note_base: '※ Base prices, tax included, per group of 1–6 people. Bookings start from one group.',
       booking_s2_note_fees: '+ Additional fees apply for what the base price doesn’t cover: hotel pick-up & drop-off transport, taxi or private-hire arrangements, hotel & ryokan bookings, activities and experiences, admission to attractions, and food & drink.',
 
       // booking step 3: when + who
@@ -263,6 +264,7 @@
       booking_s3_sub: 'Dates &amp; party',
       booking_s3_h: 'When, and how<br/>many of you?',
       booking_s3_lede: 'A rough window is fine — we\u2019ll come back with two or three open dates near it.',
+      booking_s3_dates: 'Dates',
       booking_s3_date_from: 'Earliest date',
       booking_s3_date_to: 'Latest date',
       booking_s3_party: 'Group size',
@@ -327,7 +329,7 @@
       booking_summary_dates_flex: 'Flexible — talk to us',
 
       // booking sent
-      booking_sent_n: 'Sent — thank you',
+      booking_sent_n: 'Sent, thank you',
       booking_sent_h: 'That\u2019s with us.',
       booking_sent_p1: 'Thank you for reaching out. We\u2019ll write back within two business days with two or three itinerary sketches that fit your dates.',
       booking_sent_p2: 'If you haven\u2019t heard from us by then, an email may have gone astray \u2014 please write to hello@zenrise.jp and quote your reference below.',
@@ -552,10 +554,10 @@
       booking_s1_meta: 'ステップ 01 / 05',
       booking_s1_h: 'どこを訪れて<br/>みたいですか？',
       booking_s1_lede: '一つでも、複数でも構いません。一日のルートで二つの町をつなぐことも、一つの町で朝のあいだ過ごすこともできます。',
-      booking_s1_kamakura_sub: '寺 · 茶 · 窯',
-      booking_s1_enoshima_sub: '海岸 · 洞窟 · 海の幸',
-      booking_s1_fujisawa_sub: '東京 · 富士山 · 箱根',
-      booking_s1_yokohama_sub: '港 · 中華街 · 夜景',
+      booking_s1_kamakura_sub: '寺 · 茶<span class="s3"> · 窯</span>',
+      booking_s1_enoshima_sub: '海岸 · 洞窟<span class="s3"> · 海の幸</span>',
+      booking_s1_fujisawa_sub: '東京<span class="s3"> · 富士山</span> · 箱根',
+      booking_s1_yokohama_sub: '港 · 中華街<span class="s3"> · 夜景</span>',
       booking_s1_count_suffix: '選択中',
 
       // booking step 2
@@ -569,11 +571,12 @@
       booking_s2_full_p: '二つの町を地元の電車でつなぎます。朝のひととき、その日の案内人との昼食、午後の立ち寄り先。',
       booking_s2_half_t: '約 4 時間',
       booking_s2_full_t: '約 8 時間',
-      booking_s2_half_price: '¥65,000（税込）／ 1組',
-      booking_s2_full_price: '¥95,000（税込）／ 1組',
+      booking_s2_half_price: '¥65,000 ／ 1組',
+      booking_s2_full_price: '¥95,000 ／ 1組',
       booking_s2_opt1: 'オプション 01',
       booking_s2_opt2: 'オプション 02',
-      booking_s2_note_base: '※基本料金・1組（1〜6名さま）あたり。ご予約は1組から承ります。',
+      booking_s2_notes_ttl: '注意事項',
+      booking_s2_note_base: '※基本料金（税込）・1組（1〜6名さま）あたり。ご予約は1組から承ります。',
       booking_s2_note_fees: '＋追加料金：基本料金に含まれないもの — ホテル送迎の交通費、タクシー・ハイヤーの手配、ホテル・旅館のご宿泊予約、アクティビティ・体験の料金、観光施設の入場料、飲食費（レストラン・カフェ等）。',
 
       // booking step 3
@@ -581,6 +584,7 @@
       booking_s3_sub: '日時と人数',
       booking_s3_h: 'いつ、何人で<br/>来られますか?',
       booking_s3_lede: 'おおよその期間で構いません — その近辺で空いている候補日を二、三日お返しします。',
+      booking_s3_dates: '日程',
       booking_s3_date_from: '最も早い日',
       booking_s3_date_to: '最も遅い日',
       booking_s3_party: '人数',
@@ -645,7 +649,7 @@
       booking_summary_dates_flex: 'お任せ — ご相談ください',
 
       // booking sent
-      booking_sent_n: '送信完了 — ありがとうございます',
+      booking_sent_n: '送信完了、ありがとうございます',
       booking_sent_h: '承りました。',
       booking_sent_p1: 'お問い合わせいただきありがとうございます。二営業日以内に、ご希望の日付に合う二、三の行程案をお送りします。',
       booking_sent_p2: '万が一ご連絡がない場合は、メールが届いていない可能性がございます。お手数ですが、下記の受付番号を添えて hello@zenrise.jp までご連絡ください。',

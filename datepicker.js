@@ -25,6 +25,11 @@
     en: 'Choose a date',
     ja: '日付を選ぶ'
   };
+  var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var RANGE_PLACEHOLDER = {
+    en: 'Choose your dates',
+    ja: '日程を選ぶ'
+  };
 
   function lang() {
     return (window.ZenriseI18n && window.ZenriseI18n.get()) || 'en';
@@ -96,13 +101,23 @@
       '.zp-day.other { color: rgba(41,65,56,0.2); cursor: pointer; }',
       '.zp-day.other:hover { background: rgba(41,65,56,0.03); }',
       '.zp-day.on { background: #294138; color: #F7F4EA; }',
+      '.zp-day.in-range { background: rgba(41,65,56,0.10); }',
+      '.zp-day.in-range:hover { background: rgba(41,65,56,0.16); }',
       '.zp-day.today::after { content: ""; position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); width: 3px; height: 3px; background: currentColor; border-radius: 50%; opacity: 0.55; }',
       '.zp-day.on.today::after { background: #F7F4EA; opacity: 0.75; }',
 
       // footer — clear button
       '.zp-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(41,65,56,0.08); }',
       '.zp-today, .zp-clear { background: transparent; border: none; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(41,65,56,0.6); cursor: pointer; padding: 4px 0; transition: color 140ms ease; }',
-      '.zp-today:hover, .zp-clear:hover { color: #294138; }'
+      '.zp-today:hover, .zp-clear:hover { color: #294138; }',
+
+      // range-mode confirm — filled ink, unmissable next to the quiet Clear
+      '.zp-confirm { background: #294138; color: #F7F4EA; border: none; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; padding: 12px 22px; cursor: pointer; border-radius: 0; transition: background 160ms ease; }',
+      '.zp-confirm:hover { background: #1f3328; }',
+
+      // range trigger labels run long ("Sep 24 – Oct 2, 2026") — step the
+      // display size down on phones so they hold one line
+      '@media (max-width: 599px) { .zp-trigger { font-size: 22px; } }'
     ].join('\n');
     document.head.appendChild(s);
   }
@@ -296,8 +311,208 @@
     render();
   }
 
+  // ────────────────────────────────────────────────────────────
+  // Range enhancement — one trigger + one calendar driving TWO date
+  // inputs (from/to) inside a [data-zp-range] container. First pick
+  // sets the start, second the end (an earlier pick swaps), and both
+  // inputs get `change` events so existing form state logic is
+  // untouched.
+  // ────────────────────────────────────────────────────────────
+  function enhanceRange(container) {
+    if (container.dataset.zpReady) return;
+    var inputs = container.querySelectorAll('input[type="date"]');
+    if (inputs.length < 2) return;
+    container.dataset.zpReady = '1';
+    var from = inputs[0], to = inputs[1];
+    from.dataset.zpReady = '1';
+    to.dataset.zpReady = '1';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'zp';
+    from.parentNode.insertBefore(wrap, from);
+    wrap.appendChild(from);
+    wrap.appendChild(to);
+
+    var trig = document.createElement('button');
+    trig.type = 'button';
+    trig.className = 'zp-trigger empty';
+    // no .zp-icon here — the field's own "Dates" label already says it
+    trig.innerHTML = '<span class="zp-value"></span>';
+    wrap.appendChild(trig);
+
+    var pop = document.createElement('div');
+    pop.className = 'zp-pop';
+    pop.innerHTML =
+      '<div class="zp-head">' +
+        '<button class="zp-nav" data-zp-prev type="button" aria-label="Previous month">←</button>' +
+        '<span class="zp-month"></span>' +
+        '<button class="zp-nav" data-zp-next type="button" aria-label="Next month">→</button>' +
+      '</div>' +
+      '<div class="zp-dow"></div>' +
+      '<div class="zp-days"></div>' +
+      '<div class="zp-foot">' +
+        '<button class="zp-clear" type="button" data-zp-clear></button>' +
+        '<button class="zp-confirm" type="button" data-zp-confirm></button>' +
+      '</div>';
+    wrap.appendChild(pop);
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var todayISO = toISO({ y: today.getFullYear(), m: today.getMonth(), d: today.getDate() });
+    var view = { y: today.getFullYear(), m: today.getMonth() };
+
+    function sel() { return { a: parseISO(from.value), b: parseISO(to.value) }; }
+    function cmp(c1, c2) { return (c1.y - c2.y) || (c1.m - c2.m) || (c1.d - c2.d); }
+    function fire(el) { el.dispatchEvent(new Event('change', { bubbles: true })); }
+
+    function label(s) {
+      var l = lang();
+      if (!s.a) return RANGE_PLACEHOLDER[l];
+      if (!s.b) return l === 'ja' ? formatLong(s.a) + ' 〜' : formatLong(s.a) + ' – …';
+      if (l === 'ja') {
+        if (s.a.y === s.b.y) {
+          if (s.a.m === s.b.m) return s.a.y + '年' + (s.a.m + 1) + '月' + s.a.d + '日〜' + s.b.d + '日';
+          return s.a.y + '年' + (s.a.m + 1) + '月' + s.a.d + '日〜' + (s.b.m + 1) + '月' + s.b.d + '日';
+        }
+        return formatLong(s.a) + '〜' + formatLong(s.b);
+      }
+      var A = MONTHS_SHORT[s.a.m], B = MONTHS_SHORT[s.b.m];
+      if (s.a.y === s.b.y) {
+        if (s.a.m === s.b.m) return A + ' ' + s.a.d + ' – ' + s.b.d + ', ' + s.a.y;
+        return A + ' ' + s.a.d + ' – ' + B + ' ' + s.b.d + ', ' + s.a.y;
+      }
+      return A + ' ' + s.a.d + ', ' + s.a.y + ' – ' + B + ' ' + s.b.d + ', ' + s.b.y;
+    }
+
+    function render() {
+      pop.querySelector('.zp-month').textContent = monthLabel(view.y, view.m);
+      pop.querySelector('.zp-dow').innerHTML = DOW[lang()].map(function (d) {
+        return '<span>' + d + '</span>';
+      }).join('');
+      pop.querySelector('[data-zp-clear]').textContent = lang() === 'ja' ? 'クリア' : 'Clear';
+      pop.querySelector('[data-zp-confirm]').textContent = lang() === 'ja' ? '確定' : 'Confirm';
+
+      var firstDay = new Date(view.y, view.m, 1);
+      var lastDay = new Date(view.y, view.m + 1, 0);
+      var startDow = (firstDay.getDay() + 6) % 7;
+      var daysInMonth = lastDay.getDate();
+      var prevLast = new Date(view.y, view.m, 0).getDate();
+
+      var s = sel();
+
+      var cells = [];
+      for (var i = 0; i < startDow; i++) {
+        var d = prevLast - startDow + 1 + i;
+        cells.push({ d: d, y: view.m === 0 ? view.y - 1 : view.y, m: view.m === 0 ? 11 : view.m - 1, other: true });
+      }
+      for (var dd = 1; dd <= daysInMonth; dd++) {
+        cells.push({ d: dd, y: view.y, m: view.m, other: false });
+      }
+      var nextD = 1;
+      while (cells.length < 42) {
+        cells.push({ d: nextD++, y: view.m === 11 ? view.y + 1 : view.y, m: view.m === 11 ? 0 : view.m + 1, other: true });
+      }
+
+      pop.querySelector('.zp-days').innerHTML = cells.map(function (c) {
+        var iso = toISO(c);
+        var classes = ['zp-day'];
+        if (c.other) classes.push('other');
+        var isA = s.a && cmp(c, s.a) === 0;
+        var isB = s.b && cmp(c, s.b) === 0;
+        if (isA || isB) classes.push('on');
+        else if (s.a && s.b && cmp(c, s.a) > 0 && cmp(c, s.b) < 0) classes.push('in-range');
+        if (iso === todayISO) classes.push('today');
+        return '<button type="button" class="' + classes.join(' ') + '" data-zp-pick="' + iso + '">' + c.d + '</button>';
+      }).join('');
+
+      var v = trig.querySelector('.zp-value');
+      trig.classList.toggle('empty', !s.a && !s.b);
+      v.textContent = label(s);
+    }
+
+    trig.addEventListener('click', function (e) {
+      e.stopPropagation();
+      document.querySelectorAll('.zp.open').forEach(function (z) {
+        if (z !== wrap) z.classList.remove('open');
+      });
+      var open = wrap.classList.toggle('open');
+      if (open) {
+        var s = sel();
+        if (s.a) { view.y = s.a.y; view.m = s.a.m; }
+        else { view.y = today.getFullYear(); view.m = today.getMonth(); }
+        render();
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!wrap.contains(e.target)) wrap.classList.remove('open');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') wrap.classList.remove('open');
+    });
+
+    pop.querySelector('[data-zp-prev]').addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (view.m === 0) { view.m = 11; view.y--; } else { view.m--; }
+      render();
+    });
+    pop.querySelector('[data-zp-next]').addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (view.m === 11) { view.m = 0; view.y++; } else { view.m++; }
+      render();
+    });
+    pop.querySelector('[data-zp-clear]').addEventListener('click', function (e) {
+      e.stopPropagation();
+      from.value = '';
+      to.value = '';
+      fire(from); fire(to);
+      render();
+    });
+
+    pop.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-zp-pick]');
+      if (!btn) return;
+      e.stopPropagation();
+      var iso = btn.dataset.zpPick;
+      var c = parseISO(iso);
+      var s = sel();
+      if (!s.a || (s.a && s.b)) {
+        // start a new range
+        from.value = iso;
+        to.value = '';
+        fire(from); fire(to);
+        render();
+      } else {
+        // complete it — picking before the start swaps the endpoints.
+        // Stays open; Confirm closes.
+        if (cmp(c, s.a) < 0) {
+          to.value = toISO(s.a);
+          from.value = iso;
+        } else {
+          to.value = iso;
+        }
+        fire(from); fire(to);
+        render();
+      }
+    });
+
+    pop.querySelector('[data-zp-confirm]').addEventListener('click', function (e) {
+      e.stopPropagation();
+      wrap.classList.remove('open');
+    });
+
+    from.addEventListener('change', render);
+    to.addEventListener('change', render);
+    if (window.ZenriseI18n) {
+      window.ZenriseI18n.onChange(function () { render(); });
+    }
+
+    render();
+  }
+
   function boot() {
     injectStyles();
+    document.querySelectorAll('[data-zp-range]').forEach(enhanceRange);
     document.querySelectorAll('input[type="date"]').forEach(enhance);
   }
 

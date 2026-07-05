@@ -377,7 +377,6 @@
     padding: 32px 28px 28px;
     cursor: pointer;
     transition: background 180ms ease, transform 180ms ease;
-    border: 1px solid transparent;
     user-select: none;
     overflow: hidden;
   }
@@ -385,7 +384,6 @@
   .card.on {
     background: var(--ink);
     color: var(--bg);
-    border-color: var(--ink);
   }
   .card .tick {
     position: absolute;
@@ -482,11 +480,14 @@
   }
   .card.format.on .price { color: rgba(247,244,234,0.65); }
 
-  /* base-price + additional-fees notes under the format cards */
+  /* base-price + additional-fees notes under the format cards.
+     A <details> so mobile can collapse them behind a "Terms" row;
+     ships open, and the summary only surfaces at ≤1023px. */
   .price-notes {
     margin-top: 22px;
     max-width: 720px;
   }
+  .price-notes summary { display: none; }
   .price-notes p {
     margin: 0 0 8px;
     font-size: 13px;
@@ -528,7 +529,8 @@
   }
   input::placeholder, textarea::placeholder { color: var(--ink-40); }
   input:focus, textarea:focus, select:focus { border-bottom-color: var(--ink); }
-  textarea { resize: vertical; min-height: 120px; font-size: 22px; line-height: 1.5; }
+  /* overflow hidden: JS auto-grows it, so it should never scroll inside */
+  textarea { resize: vertical; min-height: 120px; font-size: 22px; line-height: 1.5; overflow-y: hidden; }
 
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 
@@ -553,7 +555,7 @@
     width: 88px;
     text-align: center;
     font-family: var(--display);
-    font-size: 32px;
+    font-size: 26px;
     line-height: 1;
     padding: 0 4px;
     border-left: 1px solid var(--ink-30);
@@ -561,6 +563,9 @@
     height: 56px;
     display: grid; place-items: center;
   }
+  /* the numeral rides down with the label (relative nudges — the
+     centered stack itself stays put) */
+  .stepper .val > div { position: relative; top: 6px; }
   .stepper .val .lbl {
     font-family: var(--mono);
     font-size: 10px;
@@ -568,6 +573,9 @@
     color: var(--ink-60);
     text-transform: uppercase;
     margin-top: 2px;
+    /* nudged toward the box's bottom edge without moving the number */
+    position: relative;
+    top: 6px;
   }
 
   /* checkbox chips */
@@ -885,40 +893,144 @@
     .navlinks { gap: 28px; font-size: 16px; }
     .lang { font-size: 16px; }
 
-    /* Contact hero */
-    .hero-v2 { padding: 40px 20px 56px; }
+    /* Contact hero — same treatment as home/about: full-bleed photo
+       leading the page flush under the nav, roomier height. vw (not
+       vh/svh): width-relative units hold still when Firefox iOS
+       collapses its toolbar; max-height keeps tablets sane. */
+    .hero-v2 { padding: 0 20px 56px; }
     .hero-v2 .body { grid-template-columns: 1fr; row-gap: 36px; }
-    .hero-v2 .photo { width: 100%; height: 56vw; min-height: 200px; }
+    .hero-v2 .photo {
+      width: auto; margin: 0 -20px;
+      height: 120vw; min-height: 320px; max-height: 560px;
+    }
+    /* no attribution over the mobile hero — matches home/about */
+    .hero-v2 .photo::after { display: none; }
+    /* caption steps down to match the other heroes (EN uppercase mono
+       runs louder than JP at the same size, so EN drops further) */
+    .hero-v2 .photo .credit { font-size: 10px; }
+    .hero-v2 .photo .credit:lang(ja) { font-size: 13px; }
+    /* the eyebrow sits right on the first row's border once the column
+       stacks — desktop spacing came from the stretched flex column */
+    .hero-v2 .top { margin-bottom: 20px; }
     .hero-v2 .lh .row { gap: 24px; padding: 20px 0; }
     .hero-v2 .lh .lbl { width: 72px; font-size: 11px; padding-top: 6px; }
-    .hero-v2 .lh .v { font-size: 26px; }
-    /* the email is the display moment; the 3-line office address drops to
-       reading size — at display size it wraps into a wall of serif */
-    .hero-v2 .lh .row:last-child .v { font-size: 17px; line-height: 1.6; }
+    /* email and address at the same size — the label column carries the
+       hierarchy; the address just takes a taller line for its 3 lines */
+    .hero-v2 .lh .v { font-size: 20px; }
+    .hero-v2 .lh .row:last-child .v { line-height: 1.55; }
 
-    /* Booking layout — stack sidebar above form */
-    .booking { padding: 56px 20px 80px; grid-template-columns: 1fr; row-gap: 48px; }
-    .progress { position: static; }
+    /* Booking layout — stack sidebar above form. Light top padding on
+       top of the hero's 56px tail to breathe from the contact rows. */
+    .booking { padding: 32px 20px 80px; grid-template-columns: 1fr; row-gap: 48px; }
+    .progress { position: static; margin: 0 0 40px; }
     .progress li.cur::before { display: none; }
+    /* the BOOKING label reads as clutter once the row sits inside the step */
+    .progress .ttl { display: none; }
+    /* only the current step shows — the 5-row list is a desktop sidebar
+       device; setStep()'s .cur swap refreshes this as steps advance.
+       The visible row needs its own bottom border since it's usually
+       not :last-child. JS relocates the whole aside under the current
+       step's heading at this breakpoint (see placeProgress). */
+    .progress li { display: none; }
+    .progress li.cur { display: grid; border-bottom: 1px solid var(--ink-12); }
+    /* the bare number becomes "01 / 05" — each row's own 01/02/…
+       supplies the front, so it tracks the current step for free.
+       The desktop 56px number column is too narrow for the long form. */
+    .progress li { grid-template-columns: auto 1fr; column-gap: 20px; }
+    .progress li .n::after { content: " / 05"; }
+    /* the desktop 56px tail under the list doubles up with the grid's
+       48px row-gap once stacked */
+    .progress ol { margin-bottom: 0; }
 
-    /* Booking intro */
-    .booking-intro { padding: 56px 20px 0; grid-template-columns: 1fr; row-gap: 24px; }
-    .booking-intro h2 { font-size: 56px; }
+    /* Booking intro — heading hidden on mobile (the step heading leads
+       instead), but the section stays in flow: it's the #booking anchor
+       target for the home page's CTA */
+    .booking-intro { padding: 0 20px; grid-template-columns: 1fr; row-gap: 0; }
+    .booking-intro h2 { display: none; }
     .booking-intro p { font-size: 18px; max-width: 100%; }
+
+    /* The meta row becomes the BOOKING label: step numbering lives in
+       the progress row below the heading, and the live selected-count
+       is noise at phone size. ::before inherits .meta's mono styling. */
+    .step .meta > span { display: none; }
+    .step .meta::before { content: "Booking"; }
+    html:lang(ja) .step .meta::before { content: "ご予約"; }
 
     /* Form step headings */
     .step h2 { font-size: 48px; }
     .step .lede { font-size: 18px; max-width: 100%; }
-    .sent h2 { font-size: 48px; }
-    .sent p { font-size: 18px; }
+    /* steps 1–4: headings + controls speak for themselves; the ledes
+       just push the content down the screen. The relocated progress
+       row now provides the separation below the heading. */
+    .step[data-step="0"] .lede,
+    .step[data-step="1"] .lede,
+    .step[data-step="2"] .lede,
+    .step[data-step="3"] .lede { display: none; }
+
+    /* tighter field rhythm across the form steps */
+    .field { margin: 0 0 26px; }
+    .field .lbl { margin-bottom: 10px; }
+    input[type="text"], input[type="email"], textarea, select { font-size: 22px; padding: 8px 0 10px; }
+    /* notes read (and get typed) at reading size, not display size —
+       the wrapping placeholder was clipping the bottom rule */
+    textarea { min-height: 100px; font-size: 17px; line-height: 1.55; }
+    /* summary rows whose values run long (interests, notes) match it */
+    .summary dd.wordy { font-size: 17px; line-height: 1.55; }
+
+    /* step 2: format cards trimmed to match the tighter mobile rhythm */
+    .card.format { padding: 24px 24px 26px; min-height: 0; }
+    .card.format h3 { font-size: 32px; }
+    .card.format p { font-size: 14px; }
+    .card.format .price { margin-top: 14px; flex-wrap: wrap; gap: 8px 20px; }
+
+    /* the wordy price notes collapse behind a tap-to-open Terms row
+       (JS closes it at this breakpoint; see syncNotes) */
+    .price-notes { margin-top: 16px; border-top: 1px solid var(--ink-12); border-bottom: 1px solid var(--ink-12); }
+    .price-notes[open] { padding-bottom: 8px; }
+    .price-notes summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 14px 0;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      color: var(--ink-60);
+      text-transform: uppercase;
+    }
+    .price-notes summary::-webkit-details-marker { display: none; }
+    .price-notes summary::after { content: "+"; font-size: 14px; }
+    .price-notes[open] summary::after { content: "−"; }
+    /* confirmation: tightened to the mobile rhythm */
+    .sent { padding: 8px 0 0; }
+    .sent .num { margin-bottom: 16px; }
+    .sent h2 { font-size: 48px; margin: 0 0 20px; }
+    .sent p { font-size: 18px; margin: 0 0 14px; }
+    .sent .ref { margin-top: 28px; padding: 18px 24px; }
+    .sent .actions { margin-top: 32px; flex-wrap: wrap; gap: 16px 28px; }
 
     /* Card grids */
     .grid-3 { grid-template-columns: 1fr 1fr; }
     .grid-4 { grid-template-columns: 1fr 1fr; }
 
+    /* Step nav: smaller Continue, and the rule sits BELOW the buttons
+       so they read as part of the step rather than the footer zone */
+    .step-nav {
+      border-top: none;
+      border-bottom: 1px solid var(--ink-12);
+      margin-top: 40px;
+      padding: 0 0 40px;
+    }
+    .btn-next { padding: 14px 24px; font-size: 16px; gap: 12px; }
+    .btn-next.send { padding: 16px 28px; font-size: 17px; }
+
     /* Footer */
   .foot-brand .brk { display: none; }
-    .foot-v2 { padding: 0 20px; }
+    /* footer.foot-v2, not .foot-v2 — must outrank the desktop 36px rule */
+    footer.foot-v2 { padding: 0 20px; }
     /* no divider at the top of the footer on mobile */
     .foot-v2 > .rule { display: none; }
     .foot-v2-top { padding: 16px 0 40px; grid-template-columns: 1fr; gap: 32px; }
@@ -937,13 +1049,38 @@
     .booking-intro h2 { font-size: 40px; }
     .step h2 { font-size: 36px; }
     .sent h2 { font-size: 40px; }
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    /* regions run full-bleed 2-up at the home tiles' portrait ratio,
+       but keep the standard card style (cream body, ink flip when
+       selected): photo fills whatever the body doesn't need */
+    /* -21px, not -20px: one extra pixel each side so the tiles sit truly
+       flush at the screen edges (html is overflow-x: hidden) */
+    .grid-4 { gap: 8px; margin: 0 -21px; }
+    .card.region {
+      min-height: 0;
+      aspect-ratio: 446 / 558;
+      display: flex; flex-direction: column;
+    }
+    .card.region .pic { height: auto; flex: 1; }
+    .card.region .body { padding: 16px 18px 18px; }
+    /* numbering is noise on the compact tiles */
+    .card.region .num { display: none; }
+    .card.region h3 { font-size: 20px; margin: 0 0 6px; }
+    /* two examples only so the sub holds one line; span.s3 marks any
+       copy trimmed on the tiles (incl. "Other Destinations") */
+    .card.region .sub { font-size: 10px; letter-spacing: 0.16em; }
+    .card.region .s3 { display: none; }
+    .card.region .tick { width: 20px; height: 20px; right: 12px; top: 12px; font-size: 12px; }
     /* Paired fields (date range, contact details) stack */
     .row-2 { grid-template-columns: 1fr; gap: 24px; }
     /* Review summary: stack label above value, single separator per row */
     .summary { grid-template-columns: 1fr; }
-    .summary dt { padding: 16px 0 4px; }
+    .summary dt { padding: 16px 0 6px; }
     .summary dd { padding: 0 0 16px; border-top: none; }
+    /* stacked rows: the last row's dt border-bottom (the desktop
+       table-closing line) would paint between the NOTES label and its
+       value — the closing line belongs on the dd only */
+    .summary .row:last-of-type dt { border-bottom: none; }
   }
 </style>
 </head>
@@ -990,7 +1127,7 @@
   <!-- ───── Booking-flow intro ───── -->
   <section class="booking-intro" id="booking" data-screen-label="03 Contact — Booking intro">
     <div>
-      <h2 data-i18n-html="contact_bi_title">Plan<br/>your trip.</h2>
+      <h2 data-i18n-html="contact_bi_title">Plan <br/>your trip.</h2>
     </div>
   </section>
 
@@ -1022,7 +1159,7 @@
             <div class="body">
               <span class="num">01 / 04</span>
               <h3 data-i18n="home_dest_kamakura_name">Kamakura</h3>
-              <span class="sub" data-i18n="booking_s1_kamakura_sub">Temples · Tea · Kilns</span>
+              <span class="sub" data-i18n-html="booking_s1_kamakura_sub">Temples · Tea<span class="s3"> · Kilns</span></span>
             </div>
             <span class="tick"></span>
           </div>
@@ -1031,7 +1168,7 @@
             <div class="body">
               <span class="num">02 / 04</span>
               <h3 data-i18n="home_dest_enoshima_name">Enoshima</h3>
-              <span class="sub" data-i18n="booking_s1_enoshima_sub">Coast · Caves · Seafood</span>
+              <span class="sub" data-i18n-html="booking_s1_enoshima_sub">Coast · Caves<span class="s3"> · Seafood</span></span>
             </div>
             <span class="tick"></span>
           </div>
@@ -1040,7 +1177,7 @@
             <div class="body">
               <span class="num">03 / 04</span>
               <h3 data-i18n="home_dest_yokohama_name">Yokohama</h3>
-              <span class="sub" data-i18n="booking_s1_yokohama_sub">Old harbour · Chinatown · Dusk</span>
+              <span class="sub" data-i18n-html="booking_s1_yokohama_sub">Port · Chinatown<span class="s3"> · Lights</span></span>
             </div>
             <span class="tick"></span>
           </div>
@@ -1048,8 +1185,8 @@
             <div class="pic"></div>
             <div class="body">
               <span class="num">04 / 04</span>
-              <h3 data-i18n="home_dest_fujisawa_name">Other Destinations</h3>
-              <span class="sub" data-i18n="booking_s1_fujisawa_sub">Tokyo · Mt. Fuji · Hakone</span>
+              <h3 data-i18n="home_dest_fujisawa_name">Other<span class="s3"> Destinations</span></h3>
+              <span class="sub" data-i18n-html="booking_s1_fujisawa_sub">Tokyo<span class="s3"> · Mt. Fuji</span> · Hakone</span>
             </div>
             <span class="tick"></span>
           </div>
@@ -1072,22 +1209,23 @@
             <span class="num" data-i18n="booking_s2_opt1">Option 01</span>
             <h3 data-i18n="booking_s2_half">Half day</h3>
             <p data-i18n="booking_s2_half_p">One town, one neighbourhood. A long morning of exploring, one workshop or tea stop, and a quiet lunch.</p>
-            <div class="price"><span data-i18n="booking_s2_half_t">≈ 4 hrs</span><span data-i18n="booking_s2_half_price">¥65,000 (tax incl.) / group</span></div>
+            <div class="price"><span data-i18n="booking_s2_half_t">≈ 4 hrs</span><span data-i18n="booking_s2_half_price">¥65,000 / group</span></div>
             <span class="tick"></span>
           </div>
           <div class="card format" data-radio="length" data-val="Full day">
             <span class="num" data-i18n="booking_s2_opt2">Option 02</span>
             <h3 data-i18n="booking_s2_full">Full day</h3>
             <p data-i18n="booking_s2_full_p">Two towns linked by local train. A morning exploring, lunch with the day's host, an afternoon stop.</p>
-            <div class="price"><span data-i18n="booking_s2_full_t">≈ 8 hrs</span><span data-i18n="booking_s2_full_price">¥95,000 (tax incl.) / group</span></div>
+            <div class="price"><span data-i18n="booking_s2_full_t">≈ 8 hrs</span><span data-i18n="booking_s2_full_price">¥95,000 / group</span></div>
             <span class="tick"></span>
           </div>
         </div>
 
-        <div class="price-notes">
-          <p data-i18n="booking_s2_note_base">※ Base prices, per group of 1–6 people. Bookings start from one group.</p>
+        <details class="price-notes" open>
+          <summary data-i18n="booking_s2_notes_ttl">Terms</summary>
+          <p data-i18n="booking_s2_note_base">※ Base prices, tax included, per group of 1–6 people. Bookings start from one group.</p>
           <p data-i18n="booking_s2_note_fees">+ Additional fees apply for what the base price doesn’t cover: hotel pick-up &amp; drop-off transport, taxi or private-hire arrangements, hotel &amp; ryokan bookings, activities and experiences, admission to attractions, and food &amp; drink.</p>
-        </div>
+        </details>
 
         <div class="step-nav">
           <button class="btn-back" data-back><span class="arrow">←</span> <span data-i18n="booking_btn_back">Back</span></button>
@@ -1101,15 +1239,12 @@
         <h2 data-i18n-html="booking_s3_h">When, and how<br/>many of you?</h2>
         <p class="lede" data-i18n-html="booking_s3_lede">A rough window is fine &mdash; we'll come back with two or three open dates near it.</p>
 
-        <div class="row-2">
-          <div class="field">
-            <span class="lbl" data-i18n="booking_s3_date_from">Earliest date</span>
-            <input type="date" id="date-from" />
-          </div>
-          <div class="field">
-            <span class="lbl" data-i18n="booking_s3_date_to">Latest date</span>
-            <input type="date" id="date-to" />
-          </div>
+        <!-- one range calendar drives both hidden inputs; booking state
+             (dateFrom/dateTo), validation and the summary are untouched -->
+        <div class="field" data-zp-range>
+          <span class="lbl" data-i18n="booking_s3_dates">Dates</span>
+          <input type="date" id="date-from" />
+          <input type="date" id="date-to" />
         </div>
 
         <div class="field">
@@ -1218,7 +1353,7 @@
       <!-- Sent confirmation -->
       <div class="step" data-step="5">
         <div class="sent">
-          <span class="num" data-i18n="booking_sent_n">Sent — thank you</span>
+          <span class="num" data-i18n="booking_sent_n">Sent, thank you</span>
           <h2 data-i18n="booking_sent_h">That's with us.</h2>
           <p data-i18n-html="booking_sent_p1">One of us &mdash; usually whoever's not on a tour that morning &mdash; will write back within two working days with two or three itinerary sketches that fit your dates.</p>
           <p data-i18n="booking_sent_p2">If you don't hear from us by the third day, it almost certainly means an email got lost. Just call.</p>
@@ -1374,6 +1509,40 @@
       var sendBtn = document.getElementById('send-btn');
       sendBtn.disabled = !state.consent;
     }
+    // Mobile: the progress row lives under the current step's heading;
+    // desktop keeps it as the booking grid's sidebar. The aside is moved,
+    // not cloned, so setStep's class toggling keeps working either way.
+    var progressAside = document.querySelector('.progress');
+    var bookingGrid = document.querySelector('.booking');
+    var progressMq = window.matchMedia('(max-width: 1023px)');
+    function placeProgress() {
+      if (progressMq.matches) {
+        var h2 = document.querySelector('.step.cur h2');
+        if (h2) h2.insertAdjacentElement('afterend', progressAside);
+      } else if (bookingGrid.firstElementChild !== progressAside) {
+        bookingGrid.insertBefore(progressAside, bookingGrid.firstElementChild);
+      }
+    }
+    if (progressMq.addEventListener) progressMq.addEventListener('change', placeProgress);
+
+    // Mobile: the step-2 price notes collapse behind their "Terms" row;
+    // desktop always shows them (the markup ships open for no-JS safety).
+    var priceNotes = document.querySelector('details.price-notes');
+    function syncNotes() { if (priceNotes) priceNotes.open = !progressMq.matches; }
+    syncNotes();
+    if (progressMq.addEventListener) progressMq.addEventListener('change', syncNotes);
+
+    // The notes box grows with its content (scrollHeight re-measure).
+    // Runs on input, and again when step 4 opens — a display:none
+    // textarea measures 0, so sizing restored text must wait for that.
+    var notesBox = document.getElementById('notes');
+    function growNotes() {
+      if (!notesBox || notesBox.offsetParent === null) return;
+      notesBox.style.height = 'auto';
+      notesBox.style.height = notesBox.scrollHeight + 'px';
+    }
+    notesBox.addEventListener('input', growNotes);
+
     function setStep(n) {
       state.step = n;
       document.querySelectorAll('.step').forEach(function (el) {
@@ -1384,6 +1553,11 @@
         li.classList.toggle('cur', i === n);
         li.classList.toggle('done', i < n && n < 5);
       });
+      placeProgress();
+      if (n === 3) growNotes();
+      // always render the summary on entering review — covers landing
+      // there on a cold reload, where no nav click has rendered it yet
+      if (n === 4) renderSummary();
       save();
       if (window.__fit) window.__fit();
       // Mobile: the steps are tall and Continue sits at their bottom — the
@@ -1521,8 +1695,11 @@
       ];
       var s = document.getElementById('summary');
       s.innerHTML = rows.map(function (r) {
+        // long values (interests, notes, several towns…) drop to reading
+        // size on mobile — the class is content-based, not per-field
+        var wordy = String(r.val).length > 32 ? ' class="wordy"' : '';
         return '<div class="row"><dt data-i18n="' + r.key + '">' + t(r.key) + '</dt>' +
-               '<dd>' + escapeHtml(r.val) +
+               '<dd' + wordy + '>' + escapeHtml(r.val) +
                ' <button class="edit" data-edit="' + r.go + '" data-i18n="booking_summary_edit">' + t('booking_summary_edit') + '</button></dd></div>';
       }).join('');
       s.querySelectorAll('.edit').forEach(function (btn) {
