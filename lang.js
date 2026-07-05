@@ -229,6 +229,8 @@
       booking_btn_back: 'Back',
       booking_btn_continue: 'Continue',
       booking_btn_send: 'Send to Zenrise',
+      booking_btn_sending: 'Sending…',
+      booking_send_err: 'Something went wrong sending your request. Please try again in a moment, or email hello@zenrise.jp directly.',
 
       // booking step 1: region
       booking_s1_meta: 'Step 01 / 05',
@@ -549,6 +551,8 @@
       booking_btn_back: '戻る',
       booking_btn_continue: '次へ',
       booking_btn_send: 'Zenrise に送る',
+      booking_btn_sending: '送信中…',
+      booking_send_err: '送信中に問題が発生しました。しばらくしてからもう一度お試しいただくか、hello@zenrise.jp まで直接ご連絡ください。',
 
       // booking step 1
       booking_s1_meta: 'ステップ 01 / 05',
