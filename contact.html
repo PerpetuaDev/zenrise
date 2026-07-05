@@ -1532,6 +1532,8 @@
     var progressAside = document.querySelector('.progress');
     var bookingGrid = document.querySelector('.booking');
     var progressMq = window.matchMedia('(max-width: 1023px)');
+    // true only during the load-time setStep restore — suppresses its scroll
+    var restoringStep = false;
     function placeProgress() {
       if (progressMq.matches) {
         var h2 = document.querySelector('.step.cur h2');
@@ -1581,7 +1583,9 @@
       // swapped-in step appears ABOVE the viewport, so tapping Continue
       // looks like nothing happened. Bring the new step's top into view.
       // Desktop keeps its position (booking area is one screen there).
-      if (window.matchMedia('(max-width: 1023px)').matches) {
+      // NOT on the load-time restore call: arriving on the page must show
+      // the top (hero/contact rows), not auto-jump to the booking form.
+      if (!restoringStep && window.matchMedia('(max-width: 1023px)').matches) {
         var cur = document.querySelector('.step.cur');
         if (cur) {
           var y = cur.getBoundingClientRect().top + window.scrollY - 20;
@@ -1789,7 +1793,9 @@
     document.querySelector('#party-stepper [data-step-act="dec"]').disabled = state.party <= 1;
     document.querySelector('#party-stepper [data-step-act="inc"]').disabled = state.party >= 6;
     // Resume at saved step but cap at 4 (don't auto-return to the sent state on reload)
+    restoringStep = true;
     setStep(Math.min(state.step, 4));
+    restoringStep = false;
     updateNext();
   })();
 </script>
