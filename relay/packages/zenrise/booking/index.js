@@ -16,43 +16,53 @@
  *   REPLY_TO         Reply-To on the customer confirmation
  */
 
-const CORS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+// NOTE: no CORS headers here — the DO Functions gateway injects its own
+// (Access-Control-Allow-Origin: * etc.) on every web function response.
+// Adding ours duplicates them, and browsers reject a CORS response whose
+// Allow-Origin has multiple values ("*, *") — the fetch fails in the page
+// even though the emails were sent.
 
 function field(v) {
   return (v === undefined || v === null || String(v).trim() === '') ? '—' : String(v).trim();
 }
 
+// Bilingual labels for the notify email — Zenrise staff process bookings in
+// Japanese regardless of the language the form was submitted in. JP terms
+// mirror the booking form's own labels (lang.js booking_summary_*).
+// Value sits on its own indented line under the label: column alignment is
+// impossible in proportional-font clients (Gmail), label-over-value is not.
+function row(jp, en, val) {
+  return jp + ' / ' + en + '\n' +
+    String(val).split('\n').map(function (l) { return '    ' + l; }).join('\n');
+}
+
 function notifyText(b) {
   return [
-    'New booking request via zenrise.jp',
+    field(b.name) + ' 様より zenrise.jp にてご予約リクエストが届きました。',
+    field(b.name) + ' has submitted a booking request via zenrise.jp.',
     '',
-    'Reference:  ' + field(b.ref),
-    'Language:   ' + (b.lang === 'ja' ? 'Japanese' : 'English'),
+    row('ご参照番号', 'Reference', field(b.ref)),
+    row('言語', 'Language', b.lang === 'ja' ? '日本語 / Japanese' : '英語 / English'),
     '',
-    'Towns:      ' + field((b.region || []).join(', ')),
-    'Length:     ' + field(b.length),
-    'Dates:      ' + (b.dateFrom || b.dateTo ? field(b.dateFrom) + ' → ' + field(b.dateTo) : 'Flexible'),
-    'Group:      ' + field(b.party),
-    'Visited:    ' + field(b.experience),
+    row('町', 'Towns', field((b.region || []).join(', '))),
+    row('長さ', 'Length', field(b.length)),
+    row('日付', 'Dates', b.dateFrom || b.dateTo ? field(b.dateFrom) + ' → ' + field(b.dateTo) : 'お任せ / Flexible'),
+    row('人数', 'Group', field(b.party)),
+    row('日本での経験', 'Visited', field(b.experience)),
     '',
-    'Name:       ' + field(b.name),
-    'Email:      ' + field(b.email),
-    'From:       ' + field(b.from),
-    'Interests:  ' + field((b.interests || []).join(', ')),
+    row('お名前', 'Name', field(b.name)),
+    row('メール', 'Email', field(b.email)),
+    row('出発地', 'From', field(b.from)),
+    row('ご興味', 'Interests', field((b.interests || []).join(', '))),
     '',
-    'Notes:',
-    field(b.notes),
+    row('備考', 'Notes', field(b.notes)),
   ].join('\n');
 }
 
 function confirmSubject(b) {
   return b.lang === 'ja'
-    ? 'ご予約リクエストを受け付けました — ' + field(b.ref)
-    : 'We have your request — ' + field(b.ref);
+    ? 'ご予約リクエスト（' + field(b.ref) + '）'
+    : 'Your Booking Request (' + field(b.ref) + ')';
 }
 
 function confirmText(b) {
@@ -102,18 +112,14 @@ async function mailgunSend(env, msg) {
 }
 
 exports.main = async function (args) {
-  if (args.__ow_method && args.__ow_method.toUpperCase() === 'OPTIONS') {
-    return { statusCode: 204, headers: CORS, body: '' };
-  }
-
   const env = process.env;
   const b = args; // web functions merge the JSON body into args
 
   // honeypot: the form never fills "website"; bots usually do
-  if (b.website) return { statusCode: 200, headers: CORS, body: { ok: true } };
+  if (b.website) return { statusCode: 200, body: { ok: true } };
 
   if (!b.name || !b.email || !/.+@.+/.test(String(b.email)) || !b.ref) {
-    return { statusCode: 400, headers: CORS, body: { ok: false, error: 'missing fields' } };
+    return { statusCode: 400, body: { ok: false, error: 'missing fields' } };
   }
 
   const from = 'Zenrise <bookings@' + env.MAILGUN_DOMAIN + '>';
@@ -122,7 +128,7 @@ exports.main = async function (args) {
     await mailgunSend(env, {
       from: from,
       to: env.NOTIFY_TO,
-      subject: 'Booking request ' + field(b.ref) + ' — ' + field(b.name),
+      subject: '新規ご予約リクエスト / New Booking Request (' + field(b.ref) + ')',
       text: notifyText(b),
       'h:Reply-To': String(b.email).trim(),
     });
@@ -137,8 +143,8 @@ exports.main = async function (args) {
     console.error(e.message);
     // the notify may have gone through even if the confirm failed;
     // surface a retryable error to the form either way
-    return { statusCode: 502, headers: CORS, body: { ok: false, error: 'send failed' } };
+    return { statusCode: 502, body: { ok: false, error: 'send failed' } };
   }
 
-  return { statusCode: 200, headers: CORS, body: { ok: true } };
+  return { statusCode: 200, body: { ok: true } };
 };
