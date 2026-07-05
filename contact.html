@@ -1734,7 +1734,7 @@
     // ─── Send ───
     // Booking relay endpoint (DigitalOcean Function). Empty string =
     // front-end-only mode: no network call, straight to the sent view.
-    var RELAY_URL = '';
+    var RELAY_URL = 'https://faas-sgp1-18bc02ac.doserverless.co/api/v1/web/fn-a4fd4d35-da69-44b6-9770-10dbeca95109/zenrise/booking';
     document.getElementById('send-btn').addEventListener('click', function () {
       if (!state.consent) return;
       var btn = this;

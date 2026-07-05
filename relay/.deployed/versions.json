@@ -1,0 +1,18 @@
+[
+  {
+    "apihost": "https://faas-sgp1-18bc02ac.doserverless.co",
+    "namespace": "fn-a4fd4d35-da69-44b6-9770-10dbeca95109",
+    "packageVersions": {
+      "zenrise": {
+        "version": "0.0.1",
+        "digest": "f3d77897aa1b74c860de3acac4e7a63c278c6c320c1789be6b7d6dabeed672cc"
+      }
+    },
+    "actionVersions": {
+      "zenrise/booking": {
+        "version": "0.0.1",
+        "digest": "a518307178706d2fada6342f3d0d9d0a6fdaa2643235691c059b647efc037a85"
+      }
+    }
+  }
+]
