@@ -1496,24 +1496,5 @@
   })();
 </script>
 <script src="lang.js"></script>
-<!-- DEV ONLY — version badge + live viewport readout for phone testing. REMOVE BEFORE DEPLOY. -->
-<div id="devbadge" style="position:fixed;top:2px;left:2px;z-index:99999;font:10px/1.4 monospace;background:#000;color:#0f0;padding:2px 5px;pointer-events:none;">v11</div>
-<script>
-(function () {
-  var b = document.getElementById('devbadge');
-  function upd() {
-    var vv = window.visualViewport;
-    b.textContent = 'v11 ih:' + window.innerHeight
-      + ' vv:' + (vv ? Math.round(vv.height) : '-')
-      + ' doc:' + Math.round(document.documentElement.scrollHeight)
-      + ' y:' + Math.round(window.scrollY);
-  }
-  upd();
-  window.addEventListener('resize', upd);
-  window.addEventListener('scroll', upd, { passive: true });
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', upd);
-  setInterval(upd, 500);
-})();
-</script>
 </body>
 </html>
