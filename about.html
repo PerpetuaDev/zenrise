@@ -348,6 +348,14 @@
   @media (max-width: 1023px) {
     .stage { width: 100% !important; }
 
+    /* Image-first (home-style): the stage becomes a column so the hero
+       can be reordered above the page header purely in CSS — the DOM
+       order stays as-is because it drives the client-approved desktop. */
+    .stage { display: flex; flex-direction: column; }
+    .nav { order: -3; }
+    .about-hero { order: -2; }
+    .ph { order: -1; }
+
     /* Nav */
     .nav { height: 64px; padding: 0 20px; }
     .logo { font-size: 22px; }
@@ -361,16 +369,27 @@
     .ph .intro p { font-size: 20px; max-width: 100%; }
     .ph .intro p.muted { font-size: 16px; }
 
-    /* Hero image */
-    .about-hero .frame { height: 52vw; min-height: 240px; }
+    /* Hero image — roomier now that it leads the page. vw (not vh/svh):
+       width-relative units hold still when Firefox iOS collapses its
+       toolbar; max-height keeps tablets sane. */
+    .about-hero .frame { height: 120vw; min-height: 320px; max-height: 560px; }
+    /* no attribution over the mobile hero — matches home */
+    .about-hero .frame::before { display: none; }
+    /* caption steps down to match the home hero (EN uppercase mono
+       runs louder than JP at the same size, so EN drops further) */
+    .about-hero .credit { font-size: 10px; }
+    .about-hero .credit:lang(ja) { font-size: 13px; }
 
-    /* Section frame */
-    .section { padding: 0 20px; }
+    /* Section frame — bottom rule mirrors the .ph border above the
+       section, delineating the company profile from the footer */
+    .section { padding: 0 20px 56px; border-bottom: 1px solid var(--ink-12); }
     .section-head { padding: 56px 0 36px; grid-template-columns: 1fr; row-gap: 16px; }
     .section-head h2 { font-size: 48px; }
 
     /* Company profile table — stack label/value */
-    .gaiyo { grid-template-columns: 1fr; row-gap: 24px; }
+    /* kill the desktop 120px tail — the .section bottom padding (56px)
+       now owns the gap to the closing rule */
+    .gaiyo { grid-template-columns: 1fr; row-gap: 24px; padding-bottom: 0; }
     .gaiyo .note { position: static; font-size: 18px; }
     .gaiyo table { grid-column: 1; }
     .gaiyo tr { display: block; padding: 16px 0; }
@@ -378,7 +397,9 @@
     .gaiyo td { display: block; padding: 0; font-size: 16px; }
 
     /* Footer */
-    .foot-v2 { padding: 0 20px; }
+    /* footer.foot-v2, not .foot-v2 — must outrank the desktop
+       `footer.foot-v2 { padding: 0 36px }` or the 20px never applies */
+    footer.foot-v2 { padding: 0 20px; }
     /* no divider at the top of the footer on mobile */
     .foot-v2 > .rule { display: none; }
     .foot-v2-top { padding: 16px 0 40px; grid-template-columns: 1fr; gap: 32px; }
