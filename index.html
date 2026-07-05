@@ -449,6 +449,9 @@
     transition: opacity 0.32s ease;
   }
   .dest-expanded.closing .exp-panel { opacity: 0; }
+  /* the ✕'s 0.5s reveal delay would hold it visible through the whole
+     close animation — vanish promptly instead */
+  .dest-expanded.closing .dest-close { opacity: 0; transition: opacity 0.15s ease; }
   .dest-expanded .exp-panel > * {
     opacity: 0;
     transform: translateY(14px);
