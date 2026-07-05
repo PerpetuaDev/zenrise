@@ -922,6 +922,9 @@
     /* Booking layout — stack sidebar above form. Light top padding on
        top of the hero's 56px tail to breathe from the contact rows. */
     .booking { padding: 32px 20px 80px; grid-template-columns: 1fr; row-gap: 48px; }
+    /* the desktop min-height guards step-to-step jumps, but on mobile
+       it leaves a void under short views (the sent confirmation) */
+    .panel { min-height: 0; }
     .progress { position: static; margin: 0 0 40px; }
     .progress li.cur::before { display: none; }
     /* the BOOKING label reads as clutter once the row sits inside the step */
