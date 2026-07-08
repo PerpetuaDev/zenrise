@@ -28,7 +28,7 @@
       nav_contact: 'contact',
 
       // footer (shared across pages)
-      footer_tagline: 'Quiet, locally-led journeys through the<br class="brk"/>lesser-known corners of Japan.',
+      footer_tagline: 'Quiet, locally-led journeys through the <br class="brk"/>lesser-known corners of Japan.',
       footer_visit: 'Office',
       footer_contact: 'Contact',
       footer_follow: 'Follow',
