@@ -281,15 +281,21 @@
     letter-spacing: 0.01em;
     position: relative;
   }
-  .hero-card .more::after {
+  .hero-card .more > span:first-child { position: relative; padding-bottom: 4px; }
+  .hero-card .more > span:first-child::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 1.5px;
     background: var(--ink);
+    opacity: 0;
+    transition: opacity 0.25s ease;
   }
+  .hero-card .more:hover > span:first-child::after { opacity: 1; }
+  .hero-card .more .dir { position: relative; right: 0; transition: right 0.3s ease; font-weight: 300; }
+  .hero-card .more:hover .dir-r { right: -8px; }
   .hero-card .tag {
     position: absolute;
     left: 56px; top: 28px;
@@ -778,6 +784,11 @@
     color: var(--ink);
   }
   .foot-v2 .foot-col li a:hover { opacity: 0.6; }
+  .foot-col .soc > span:first-child { position: relative; padding-bottom: 3px; }
+  .foot-col .soc > span:first-child::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1.5px; background: var(--ink); opacity: 0; transition: opacity 0.25s ease; }
+  .foot-col .soc:hover > span:first-child::after { opacity: 1; }
+  .foot-col .soc .ar { position: relative; right: 0; transition: right 0.3s ease; font-weight: 300; }
+  .foot-col .soc:hover .ar { right: -6px; }
   .foot-v2 .foot-v2-bottom {
     border-top: 1px solid var(--ink-12);
     padding: 28px 0;
@@ -956,6 +967,7 @@
       <nav class="navlinks">
         <a href="index.html" class="active" data-i18n="nav_home">home</a>
         <a href="about.html" data-i18n="nav_about">about us</a>
+        <a href="news.html" data-i18n="nav_news">news</a>
         <a href="contact.html" data-i18n="nav_contact">contact</a>
       </nav>
       <a class="lang" href="#">english</a>
@@ -973,7 +985,7 @@
             <p class="num">01</p>
             <h1 class="ttl" data-i18n-html="home_hero_title">Discover the<br/>hidden Japan.</h1>
             <p class="copy" data-i18n="home_hero_copy">From iconic highlights to the secret spots the guidebooks leave behind — personalized tours through local eyes, crafted just for you.</p>
-            <a class="more" href="#find"><span data-i18n="home_hero_more_label">Read more</span><span class="dir dir-r">&nbsp;&nbsp;→</span><span class="dir dir-d">&nbsp;&nbsp;↓</span></a>
+            <a class="more" href="#find"><span data-i18n="home_hero_more_label">Read more</span><span class="dir dir-r">&nbsp;→</span><span class="dir dir-d">&nbsp;↓</span></a>
           </article>
         </div>
       </div>
@@ -1097,9 +1109,9 @@
         <div class="foot-col">
           <h4 data-i18n="footer_follow">Follow</h4>
           <ul>
-            <li><a href="https://www.instagram.com/zenrise_tours/" data-i18n="footer_instagram">Instagram &nbsp;→</a></li>
-            <li><a href="https://www.youtube.com/@zenrisejapan" data-i18n="footer_youtube">YouTube &nbsp;→</a></li>
-            <li><a href="https://www.tiktok.com/@zenrise_tours" data-i18n="footer_tiktok">TikTok &nbsp;→</a></li>
+            <li><a class="soc" href="https://www.instagram.com/zenrise_tours/"><span data-i18n="footer_instagram">Instagram</span><span class="ar">&nbsp;→</span></a></li>
+            <li><a class="soc" href="https://www.youtube.com/@zenrisejapan"><span data-i18n="footer_youtube">YouTube</span><span class="ar">&nbsp;→</span></a></li>
+            <li><a class="soc" href="https://www.tiktok.com/@zenrise_tours"><span data-i18n="footer_tiktok">TikTok</span><span class="ar">&nbsp;→</span></a></li>
           </ul>
         </div>
       </div>

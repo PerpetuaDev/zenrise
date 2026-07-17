@@ -344,6 +344,11 @@
   .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
   .foot-col li { font-size: 18px; line-height: 1.45; color: var(--ink); }
   .foot-col li a:hover { opacity: 0.6; }
+  .foot-col .soc > span:first-child { position: relative; padding-bottom: 3px; }
+  .foot-col .soc > span:first-child::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1.5px; background: var(--ink); opacity: 0; transition: opacity 0.25s ease; }
+  .foot-col .soc:hover > span:first-child::after { opacity: 1; }
+  .foot-col .soc .ar { position: relative; right: 0; transition: right 0.3s ease; font-weight: 300; }
+  .foot-col .soc:hover .ar { right: -6px; }
   .foot-v2-bottom {
     border-top: 1px solid var(--ink-12);
     padding: 28px 0;
@@ -444,6 +449,7 @@
     <nav class="navlinks">
       <a href="index.html" data-i18n="nav_home">home</a>
       <a href="about.html" class="active" data-i18n="nav_about">about us</a>
+      <a href="news.html" data-i18n="nav_news">news</a>
       <a href="contact.html" data-i18n="nav_contact">contact</a>
     </nav>
     <a class="lang" href="#">english</a>
@@ -470,7 +476,7 @@
   <!-- ───── 会社概要 ───── -->
   <section class="section" data-screen-label="02 About — 会社概要">
     <div class="section-head">
-      <div class="label"><span class="num">01</span><span data-i18n="about_cp_label">Company Profile</span></div>
+      <div class="label"><span class="num">02</span><span data-i18n="about_cp_label">Company Profile</span></div>
       <h2 data-i18n="about_cp_h2">Company Profile.</h2>
     </div>
 
@@ -538,9 +544,9 @@
       <div class="foot-col">
         <h4 data-i18n="footer_follow">Follow</h4>
         <ul>
-          <li><a href="https://www.instagram.com/zenrise_tours/" data-i18n="footer_instagram">Instagram &nbsp;→</a></li>
-          <li><a href="https://www.youtube.com/@zenrisejapan" data-i18n="footer_youtube">YouTube &nbsp;→</a></li>
-          <li><a href="https://www.tiktok.com/@zenrise_tours" data-i18n="footer_tiktok">TikTok &nbsp;→</a></li>
+          <li><a class="soc" href="https://www.instagram.com/zenrise_tours/"><span data-i18n="footer_instagram">Instagram</span><span class="ar">&nbsp;→</span></a></li>
+          <li><a class="soc" href="https://www.youtube.com/@zenrisejapan"><span data-i18n="footer_youtube">YouTube</span><span class="ar">&nbsp;→</span></a></li>
+          <li><a class="soc" href="https://www.tiktok.com/@zenrise_tours"><span data-i18n="footer_tiktok">TikTok</span><span class="ar">&nbsp;→</span></a></li>
         </ul>
       </div>
     </div>
