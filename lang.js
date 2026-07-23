@@ -5,7 +5,7 @@
  *   data-i18n="key"             — replaces textContent
  *   data-i18n-html="key"        — replaces innerHTML (for strings with markup)
  *   data-i18n-placeholder="key" — replaces an input's placeholder
- *   data-i18n-title="key"       — replaces document.title (on a meta element)
+ *   data-i18n-title="key"       — replaces document.title (on the <title> element)
  *
  * Then add the matching key under each language in DICT below.
  *
@@ -114,39 +114,36 @@
       news_count: '03',
       news_read: 'Read article',
       news_photo_soon: 'Photo — coming soon',
-      news_soon_title: 'In preparation',
-      news_a1_kicker: 'Tours',
       news_a1_title: 'A day away from Tokyo',
       news_a1_subtitle: 'A bus tour through Kamakura & Enoshima',
       news_a1_excerpt: 'An hour south of the capital, time slows down. The Great Buddha, Hasedera\u2019s sea views and the little Enoden railway in a single day — with the logistics handled for you.',
 
-      // article: Kamakura & Enoshima bus tour  (EN draft — replace with final translation)
+      // article: Kamakura & Enoshima bus tour
       art_back: 'All News',
       art_cta_book: 'Booking',
       art_cta_ours: 'Our own tours',
       art1_page_title: 'A day away from Tokyo — Zenrise News',
-      art1_h1: 'A day away from Tokyo —<br/>the Kamakura & Enoshima bus tour',
-      art1_lead: "Tokyo’s energy is easy to love and, after a few days, just as easy to want a rest from. Half an hour south, Kamakura keeps a slower pace — a former samurai capital set between green hills and the Pacific, and the birthplace of Zen Buddhism in Japan. Reaching it independently means piecing together trains, local buses, and walking routes; the Kamakura and Enoshima One-Day Bus Tour, offered through Viator, does that piecing together for you.",
+      art1_lead: "Tokyo's energy pulls you in fast — but after a few days, a moment comes when you want a little distance. An hour or so south, time moves gently in Kamakura: the old samurai capital held between green hills and the Pacific, and the birthplace of Zen in Japan. Piecing the trip together yourself by train, bus and foot takes more effort than it looks. The Kamakura & Enoshima one-day bus tour, offered through Viator, arranges the way there for you.",
       art1_s1_label: '01',
-      art1_s1_h: "Kotoku-in and the Great Buddha",
+      art1_s1_h: "Kotoku-in and the Great Buddha of Kamakura",
       art1_s1_cap: 'Kotoku-in, Kamakura',
-      art1_s1_p: "The tour’s first stop is the bronze Great Buddha of Kotoku-in, seated in the open air since the 13th century. At over eleven metres, it has weathered earthquakes and tsunamis and still holds a stillness that is easy to feel standing beneath it, sea wind moving past.",
+      art1_s1_p: "The first stop is the Great Buddha of Kotoku-in, seated in the open air since the thirteenth century. Rising more than eleven metres, it has come through earthquakes and tsunami and still holds its quiet. In the sea breeze, simply looking up is enough to stop you where you stand.",
       art1_s2_label: '02',
-      art1_s2_h: "Hasedera Temple and the view over Sagami Bay",
-      art1_s2_cap: "Hasedera Temple gate",
-      art1_s2_p: "Next comes Hasedera, known for its gardens and for the view of Sagami Bay from its terraces. The paths here move slowly by design — past a hall of Kannon statues, out toward water once sailed by samurai fleets.",
+      art1_s2_h: "Hasedera and the view over Sagami Bay",
+      art1_s2_cap: "The temple gate at Hasedera",
+      art1_s2_p: "Next comes Hasedera, known for its gardens and for the view over Sagami Bay from its grounds. The temple paths were laid for walking slowly; past the hall of Kannon statues, your gaze slips out to the sea where the ships of the samurai once crossed.",
       art1_s3_label: '03',
-      art1_s3_h: "The Enoden line to Enoshima",
+      art1_s3_h: "Riding the Enoden to Enoshima",
       art1_s3_cap: 'Along the Enoden line',
-      art1_s3_p: "The Enoden, a small coastal train that has run this route for over a century, carries the tour on to Enoshima. It passes close enough to houses and beaches that the ride itself becomes part of the sightseeing — a slow, rattling introduction to an island of shrines and sea cliffs.",
-      art1_s4_h: "What the tour handles for you",
-      art1_s4_p: "Transport between all three stops is arranged in an air-conditioned bus, with an English-speaking guide able to explain the Zen and samurai history behind what you’re seeing along the way. Covering the same route independently by train would mean a good deal more walking and considerably more planning.",
-      art1_note: "This tour departs from central Tokyo and runs on a regular schedule. Reservations are handled through Viator, our booking partner for routes we don’t operate ourselves.",
-      art1_note_cta: "View dates on Viator",
-      art1_outro: "If the quieter side of Kamakura and Enoshima stays with you, our own walking tours move through the same towns at an even slower pace — worth keeping in mind for another day of your trip.",
+      art1_s3_p: "A small railway that has run this coastline for over a century, the Enoden carries the tour on to Enoshima. It threads so close to houses and beaches that the window itself becomes part of the sightseeing. Rocking gently along, you draw slowly nearer to the island of shrines and sea cliffs.",
+      art1_s4_h: "What the tour takes care of",
+      art1_s4_p: "All the travel between the three stops is left to an air-conditioned bus, with an English-speaking guide who fills in the background of the Zen and samurai culture along the way. Tracing the same route on your own by train means far more walking — and far more planning.",
+      art1_note: "This tour departs from central Tokyo and runs regularly. Bookings are handled through Viator, our partner for routes we do not operate ourselves.",
+      art1_note_cta: "See dates on Viator",
+      art1_outro: "If the quiet of Kamakura and Enoshima stays with you, our own walking tours move through this landscape at an even gentler pace. Keep us in mind for another day of your trip.",
       art1_outro_cta: 'About our tours',
 
-      // home page
+      // article: sumo show & experience (Shinjuku)
       news_a2_title: "Inside the sumo ring",
       news_a2_subtitle: "A show & experience in Shinjuku",
       art2_page_title: "Inside the sumo ring — Zenrise News",
@@ -168,6 +165,7 @@
       art2_outro: "If Shinjuku’s evening still leaves room for a quieter day, our own tours through Kamakura, Enoshima, and Yokohama sit an easy train ride away.",
       art2_outro_cta: "About our tours",
 
+      // article: Mt. Fuji & Hakone bus tour
       news_a3_title: "Fuji to Hakone",
       news_a3_subtitle: "And the ride home by Shinkansen",
       art3_page_title: "Fuji to Hakone — Zenrise News",
@@ -195,6 +193,7 @@
       art3_outro: "If a slower town appeals after a day of trains and ropeways, our own walking tours in Kamakura, Enoshima, and Yokohama are led by us directly — a gentler add-on for another day in the region.",
       art3_outro_cta: "About our tours",
 
+      // article: Tokyo private walking tour
       news_a4_title: "Tokyo, on your terms",
       news_a4_subtitle: "A private full-day walking tour",
       art4_page_title: "Tokyo, on your terms — Zenrise News",
@@ -218,6 +217,7 @@
       art4_outro: "For a quieter counterpoint to Tokyo, our own walking tours through Kamakura, Enoshima, and Yokohama run at a similarly unhurried pace — led by us, on our home ground.",
       art4_outro_cta: "About our tours",
 
+      // home page
       home_title: 'Zenrise — Quiet journeys through Japan',
       home_hero_slide_1_meta: 'Meigetsuin, Hydrangea Season',
       home_hero_slide_2_meta: 'Kamakura, Coastline',
@@ -550,8 +550,6 @@
       news_count: '03',
       news_read: '記事を読む',
       news_photo_soon: 'Photo — coming soon',
-      news_soon_title: '準備中',
-      news_a1_kicker: 'ツアー',
       news_a1_title: '東京を離れて過ごす一日',
       news_a1_subtitle: '鎌倉・江ノ島日帰りバスツアー',
       news_a1_excerpt: '東京から南へ小一時間、時間の流れがゆるやかになる。大仏、長谷寺の海の眺め、江ノ電——移動はすべてバスに任せて、鎌倉と江ノ島を一日で。',
@@ -561,7 +559,6 @@
       art_cta_book: 'ご予約',
       art_cta_ours: '私たちのツアー',
       art1_page_title: '東京を離れて過ごす一日 — Zenrise ニュース',
-      art1_h1: '東京を離れて過ごす一日<br/>鎌倉・江ノ島バスツアー',
       art1_lead: '東京の賑わいには、すぐに惹きつけられるものがある。けれど数日も過ごせば、少し離れたくなる瞬間も訪れる。南へ小一時間、鎌倉にはゆるやかな時間が流れている。緑の丘と太平洋に挟まれたかつての武家の都であり、日本における禅の発祥の地でもある。電車やバス、徒歩を自分で組み合わせて向かうのは意外と骨が折れる道のりだが、Viator提供の「鎌倉・江ノ島日帰りバスツアー」が、その道のりをかわりに整えてくれる。',
       art1_s1_label: '01',
       art1_s1_h: '高徳院と鎌倉大仏',
@@ -582,7 +579,7 @@
       art1_outro: '鎌倉・江ノ島の静けさが心に残ったなら、私たちが自ら案内するウォーキングツアーでは、さらにゆったりとした速度でこの土地を歩く。旅のもう一日のために、心に留めておいていただけたら。',
       art1_outro_cta: '弊社のツアーについて',
 
-      // home
+      // article: sumo show & experience (Shinjuku)
       news_a2_title: "土俵の中を知る午後",
       news_a2_subtitle: "新宿の相撲ショー&体験",
       art2_page_title: "土俵の中を知る午後 — Zenrise ニュース",
@@ -604,6 +601,7 @@
       art2_outro: "新宿での夜のあとに、もう少し静かな一日を過ごしたくなったら。鎌倉・江ノ島・横浜へは、電車で無理なく足を延ばせる。",
       art2_outro_cta: "弊社のツアーについて",
 
+      // article: Mt. Fuji & Hakone bus tour
       news_a3_title: "富士から箱根へ",
       news_a3_subtitle: "帰り道は新幹線で",
       art3_page_title: "富士から箱根へ — Zenrise ニュース",
@@ -631,6 +629,7 @@
       art3_outro: "電車やロープウェイを乗り継いだ一日のあとに、もう少しゆるやかな町を訪れたくなったら。鎌倉・江ノ島・横浜では、私たち自身がご案内するウォーキングツアーがある。旅のもう一日に、そっと添えていただけたら。",
       art3_outro_cta: "弊社のツアーについて",
 
+      // article: Tokyo private walking tour
       news_a4_title: "見たいものだけの東京",
       news_a4_subtitle: "プライベート終日ウォーキングツアー",
       art4_page_title: "見たいものだけの東京 — Zenrise ニュース",
@@ -654,6 +653,7 @@
       art4_outro: "東京の賑わいに対して、少し静かな一日を添えたいなら。鎌倉・江ノ島・横浜では、私たち自身が同じようにゆるやかなペースでご案内している。",
       art4_outro_cta: "弊社のツアーについて",
 
+      // home page
       home_title: 'Zenrise — 日本の静かな旅',
       home_hero_slide_1_meta: '明月院、紫陽花の季節',
       home_hero_slide_2_meta: '鎌倉、海辺',
@@ -929,7 +929,7 @@
       if (v != null) el.setAttribute('placeholder', v);
     });
     // title
-    var t = document.querySelector('meta[data-i18n-title]');
+    var t = document.querySelector('title[data-i18n-title]');
     if (t) {
       var key = t.getAttribute('data-i18n-title');
       var v = d[key] != null ? d[key] : fb[key];
@@ -1000,6 +1000,7 @@
       '  html.menu-open .mobile-nav-links a:nth-child(1) { transition-delay: 120ms; }',
       '  html.menu-open .mobile-nav-links a:nth-child(2) { transition-delay: 200ms; }',
       '  html.menu-open .mobile-nav-links a:nth-child(3) { transition-delay: 280ms; }',
+      '  html.menu-open .mobile-nav-links a:nth-child(4) { transition-delay: 360ms; }',
       '  .mobile-nav-lang { opacity: 0; transition: opacity 500ms ease; }',
       '  html.menu-open .mobile-nav-lang { opacity: 1; transition-delay: 380ms; }',
       '  .mobile-nav-lang { margin-top: auto; border-top: 1px solid rgba(41,65,56,0.14); padding-top: 22px; }',
@@ -1011,6 +1012,71 @@
       '}'
     ].join('\n');
     document.head.appendChild(s);
+  }
+
+  // Entrance animations — shared by every subpage. A page opts in by putting
+  // data-entrance="<reveal selector>" on its .stage; index.html keeps its own
+  // hero-specific system and has no attribute. Runs at parse (lang.js sits at
+  // end of body) so the hide rules land before fonts settle and the stage
+  // (kept visibility:hidden while html.wf-loading) is ever painted.
+  function initEntrance() {
+    var stage = document.querySelector('.stage[data-entrance]');
+    if (!stage || document.getElementById('zenrise-entrance-style')) return;
+    // Full entrance only on the session's first view of a page, and never
+    // under prefers-reduced-motion. Repeat views (reloads, quick back-and-
+    // forth) return before any hide rule is injected, so the page renders
+    // settled instead of blanking and re-animating content the visitor has
+    // already seen.
+    var seenKey = 'zenrise-entrance:' + location.pathname;
+    try {
+      if (sessionStorage.getItem(seenKey) === '1') return;
+    } catch (e) {}
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try { sessionStorage.setItem(seenKey, '1'); } catch (e) {}
+    var s = document.createElement('style');
+    s.id = 'zenrise-entrance-style';
+    s.textContent = [
+      '@keyframes page-fade {',
+      '  from { opacity: 0; transform: translateY(10px); }',
+      '  to   { opacity: 1; transform: none; }',
+      '}',
+      '.intro-a, .intro-b { opacity: 0; }',
+      '.stage.page-in .intro-a { animation: page-fade 0.9s ease forwards; }',
+      '.stage.page-in .intro-b { animation: page-fade 0.9s ease 0.35s forwards; }',
+      '.reveal { opacity: 0; transform: translateY(12px); transition: opacity 700ms ease, transform 700ms ease; }',
+      '.reveal.in { opacity: 1; transform: none; }'
+    ].join('\n');
+    document.head.appendChild(s);
+
+    // Intro beats fire once fonts are active (wf-loading removed), then
+    // sections reveal on scroll; reveal setup waits for fonts so above-fold
+    // sections animate on load too (the stage is hidden until then).
+    function start() {
+      requestAnimationFrame(function () { stage.classList.add('page-in'); });
+      var els = document.querySelectorAll(stage.getAttribute('data-entrance'));
+      els.forEach(function (el) { el.classList.add('reveal'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.08 });
+        els.forEach(function (el) { io.observe(el); });
+      } else {
+        els.forEach(function (el) { el.classList.add('in'); });
+      }
+    }
+    if (!document.documentElement.classList.contains('wf-loading')) {
+      start();
+    } else {
+      var obs = new MutationObserver(function () {
+        if (!document.documentElement.classList.contains('wf-loading')) {
+          obs.disconnect();
+          start();
+        }
+      });
+      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
   }
 
   function init() {
@@ -1107,8 +1173,31 @@
       });
     }
 
+    // Nav links pointing at the current page dead-click (scroll to top)
+    // instead of reloading — a same-page reload would replay the entrance
+    // system's initial hidden state on content already on screen.
+    function samePage(a) {
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#') return false;
+      var u;
+      try { u = new URL(href, location.href); } catch (e) { return false; }
+      if (u.origin !== location.origin || u.hash) return false;
+      var norm = function (p) { return p.replace(/\/index\.html$/, '/'); };
+      return norm(u.pathname) === norm(location.pathname);
+    }
+    document.querySelectorAll('.navlinks a, .mobile-nav-links a').forEach(function (a) {
+      if (!samePage(a)) return;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+
     apply(getLang());
   }
+
+  initEntrance();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
