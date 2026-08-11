@@ -148,7 +148,6 @@ def article_model(a):
         m['excerpt'] = (first_sentence(m['lead'][0], 'en'),
                         first_sentence(m['lead'][1], 'ja'))
     m['hero'] = (a.get('hero') or {}).get('url', '')
-    m['viator'] = (a.get('viatorUrl') or '').strip()
     body_en = parse_body(a.get('bodyEn') or '')
     body_ja = parse_body(a.get('bodyJa') or '')
     m['sections'] = body_en or body_ja
@@ -221,20 +220,9 @@ def render_article(m, num, tpl):
 
     sections = '\n\n'.join(out)
 
-    # ── CTA panels: booking (Viator) + our own tours ──
+    # ── CTA panel: our own tours (Viator/OTA panel removed 2026-08 — premium
+    # brand split; articles are destination content, booking CTAs stay ours) ──
     panels = []
-    if m['viator']:
-        note_p = ''
-        if m['note'][0]:
-            put('_note', (text_html(m['note'][0]), text_html(m['note'][1])))
-            note_p = f'            <p data-i18n-html="{K}_note">{en[K + "_note"]}</p>\n'
-        panels.append(
-            '          <aside class="cta-panel">\n'
-            '            <span class="cp-label" data-i18n="art_cta_book">Booking</span>\n'
-            + note_p +
-            f'            <a class="cta" href="{esc(m["viator"])}" target="_blank" rel="noopener">'
-            '<span class="u" data-i18n="art_note_cta">See dates on Viator</span><span class="ar">→</span></a>\n'
-            '          </aside>')
     if m['outro'][0]:
         put('_outro', (text_html(m['outro'][0]), text_html(m['outro'][1])))
         panels.append(
