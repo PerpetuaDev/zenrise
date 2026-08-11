@@ -24,6 +24,11 @@
 
       // nav (shared)
       nav_home: 'home',
+      // contact region-card names (referenced by contact.html)
+      home_dest_kamakura_name: 'Kamakura',
+      home_dest_enoshima_name: 'Enoshima',
+      home_dest_yokohama_name: 'Yokohama',
+      home_dest_fujisawa_name: 'Other Destinations',
       nav_about: 'about us',
       nav_news: 'news',
       nav_contact: 'contact',
@@ -362,6 +367,11 @@
 
       // nav
       nav_home: 'ホーム',
+      // contact region-card names (referenced by contact.html)
+      home_dest_kamakura_name: '鎌倉',
+      home_dest_enoshima_name: '江ノ島',
+      home_dest_yokohama_name: '横浜',
+      home_dest_fujisawa_name: 'その他の目的地',
       nav_about: '私たちについて',
       nav_news: 'ニュース',
       nav_contact: 'お問い合わせ',
