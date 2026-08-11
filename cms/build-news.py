@@ -139,7 +139,8 @@ def dict_script(en, ja):
 
 def article_model(a):
     """Normalize one API entry into everything the templates need."""
-    m = {'id': a['id'], 'key': 'cms_' + a['id'], 'date': a['date'][:10].replace('-', '.')}
+    m = {'id': a['id'], 'key': 'cms_' + a['id'], 'date': a['date'][:10].replace('-', '.'),
+         'iso': a['date'][:10]}
     for f in ('title', 'subtitle', 'excerpt', 'lead', 'closingHeading',
               'closingBody', 'note', 'outro'):
         m[f] = pick(a, f)
@@ -253,12 +254,27 @@ def render_article(m, num, tpl):
     if m['hero']:
         hero_style = f''' style="background-image: url('{esc(m["hero"] + IMG_PAGE)}')"'''
 
+    og_image = m['hero'] + IMG_OG if m['hero'] else f'{SITE}/assets/shrines/temple-gate-pine.jpg'
+    json_ld = '<script type="application/ld+json">\n' + json.dumps({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': m['title'][0],
+        'description': m['excerpt'][0],
+        'datePublished': m['iso'],
+        'image': og_image,
+        'mainEntityOfPage': url,
+        'author': {'@type': 'Organization', 'name': 'Zenrise', 'url': f'{SITE}/'},
+        'publisher': {'@type': 'Organization', 'name': 'Zenrise', 'url': f'{SITE}/',
+                      'logo': {'@type': 'ImageObject', 'url': f'{SITE}/favicon-512.png'}},
+    }, ensure_ascii=False, indent=2).replace('</', '<\\/') + '\n</script>'
+
     return render(tpl, {
         'META_DESC': esc(m['excerpt'][0]),
         'CANONICAL_URL': url,
         'OG_TITLE': esc(og_title),
         'OG_DESC': esc(m['excerpt'][0]),
-        'OG_IMAGE': esc(m['hero'] + IMG_OG) if m['hero'] else f'{SITE}/assets/shrines/temple-gate-pine.jpg',
+        'OG_IMAGE': esc(og_image),
+        'JSON_LD': json_ld,
         'K': K,
         'PAGE_TITLE': esc(en[K + '_page_title']),
         'NUM': f'{num:02d}',
