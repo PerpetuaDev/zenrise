@@ -167,6 +167,12 @@
     .fig .ph { height: 56vw; }
     .fig .ph.tall { height: 90vw; }
     .cta-duo { width: auto; margin: 48px 0 0; grid-template-columns: 1fr; gap: 16px; padding-top: 48px; }
+    /* The desktop rule pins a lone panel to 914px. A 1fr track is really
+       minmax(auto, 1fr), so that fixed width becomes the track's automatic
+       minimum and the grid blows out past the viewport -- leaving
+       max-width: 100% resolving against the blown track, so it caps
+       nothing. Releasing the width lets the track govern again. */
+    .cta-duo .cta-panel:only-child { width: auto; }
     .cta-panel { padding: 26px 22px 30px; }
     .cta-panel p { font-size: 16px; margin-bottom: 28px; }
     .cta-panel .cta { font-size: 17px; }
@@ -300,7 +306,14 @@
     var stage = document.getElementById('stage');
     function fit() {
       var vw = document.documentElement.clientWidth;
-      if (vw < 1024) {
+      // Gate on the same media query the CSS uses, not on clientWidth: the
+      // two disagree by the width of a classic scrollbar, so between a 1024
+      // and a 1038px window the CSS had already dropped its max-width:1023px
+      // override (leaving .stage at its 1920px design width) while this
+      // branch still read 'mobile' and cleared the zoom. The page then laid
+      // out at 1920 and clipped, with overflow-x: hidden leaving no way to
+      // scroll to the rest of it.
+      if (!window.matchMedia('(min-width: 1024px)').matches) {
         stage.style.zoom = ''; stage.style.width = ''; stage.style.margin = '';
         stage.classList.add('fitted');
         return;

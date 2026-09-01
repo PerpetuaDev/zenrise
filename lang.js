@@ -788,9 +788,17 @@
       '.lang-menu button:hover { background: rgba(41,65,56,0.04); }',
       '.lang-menu .name { font-family: "optima-nova-lt-pro", "toppan-bunkyu-mincho-pr6n", "Optima", serif; font-size: 22px; color: #294138; letter-spacing: -0.005em; line-height: 1; }',
       '.lang-menu button.on::after { content: ""; width: 6px; height: 6px; background: #294138; }',
-      // ── mobile hamburger nav (shared, phone widths only) ──
+      // ── mobile hamburger nav (shared, phone AND tablet widths) ──
+      // 899, not 599: the nav's own content outgrows the viewport well
+      // before 600, pushing the language switcher off the right edge and
+      // giving the page a horizontal overflow. Measured on this site's
+      // four-link nav: English fits from about 668px, but Japanese needs
+      // about 807px -- its labels are wider -- so a breakpoint chosen from
+      // the English nav alone would leave Japanese broken across the whole
+      // tablet range. 899 clears both with margin and matches the value
+      // used on the tours build. iPad landscape (1024+) keeps the full nav.
       '.nav-burger, .mobile-nav { display: none; }',
-      '@media (max-width: 599px) {',
+      '@media (max-width: 899px) {',
       '  .nav { position: relative; }',
       '  .navlinks { display: none !important; }',
       '  .lang-switcher { display: none !important; }',
