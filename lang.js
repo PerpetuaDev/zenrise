@@ -24,6 +24,7 @@
 
       // nav (shared)
       nav_home: 'home',
+      nav_tours: 'our tours',
       // contact region-card names (referenced by contact.html)
       home_dest_kamakura_name: 'Kamakura',
       home_dest_enoshima_name: 'Enoshima',
@@ -32,6 +33,67 @@
       nav_about: 'about us',
       nav_news: 'news',
       nav_contact: 'contact',
+
+      // tours page
+      tours_title: 'Our Tours — Zenrise',
+      tours_h1: 'Our<br/>tours.',
+      tours_lede: 'Original tours through the Kamakura area — researched, walked, and written by us, then led at your pace.',
+      tours_filter_label: 'Browse by area',
+      tours_area_all: 'All areas',
+      tours_area_kamakura: 'Kamakura',
+      tours_area_enoshima: 'Enoshima',
+      tours_area_yokohama: 'Yokohama',
+      tours_empty: 'New tours are in preparation. Please check back soon.',
+      tours_filter_label_theme: 'Browse by experience',
+      tours_theme_temples: 'Temples & Shrines',
+      tours_theme_culture: 'Culture',
+      tours_theme_arts: 'Arts',
+      tours_theme_food: 'Food & Drink',
+      tours_theme_walking: 'Walking',
+      tours_theme_nature: 'Nature & Views',
+      tours_len_half: 'Half-day',
+      tours_len_full: 'Full-day',
+      tours_len_both: 'Full / Half-day',
+      tours_cta_h: 'Looking for something<br/>of your own?',
+      tours_cta_p: 'Multi-day itineraries and days built around a single interest — designed around you, not a route.',
+      tours_cta_link: 'Plan a bespoke journey',
+
+      // home — tours + news sections
+      home_tours_title: 'Our tours',
+      home_tours_more: 'All tours',
+      home_tours_cta: 'View this tour',
+      home_news_title: 'News & stories',
+      home_news_more: 'All news',
+      home_news_1_title: 'A day away from Tokyo',
+      home_news_1_sub: 'A bus tour through Kamakura & Enoshima',
+      home_news_2_title: 'Inside the sumo ring',
+      home_news_2_sub: 'A show & experience in Shinjuku',
+      home_news_3_title: 'Fuji to Hakone',
+      home_news_3_sub: 'And the ride home by Shinkansen',
+
+      // tour detail — shared
+      tours_back: 'All tours',
+      td_f_tour: 'Tour', td_f_area: 'Area', td_f_format: 'Format',
+      td_f_length: 'Length', td_f_group: 'Group', td_f_from: 'From',
+      td_included: 'Included',
+      td_notinc: 'Not included',
+      td_bring: 'What to bring',
+      td_know: 'Good to know',
+      td_book_heading: 'Book your spot',
+      td_route: 'The route.',
+      td_other: 'Other info.',
+      td_other_terms: 'Cancellation, insurance and payment terms in full',
+      td_cta_h: 'Walk it with us.',
+      td_cta_p: 'Tell us your dates and we\u2019ll come back within two working days with the mornings we have open. Printed pamphlet included, English and Japanese.',
+      td_cta_link: 'Book this tour',
+      td_prep_label: 'In preparation',
+      td_prep_p1: 'The pamphlet for this tour is still being written \u2014 we walk each route several times before we publish it.',
+      td_prep_p2: 'Write to us in the meantime and we\u2019ll send the current itinerary by email, along with the dates we have open.',
+      td_prep_cta: 'Write to us',
+
+      // tour detail — No. 04
+
+      // tour detail — in-preparation tours
 
       // footer (shared across pages)
       footer_tagline: 'Quiet, locally-led journeys through the <br class="brk"/>lesser-known corners of Japan.',
@@ -136,63 +198,9 @@
       home_hero_title: 'Discover the<br/>hidden Japan.',
       home_hero_copy: 'From iconic highlights to the secret spots the guidebooks leave behind — personalized tours through local eyes, crafted just for you.',
       home_hero_more_label: 'Read more',
-      home_find_title: 'Find your travel inspiration',
-      home_dest_1_name: 'Shrines & Temples',
-      home_dest_2_name: 'Cultural Experiences',
-      home_dest_3_name: 'Local Food',
-      home_dest_4_name: 'Hidden Views',
-      home_dest_5_name: 'Everyday Local Life',
-      home_dest_6_name: 'Get to Know Japan',
-      home_dest_7_name: 'Travel Support',
-      home_dest_8_name: 'Travel Concierge',
 
       // home — expanded category panels. Item lists are client content; leads on the
       // five list tiles (2,3,4,5,7) are drafted copy. Tile 8 is lead-only.
-      home_dest_cta: 'Plan your journey&nbsp;&nbsp;→',
-      home_dest_1_lead: 'Kamakura is home to over 100 temples and nearly 50 shrines. Many have stood here for more than 800 years, tracing back to the dawn of the Kamakura period.',
-      home_dest_1_item_1: 'Tsurugaoka Hachimangu',
-      home_dest_1_item_2: 'Hase-dera',
-      home_dest_1_item_3: 'Kotoku-in (Great Buddha)',
-      home_dest_1_item_4: 'Meigetsuin',
-      home_dest_1_item_5: 'Enoshima Shrine',
-      home_dest_2_lead: 'Step inside the rituals that shape daily life — slow, hands-on, and led by local practitioners.',
-      home_dest_2_item_1: 'Zen Meditation',
-      home_dest_2_item_2: 'Tea House',
-      home_dest_2_item_3: 'Soba Making',
-      home_dest_2_item_4: 'Pottery',
-      home_dest_2_item_5: 'Sutra Copying',
-      home_dest_3_lead: 'Eat the way locals do — from hand-cut noodles to the easy clatter of an evening izakaya.',
-      home_dest_3_item_1: 'Soba',
-      home_dest_3_item_2: 'Udon',
-      home_dest_3_item_3: 'Ramen',
-      home_dest_3_item_4: 'Izakaya',
-      home_dest_3_item_5: 'Teishoku',
-      home_dest_4_lead: 'Mountains, ocean, and the quiet corners worth the detour — the views the guidebooks skip.',
-      home_dest_4_item_1: 'Mt. Fuji',
-      home_dest_4_item_2: 'The Ocean',
-      home_dest_4_item_3: 'Nature',
-      home_dest_4_item_4: 'Photogenic Spots',
-      home_dest_5_lead: 'Spend a few hours in the rhythm of the neighbourhood, where nothing is staged for visitors.',
-      home_dest_5_item_1: 'Cafés',
-      home_dest_5_item_2: 'Back Alleys',
-      home_dest_5_item_3: 'Local Lifestyle',
-      home_dest_5_item_4: 'Farmers Market',
-      home_dest_5_item_5: 'Local Eats',
-      home_dest_6_lead: 'The culture, customs, and daily rhythms that give Japan its depth.',
-      home_dest_6_item_1: 'Culture',
-      home_dest_6_item_2: 'Traditions',
-      home_dest_6_item_3: 'Daily Life',
-      home_dest_7_lead: 'The logistics handled quietly in the background, so the trip stays yours to enjoy.',
-      home_dest_7_item_1: 'Transport',
-      home_dest_7_item_2: 'Stays',
-      home_dest_7_item_3: 'Tickets',
-      home_dest_7_item_4: 'Wi-Fi & eSIM',
-      home_dest_7_item_5: 'Luggage Storage',
-      home_dest_8_lead: 'Feel free to ask us anything — no question is too small.',
-      home_dest_8_item_1: 'Restaurant Reservations',
-      home_dest_8_item_2: 'Personal Recommendations',
-      home_dest_8_item_3: 'Special Requests',
-      home_dest_8_item_4: 'On-Trip Support',
 
       // about page
       about_title: 'About — Zenrise',
@@ -231,7 +239,7 @@
       contact_hero_visit_v: 'me-labo4, Sophiale Minamifujisawa #101<br/>10-11 Minamifujisawa, Fujisawa<br/>Kanagawa, 251-0055, Japan',
       // display hero (alt)
       // booking intro
-      contact_bi_title: 'Plan <br/>your trip.',
+      contact_bi_title: 'Plan your trip.',
 
       // booking flow — sidebar
       booking_progress_title: 'Booking',
@@ -263,10 +271,10 @@
       // booking step 2: length
       booking_s2_meta: 'Step 02 / 05',
       booking_s2_sub: 'Tour length',
-      booking_s2_h: 'Half day or full?',
+      booking_s2_h: 'Half-day or full?',
       booking_s2_lede: 'Half-days run roughly 09:00–13:00. Full-days end with a late lunch or a harbourside visit around 17:00.',
-      booking_s2_half: 'Half day',
-      booking_s2_full: 'Full day',
+      booking_s2_half: 'Half-day',
+      booking_s2_full: 'Full-day',
       booking_s2_half_p: 'One town, one neighbourhood. A long morning of exploring, one workshop or tea stop, and a quiet lunch.',
       booking_s2_full_p: 'Two towns linked by local train. A morning exploring, lunch with the day\u2019s host, an afternoon stop.',
       booking_s2_half_t: '≈ 4 hrs',
@@ -367,6 +375,7 @@
 
       // nav
       nav_home: 'ホーム',
+      nav_tours: 'ツアー',
       // contact region-card names (referenced by contact.html)
       home_dest_kamakura_name: '鎌倉',
       home_dest_enoshima_name: '江ノ島',
@@ -375,6 +384,67 @@
       nav_about: '私たちについて',
       nav_news: 'ニュース',
       nav_contact: 'お問い合わせ',
+
+      // tours page
+      tours_title: 'ツアー — Zenrise',
+      tours_h1: '私たちの<br/>ツアー。',
+      tours_lede: '鎌倉エリアを中心とした、Zenriseオリジナルのツアー。私たち自身が調べ、歩き、書き上げた行程を、あなたのペースでご案内します。',
+      tours_filter_label: 'エリアから探す',
+      tours_area_all: 'すべてのエリア',
+      tours_area_kamakura: '鎌倉',
+      tours_area_enoshima: '江ノ島',
+      tours_area_yokohama: '横浜',
+      tours_empty: '新しいツアーを準備しております。公開までしばらくお待ちください。',
+      tours_filter_label_theme: '体験から探す',
+      tours_theme_temples: '寺社',
+      tours_theme_culture: '文化',
+      tours_theme_arts: 'アート',
+      tours_theme_food: '食',
+      tours_theme_walking: 'まち歩き',
+      tours_theme_nature: '眺めと自然',
+      tours_len_half: '半日',
+      tours_len_full: '一日',
+      tours_len_both: '一日／半日',
+      tours_cta_h: 'あなただけの旅を<br/>お探しですか？',
+      tours_cta_p: '数日にわたる旅程も、ひとつの興味を深める一日も。決まったルートではなく、あなたに合わせて設計します。',
+      tours_cta_link: 'オーダーメイドの旅を相談する',
+
+      // home — tours + news sections
+      home_tours_title: '私たちのツアー',
+      home_tours_more: 'ツアー一覧',
+      home_tours_cta: 'このツアーを見る',
+      home_news_title: 'ニュースと読みもの',
+      home_news_more: 'ニュース一覧',
+      home_news_1_title: '東京を離れて過ごす一日',
+      home_news_1_sub: '鎌倉・江ノ島日帰りバスツアー',
+      home_news_2_title: '土俵の中を知る午後',
+      home_news_2_sub: '新宿の相撲ショー&体験',
+      home_news_3_title: '富士から箱根へ',
+      home_news_3_sub: '\u5e30\u308a\u9053\u306f\u65b0\u5e79\u7dda\u3067',
+
+      // tour detail — shared
+      tours_back: 'ツアー一覧',
+      td_f_tour: 'ツアー', td_f_area: 'エリア', td_f_format: '形式',
+      td_f_length: '所要', td_f_group: '人数', td_f_from: '料金',
+      td_included: '含まれるもの',
+      td_notinc: '含まれないもの',
+      td_bring: 'お持ちいただくもの',
+      td_know: 'ご予約前に',
+      td_book_heading: 'ご予約はこちら',
+      td_route: 'ルート。',
+      td_other: 'その他の情報。',
+      td_other_terms: 'キャンセル・保険・お支払いに関する規定の全文',
+      td_cta_h: '一緒に歩きませんか。',
+      td_cta_p: 'ご希望の日程をお知らせください。2営業日以内に、空きのある朝の日程をご案内します。英語・日本語の冊子付きです。',
+      td_cta_link: 'このツアーを予約する',
+      td_prep_label: '準備中',
+      td_prep_p1: 'このツアーの冊子は、いま執筆を進めているところです。公開の前に、それぞれのルートを何度も歩いて確かめています。',
+      td_prep_p2: 'それまでの間も、お気軽にお問い合わせください。現時点での行程と、空きのある日程をメールでお送りします。',
+      td_prep_cta: 'お問い合わせ',
+
+      // tour detail — No. 04
+
+      // tour detail — in-preparation tours
 
       // footer
       footer_tagline: '日本の知られざる場所を巡る、<br/>静かな旅。',
@@ -479,63 +549,9 @@
       home_hero_title: '知られざる日本へ。',
       home_hero_copy: '人気の観光地から、ガイドブックには載っていない穴場まで。地元民の目線であなただけの特別な体験を。',
       home_hero_more_label: '続きを読む',
-      home_find_title: '旅の目的を探す',
-      home_dest_1_name: '神社仏閣',
-      home_dest_2_name: '文化体験',
-      home_dest_3_name: 'グルメ',
-      home_dest_4_name: '絶景',
-      home_dest_5_name: 'ローカルな日常',
-      home_dest_6_name: '日本を知る',
-      home_dest_7_name: '旅のサポート',
-      home_dest_8_name: '旅の相談窓口',
 
       // home — expanded category panels. Item lists are client content; leads on the
       // five list tiles (2,3,4,5,7) are drafted copy. Tile 8 is lead-only.
-      home_dest_cta: '旅を計画する&nbsp;&nbsp;→',
-      home_dest_1_lead: '鎌倉には、100を超える寺院と、50近くの神社が息づいています。その多くは鎌倉時代の黎明期から、800年以上の時をこの地で静かに刻み続けています。',
-      home_dest_1_item_1: '鶴岡八幡宮',
-      home_dest_1_item_2: '長谷寺',
-      home_dest_1_item_3: '高徳院（鎌倉大仏）',
-      home_dest_1_item_4: '明月院',
-      home_dest_1_item_5: '江島神社',
-      home_dest_2_lead: '暮らしを形づくる作法の内側へ。地元の担い手が導く、ゆっくりとしたご自身の時間。',
-      home_dest_2_item_1: '坐禅',
-      home_dest_2_item_2: 'お茶屋',
-      home_dest_2_item_3: '蕎麦打ち',
-      home_dest_2_item_4: '陶芸',
-      home_dest_2_item_5: '写経',
-      home_dest_3_lead: '手打ちの麺から、夜の居酒屋のにぎわいまで。地元の人の食べ方で味わう。',
-      home_dest_3_item_1: '蕎麦',
-      home_dest_3_item_2: 'うどん',
-      home_dest_3_item_3: 'ラーメン',
-      home_dest_3_item_4: '居酒屋',
-      home_dest_3_item_5: '定食',
-      home_dest_4_lead: '山に海、そして寄り道する価値のある静かな場所。ガイドブックでは辿り着けない景色。',
-      home_dest_4_item_1: '富士山',
-      home_dest_4_item_2: '海',
-      home_dest_4_item_3: '自然',
-      home_dest_4_item_4: 'SNS映え',
-      home_dest_5_lead: '訪問者のために用意されたものは何もない、街そのもののリズムの中で過ごす数時間。',
-      home_dest_5_item_1: 'カフェ',
-      home_dest_5_item_2: '裏路地',
-      home_dest_5_item_3: '地元民の日常',
-      home_dest_5_item_4: '朝市',
-      home_dest_5_item_5: '地元の味',
-      home_dest_6_lead: '日本に深みを与える、文化と習慣、そして日々の営み。',
-      home_dest_6_item_1: '文化',
-      home_dest_6_item_2: '習慣、伝統',
-      home_dest_6_item_3: '生活',
-      home_dest_7_lead: '段取りは静かに背景で。旅はそのまま、あなたが楽しむためのものに。',
-      home_dest_7_item_1: '交通サポート',
-      home_dest_7_item_2: '宿泊',
-      home_dest_7_item_3: 'チケット',
-      home_dest_7_item_4: 'Wi-Fi・eSIM',
-      home_dest_7_item_5: '荷物預かり',
-      home_dest_8_lead: 'どんな小さなことでも、どうぞお気軽にご相談ください。',
-      home_dest_8_item_1: 'レストラン予約',
-      home_dest_8_item_2: 'おすすめのご提案',
-      home_dest_8_item_3: '特別なご要望',
-      home_dest_8_item_4: '滞在中のサポート',
 
       // about page
       about_title: '私たちについて — Zenrise',
@@ -571,7 +587,7 @@
       contact_hero_email: 'メール',
       contact_hero_visit: 'オフィス',
       contact_hero_visit_v: '〒251-0055<br/>神奈川県藤沢市南藤沢 10-11<br/>Sophiale Minamifujisawa #101 me-labo4',
-      contact_bi_title: '旅を<br/>計画する。',
+      contact_bi_title: '旅を計画する。',
 
       // booking flow — sidebar
       booking_progress_title: 'ご予約',
@@ -789,14 +805,13 @@
       '.lang-menu .name { font-family: "optima-nova-lt-pro", "toppan-bunkyu-mincho-pr6n", "Optima", serif; font-size: 22px; color: #294138; letter-spacing: -0.005em; line-height: 1; }',
       '.lang-menu button.on::after { content: ""; width: 6px; height: 6px; background: #294138; }',
       // ── mobile hamburger nav (shared, phone AND tablet widths) ──
-      // 899, not 599: the nav's own content outgrows the viewport well
-      // before 600, pushing the language switcher off the right edge and
-      // giving the page a horizontal overflow. Measured on this site's
-      // four-link nav: English fits from about 668px, but Japanese needs
-      // about 807px -- its labels are wider -- so a breakpoint chosen from
-      // the English nav alone would leave Japanese broken across the whole
-      // tablet range. 899 clears both with margin and matches the value
-      // used on the tours build. iPad landscape (1024+) keeps the full nav.
+      // 899, not 599: the nav's own content needs about 832px (brand + five
+      // links + the language switcher), so between 600 and 860 the switcher was
+      // pushed off the right edge -- 832px of content in a 768px viewport, which
+      // also gave the page a horizontal scroll. Measured: overflows at 640 and
+      // 768, fits from 860. 899 leaves margin. iPad landscape (1024+) keeps the
+      // full nav. The .nav height/padding already drop to 72/20px at 1023, so
+      // the burger's fixed offsets line up across this whole range.
       '.nav-burger, .mobile-nav { display: none; }',
       '@media (max-width: 899px) {',
       '  .nav { position: relative; }',
@@ -832,14 +847,40 @@
       '  html.menu-open .mobile-nav-links a:nth-child(2) { transition-delay: 200ms; }',
       '  html.menu-open .mobile-nav-links a:nth-child(3) { transition-delay: 280ms; }',
       '  html.menu-open .mobile-nav-links a:nth-child(4) { transition-delay: 360ms; }',
+      '  html.menu-open .mobile-nav-links a:nth-child(5) { transition-delay: 440ms; }',
       '  .mobile-nav-lang { opacity: 0; transition: opacity 500ms ease; }',
-      '  html.menu-open .mobile-nav-lang { opacity: 1; transition-delay: 380ms; }',
+      '  html.menu-open .mobile-nav-lang { opacity: 1; transition-delay: 460ms; }',
       '  .mobile-nav-lang { margin-top: auto; border-top: 1px solid rgba(41,65,56,0.14); padding-top: 22px; }',
       '  .mobile-nav-lang .mnl-h { display: block; font-family: "gill-sans-nova", "Gill Sans", "Gill Sans MT", sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(41,65,56,0.55); margin-bottom: 14px; }',
       '  .mobile-nav-lang button { display: inline-flex; align-items: baseline; gap: 10px; background: none; border: none; padding: 6px 0; margin-right: 32px; cursor: pointer; }',
       '  .mobile-nav-lang button .code { font-family: "gill-sans-nova", "Gill Sans", "Gill Sans MT", sans-serif; text-transform: uppercase; font-size: 12px; letter-spacing: 0.08em; color: rgba(41,65,56,0.5); }',
       '  .mobile-nav-lang button .name { font-family: "optima-nova-lt-pro","Optima",serif; font-size: 22px; color: #294138; }',
       '  .mobile-nav-lang button.on .name { text-decoration: underline; text-underline-offset: 4px; }',
+      '}',
+      // CTA underline offset, Japanese correction.
+      //
+      // Every CTA underline sits 0.18em below its text -- the ratio taken from
+      // the home page's "All tours" link. That ratio is right for Latin type,
+      // but Japanese glyphs sit higher in the line box, so the same offset
+      // reads as a noticeably wider gap: measured at 3x DPR on the home tile
+      // CTA, English came out at 6.0px and Japanese at 10.0px from the same
+      // padding. Lifting the rule by 0.22em brings Japanese back to the same
+      // optical gap. Expressed relatively so it holds at every CTA size, and
+      // injected here because this is the language layer and it applies to
+      // every page including the generated ones.
+      'html[lang="ja"] .more-link > span:first-child::after,',
+      'html[lang="ja"] .hero-card .more > span:first-child::after,',
+      'html[lang="ja"] .dest .panel .go .u::after,',
+      'html[lang="ja"] .bespoke .cta > span:first-child::after,',
+      'html[lang="ja"] .book-cta .cta > span:first-child::after,',
+      'html[lang="ja"] .f-body .more > span:first-child::after,',
+      'html[lang="ja"] .cta-panel .cta .u::after,',
+      'html[lang="ja"] .art-head .meta .back .lbl::after,',
+      'html[lang="ja"] .art-foot .back .lbl::after,',
+      'html[lang="ja"] .back .b-label::after,',
+      'html[lang="ja"] .pg-num::after,',
+      'html[lang="ja"] .foot-col .soc > span:first-child::after {',
+      '  bottom: 0.28em;',
       '}'
     ].join('\n');
     document.head.appendChild(s);

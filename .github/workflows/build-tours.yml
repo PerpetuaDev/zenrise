@@ -1,0 +1,65 @@
+name: Build tours from Bokun
+
+# Hourly, so a change made in the Bokun panel reaches the site without anyone
+# running a build. Triggers are deliberately limited to schedule and manual
+# dispatch: this repo is public, and pull_request_target would hand the
+# credentials to any fork.
+on:
+  # Schedule paused at go-live: the live repo has no BOKUN_ACCESS_KEY /
+  # BOKUN_SECRET_KEY yet, and --require-live means every scheduled run would
+  # fail red hourly until they are set. Add the two secrets, then uncomment
+  # the schedule below to resume the hourly zero-touch rebuild. Manual
+  # dispatch stays available for a first verified run.
+  # schedule:
+  #   - cron: '0 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: build-tours
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild tour pages from the Bokun catalogue
+        env:
+          BOKUN_ACCESS_KEY: ${{ secrets.BOKUN_ACCESS_KEY }}
+          BOKUN_SECRET_KEY: ${{ secrets.BOKUN_SECRET_KEY }}
+        # --require-live turns off the cache fallback. Without it a credentials
+        # failure rebuilds from the committed cache, produces no diff, and the
+        # run reports "no changes to publish" -- a green tick for a job that
+        # published nothing. Here it fails instead.
+        run: python3 cms/build-tours.py --source bokun --require-live
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+            exit 0
+          fi
+          git commit -m "CMS: rebuild tour pages from Bokun"
+          # Two publishes in quick succession race each other: the loser's push
+          # is rejected as a non-fast-forward and, before this loop, the run
+          # simply failed and its rebuild was dropped on the floor -- silently,
+          # since nothing reports a red run back to whoever published. The
+          # commit only ever touches generated files and the build is
+          # deterministic from the source of truth, so rebasing onto whoever
+          # won and pushing again is safe.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt), rebasing onto origin/main"
+            git pull --rebase origin main || exit 1
+          done
+          echo "push still rejected after 5 attempts"
+          exit 1

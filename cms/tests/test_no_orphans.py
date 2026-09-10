@@ -1,0 +1,121 @@
+# cms/tests/test_no_orphans.py
+import glob, json, os, re, unittest
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def read(p):
+    with open(os.path.join(ROOT, p)) as f:
+        return f.read()
+
+
+class TestNoOrphans(unittest.TestCase):
+    def setUp(self):
+        with open(os.path.join(ROOT, 'cms', 'tours-config.json')) as f:
+            cfg = json.load(f)
+        self.slugs = {entry['slug'] for entry in cfg['tours'].values()}
+        # Staging-only invented samples generate a page each and are legitimate.
+        self.sample_slugs = {s['id'] for s in (cfg.get('sampleTours') or [])}
+
+    def test_only_generated_tour_pages_exist(self):
+        # Zero-touch catalogue (2026-08-26): a tours-config.json entry is a
+        # pinned override, not a publish decision any more -- a tour can be
+        # configured (its slug/number/area frozen from an earlier run) and
+        # still be correctly held back from the live catalogue (e.g. taken
+        # off the Bokun "Website" product list), in which case
+        # cleanup_stale_pages() removes its page. So the invariant this test
+        # can still check from static config alone is one-directional: no
+        # page exists for a slug config doesn't know about at all. The
+        # reverse -- every currently-catalogued slug DOES have a page -- is
+        # covered by the live/gate tests in test_bokun_source.py and
+        # test_stale_cleanup.py, which have the catalogue to check against.
+        on_disk = {os.path.basename(p)[len('tour-'):-len('.html')]
+                   for p in glob.glob(os.path.join(ROOT, 'tour-*.html'))}
+        known = self.slugs | self.sample_slugs
+        self.assertTrue(on_disk <= known, on_disk - known)
+
+    def test_sample_tours_are_staging_only_and_marked(self):
+        with open(os.path.join(ROOT, 'cms', 'tours-config.json')) as f:
+            cfg = json.load(f)
+        for s in (cfg.get('sampleTours') or []):
+            # A sample must be self-identifying, carry no Bokun product that
+            # could collide with a real one, and never be OTA-tier.
+            self.assertTrue(s.get('_sample'), s['id'])
+            self.assertGreater(s['bokunId'], 9000000, s['id'])
+            self.assertNotIn(s['bokunId'], [1272734, 1272756, 1272817, 1272825,
+                                            1272835, 1272849, 1273963])
+            self.assertNotIn(s['id'], self.slugs)
+
+    def test_retired_fixtures_and_schemas_are_gone(self):
+        for p in ('cms/tours-fixture.json', 'cms/tours-schema.json',
+                  'cms/site-config-schema.json', 'cms/push-tours.py',
+                  'cms/tour-routes.json'):
+            self.assertFalse(os.path.exists(os.path.join(ROOT, p)), p)
+
+    def test_no_link_points_at_a_retired_tour_page(self):
+        retired = ['kita-kamakura-hase', 'tsurugaoka', 'enoshima',
+                   'farmers-market', 'zen-morning', 'yokohama']
+        for page in glob.glob(os.path.join(ROOT, '*.html')):
+            if 'archive' in page:
+                continue
+            body = read(os.path.basename(page))
+            for slug in retired:
+                self.assertNotIn(f'tour-{slug}.html', body,
+                                 f'{os.path.basename(page)} links to retired tour-{slug}.html')
+
+    def test_superseded_draft_lang_keys_are_gone(self):
+        lang = read('lang.js')
+        for key in ('tours_c1_', 'tours_d1_', 'rt04_'):
+            self.assertNotIn(key, lang, key)
+
+    def test_keys_orphaned_by_the_calendar_removal_are_gone(self):
+        # These labelled the hand-built calendar that Task 8 replaced with the
+        # Bokun widget. Nothing references them any more.
+        lang = read('lang.js')
+        for key in ('td_book_label', 'td_cal_note', 'td_travellers',
+                    'td_choose', 'td_request'):
+            self.assertNotIn(key, lang, key)
+
+    def test_keys_orphaned_by_the_chip_group_retirement_are_gone(self):
+        # notAllowed/notSuitable (task 17) never had a Bokun field feeding
+        # them, so they were retired in favour of bring/know.
+        lang = read('lang.js')
+        for key in ('td_notallowed', 'td_notsuitable'):
+            self.assertNotIn(key, lang, key)
+
+    def test_archive_is_untouched(self):
+        # archive/ is a staging-only holding pen for the retired custom-booking
+        # site; it is deliberately not published to the live repo, where this
+        # guard has nothing to guard. Skipping rather than deleting keeps it
+        # armed wherever the folder does exist -- the point is that the archived
+        # copy can never submit a real booking.
+        target = os.path.join(ROOT, 'archive/custom-booking/index.html')
+        if not os.path.exists(target):
+            self.skipTest('archive/ not present (live repo)')
+        self.assertIn("var RELAY_URL = ''", read('archive/custom-booking/index.html'))
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+class TestNoUnsizedImages(unittest.TestCase):
+    """No generated page may request a Bokun original.
+
+    Originals live on bokun.s3.amazonaws.com and are around 4000x2800; the
+    resized derivatives come from imgcdn.bokun.tools with an explicit ?w=. A
+    bare original slipping back in is a 1.6MB download for a 430px slot.
+    """
+
+    def pages(self):
+        return (['index.html', 'tours.html']
+                + [os.path.basename(p) for p in glob.glob(os.path.join(ROOT, 'tour-*.html'))])
+
+    def test_no_s3_original_is_referenced(self):
+        for page in self.pages():
+            self.assertNotIn('bokun.s3.amazonaws.com', read(page), page)
+
+    def test_every_bokun_image_asks_for_a_width(self):
+        for page in self.pages():
+            for url in re.findall(r'https://imgcdn\.bokun\.tools/[^"\'()\s]+', read(page)):
+                self.assertIn('w=', url, f'{page}: {url}')

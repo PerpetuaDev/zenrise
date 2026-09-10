@@ -1,4 +1,6 @@
 relay/.env
 relay/.deployed/
 relay/.cf.env
-cms/.env
+cms/__pycache__/
+.superpowers/
+__pycache__/

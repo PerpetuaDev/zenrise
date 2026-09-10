@@ -287,14 +287,14 @@
     letter-spacing: 0.01em;
     position: relative;
   }
-  .hero-card .more > span:first-child { position: relative; padding-bottom: 4px; }
+  .hero-card .more > span:first-child { position: relative; padding-bottom: 0.18em; }
   .hero-card .more > span:first-child::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1.5px;
+    height: 1px;
     background: var(--ink);
     opacity: 0;
     transition: opacity 0.25s ease;
@@ -315,6 +315,12 @@
   .hero-card .more .dir-d { display: none; }
 
   /* ───── Find your perfect place ───── */
+  /* With no published tours the tiles region carries a line of copy
+     instead. The section deliberately stays in the page: the hero's
+     "Read more" link is href="#find", so hiding it would leave that
+     anchor pointing at nothing. */
+  .tours-empty { grid-column: 1 / -1; font-family: var(--display); font-size: 24px;
+    line-height: 1.45; color: var(--ink-60); margin: 0; text-wrap: pretty; }
   .find {
     margin-top: 120px;
     padding: 0 36px;
@@ -358,285 +364,25 @@
 
   .dest-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     position: relative;
   }
-  .dest-expanded {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    background: var(--bg-3);
-    overflow: hidden;
-  }
-  .dest-expanded .exp-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-  }
-  .dest-expanded .exp-scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0) 50%);
-    pointer-events: none;
-  }
-  .dest-expanded .exp-meta {
-    position: absolute;
-    bottom: 64px;
-    left: 64px;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.4s ease 0.45s, transform 0.4s ease 0.45s;
-  }
-  .dest-expanded.open .exp-meta { opacity: 1; transform: none; }
-  .dest-expanded .exp-num {
-    font-family: var(--sans);
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 16px;
-  }
-  .dest-expanded.is-placeholder .exp-num { color: var(--ink-60); }
-  .dest-expanded .exp-name {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 80px;
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-    color: #fff;
-    max-width: 1400px;
-  }
-  .dest-expanded.is-placeholder .exp-name { color: var(--ink); }
-  .dest-close {
-    position: absolute;
-    top: 32px;
-    right: 32px;
-    width: 52px;
-    height: 52px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease 0.5s, background 0.2s ease;
-  }
-  .dest-expanded.is-placeholder .dest-close {
-    background: rgba(41,65,56,0.06);
-    border-color: var(--ink-30);
-    color: var(--ink);
-  }
-  .dest-expanded.open .dest-close { opacity: 1; }
-  .dest-close:hover { background: rgba(255,255,255,0.22); }
-  .dest-expanded.is-placeholder .dest-close:hover { background: rgba(41,65,56,0.1); }
-
-  /* ─ Expanded split layout (image + offerings) ─ */
-  .dest-expanded { --exp-panel-w: 42%; }
-  /* Photo fills the whole overlay; the cream panel is layered on top at the right.
-     This keeps the photo behind the panel, so closing reveals photo (not white)
-     no matter which column the card sits in. */
-  .dest-expanded .exp-bg { transition: opacity 0.35s ease; }
-  .dest-expanded.is-placeholder .exp-bg {
-    background:
-      repeating-linear-gradient(135deg, rgba(41,65,56,0.05) 0 1px, transparent 1px 14px),
-      var(--bg-3);
-  }
-
-  .dest-expanded .exp-panel {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: var(--exp-panel-w);
-    background: var(--bg);
-    color: var(--ink);
-    padding: 72px 64px;
+  .dest {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
-    transition: opacity 0.32s ease;
-  }
-  .dest-expanded.closing .exp-panel { opacity: 0; }
-  /* the ✕'s 0.5s reveal delay would hold it visible through the whole
-     close animation — vanish promptly instead */
-  .dest-expanded.closing .dest-close { opacity: 0; transition: opacity 0.15s ease; }
-  .dest-expanded .exp-panel > * {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .dest-expanded.open .exp-panel > * { opacity: 1; transform: none; }
-  .dest-expanded.open .exp-panel > *:nth-child(1) { transition-delay: 0.40s; }
-  .dest-expanded.open .exp-panel > *:nth-child(2) { transition-delay: 0.46s; }
-  .dest-expanded.open .exp-panel > *:nth-child(3) { transition-delay: 0.52s; }
-  .dest-expanded.open .exp-panel > *:nth-child(4) { transition-delay: 0.58s; }
-
-  .dest-expanded .exp-panel .exp-num { color: var(--ink-60); margin-bottom: 20px; }
-  .dest-expanded .exp-panel .exp-name {
-    color: var(--ink);
-    font-size: clamp(40px, 4.2vw, 68px);
-    line-height: 0.98;
-    margin: 0 0 22px;
-  }
-  .dest-expanded .exp-lead {
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--ink-60);
-    margin: 0 0 36px;
-    max-width: 46ch;
-  }
-  .dest-expanded .exp-items { list-style: none; margin: 0; padding: 0; }
-  .dest-expanded .exp-items li {
-    font-family: var(--display);
-    font-size: 26px;
-    color: var(--ink);
-    padding: 18px 0;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .dest-expanded .exp-items li:last-child { border-bottom: 1px solid var(--rule); }
-  .dest-expanded .exp-items li .it-arrow {
-    font-family: var(--sans); text-transform: uppercase;
-    font-size: 14px;
-    color: var(--ink-30);
-  }
-  .dest-expanded .exp-cta {
-    align-self: flex-start;
-    margin-top: 40px;
-    background: var(--ink);
-    color: var(--bg);
-    font-family: var(--sans);
-    font-size: 17px;
-    letter-spacing: 0.02em;
-    padding: 20px 34px;
-    text-decoration: none;
-    opacity: 0;
-    transform: translateY(14px);
-    /* reveal (opacity/transform) is delayed to follow the list; background stays instant for hover */
-    transition: opacity 0.5s ease 0.70s, transform 0.5s ease 0.70s, background 0.18s ease;
-  }
-  .dest-expanded.open .exp-cta { opacity: 1; transform: none; }
-  .dest-expanded .exp-cta:hover { background: #1f3129; }
-
-  /* Slideshow controls on the image side */
-  .dest-expanded .exp-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 52px; height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.35);
-    color: #fff;
-    font-size: 18px;
+    /* Height is content-driven: the panel must be free to fit its copy, or the
+       text spills out below the grey box. The photo keeps the design's ratio
+       below. Grid stretch keeps tiles in a row level. Mobile already did this. */
     cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease 0.5s, background 0.2s ease;
   }
-  .dest-expanded.open .exp-arrow { opacity: 1; }
-  .dest-expanded .exp-arrow:hover { background: rgba(255,255,255,0.26); }
-  .dest-expanded .exp-arrow.prev { left: 24px; }
-  .dest-expanded .exp-arrow.next { right: calc(var(--exp-panel-w) + 24px); }
-  .dest-expanded .exp-counter {
-    position: absolute;
-    left: 28px; bottom: 28px;
-    font-family: var(--sans); text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.9);
-    opacity: 0;
-    transition: opacity 0.3s ease 0.55s;
-  }
-  .dest-expanded.open .exp-counter { opacity: 1; }
-
-  /* Close button now sits over the cream panel — keep it ink-on-cream always */
-  .dest-expanded .dest-close {
-    background: rgba(41,65,56,0.06);
-    border-color: var(--ink-30);
-    color: var(--ink);
-  }
-  .dest-expanded .dest-close:hover { background: rgba(41,65,56,0.12); }
-
-  @media (max-width: 860px) {
-    /* Pinned-photo parallax, same logic as the home hero: the photo is
-       fixed full-screen behind, and the cream panel sits in the overlay's
-       scroll flow, riding up OVER the pinned image as you scroll. */
-    .dest-expanded { --exp-panel-w: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-    /* Photo + scrim pin via sticky INSIDE the overlay's own scroll (position:
-       fixed would hand the touch gesture to the page behind instead). Each
-       spans one viewport but contributes zero flow height (negative bottom
-       margin), so the panel's 62vh offset works out the same as before and
-       the panel rides over the pinned photo in ONE scroll. */
-    .dest-expanded .exp-bg,
-    .dest-expanded .exp-scrim {
-      position: sticky;
-      inset: auto; /* drop the base rule's bottom:0 — a second sticky
-                      constraint fights top:0 in Safari */
-      top: 0;
-      /* frozen pixel height for the same reason as the hero: the photo
-         must never resize when the toolbar collapses. The overlay's
-         measured --exp-vvh keeps the visible area COVERED; any strip
-         below the photo is overlay cream, and in practice the panel
-         (min 46% of the frozen height, starting at 62%) overlaps it. */
-      height: 100vh;
-      height: var(--vh-px, 100svh);
-      margin-bottom: -100vh;
-      margin-bottom: calc(0px - var(--vh-px, 100svh));
-    }
-    .dest-expanded .exp-panel {
-      position: relative;
-      top: auto;
-      width: 100%;
-      height: auto;
-      min-height: 46vh;
-      min-height: calc(var(--vh-px, 100vh) * 0.46);
-      margin-top: 62vh;
-      margin-top: calc(var(--vh-px, 100vh) * 0.62);
-      padding: 36px 28px 48px;
-      /* breathing room for the collapsible browser toolbar: lvh−svh is
-         exactly its height, so the CTA can always scroll clear of it even
-         while it's expanded (resolves to the plain 48px where there is no
-         dynamic toolbar). */
-      padding-bottom: calc(48px + (100lvh - 100svh));
-      justify-content: flex-start;
-      overflow: visible;
-      z-index: 1;
-    }
-    .dest-expanded .exp-panel .exp-name { font-size: 40px; }
-    .dest-expanded .exp-lead { font-size: 15px; margin-bottom: 28px; }
-    .dest-expanded .exp-items li { font-size: 20px; padding: 14px 0; }
-    .dest-expanded .exp-cta { margin-top: 28px; padding: 16px 26px; font-size: 15px; }
-    /* no arrow buttons on small screens — the photo is swipeable instead */
-    .dest-expanded .exp-arrow { display: none; }
-    /* counter and close stay pinned with the photo; close floats above
-       the panel so the view is always dismissable */
-    .dest-expanded .exp-counter { position: fixed; bottom: auto; top: 24px; }
-    .dest-expanded .dest-close {
-      position: fixed;
-      width: 38px; height: 38px;
-      top: 16px; right: 24px;
-      font-size: 14px;
-      background: rgba(255,255,255,0.16);
-      border-color: rgba(255,255,255,0.55);
-      color: #fff;
-      z-index: 3;
-    }
-    .dest-expanded .dest-close:hover { background: rgba(255,255,255,0.28); }
-  }
-  .dest {
+  .dest:hover { opacity: 1; }
+  /* photo region — top two thirds */
+  .dest .ph {
     position: relative;
-    aspect-ratio: 446 / 558;
+    /* 66% of the original 446x558 tile, kept as a ratio now the tile is fluid */
+    aspect-ratio: 446 / 368;
     overflow: hidden;
-    cursor: pointer;
     background: var(--bg-3);
   }
   .dest .pic {
@@ -649,51 +395,6 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  .dest .pic.placeholder {
-    background:
-      repeating-linear-gradient(135deg, rgba(41,65,56,0.05) 0 1px, transparent 1px 14px),
-      var(--bg-3);
-  }
-  .dest .ph-label {
-    position: absolute;
-    left: 24px; top: 24px;
-    font-family: var(--sans);
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: var(--ink-60);
-    text-transform: uppercase;
-  }
-  .dest .scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 38%, transparent 62%);
-  }
-  .dest .meta {
-    position: absolute;
-    left: 28px; right: 28px; bottom: 28px;
-    color: #fff;
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .dest .meta .name {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 39px;
-    line-height: 0.95;
-    letter-spacing: -0.005em;
-  }
-  .dest .meta .kanji {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 16px;
-    opacity: 0.85;
-    letter-spacing: 0.1em;
-    margin-top: 6px;
-    display: block;
-  }
-  .dest .meta .arrow { display: none; }
   .dest .num-tag {
     position: absolute;
     right: 24px; top: 22px;
@@ -702,14 +403,68 @@
     letter-spacing: 0.08em;
     color: #fff;
     opacity: 0.9;
+    z-index: 2;
   }
-  .dest.placeholder .num-tag { color: var(--ink-60); }
+  /* product panel — booking-system grey, contains the card against the bg */
+  .dest .panel {
+    flex: 1 0 auto;
+    background: var(--bg-2);
+    padding: 26px 28px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .dest .panel .t-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    margin-bottom: 14px;
+  }
+  .dest .panel .t-meta .dot { color: var(--ink-30); }
+  .dest .panel .name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  :lang(ja) .dest .panel .name { line-height: 1.35; }
+  /* STOP-GAP (2026-08-26): Bokun excerpts vary from 73 to 251 characters, and the
+     longest run to four lines. Clamped to three with an ellipsis pending a
+     client conversation about shortening the source blurbs. Remove the clamp
+     once the copy itself is bounded. */
+  .dest .panel .sub {
+    font-family: var(--display); font-size: 18px; line-height: 1.45;
+    color: var(--ink-60); margin: 8px 0 0; text-wrap: pretty;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+    line-clamp: 3; overflow: hidden;
+  }
+  :lang(ja) .dest .panel .sub { line-height: 1.6; }
+  .dest .panel .row { margin-top: auto; padding-top: 16px; }
+  .dest .panel .go { display: inline-flex; align-items: baseline; font-size: 18px; letter-spacing: 0.01em; color: var(--ink); }
+  /* Hover-reveal underline, matching .more-link and the hero card rather than the
+     persistent underline used by tours.html's bespoke CTA and the tour detail
+     "Book this tour". Triggered by card hover, like the arrow slide below. */
+  .dest .panel .go .u { position: relative; padding-bottom: 0.18em; }
+  .dest .panel .go .u::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: var(--ink); opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .dest:hover .panel .go .u::after { opacity: 1; }
+  .dest .panel .go .ar { position: relative; right: 0; transition: right 0.3s ease; font-weight: 300; }
+  .dest:hover .panel .go .ar { right: -6px; }
 
   /* photo credits — required on all photography */
   .hero-photo::after,
-  .dest .scrim::after,
-  .dest-expanded:not(.is-placeholder) .exp-scrim::after {
-    content: "© Zenrise";
+  .dest .ph::after {
+    content: "\00a9 Zenrise";
     position: absolute;
     font-family: var(--sans);
     font-size: 12px;
@@ -720,17 +475,34 @@
     z-index: 2;
   }
   .hero-photo::after { right: 24px; top: 22px; color: #fff; }
-  .dest .scrim::after { left: 24px; top: 22px; }
-  .dest-expanded:not(.is-placeholder) .exp-scrim::after {
-    right: calc(var(--exp-panel-w) + 28px);
-    bottom: 28px;
-  }
-  @media (max-width: 860px) {
-    /* no attribution in the full-screen expanded view — too cramped */
-    .dest-expanded:not(.is-placeholder) .exp-scrim::after { display: none; }
-  }
+  .dest .ph::after { left: 24px; top: 22px; }
 
   /* Subtle entrance */
+  .find-more { display: flex; justify-content: center; padding: 88px 0 0; }
+  .more-link { display: inline-flex; align-items: baseline; font-size: 22px; letter-spacing: 0.01em; color: var(--ink); }
+  .more-link:hover { opacity: 1; }
+  .more-link > span:first-child { position: relative; padding-bottom: 0.18em; }
+  .more-link > span:first-child::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--ink); opacity: 0; transition: opacity 0.25s ease; }
+  .more-link:hover > span:first-child::after { opacity: 1; }
+  .more-link .ar { position: relative; right: 0; transition: right 0.3s ease; font-weight: 300; }
+  .more-link:hover .ar { right: -8px; }
+
+  /* ── home news ── */
+  .home-news { margin-top: 140px; padding: 0 36px; }
+  .home-news .news-head-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 88px 0 96px; }
+  .home-news h2 { font-family: var(--display); font-weight: 400; font-size: 56px; line-height: 1; margin: 0; letter-spacing: -0.005em; white-space: nowrap; }
+  .hn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px 20px; }
+  .hn-card { display: block; }
+  .hn-card:hover { opacity: 1; }
+  .hn-card .pic { position: relative; height: 380px; background: var(--bg-3) center / cover no-repeat; margin-bottom: 22px; overflow: hidden; }
+  .hn-card .pic::before { content: ''; position: absolute; inset: 0; background: inherit; transition: transform 700ms cubic-bezier(.2,.6,.2,1); }
+  .hn-card:hover .pic::before { transform: scale(1.04); }
+  .hn-card .date { display: flex; font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 14px; }
+  .hn-card h3 { font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.25; margin: 0 0 12px; letter-spacing: -0.005em; text-wrap: pretty; }
+  :lang(ja) .hn-card h3 { line-height: 1.4; }
+  .hn-card .sub { font-family: var(--display); font-size: 19px; line-height: 1.45; color: var(--ink-60); margin: 0; text-wrap: pretty; }
+  :lang(ja) .hn-card .sub { line-height: 1.6; }
+
   .reveal { opacity: 0; transform: translateY(12px); transition: opacity 700ms ease, transform 700ms ease; }
   .reveal.in { opacity: 1; transform: none; }
 
@@ -790,8 +562,8 @@
     color: var(--ink);
   }
   .foot-v2 .foot-col li a:hover { opacity: 0.6; }
-  .foot-col .soc > span:first-child { position: relative; padding-bottom: 3px; }
-  .foot-col .soc > span:first-child::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1.5px; background: var(--ink); opacity: 0; transition: opacity 0.25s ease; }
+  .foot-col .soc > span:first-child { position: relative; padding-bottom: 0.18em; }
+  .foot-col .soc > span:first-child::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--ink); opacity: 0; transition: opacity 0.25s ease; }
   .foot-col .soc:hover > span:first-child::after { opacity: 1; }
   .foot-col .soc .ar { position: relative; right: 0; transition: right 0.3s ease; font-weight: 300; }
   .foot-col .soc:hover .ar { right: -6px; }
@@ -888,53 +660,32 @@
     /* full-bleed grid: pull out of the section's side padding so tiles
        run edge-to-edge, with gaps only between tiles */
     .dest-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 -20px; }
-    .dest .meta { left: 18px; right: 18px; bottom: 18px; gap: 8px; }
-    .dest .meta .name { font-size: 24px; }
+    /* content-driven card height at phone widths — the fixed portrait
+       ratio leaves too little room for the panel; grid stretch keeps
+       row heights aligned */
+    .dest { aspect-ratio: auto; }
+    .dest .ph { height: auto; aspect-ratio: 4 / 3; }
+    .dest .panel { padding: 14px 14px 13px; }
+    .dest .panel .t-meta { font-size: 9px; letter-spacing: 0.06em; gap: 8px; margin-bottom: 8px; }
+    .dest .panel .name { font-size: 17px; }
+    .dest .panel .sub { font-size: 13px; margin-top: 5px; }
+    .dest .panel .row { padding-top: 12px; }
+    .dest .panel .go { font-size: 13px; }
     .dest .num-tag { right: 12px; top: 12px; font-size: 10px; letter-spacing: 0.18em; }
     /* no attribution on the small mobile tiles — too cramped */
-    .dest .scrim::after { display: none; }
-    /* Expanded card becomes a true full-screen modal (not grid-boxed) and
-       fades in — the desktop clip-path morph is grid-relative, so it's
-       overridden here in favour of a simple opacity fade. */
-    .dest-expanded {
-      /* NOT position: fixed — iOS re-clips fixed layers a beat behind the
-         collapsing toolbar, leaving an unpaintable strip where the page
-         shows through. Instead the overlay is ordinary page content:
-         absolute at the locked scroll offset (JS sets top on open, page
-         scroll is exp-lock'd) and a full LARGE viewport tall, so the strip
-         the collapsing toolbar reveals is already-painted overlay. While
-         the toolbar is expanded the overlay's bottom edge simply hangs
-         behind it. */
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: auto;
-      left: 0;
-      /* --exp-vvh is the MEASURED visible height (visualViewport, set and
-         live-updated by openCard) — CSS viewport units are exactly what
-         misbehaves around the collapsing iOS toolbar, so we don't rely on
-         them beyond the no-JS fallback. +2px with a -1px JS top: subpixel
-         scroll offsets make the JS-set top fractional, which can leave a
-         hairline of page peeking out at either edge — overshoot both. */
-      height: calc(100vh + 2px);
-      height: calc(var(--exp-vvh, 100vh) + 2px);
-      z-index: 1000;
-      clip-path: none !important;
-      transition: opacity 0.3s ease !important;
-      opacity: 0;
-    }
-    .dest-expanded.open { opacity: 1; }
-    /* while the full-screen overlay is open it is the ONLY scroller — the
-       page behind must not move under a stray touch. The body is PINNED
-       (position:fixed at the recorded scroll offset, set as an inline top
-       by openCard) rather than relying on overflow:hidden alone: WebKit
-       resets the root scroll position to 0 the moment the root stops
-       being scrollable, which teleported the page to the top behind the
-       overlay. The body must also stay unclipped — the overlay legally
-       extends past the document's end when a tile near the page bottom
-       is opened. */
-    html.exp-lock { overflow: hidden; }
-    html.exp-lock body { position: fixed; left: 0; right: 0; overflow: visible; }
+    .dest .ph::after { display: none; }
+
+    .find-more { padding: 48px 0 0; }
+    .more-link { font-size: 18px; }
+    /* news section sits above the pinned hero, like .find */
+    .home-news { margin-top: 0; padding: 56px 20px 0; position: relative; z-index: 2; background: var(--bg); }
+    .home-news > .rule { display: none; }
+    .home-news .news-head-row { grid-template-columns: 1fr; padding: 0 0 32px; }
+    .home-news h2 { font-size: 36px; white-space: normal; }
+    .hn-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hn-card .pic { height: 56vw; margin-bottom: 16px; }
+    .hn-card h3 { font-size: 24px; }
+    .hn-card .sub { font-size: 16px; }
 
     /* Footer (inline/cream — active variant). Top gap is PADDING, not
        margin — margins are transparent and would let the pinned hero
@@ -958,8 +709,7 @@
     .navlinks { display: none; }
     .hero-card .ttl { font-size: 38px; }
     .dest-grid { gap: 8px; }
-    .dest .meta { left: 14px; right: 14px; bottom: 14px; }
-    .dest .meta .name { font-size: 18px; }
+    .dest .panel .name { font-size: 16px; }
   }
 </style>
 </head>
@@ -972,6 +722,7 @@
       <a class="logo" href="#">ZENRISE</a>
       <nav class="navlinks">
         <a href="index.html" class="active" data-i18n="nav_home">home</a>
+        <a href="tours.html" data-i18n="nav_tours">our tours</a>
         <a href="about.html" data-i18n="nav_about">about us</a>
         <a href="news.html" data-i18n="nav_news">news</a>
         <a href="contact.html" data-i18n="nav_contact">contact</a>
@@ -998,96 +749,163 @@
     </section>
 
     <!-- ───── Find your perfect place ───── -->
-    <section class="find" id="find" data-screen-label="01 Home — Destinations">
+    <section class="find" id="find" data-screen-label="01 Home — Tours">
       <div class="rule"></div>
       <div class="find-head">
-        <h2 data-i18n="home_find_title">Find your travel inspiration</h2>
+        <h2 data-i18n="home_tours_title">Our tours</h2>
       </div>
 
       <div class="dest-grid">
+      <!-- CMS:home-tours:start -->
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/shrines/kamakura-tsurugaoka-hachimangu.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">01 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_1_name">Shrines & Temples</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-ikebana-ichigo-ichie.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/125107cd-37b0-44d5-8ec7-1071be67f871.jpeg?w=900')"></div>
+            <span class="num-tag">No. 01</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_half">Half-day</span></div>
+            <div class="name" data-i18n="tours_ikebana-ichigo-ichie_name">Kamakura: Ikebana — One Flower, One Encounter</div>
+            <p class="sub" data-i18n="tours_ikebana-ichigo-ichie_sub">A private, small-group ikebana experience with master florist Koen Yokoi. Discover the quiet beauty of Kamakura through flowers and a personal encounter with a master of the art.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/cultural/zazen-meditation-hall.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">02 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_2_name">Cultural Experiences</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-kamakura-enoshima-yokohama-local.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/7ba205a2-33a3-4fba-89a0-5fb7cb6f21b2.jpeg?w=900')"></div>
+            <span class="num-tag">No. 01</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_both">Full / Half-day</span></div>
+            <div class="name" data-i18n="tours_kamakura-enoshima-yokohama-local_name">Kamakura, Enoshima &amp; Yokohama Private Local Guide Service</div>
+            <p class="sub" data-i18n="tours_kamakura-enoshima-yokohama-local_sub">Explore Kamakura, Enoshima, and Yokohama with an English-speaking local guide, with support for navigation, translation, and local recommendations at your own pace.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/food/ramen.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">03 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_3_name">Local Food</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-candle-making.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/cfe134ea-d26d-45eb-b812-8eeabf2478f8.jpeg?w=900')"></div>
+            <span class="num-tag">No. 02</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_half">Half-day</span></div>
+            <div class="name" data-i18n="tours_candle-making_name">Kamakura &amp; Fujisawa: Japanese Candle-Making — A Handmade Light</div>
+            <p class="sub" data-i18n="tours_candle-making_sub">A private, intimate candle-making experience in Shonan, where you can slow down and discover the quiet beauty of Japanese craftsmanship. Guided by local candle artisan Meria, create your own Japanese candle by hand using natural materials from the region.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/views/mount-fuji-ocean.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">04 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_4_name">Hidden Views</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-zen-journey.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/4277c6b0-2337-43f9-8c40-1ed5578910fd.jpeg?w=900')"></div>
+            <span class="num-tag">No. 03</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_both">Full / Half-day</span></div>
+            <div class="name" data-i18n="tours_zen-journey_name">Kamakura: The Zen Journey</div>
+            <p class="sub" data-i18n="tours_zen-journey_sub">Experience 850 years of Kamakura and the quiet heart of Zen through Japanese gardens, zazen, and matcha.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/everyday/noren-shopfront.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">05 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_5_name">Everyday Local Life</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-swordsmithing.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/df98408a-a4cb-4cc4-af26-4203a827c34b.jpeg?w=900')"></div>
+            <span class="num-tag">No. 04</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_half">Half-day</span></div>
+            <div class="name" data-i18n="tours_swordsmithing_name">Kamakura: The Swordsmith's Flame</div>
+            <p class="sub" data-i18n="tours_swordsmithing_sub">An authentic swordsmithing experience with a 24th-generation descendant of Masamune — one of Japan’s Three Great Swordsmiths — preserving an unbroken lineage of master craftsmanship.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/japan/sutra-copying-sheet.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">06 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_6_name">Get to Know Japan</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-zenrise-kamakura-cocon.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/3d1a84d2-36ca-4c4e-913c-eab26856925f.jpeg?w=900')"></div>
+            <span class="num-tag">No. 06</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_both">Full / Half-day</span></div>
+            <div class="name" data-i18n="tours_zenrise-kamakura-cocon_name">ZENRISE × Kamakura Cocon: Custom Private Tour &amp; Dining</div>
+            <p class="sub" data-i18n="tours_zenrise-kamakura-cocon_sub">A seamless blend of a private Kamakura tour by ZENRISE and fine dining at Kamakura Cocon.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/support/railway-crossing-hills.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">07 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_7_name">Travel Support</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-yokohama-anime-gaming-kawaii.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg?w=900')"></div>
+            <span class="num-tag">No. 08</span>
+          </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_yokohama">Yokohama</span><span class="dot">・</span><span data-i18n="tours_len_half">Half-day</span></div>
+            <div class="name" data-i18n="tours_yokohama-anime-gaming-kawaii_name">Yokohama: Anime, Gaming &amp; Kawaii Pop Culture Tour</div>
+            <p class="sub" data-i18n="tours_yokohama-anime-gaming-kawaii_sub">Explore Yokohama with an English-speaking local guide. Visit Pokémon Center, trading card shops, gachapon machines, purikura photo booths, game arcades, and more — discovering the world of Japanese anime, gaming, and Kawaii culture.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
           </div>
         </a>
 
-        <a class="dest" href="#">
-          <div class="pic photo" style="background-image: url('assets/concierge/coastal-town-view.jpg')"></div>
-          <div class="scrim"></div>
-          <span class="num-tag">08 / 08</span>
-          <div class="meta">
-            <div><div class="name" data-i18n="home_dest_8_name">Travel Concierge</div></div>
-            <div class="arrow">→</div>
+        <a class="dest" href="tour-zenrise-kamakura-cocon-custom.html">
+          <div class="ph">
+            <div class="pic photo" style="background-image: url('https://imgcdn.bokun.tools/3d1a84d2-36ca-4c4e-913c-eab26856925f.jpeg?w=900')"></div>
+            <span class="num-tag">No. 09</span>
           </div>
+          <div class="panel">
+            <div class="t-meta"><span data-i18n="tours_area_kamakura">Kamakura</span><span class="dot">・</span><span data-i18n="tours_len_full">Full-day</span></div>
+            <div class="name" data-i18n="tours_zenrise-kamakura-cocon-custom_name">ZENRISE × Kamakura Cocon: Custom Private Tour &amp; Stay</div>
+            <p class="sub" data-i18n="tours_zenrise-kamakura-cocon-custom_sub">Stay · Private Tour · Dinner &amp; Breakfast A tailor-made Kamakura journey designed around your pace, combining a private ZENRISE tour with an overnight stay at Kamakura Cocon, dinner at Restaurant COCON, and breakfast the following morning.</p>
+            <div class="row"><span class="go"><span class="u" data-i18n="home_tours_cta">View this tour</span><span class="ar">&nbsp;→</span></span></div>
+          </div>
+        </a>
+
+      <!-- CMS:home-tours:end -->
+      </div>
+
+      <div class="find-more">
+        <a class="more-link" href="tours.html"><span data-i18n="home_tours_more">All tours</span><span class="ar">&nbsp;→</span></a>
+      </div>
+    </section>
+
+
+    <!-- CMS:home-news:start — hardcoded mock; the news build will own this region -->
+    <section class="home-news" data-screen-label="01 Home — News">
+      <div class="rule"></div>
+      <div class="news-head-row">
+        <h2 data-i18n="home_news_title">News &amp; stories</h2>
+      </div>
+      <div class="hn-grid">
+
+        <a class="hn-card" href="news-kamakura-enoshima.html">
+          <div class="pic" style="background-image: url('https://images.microcms-assets.io/assets/6678617c772a42aeb9340a4297ce95d3/a7737ac0130d4e5291e9b728121cf033/kamakura-enoshima-hero-enoden-dusk.jpg?fm=webp&amp;q=82&amp;w=1200')"></div>
+          <div class="date"><span>2026.07.17</span></div>
+          <h3 data-i18n="home_news_1_title">A day away from Tokyo</h3>
+          <p class="sub" data-i18n="home_news_1_sub">A bus tour through Kamakura &amp; Enoshima</p>
+        </a>
+
+        <a class="hn-card" href="news-sumo-shinjuku.html">
+          <div class="pic" style="background-image: url('https://images.microcms-assets.io/assets/6678617c772a42aeb9340a4297ce95d3/fbd5b7148bfe42c3bf65d20fa65bc522/sumo-hero-ukiyoe.jpg?fm=webp&amp;q=82&amp;w=1200')"></div>
+          <div class="date"><span>2026.07.10</span></div>
+          <h3 data-i18n="home_news_2_title">Inside the sumo ring</h3>
+          <p class="sub" data-i18n="home_news_2_sub">A show &amp; experience in Shinjuku</p>
+        </a>
+
+        <a class="hn-card" href="news-fuji-hakone.html">
+          <div class="pic" style="background-image: url('https://images.microcms-assets.io/assets/6678617c772a42aeb9340a4297ce95d3/2620a33e430f40ac9aacee66772249f8/fuji-hakone-hero-sunset.jpg?fm=webp&amp;q=82&amp;w=1200')"></div>
+          <div class="date"><span>2026.07.03</span></div>
+          <h3 data-i18n="home_news_3_title">Fuji to Hakone</h3>
+          <p class="sub" data-i18n="home_news_3_sub">And the ride home by Shinkansen</p>
         </a>
 
       </div>
+      <div class="find-more">
+        <a class="more-link" href="news.html"><span data-i18n="home_news_more">All news</span><span class="ar">&nbsp;→</span></a>
+      </div>
     </section>
+    <!-- CMS:home-news:end -->
 
     <!-- ───── Footer ───── -->
     <footer class="foot-v2" data-screen-label="01 Home — Footer">
@@ -1132,7 +950,6 @@
 
   </div>
 
-  <script src="image-slot.js"></script>
 
 <script>
   // Scale the 1920px stage down to fit the viewer's window width.
@@ -1261,7 +1078,7 @@
 
   // gentle reveal on scroll
   (function () {
-    var els = document.querySelectorAll('.dest');
+    var els = document.querySelectorAll('.dest, .hn-card, .find-more');
     els.forEach(function (el) { el.classList.add('reveal'); });
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
@@ -1275,289 +1092,8 @@
     }
   })();
 
-  // Destination card expand + per-category slideshow.
-  (function () {
-    var grid = document.querySelector('.dest-grid');
-    if (!grid) return;
-    var expanded = null;
-
-    // Per-category image sets (PLACEHOLDER — swap with client photo sets).
-    // Categories 5 & 8 are intentionally photo-less; they stay as placeholders.
-    var DEST = {
-      1: { images: [
-        'assets/shrines/kamakura-tsurugaoka-hachimangu.jpg',
-        'assets/shrines/kamakura-daibutsu-great-buddha.jpg',
-        'assets/shrines/kamakura-meigetsuin-hydrangea-steps.jpg',
-        'assets/shrines/kamakura-meigetsuin-round-window.jpg',
-        'assets/shrines/kamakura-toshoji-bridge.jpg',
-        'assets/shrines/cherry-blossom-temple-approach.jpg',
-        'assets/shrines/temple-moss-garden.jpg',
-        'assets/shrines/hidden-shrine-komainu.jpg'
-      ] },
-      2: { images: [
-        'assets/cultural/zazen-meditation-hall.jpg',
-        'assets/cultural/matcha-tea-bowl.jpg',
-        'assets/cultural/sutra-copying-hand.jpg',
-        'assets/cultural/temple-garden-suikinkutsu.jpg'
-      ] },
-      3: { images: [
-        'assets/food/ramen.jpg',
-        'assets/food/zaru-soba.jpg',
-        'assets/food/tempura-soba-set.jpg',
-        'assets/food/teishoku-set.jpg',
-        'assets/food/curry-plate.jpg',
-        'assets/food/izakaya-table.jpg',
-        'assets/food/cafe-lunch.jpg',
-        'assets/food/parfait-dessert.jpg'
-      ] },
-      4: { images: [
-        'assets/views/mount-fuji-ocean.jpg',
-        'assets/views/mount-fuji-sunset.jpg',
-        'assets/views/coastal-hillside-view.jpg',
-        'assets/views/ocean-headland-view.jpg',
-        'assets/views/coastal-road-ocean.jpg',
-        'assets/views/town-bay-view.jpg',
-        'assets/views/train-tracks-dusk.jpg',
-        'assets/views/monorail-street.jpg'
-      ] },
-      5: { images: [
-        'assets/everyday/noren-shopfront.jpg',
-        'assets/everyday/retro-street-corner.jpg',
-        'assets/everyday/seaside-alley.jpg',
-        'assets/everyday/tatami-room-garden-view.jpg'
-      ] },
-      6: { images: ['assets/japan/sutra-copying-sheet.jpg'] },
-      7: { images: ['assets/support/railway-crossing-hills.jpg'] },
-      8: { images: ['assets/concierge/coastal-town-view.jpg'] }
-    };
-
-    function t(key) {
-      return (window.ZenriseI18n && ZenriseI18n.t) ? ZenriseI18n.t(key) : key;
-    }
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
-    function catOf(card) { return parseInt(card.querySelector('.num-tag').textContent, 10); }
-
-    // On each page load, give every photo category a random starting image.
-    Array.prototype.forEach.call(grid.querySelectorAll('.dest'), function (card) {
-      var cfg = DEST[catOf(card)];
-      if (!cfg || !cfg.images.length) return;
-      var idx = Math.floor(Math.random() * cfg.images.length);
-      card._imgIdx = idx;
-      var pic = card.querySelector('.pic');
-      if (pic) {
-        pic.classList.add('photo');
-        pic.classList.remove('placeholder');
-        pic.style.backgroundImage = "url('" + cfg.images[idx] + "')";
-      }
-    });
-
-    function clip(cardRect, gridRect) {
-      var t = (cardRect.top    - gridRect.top)    / gridRect.height * 100;
-      var r = (gridRect.right  - cardRect.right)  / gridRect.width  * 100;
-      var b = (gridRect.bottom - cardRect.bottom) / gridRect.height * 100;
-      var l = (cardRect.left   - gridRect.left)   / gridRect.width  * 100;
-      return 'inset(' + t.toFixed(3) + '% ' + r.toFixed(3) + '% ' + b.toFixed(3) + '% ' + l.toFixed(3) + '%)';
-    }
-
-    // Fill the cream panel's text from the dictionary (reused on language change).
-    function render(overlay) {
-      var cat = overlay._cat;
-      overlay.querySelector('.exp-name').textContent = t('home_dest_' + cat + '_name');
-      var leadEl = overlay.querySelector('.exp-lead');
-      if (leadEl) {
-        var leadKey = 'home_dest_' + cat + '_lead';
-        var leadVal = t(leadKey);
-        leadEl.textContent = leadVal === leadKey ? '' : leadVal;
-        leadEl.style.display = leadVal === leadKey ? 'none' : '';
-      }
-      overlay.querySelector('.exp-cta').innerHTML = t('home_dest_cta');
-      var ul = overlay.querySelector('.exp-items');
-      ul.innerHTML = '';
-      for (var i = 1; i <= 8; i++) {
-        var key = 'home_dest_' + cat + '_item_' + i;
-        var val = t(key);
-        if (val === key) break;            // missing key → end of list
-        var li = document.createElement('li');
-        var label = document.createElement('span');
-        label.textContent = val;
-        var arr = document.createElement('span');
-        arr.className = 'it-arrow';
-        arr.textContent = '→';
-        li.appendChild(label);
-        li.appendChild(arr);
-        ul.appendChild(li);
-      }
-    }
-
-    function showSlide(overlay, animate) {
-      var imgs = overlay._slides;
-      if (!imgs || !imgs.length) return;
-      var bg = overlay.querySelector('.exp-bg');
-      var counter = overlay.querySelector('.exp-counter');
-      if (counter) counter.textContent = pad(overlay._idx + 1) + ' / ' + pad(imgs.length);
-      var url = "url('" + imgs[overlay._idx] + "')";
-      if (animate) {
-        bg.style.opacity = '0';
-        setTimeout(function () { bg.style.backgroundImage = url; bg.style.opacity = '1'; }, 180);
-      } else {
-        bg.style.backgroundImage = url;
-      }
-    }
-
-    function step(overlay, dir) {
-      var n = overlay._slides.length;
-      if (n < 2) return;
-      overlay._idx = (overlay._idx + dir + n) % n;
-      showSlide(overlay, true);
-    }
-
-    function openCard(card) {
-      if (expanded) return;
-      var gridRect = grid.getBoundingClientRect();
-      var cardRect = card.getBoundingClientRect();
-      var cat = catOf(card);
-      var images = (DEST[cat] && DEST[cat].images) || [];
-      var hasImages = images.length > 0;
-      var num = card.querySelector('.num-tag').textContent;
-      var multi = images.length > 1;
-
-      var overlay = document.createElement('div');
-      overlay.className = 'dest-expanded' + (hasImages ? '' : ' is-placeholder');
-      overlay.innerHTML =
-        '<div class="exp-bg"></div>' +
-        '<div class="exp-scrim"></div>' +
-        (multi
-          ? '<button class="exp-arrow prev" aria-label="Previous image">&#8592;</button>' +
-            '<button class="exp-arrow next" aria-label="Next image">&#8594;</button>' +
-            '<div class="exp-counter"></div>'
-          : '') +
-        '<div class="exp-panel">' +
-          '<div class="exp-num">' + num + '</div>' +
-          '<div class="exp-name"></div>' +
-          '<p class="exp-lead"></p>' +
-          '<ul class="exp-items"></ul>' +
-          '<a class="exp-cta" href="contact.html#booking"></a>' +
-        '</div>' +
-        '<button class="dest-close" aria-label="Close">&#x2715;</button>';
-
-      overlay._origCard = card;
-      overlay._cat = cat;
-      overlay._slides = images;
-      overlay._idx = card._imgIdx || 0;
-      render(overlay);
-      if (hasImages) showSlide(overlay, false);
-
-      overlay.style.clipPath = clip(cardRect, gridRect);
-      // Mobile overlay is absolute page content, not fixed (see the ≤1023
-      // CSS) — align its top with the viewport at the locked scroll offset.
-      if (window.matchMedia('(max-width: 1023px)').matches) {
-        overlay.style.top = (-gridRect.top - 1) + 'px';
-        // pin the page at its current offset (see html.exp-lock body CSS)
-        overlay._lockY = window.scrollY;
-        document.body.style.top = -overlay._lockY + 'px';
-        // Measure the real visible height and keep it current while the
-        // toolbar collapses/expands — the overlay and pinned photo size
-        // from --exp-vvh instead of CSS viewport units.
-        var vv = window.visualViewport;
-        var size = function () {
-          var h = vv ? vv.height : window.innerHeight;
-          overlay.style.setProperty('--exp-vvh', h + 'px');
-        };
-        size();
-        if (vv) {
-          vv.addEventListener('resize', size);
-          overlay._unsize = function () { vv.removeEventListener('resize', size); };
-        }
-      }
-      grid.appendChild(overlay);
-      expanded = overlay;
-      document.documentElement.classList.add('exp-lock');
-
-      // Force the browser to commit the initial clip-path before animating.
-      overlay.getBoundingClientRect();
-      overlay.style.transition = 'clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1)';
-      overlay.style.clipPath = 'inset(0%)';
-      setTimeout(function () { overlay.classList.add('open'); }, 10);
-
-      var prev = overlay.querySelector('.exp-arrow.prev');
-      var next = overlay.querySelector('.exp-arrow.next');
-      if (prev) prev.addEventListener('click', function (e) { e.stopPropagation(); step(overlay, -1); });
-      if (next) next.addEventListener('click', function (e) { e.stopPropagation(); step(overlay, 1); });
-
-      // Touch swipe on the photo cycles slides (the arrows are hidden on
-      // small screens). Horizontal-dominant moves over 40px only, so vertical
-      // scrolling and simple taps (tap = close) are unaffected.
-      var bgEl = overlay.querySelector('.exp-bg');
-      var tX = null, tY = null;
-      bgEl.addEventListener('touchstart', function (e) {
-        if (e.touches.length !== 1) return;
-        tX = e.touches[0].clientX; tY = e.touches[0].clientY;
-      }, { passive: true });
-      bgEl.addEventListener('touchend', function (e) {
-        if (tX === null) return;
-        var dx = e.changedTouches[0].clientX - tX;
-        var dy = e.changedTouches[0].clientY - tY;
-        tX = tY = null;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) step(overlay, dx < 0 ? 1 : -1);
-      }, { passive: true });
-    }
-
-    function closeCard() {
-      if (!expanded) return;
-      var overlay = expanded;
-      expanded = null;
-      document.documentElement.classList.remove('exp-lock');
-      if (overlay._lockY !== undefined) {
-        document.body.style.top = '';
-        window.scrollTo({ top: overlay._lockY, behavior: 'instant' });
-      }
-      if (overlay._unsize) overlay._unsize();
-      overlay.classList.remove('open');
-      // Fade the cream panel away so the full-bleed photo is revealed before the
-      // clip-path shrinks back — otherwise right-column cards close over the panel.
-      overlay.classList.add('closing');
-
-      requestAnimationFrame(function () {
-        var gridRect = grid.getBoundingClientRect();
-        var cardRect = overlay._origCard.getBoundingClientRect();
-        overlay.style.transition = 'clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-        overlay.style.clipPath = clip(cardRect, gridRect);
-        setTimeout(function () {
-          if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-        }, 550);
-      });
-    }
-
-    grid.addEventListener('click', function (e) {
-      if (expanded) {
-        if (e.target.closest('.exp-cta')) return;      // let the CTA navigate
-        e.preventDefault();
-        if (e.target.closest('.exp-arrow')) return;    // cycling, not closing
-        if (e.target.closest('.exp-panel')) return;    // reading the offerings
-        closeCard();                                   // × button or image area
-        return;
-      }
-      e.preventDefault();
-      var card = e.target.closest('.dest');
-      if (card) openCard(card);
-    });
-
-    // Keyboard: Esc closes, ←/→ cycle the slideshow while open.
-    document.addEventListener('keydown', function (e) {
-      if (!expanded) return;
-      if (e.key === 'Escape') closeCard();
-      else if (e.key === 'ArrowLeft') step(expanded, -1);
-      else if (e.key === 'ArrowRight') step(expanded, 1);
-    });
-
-    // Re-render the open panel if the visitor switches language.
-    document.addEventListener('DOMContentLoaded', function () {
-      if (window.ZenriseI18n && ZenriseI18n.onChange) {
-        ZenriseI18n.onChange(function () { if (expanded) render(expanded); });
-      }
-    });
-  })();
 </script>
+<script>window.ZENRISE_CMS_DICT = {"en":{"tours_ikebana-ichigo-ichie_name":"Kamakura: Ikebana — One Flower, One Encounter","tours_ikebana-ichigo-ichie_sub":"A private, small-group ikebana experience with master florist Koen Yokoi. Discover the quiet beauty of Kamakura through flowers and a personal encounter with a master of the art.","tours_ikebana-ichigo-ichie_hours":"1 hour and 30 minutes","tours_ikebana-ichigo-ichie_title":"Kamakura: Ikebana — One Flower, One Encounter — Zenrise","tours_ikebana-ichigo-ichie_eyebrow":"Tour No. 01","tours_ikebana-ichigo-ichie_cap":"","tours_ikebana-ichigo-ichie_cta_eyebrow":"from ¥88,000 ・ 1–6 travelers","tours_ikebana-ichigo-ichie_price":"from ¥88,000","tours_kamakura-enoshima-yokohama-local_name":"Kamakura, Enoshima & Yokohama Private Local Guide Service","tours_kamakura-enoshima-yokohama-local_sub":"Explore Kamakura, Enoshima, and Yokohama with an English-speaking local guide, with support for navigation, translation, and local recommendations at your own pace.","tours_kamakura-enoshima-yokohama-local_hours":"8 hours","tours_kamakura-enoshima-yokohama-local_title":"Kamakura, Enoshima & Yokohama Private Local Guide Service — Zenrise","tours_kamakura-enoshima-yokohama-local_eyebrow":"Tour No. 01","tours_kamakura-enoshima-yokohama-local_cap":"","tours_kamakura-enoshima-yokohama-local_cta_eyebrow":"from ¥40,000 per group ・ 1–6 travelers","tours_kamakura-enoshima-yokohama-local_price":"from ¥40,000 per group","tours_candle-making_name":"Kamakura & Fujisawa: Japanese Candle-Making — A Handmade Light","tours_candle-making_sub":"A private, intimate candle-making experience in Shonan, where you can slow down and discover the quiet beauty of Japanese craftsmanship. Guided by local candle artisan Meria, create your own Japanese candle by hand using natural materials from the region.","tours_candle-making_hours":"2 hours","tours_candle-making_title":"Kamakura & Fujisawa: Japanese Candle-Making — A Handmade Light — Zenrise","tours_candle-making_eyebrow":"Tour No. 02","tours_candle-making_cap":"","tours_candle-making_cta_eyebrow":"from ¥58,000","tours_candle-making_price":"from ¥58,000","tours_zen-journey_name":"Kamakura: The Zen Journey","tours_zen-journey_sub":"Experience 850 years of Kamakura and the quiet heart of Zen through Japanese gardens, zazen, and matcha.","tours_zen-journey_hours":"8 hours","tours_zen-journey_title":"Kamakura: The Zen Journey — Zenrise","tours_zen-journey_eyebrow":"Tour No. 03","tours_zen-journey_cap":"","tours_zen-journey_cta_eyebrow":"from ¥50,000 ・ 1–6 travelers","tours_zen-journey_price":"from ¥50,000","tours_swordsmithing_name":"Kamakura: The Swordsmith's Flame","tours_swordsmithing_sub":"An authentic swordsmithing experience with a 24th-generation descendant of Masamune — one of Japan’s Three Great Swordsmiths — preserving an unbroken lineage of master craftsmanship.","tours_swordsmithing_hours":"2 hours","tours_swordsmithing_title":"Kamakura: The Swordsmith's Flame — Zenrise","tours_swordsmithing_eyebrow":"Tour No. 04","tours_swordsmithing_cap":"","tours_swordsmithing_cta_eyebrow":"from ¥150,000","tours_swordsmithing_price":"from ¥150,000","tours_zenrise-kamakura-cocon_name":"ZENRISE × Kamakura Cocon: Custom Private Tour & Dining","tours_zenrise-kamakura-cocon_sub":"A seamless blend of a private Kamakura tour by ZENRISE and fine dining at Kamakura Cocon.","tours_zenrise-kamakura-cocon_hours":"8 hours","tours_zenrise-kamakura-cocon_title":"ZENRISE × Kamakura Cocon: Custom Private Tour & Dining — Zenrise","tours_zenrise-kamakura-cocon_eyebrow":"Tour No. 06","tours_zenrise-kamakura-cocon_cap":"","tours_zenrise-kamakura-cocon_cta_eyebrow":"from ¥25,400 ・ 2–6 travelers","tours_zenrise-kamakura-cocon_price":"from ¥25,400","tours_yokohama-anime-gaming-kawaii_name":"Yokohama: Anime, Gaming & Kawaii Pop Culture Tour","tours_yokohama-anime-gaming-kawaii_sub":"Explore Yokohama with an English-speaking local guide. Visit Pokémon Center, trading card shops, gachapon machines, purikura photo booths, game arcades, and more — discovering the world of Japanese anime, gaming, and Kawaii culture.","tours_yokohama-anime-gaming-kawaii_hours":"3 hours and 30 minutes","tours_yokohama-anime-gaming-kawaii_title":"Yokohama: Anime, Gaming & Kawaii Pop Culture Tour — Zenrise","tours_yokohama-anime-gaming-kawaii_eyebrow":"Tour No. 08","tours_yokohama-anime-gaming-kawaii_cap":"","tours_yokohama-anime-gaming-kawaii_cta_eyebrow":"from ¥15,000 ・ 1–10 travelers","tours_yokohama-anime-gaming-kawaii_price":"from ¥15,000","tours_zenrise-kamakura-cocon-custom_name":"ZENRISE × Kamakura Cocon: Custom Private Tour & Stay","tours_zenrise-kamakura-cocon-custom_sub":"Stay · Private Tour · Dinner & Breakfast A tailor-made Kamakura journey designed around your pace, combining a private ZENRISE tour with an overnight stay at Kamakura Cocon, dinner at Restaurant COCON, and breakfast the following morning.","tours_zenrise-kamakura-cocon-custom_hours":"8 hours","tours_zenrise-kamakura-cocon-custom_title":"ZENRISE × Kamakura Cocon: Custom Private Tour & Stay — Zenrise","tours_zenrise-kamakura-cocon-custom_eyebrow":"Tour No. 09","tours_zenrise-kamakura-cocon-custom_cap":"","tours_zenrise-kamakura-cocon-custom_cta_eyebrow":"from ¥81,000 ・ 2–6 travelers","tours_zenrise-kamakura-cocon-custom_price":"from ¥81,000"},"ja":{"tours_ikebana-ichigo-ichie_name":"鎌倉：生け花体験・一花一会","tours_ikebana-ichigo-ichie_sub":"現役の華道家・横井紅炎による、少人数のプライベートいけばな体験です。 鎌倉の静けさと、お花との一期一会をお楽しみください。","tours_ikebana-ichigo-ichie_hours":"1 時間30 分","tours_ikebana-ichigo-ichie_title":"鎌倉：生け花体験・一花一会 — Zenrise","tours_ikebana-ichigo-ichie_eyebrow":"ツアー No. 01","tours_ikebana-ichigo-ichie_cap":"","tours_ikebana-ichigo-ichie_cta_eyebrow":"¥88,000〜 ・ 1〜6名","tours_ikebana-ichigo-ichie_price":"¥88,000〜","tours_kamakura-enoshima-yokohama-local_name":"鎌倉・江の島・横浜 英語対応 専属ガイドサービス","tours_kamakura-enoshima-yokohama-local_sub":"英語対応のローカルガイドとともに、鎌倉・江ノ島・横浜を自分のペースで巡ります。移動や通訳をサポートしながら、地元ならではのおすすめスポットもご案内します。","tours_kamakura-enoshima-yokohama-local_hours":"8 時間","tours_kamakura-enoshima-yokohama-local_title":"鎌倉・江の島・横浜 英語対応 専属ガイドサービス — Zenrise","tours_kamakura-enoshima-yokohama-local_eyebrow":"ツアー No. 01","tours_kamakura-enoshima-yokohama-local_cap":"","tours_kamakura-enoshima-yokohama-local_cta_eyebrow":"¥40,000〜（1グループ） ・ 1〜6名","tours_kamakura-enoshima-yokohama-local_price":"¥40,000〜（1グループ）","tours_candle-making_name":"鎌倉・藤沢：和蝋燭作り体験 — 手作りの灯","tours_candle-making_sub":"湘南の静かな空間で、日本の手仕事に触れながら、ゆっくりと過ごすプライベートな和蝋燭づくり体験。湘南を拠点に活動する蝋作家・Meriaとともに、地域の自然素材を使って一本の和蝋燭を手作りし、日本で過ごした時間の記憶とともに持ち帰ります。","tours_candle-making_hours":"2 時間","tours_candle-making_title":"鎌倉・藤沢：和蝋燭作り体験 — 手作りの灯 — Zenrise","tours_candle-making_eyebrow":"ツアー No. 02","tours_candle-making_cap":"","tours_candle-making_cta_eyebrow":"¥58,000〜","tours_candle-making_price":"¥58,000〜","tours_zen-journey_name":"鎌倉 禅の旅","tours_zen-journey_sub":"850年の鎌倉の歴史と、禅の本質に触れる。日本庭園・坐禅・抹茶。","tours_zen-journey_hours":"8 時間","tours_zen-journey_title":"鎌倉 禅の旅 — Zenrise","tours_zen-journey_eyebrow":"ツアー No. 03","tours_zen-journey_cap":"","tours_zen-journey_cta_eyebrow":"¥50,000〜 ・ 1〜6名","tours_zen-journey_price":"¥50,000〜","tours_swordsmithing_name":"鎌倉： 刀匠の炎 刀鍛冶体験","tours_swordsmithing_sub":"日本三大刀匠の一人、正宗の系譜を継ぐ、24代にわたり途切れることの ない刀鍛冶の血脈による刀鍛冶体験。","tours_swordsmithing_hours":"2 時間","tours_swordsmithing_title":"鎌倉： 刀匠の炎 刀鍛冶体験 — Zenrise","tours_swordsmithing_eyebrow":"ツアー No. 04","tours_swordsmithing_cap":"","tours_swordsmithing_cta_eyebrow":"¥150,000〜","tours_swordsmithing_price":"¥150,000〜","tours_zenrise-kamakura-cocon_name":"ZENRISE × 鎌倉古今：カスタムプライベートツアー＆ダイニング","tours_zenrise-kamakura-cocon_sub":"ZENRISEによるオーダーメイドのプライベートツアーと、鎌倉古今でのランチまたはディナーを組み合わせた、鎌倉ならではの一日。","tours_zenrise-kamakura-cocon_hours":"8 時間","tours_zenrise-kamakura-cocon_title":"ZENRISE × 鎌倉古今：カスタムプライベートツアー＆ダイニング — Zenrise","tours_zenrise-kamakura-cocon_eyebrow":"ツアー No. 06","tours_zenrise-kamakura-cocon_cap":"","tours_zenrise-kamakura-cocon_cta_eyebrow":"¥25,400〜 ・ 2〜6名","tours_zenrise-kamakura-cocon_price":"¥25,400〜","tours_yokohama-anime-gaming-kawaii_name":"横浜：アニメ・ゲーム・Kawaii ポップカルチャーツアー","tours_yokohama-anime-gaming-kawaii_sub":"英語ガイドと歩く3時間半。ポケモンセンター、カードショップ、ガ チャガチャ、プリクラ — ガイドブックには載らない「今の日本」を体験ごとご案内します。","tours_yokohama-anime-gaming-kawaii_hours":"3 時間30 分","tours_yokohama-anime-gaming-kawaii_title":"横浜：アニメ・ゲーム・Kawaii ポップカルチャーツアー — Zenrise","tours_yokohama-anime-gaming-kawaii_eyebrow":"ツアー No. 08","tours_yokohama-anime-gaming-kawaii_cap":"","tours_yokohama-anime-gaming-kawaii_cta_eyebrow":"¥15,000〜 ・ 1〜10名","tours_yokohama-anime-gaming-kawaii_price":"¥15,000〜","tours_zenrise-kamakura-cocon-custom_name":"ZENRISE × 鎌倉古今：カスタムプライベートツアー＆宿泊プラン","tours_zenrise-kamakura-cocon-custom_sub":"鎌倉で過ごす時間を、お客様のペースに合わせて丁寧に。ZENRISEのオーダーメイドツアーと、鎌倉古今での滞在、Restaurant COCONでのディナーと朝食を組み合わせた特別なプランです。","tours_zenrise-kamakura-cocon-custom_hours":"8 時間","tours_zenrise-kamakura-cocon-custom_title":"ZENRISE × 鎌倉古今：カスタムプライベートツアー＆宿泊プラン — Zenrise","tours_zenrise-kamakura-cocon-custom_eyebrow":"ツアー No. 09","tours_zenrise-kamakura-cocon-custom_cap":"","tours_zenrise-kamakura-cocon-custom_cta_eyebrow":"¥81,000〜 ・ 2〜6名","tours_zenrise-kamakura-cocon-custom_price":"¥81,000〜"}};</script>
 <script src="lang.js"></script>
 </body>
 </html>
