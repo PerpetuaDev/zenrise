@@ -21,10 +21,26 @@ import json, os, re, sys, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SITE = 'https://zenrise.jp'
-IMG_PAGE = '?fm=webp&q=82&w=1920'   # article hero
-IMG_FIG = '?fm=webp&q=82&w=1600'    # in-article figures, featured card
-IMG_CARD = '?fm=webp&q=82&w=1200'   # index grid cards
-IMG_OG = '?fm=jpg&w=1200'           # link previews: JPG for scraper compatibility
+# Every slot is a fixed-height box painted with `background: center / cover`,
+# so the rendition has to arrive in roughly the slot's shape. Asking for a
+# width alone leaves the height to the source: a 2334x3500 portrait hero came
+# back 1920x2879 and the 700px-tall slot centre-cropped it to a band across
+# the middle, slicing the hand off at the bottom edge (2026-09-16).
+#
+# fit=crop pins both dimensions. crop=faces,entropy chooses which band to
+# keep -- faces first for the people shots, then the busiest region -- which
+# is what stops the cut falling through the subject. The default, center,
+# is exactly what produced the sliced hand.
+#
+# Ratios follow the CSS boxes: the hero runs full-bleed at ~2:1 on a laptop,
+# the featured photo is 1088x612 and in-article figures 880x520 (both ~16:9),
+# the grid cards sit between 1.16 and 1.59 across breakpoints, and 1200x630
+# is the standard link-preview frame.
+CROP = 'fit=crop&crop=faces,entropy'
+IMG_PAGE = f'?fm=webp&q=82&w=1920&h=960&{CROP}'   # article hero, 2:1
+IMG_FIG = f'?fm=webp&q=82&w=1600&h=900&{CROP}'    # in-article figures, featured card
+IMG_CARD = f'?fm=webp&q=82&w=1200&h=900&{CROP}'   # index grid cards, 4:3
+IMG_OG = f'?fm=jpg&w=1200&h=630&{CROP}'           # link previews: JPG for scraper compatibility
 
 STATIC_PAGES = ['', 'about.html', 'contact.html', 'terms.html', 'news.html']
 
