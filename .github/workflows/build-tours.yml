@@ -5,13 +5,13 @@ name: Build tours from Bokun
 # dispatch: this repo is public, and pull_request_target would hand the
 # credentials to any fork.
 on:
-  # Schedule paused at go-live: the live repo has no BOKUN_ACCESS_KEY /
-  # BOKUN_SECRET_KEY yet, and --require-live means every scheduled run would
-  # fail red hourly until they are set. Add the two secrets, then uncomment
-  # the schedule below to resume the hourly zero-touch rebuild. Manual
-  # dispatch stays available for a first verified run.
-  # schedule:
-  #   - cron: '0 * * * *'
+  # Resumed 2026-09-16: BOKUN_ACCESS_KEY / BOKUN_SECRET_KEY are now set on this
+  # repo, and a manual dispatch (run 35027041169) verified a real live fetch --
+  # 9 tours resolved, 8 published, 0 stale removals, no diff against the tree
+  # adopted at go-live. The schedule was paused between 09-11 and 09-16, so
+  # nothing from the Bokun panel reached the site in that window.
+  schedule:
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 concurrency:
