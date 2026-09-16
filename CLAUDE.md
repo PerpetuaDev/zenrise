@@ -32,6 +32,11 @@ Each of these exists only here, and staging will silently undo it:
   `cms/templates/`. Pages alone is not enough — `tour-*.html` and `news-*.html`
   are generated, so a rebuild strips the tag straight back out if the template
   lacks it.
+- **`<meta name="cms-revised">` in `cms/templates/article.html`.** The watchdog
+  compares it against microCMS to spot an *edited* article whose page was never
+  rebuilt — the majority of the 2026-08-11 incident. Staging's template has no
+  such tag, so an adoption silently blinds that check, and it fails open: pages
+  without the stamp are reported as fine.
 - **The push-race retry loop in `.github/workflows/build-news.yml`.** Two
   publishes in quick succession race; the loser's push is rejected and its
   rebuild is dropped silently. This actually happened on 2026-08-11 and the
@@ -51,14 +56,37 @@ Each of these exists only here, and staging will silently undo it:
   `cms/tours-config.json` (`productListName`) contains; the `allowlist` is only a
   fallback for when no such list exists. `tours-config.json` entries are pinned
   slug/number overrides, not publish decisions.
+- `cms/watchdog.py` — checks the **deployed site** against microCMS daily
+  (`watchdog.yml`, 07:00 JST) and opens an issue on drift. Exit 1 means the two
+  disagree; exit 2 means it could not find out. It never fails the job red.
+
+The news build runs on the microCMS webhook *and* hourly at `:30`. The webhook
+stopped firing between 2026-08-11 and 2026-09-16 with nothing to show for it, so
+the schedule is the floor on staleness; `:30` keeps it clear of `build-tours` at
+`:00`, which pushes to the same branch.
+
+**Images:** every microCMS rendition pins width *and* height with
+`fit=crop&crop=faces,entropy`. Asking for a width alone returns the source's own
+shape, and the fixed-height CSS slots then centre-crop it — which sliced a
+portrait hero through the subject. Portrait figures take `IMG_FIG_TALL`, because
+they land in a taller box (`.fig .ph.tall`).
+
+**`build-news.py` refuses to publish an empty catalogue** (`--allow-empty`
+overrides). An empty `contents` arrives as a 200, and the stale sweep would then
+delete every article page and push the deletion.
 
 Unknown fields from either API are ignored — `pick()` and `.get()` throughout —
 so a retired CMS field cannot break a build.
 
 ## Tests
 
-`python3 -m pytest cms/tests` — 464 tests. **Neither workflow runs them.** They
-guard the zero-touch pipeline, so run them before touching `cms/`.
+`python3 -m pytest cms/tests` — 497 tests. Also `python3 -m unittest discover -s
+cms/tests -t .`, which is what CI uses so the runner needs no install.
+
+**Both build workflows run them**, after the build and before the commit, so a
+failure stops publication rather than merely colouring a run red. Nothing ran
+them until 2026-09-16, which is how two sat red from the first tour the client
+published until someone happened to look.
 
 `test_archive_is_untouched` skips here by design: `archive/` is a staging-only
 holding pen and is deliberately not published to this repo.
