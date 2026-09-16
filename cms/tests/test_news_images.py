@@ -11,7 +11,7 @@ SPEC = importlib.util.spec_from_file_location(
 bn = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(bn)
 
-TRANSFORMS = ('IMG_PAGE', 'IMG_FIG', 'IMG_CARD', 'IMG_OG')
+TRANSFORMS = ('IMG_PAGE', 'IMG_FIG', 'IMG_FIG_TALL', 'IMG_CARD', 'IMG_OG')
 CMS_IMG = re.compile(r"url\('(https://images\.microcms-assets\.io/[^']+)'\)")
 
 
@@ -38,6 +38,28 @@ class TestTransforms(unittest.TestCase):
             self.assertIn('crop=', getattr(bn, name), name)
 
 
+def ratio(transform):
+    """w/h out of a transform query string."""
+    w = int(re.search(r'[?&]w=(\d+)', transform).group(1))
+    h = int(re.search(r'[?&]h=(\d+)', transform).group(1))
+    return w / h
+
+
+class TestTallSlot(unittest.TestCase):
+    """A portrait figure is routed to `.fig .ph.tall`, which is 880x720 on
+    desktop (1.22) and about 1.11 on mobile. Feeding it the same 16:9
+    rendition as the default slot cuts the portrait to a landscape band
+    first, then the box crops that band's sides -- strictly worse than the
+    slot it was promoted out of."""
+
+    def test_the_tall_slot_asks_for_a_taller_frame_than_the_default(self):
+        self.assertLess(ratio(bn.IMG_FIG_TALL), ratio(bn.IMG_FIG))
+
+    def test_the_tall_frame_roughly_matches_its_box(self):
+        # box is 1.22 desktop / ~1.11 mobile; anything landscape defeats it
+        self.assertLess(ratio(bn.IMG_FIG_TALL), 1.4)
+
+
 class TestBuiltPages(unittest.TestCase):
     """The invariant on the real pages: no CMS image is ever requested in an
     unconstrained shape."""
@@ -51,6 +73,22 @@ class TestBuiltPages(unittest.TestCase):
 
     def test_there_are_pages_to_check(self):
         self.assertTrue(self.pages)
+
+    def test_tall_figures_are_requested_in_a_tall_frame(self):
+        fig = re.compile(
+            r"""<div class="ph( tall)?" style="background-image: url\('([^']+)'\)""")
+        seen = 0
+        for name, html in self.pages.items():
+            for tall, url in fig.findall(html):
+                if 'images.microcms-assets.io' not in url:
+                    continue
+                seen += 1
+                r = ratio(url.replace('&amp;', '&'))
+                if tall:
+                    self.assertLess(r, 1.4, f'{name}: tall figure got {r:.2f}')
+                else:
+                    self.assertGreater(r, 1.4, f'{name}: wide figure got {r:.2f}')
+        self.assertTrue(seen, 'no CMS figures found to check')
 
     def test_no_cms_image_is_requested_without_a_crop(self):
         bad = []

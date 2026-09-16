@@ -39,6 +39,11 @@ SITE = 'https://zenrise.jp'
 CROP = 'fit=crop&crop=faces,entropy'
 IMG_PAGE = f'?fm=webp&q=82&w=1920&h=960&{CROP}'   # article hero, 2:1
 IMG_FIG = f'?fm=webp&q=82&w=1600&h=900&{CROP}'    # in-article figures, featured card
+# A portrait figure is promoted to `.fig .ph.tall` -- 880x720 desktop (1.22),
+# about 1.11 on mobile. Handing it the 16:9 frame above would cut the portrait
+# to a landscape band and then crop that band's sides to fit, which is worse
+# than not promoting it at all.
+IMG_FIG_TALL = f'?fm=webp&q=82&w=1200&h=1000&{CROP}'  # portrait figures, 1.2
 IMG_CARD = f'?fm=webp&q=82&w=1200&h=900&{CROP}'   # index grid cards, 4:3
 IMG_OG = f'?fm=jpg&w=1200&h=630&{CROP}'           # link previews: JPG for scraper compatibility
 
@@ -257,8 +262,9 @@ def render_article(m, num, tpl):
             if t == 'fig':
                 nf += 1
                 tall = ' tall' if b['h'] > b['w'] else ''
+                frame = IMG_FIG_TALL if tall else IMG_FIG
                 lines.append('          <figure class="fig">')
-                lines.append(f'''            <div class="ph{tall}" style="background-image: url('{esc(b["src"] + IMG_FIG)}')"></div>''')
+                lines.append(f'''            <div class="ph{tall}" style="background-image: url('{esc(b["src"] + frame)}')"></div>''')
                 if b['alt']:
                     alt_ja = figs_ja[nf - 1]['alt'] if nf - 1 < len(figs_ja) else ''
                     put(f'_s{i}_f{nf}_cap', (b['alt'], alt_ja or b['alt']))
