@@ -59,14 +59,63 @@ def env(name):
     sys.exit(f'missing {name} (env var or cms/.env)')
 
 
-def fetch_articles():
-    service, key = env('MICROCMS_SERVICE_ID'), env('MICROCMS_API_KEY')
-    req = urllib.request.Request(
-        f'https://{service}.microcms.io/api/v1/news?limit=100&orders=-date',
-        headers={'X-MICROCMS-API-KEY': key})
+class BuildError(Exception):
+    pass
+
+
+PAGE = 100   # microCMS caps limit at 100 per request
+
+
+def _http_json(url, headers):
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req) as r:
-        data = json.load(r)
-    return data['contents']
+        return json.load(r)
+
+
+def fetch_articles(transport=None, service=None, key=None):
+    """Every published article, following microCMS's paging to the end.
+
+    The fetch used to ask for one page of 100 and stop. The stale sweep in
+    main() deletes any news-*.html the fetch did not return, so the 101st
+    article would not merely be missing -- publishing it would delete the
+    page of whichever article it displaced. The transport is injectable so
+    paging can be tested without credentials or network.
+    """
+    transport = transport or _http_json
+    service = service or env('MICROCMS_SERVICE_ID')
+    key = key or env('MICROCMS_API_KEY')
+    headers = {'X-MICROCMS-API-KEY': key}
+
+    out = []
+    while True:
+        data = transport(
+            f'https://{service}.microcms.io/api/v1/news'
+            f'?limit={PAGE}&offset={len(out)}&orders=-date', headers)
+        batch = data.get('contents') or []
+        out.extend(batch)
+        total = data.get('totalCount')
+        # No total: take the response at face value. No progress: stop rather
+        # than ask for the same offset forever.
+        if total is None or len(out) >= total or not batch:
+            return out
+
+
+def check_not_empty(articles, allow_empty=False):
+    """Refuse to publish a catalogue of nothing.
+
+    An empty `contents` arrives with a 200, so it is indistinguishable from a
+    real build: main() would write an empty index and the stale sweep would
+    delete every article page, which the workflow then commits and pushes. A
+    transport error raises and fails the job loudly, but this path was silent.
+    Since 2026-09-16 the build also runs hourly on a schedule, so nobody is
+    watching when it happens. --allow-empty is the deliberate override, for a
+    site that genuinely has no articles yet.
+    """
+    if not articles and not allow_empty:
+        raise BuildError(
+            'microCMS returned 0 published articles. Refusing to rebuild, '
+            'because doing so would delete every news page. Re-run with '
+            '--allow-empty if the news section is genuinely empty.')
 
 
 def esc(s):
@@ -381,8 +430,7 @@ def render_sitemap(models):
 
 def main():
     articles = fetch_articles()
-    if not articles:
-        print('WARNING: microCMS returned 0 published articles; writing empty index')
+    check_not_empty(articles, allow_empty='--allow-empty' in sys.argv)
     models = [article_model(a) for a in articles]
 
     art_tpl = load_template('article.html')
