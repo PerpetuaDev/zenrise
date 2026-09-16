@@ -217,6 +217,9 @@ def article_model(a):
     if not m['excerpt'][0]:
         m['excerpt'] = (first_sentence(m['lead'][0], 'en'),
                         first_sentence(m['lead'][1], 'ja'))
+    # Stamped into the page so the watchdog can tell a stale build from a
+    # current one. An edit changes this without changing any page name.
+    m['revised'] = a.get('revisedAt') or a.get('updatedAt') or ''
     m['hero'] = (a.get('hero') or {}).get('url', '')
     body_en = parse_body(a.get('bodyEn') or '')
     body_ja = parse_body(a.get('bodyJa') or '')
@@ -333,6 +336,7 @@ def render_article(m, num, tpl):
         'OG_TITLE': esc(og_title),
         'OG_DESC': esc(m['excerpt'][0]),
         'OG_IMAGE': esc(og_image),
+        'CMS_REVISED': esc(m['revised']),
         'JSON_LD': json_ld,
         'K': K,
         'PAGE_TITLE': esc(en[K + '_page_title']),

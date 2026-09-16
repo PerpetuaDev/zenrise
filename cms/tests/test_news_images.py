@@ -12,7 +12,10 @@ bn = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(bn)
 
 TRANSFORMS = ('IMG_PAGE', 'IMG_FIG', 'IMG_FIG_TALL', 'IMG_CARD', 'IMG_OG')
-CMS_IMG = re.compile(r"url\('(https://images\.microcms-assets\.io/[^']+)'\)")
+# Any occurrence, not just the CSS url('...') form: og:image and
+# twitter:image are built from IMG_OG and sit in <meta content="...">, so a
+# regression confined to the link-preview frame used to pass unnoticed.
+CMS_IMG = re.compile(r"https://images\.microcms-assets\.io/[^\"'\s>]+")
 
 
 class TestTransforms(unittest.TestCase):

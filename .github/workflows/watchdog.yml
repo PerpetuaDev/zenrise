@@ -8,6 +8,11 @@ name: Watchdog - site vs microCMS
 # So this checks the deployed site against the CMS and opens an issue when
 # they disagree. 07:00 JST, so anything found is waiting at the start of the
 # working day rather than overnight.
+#
+# Two different alerts, because they need different answers: the site and the
+# CMS disagreeing is a publishing problem, while the watchdog being unable to
+# look is usually a credential or an outage. Reporting the second as the first
+# sends whoever reads it to the wrong place.
 on:
   schedule:
     - cron: '0 22 * * *'
@@ -43,49 +48,75 @@ jobs:
           # The issue is the alert.
           exit 0
 
-      - name: Raise or clear the drift issue
+      - name: Raise or clear the alert
         env:
           GH_TOKEN: ${{ github.token }}
-          TITLE: Site is out of sync with microCMS
+          DRIFT_TITLE: Site is out of sync with microCMS
+          BLIND_TITLE: Watchdog could not check the site
           REPORT: ${{ steps.check.outputs.report }}
           CODE: ${{ steps.check.outputs.code }}
         run: |
           set -euo pipefail
-          existing=$(gh issue list --state open --search "$TITLE in:title" \
-                       --json number --jq '.[0].number // empty')
+
+          # Exact title match. `gh issue list --search "... in:title"` is
+          # full-text, so it happily returns a human-filed issue that merely
+          # shares a few words -- which the bot would then comment on and
+          # close as if it had raised it.
+          number_for() {
+            gh issue list --state open --limit 100 --json number,title \
+              | python3 -c 'import json,sys; t=sys.argv[1]; print(next((str(i["number"]) for i in json.load(sys.stdin) if i["title"] == t), ""))' "$1"
+          }
+
+          drift=$(number_for "$DRIFT_TITLE")
+          blind=$(number_for "$BLIND_TITLE")
+
+          resolve() {   # $1 = issue number, $2 = closing note
+            [ -n "$1" ] || return 0
+            gh issue comment "$1" --body "$2"
+            gh issue close "$1"
+          }
+
+          write_body() {   # $1 = lead paragraph, $2 = guidance
+            {
+              echo "$1"
+              echo
+              echo '```'
+              echo "$REPORT"
+              echo '```'
+              echo
+              echo "$2"
+              echo
+              echo "This issue closes itself on the next clean run."
+            } > /tmp/watchdog-issue.md
+          }
 
           if [ "$CODE" = "0" ]; then
-            if [ -n "$existing" ]; then
-              gh issue comment "$existing" --body "Site and microCMS agree again. Closing."
-              gh issue close "$existing"
-            else
-              echo "site matches microCMS"
+            resolve "$drift" "Site and microCMS agree again. Closing."
+            resolve "$blind" "The watchdog can reach both sides again. Closing."
+            echo "site matches microCMS"
+            exit 0
+          fi
+
+          if [ "$CODE" = "1" ]; then
+            # It ran, so any "could not check" alert is answered.
+            resolve "$blind" "The watchdog is running again. Closing."
+            if [ -n "$drift" ]; then
+              echo "drift persists; issue #$drift is already open"
+              exit 0
             fi
+            write_body \
+              "The live site does not match what microCMS holds." \
+              "**Most likely cause:** the news build has not run. It runs on a microCMS webhook (instant) and hourly at :30 as a safety net, so if both are quiet, check the webhook in the microCMS panel first -- it has silently stopped before, on 2026-08-11. Recover with: \`gh workflow run \"Build news from microCMS\" -R $GITHUB_REPOSITORY --ref main\`"
+            gh issue create --title "$DRIFT_TITLE" --body-file /tmp/watchdog-issue.md
             exit 0
           fi
 
-          if [ -n "$existing" ]; then
-            echo "drift persists; issue #$existing is already open"
+          # CODE >= 2: the watchdog could not look. Say only that.
+          if [ -n "$blind" ]; then
+            echo "watchdog still blind; issue #$blind is already open"
             exit 0
           fi
-
-          {
-            echo "The live site does not match what microCMS holds."
-            echo
-            echo '```'
-            echo "$REPORT"
-            echo '```'
-            echo
-            echo "**Most likely cause:** the news build has not run. It runs on a"
-            echo "microCMS webhook (instant) and hourly at :30 as a safety net, so if"
-            echo "both are quiet, check the webhook in the microCMS panel first --"
-            echo "it has silently stopped before, on 2026-08-11."
-            echo
-            echo "Recover the backlog immediately with:"
-            echo
-            echo "    gh workflow run \"Build news from microCMS\" -R $GITHUB_REPOSITORY --ref main"
-            echo
-            echo "This issue closes itself once the site and the CMS agree again."
-          } > /tmp/watchdog-issue.md
-
-          gh issue create --title "$TITLE" --body-file /tmp/watchdog-issue.md
+          write_body \
+            "The watchdog could not check the site, so whether the site matches microCMS is currently unknown." \
+            "**Most likely cause:** the MICROCMS_API_KEY secret was rotated or revoked, microCMS is down, or zenrise.jp is unreachable. This says nothing about the news build -- it may be perfectly healthy."
+          gh issue create --title "$BLIND_TITLE" --body-file /tmp/watchdog-issue.md

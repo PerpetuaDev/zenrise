@@ -82,6 +82,57 @@ class TestRepoToSiteDrift(unittest.TestCase):
         self.assertEqual(found['unreachable'], [])
 
 
+class TestStaleContent(unittest.TestCase):
+    """Existence alone cannot see an edit. Four of the six articles stranded
+    by the 2026-08-11 webhook failure were edits to pages that already
+    existed, so a watchdog that only counts pages would have reported the
+    site healthy through most of that incident."""
+
+    def test_a_page_built_before_its_last_edit_is_reported(self):
+        found = watchdog.check(
+            expected={'news-a.html'}, on_disk={'news-a.html'},
+            index_html='<a href="news-a.html">', status={'news-a.html': 200},
+            cms_revised={'news-a.html': '2026-09-05T09:32:58.000Z'},
+            live_revised={'news-a.html': '2026-08-01T00:00:00.000Z'})
+        self.assertIn('news-a.html', found['stale'])
+
+    def test_a_page_matching_its_revision_is_clean(self):
+        stamp = '2026-09-05T09:32:58.000Z'
+        found = watchdog.check(
+            expected={'news-a.html'}, on_disk={'news-a.html'},
+            index_html='<a href="news-a.html">', status={'news-a.html': 200},
+            cms_revised={'news-a.html': stamp}, live_revised={'news-a.html': stamp})
+        self.assertEqual(watchdog.findings(found), [])
+
+    def test_a_page_that_does_not_serve_is_not_also_called_stale(self):
+        # It could not be read, so its revision is unknown, not wrong.
+        found = watchdog.check(
+            expected={'news-a.html'}, on_disk={'news-a.html'},
+            index_html='<a href="news-a.html">', status={'news-a.html': 404},
+            cms_revised={'news-a.html': '2026-09-05T09:32:58.000Z'},
+            live_revised={})
+        self.assertEqual(found['stale'], [])
+
+    def test_a_page_with_no_stamp_yet_is_not_reported(self):
+        # Pages built before the stamp existed must not all alarm at once.
+        found = watchdog.check(
+            expected={'news-a.html'}, on_disk={'news-a.html'},
+            index_html='<a href="news-a.html">', status={'news-a.html': 200},
+            cms_revised={'news-a.html': '2026-09-05T09:32:58.000Z'},
+            live_revised={'news-a.html': ''})
+        self.assertEqual(found['stale'], [])
+
+    def test_the_finding_says_the_page_is_behind_the_cms(self):
+        found = watchdog.check(
+            expected={'news-a.html'}, on_disk={'news-a.html'},
+            index_html='<a href="news-a.html">', status={'news-a.html': 200},
+            cms_revised={'news-a.html': '2026-09-05T09:32:58.000Z'},
+            live_revised={'news-a.html': '2026-08-01T00:00:00.000Z'})
+        line = watchdog.findings(found)[0]
+        self.assertIn('news-a.html', line)
+        self.assertIn('edited', line)
+
+
 class TestReport(unittest.TestCase):
     def test_findings_are_flat_human_readable_lines(self):
         found = watchdog.check(expected={'news-b.html'}, on_disk=set(),
