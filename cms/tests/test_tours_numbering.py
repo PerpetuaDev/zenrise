@@ -19,11 +19,29 @@ it (appended, position 5) and silently became "No. 01" on the very next build
 The invariant tests below read the built pages, so they fail on the symptom the
 client would actually see. The unit tests pin the allocation rule itself.
 """
-import glob, json, os, re, unittest
+import json, os, re, unittest
 
 from cms import bokun_source
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+
+# The numbers the live site already publishes. Maintained by hand: when a tour
+# legitimately changes number, update this in the same commit that rebuilds the
+# pages. The build never reads it -- it exists so an UNINTENDED renumbering
+# fails the suite, and therefore the build, before anything is published.
+PUBLISHED_NUMBERS = os.path.join(DATA, 'published-tour-numbers.json')
+
+
+def renumbered(locked, built):
+    """{slug: (was, now)} for tours whose number moved.
+
+    Only slugs present in both are compared: a newly published tour has no
+    number to keep, and an unpublished one no longer has a page to check.
+    """
+    return {slug: (locked[slug], built[slug])
+            for slug in sorted(locked)
+            if slug in built and built[slug] != locked[slug]}
 
 
 # The two surfaces a visitor reads a tour number off. The home tile is where
@@ -75,6 +93,40 @@ class TestBuiltCatalogueNumbering(unittest.TestCase):
 
     def test_both_surfaces_agree_on_every_tours_number(self):
         self.assertEqual(built_numbers('index.html'), built_numbers('tours.html'))
+
+    def test_no_already_published_tour_changes_its_number(self):
+        """The guard the duplicate/gap check cannot provide.
+
+        If this fails, a build moved a number that is already live. Either pin
+        that tour's number in tours-config.json to hold it, or -- if the move
+        is intended -- update cms/tests/data/published-tour-numbers.json in the
+        same commit as the rebuilt pages.
+        """
+        with open(PUBLISHED_NUMBERS, encoding='utf-8') as f:
+            locked = json.load(f)
+        moved = renumbered(locked, built_numbers('index.html'))
+        self.assertEqual(moved, {}, f'tours changed number (was, now): {moved}')
+
+
+class TestRenumberDetection(unittest.TestCase):
+    """A duplicate-and-gap check cannot see a renumbering.
+
+    Publishing an older Bokun product (a lower id, which save_registry sorts to
+    the front) shifts every tour after it -- kamakura 05->06, cocon 06->07, on
+    up -- and the run stays a clean 01..11 throughout. So the invariant above
+    passes while six live tours quietly change number. Catching that needs a
+    record of the numbers the site already publishes.
+    """
+
+    def test_a_tour_whose_number_moved_is_reported(self):
+        self.assertEqual(renumbered({'a': '01', 'b': '02'}, {'a': '01', 'b': '03'}),
+                         {'b': ('02', '03')})
+
+    def test_a_newly_published_tour_is_not_a_renumbering(self):
+        self.assertEqual(renumbered({'a': '01'}, {'a': '01', 'new': '02'}), {})
+
+    def test_an_unpublished_tour_is_not_a_renumbering(self):
+        self.assertEqual(renumbered({'a': '01', 'gone': '02'}, {'a': '01'}), {})
 
 
 class TestNumberAllocation(unittest.TestCase):
