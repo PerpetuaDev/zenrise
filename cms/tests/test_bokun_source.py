@@ -940,14 +940,21 @@ class TestGates(unittest.TestCase):
 
     # --- Derivations: number ------------------------------------------------
 
-    def test_number_falls_back_to_the_slugs_registry_position(self):
+    def test_number_falls_back_to_the_lowest_number_no_pin_has_claimed(self):
+        # Was "falls back to the registry position", which collided with the
+        # pinned numbers: an unpinned tour at position 1 rendered No. 01 beside
+        # the tour pinned to 01. Derived numbers now come out of the same pool
+        # the pins draw from. See bokun_source.derive_number and
+        # test_tours_numbering.
         cfg = self._cfg_without_entry(ZEN)
         cfg['tours'][str(ZEN)] = {'slug': 'zj-num-test'}  # no explicit number
         registry = {'900001': 'placeholder-one', '900002': 'placeholder-two'}
         records, warnings, final_registry = self._run(FakeClient(), cfg, registry=registry)
         rec = next(r for r in records if r['id'] == 'zj-num-test')
-        # zj-num-test is appended after the two seeded placeholders: position 3.
-        self.assertEqual(rec['number'], '03')
+        # Ikebana, candle and sword still hold pins 01, 02 and 04, so the free
+        # run is 03, 05, 06 -- and zj-num-test is appended third, after the two
+        # seeded placeholders took 03 and 05.
+        self.assertEqual(rec['number'], '06')
 
     def test_explicit_config_number_still_overrides_derivation(self):
         cfg = self._cfg_without_entry(ZEN)

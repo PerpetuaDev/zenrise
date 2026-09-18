@@ -437,6 +437,46 @@ def to_record(activity, activity_ja, availability, availability_ja, entry, corr)
     return rec, warnings, raw_texts
 
 
+def derive_number(pid, registry, cfg):
+    """The display number a tour wears: "No. 07" on its tile and grid card.
+
+    A number pinned in tours-config.json wins outright. Every other tour takes
+    the lowest number no pin has claimed, allocated in registry order.
+
+    Pinned and derived numbers MUST draw on one pool or they collide. Until
+    2026-09-18 they were computed independently -- a pin was hand-written while
+    everyone else took their 1-based position in the registry -- so the
+    unpinned tour sitting at position 1 rendered "No. 01" beside the tour
+    pinned to 01, and because a pinned tour held position 5, nothing ever
+    derived "05". The home page showed two No. 01s and no No. 05.
+
+    Allocation is still positional, so inserting a tour ahead of others in
+    registry order still shifts their numbers -- and tours-slugs.json is
+    rewritten in sorted key order, so a lower Bokun id does exactly that. That
+    is how kamakura-enoshima-yokohama-local published as No. 05 on the run that
+    minted it (appended in memory, position 5) and became No. 01 on the next
+    one (reloaded sorted, position 1). Pin a number to hold it still.
+    test_tours_numbering fails the build before publication if any run
+    produces a duplicate or a gap, so it can no longer happen silently.
+    """
+    tours = cfg.get('tours') or {}
+    pinned = {str(k): (v or {}).get('number') for k, v in tours.items()}
+    pinned = {k: v for k, v in pinned.items() if v}
+    if pinned.get(str(pid)):
+        return pinned[str(pid)]
+
+    claimed = set(pinned.values())
+    unpinned = [k for k in (str(k) for k in registry) if k not in pinned]
+    rank = unpinned.index(str(pid))
+    free, n = [], 1
+    while len(free) <= rank:
+        label = f'{n:02d}'
+        if label not in claimed:
+            free.append(label)
+        n += 1
+    return free[rank]
+
+
 def fetch_records(client, cfg, registry_path=None):
     """Resolve the catalogue through all four gates (spec 3.1-3.4), then build
     a record for every tour that survives them.
@@ -573,10 +613,11 @@ def fetch_records(client, cfg, registry_path=None):
                 f'Japanese rather than as English with a few Japanese words in '
                 f'it.')
 
-        # number: entry override, else this slug's position in the (now
-        # possibly just-extended) registry order -- stable once assigned,
-        # because a new key is appended, never inserted mid-order.
-        number = entry.get('number') or f'{list(registry.keys()).index(str(pid)) + 1:02d}'
+        # number: a pin in tours-config.json wins, else the lowest number no
+        # pin has claimed. Pinned and derived numbers share one pool -- see
+        # derive_number(), which carries why, and what is still positional
+        # about it.
+        number = derive_number(pid, registry, cfg)
 
         # area: entry override -> googlePlace.city -> the trailing place name
         # a slug derivation would have dropped from the title -> empty, which
