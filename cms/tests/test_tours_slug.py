@@ -13,6 +13,13 @@ from cms import tours_slug
 # equals this map made the suite fail every time the client published a tour --
 # which is how it sat red from the first addition until 2026-09-16. Assert
 # containment instead, and add a line here when a slug goes live.
+# 2026-09-19: the client re-created three products in Bokun. A replacement
+# carries a new id, so the slug is re-keyed onto it here and pinned by a config
+# override -- the id moves, the published URL does not, which is what this map
+# exists to protect. zenrise-kamakura-cocon-custom has no line because its
+# replacement (1291274) is UNLISTED rather than PRIVATE and so does not
+# publish: that URL is dark until the Bokun panel is corrected, and the line
+# comes back when it is.
 SEEDED = {
     '1272725': 'kamakura-enoshima-yokohama-local',
     '1273194': 'zen-journey',
@@ -20,9 +27,10 @@ SEEDED = {
     '1273235': 'candle-making',
     '1275339': 'swordsmithing',
     '1277203': 'zenrise-kamakura-cocon',
-    '1281293': 'tokyo-shibuya-harajuku-anime',
-    '1281308': 'yokohama-anime-gaming-kawaii',
-    '1281848': 'zenrise-kamakura-cocon-custom',
+    '1286744': 'professional-on-location-photography',
+    '1287563': 'kamakura-calligraphy-write-your',
+    '1291287': 'yokohama-anime-gaming-kawaii',
+    '1291292': 'tokyo-shibuya-harajuku-anime',
 }
 
 

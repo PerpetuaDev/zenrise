@@ -61,6 +61,25 @@
    "widgets": {
     "en": "6db7a498-ed75-46ba-b4fa-6ab6abc239c0/experience-calendar/1275339"
    }
+  },
+  "1291292": {
+   "slug": "tokyo-shibuya-harajuku-anime",
+   "number": "07"
+  },
+  "1291287": {
+   "slug": "yokohama-anime-gaming-kawaii",
+   "number": "08"
+  },
+  "1287563": {
+   "slug": "kamakura-calligraphy-write-your",
+   "number": "09"
+  },
+  "1286744": {
+   "slug": "professional-on-location-photography",
+   "number": "10"
+  },
+  "1291274": {
+   "slug": "zenrise-kamakura-cocon-custom"
   }
  }
 }
