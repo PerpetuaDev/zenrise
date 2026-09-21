@@ -159,6 +159,27 @@ def _trailing_place(en_title):
     return ''
 
 
+def cover_photo(activity):
+    """The photo a Bokun user chose as the hero, or the first upload.
+
+    `photos` is returned in upload order and never re-sorts when the hero is
+    re-picked; the choice is expressed as the separate top-level `keyPhoto`.
+    Reading photos[0] therefore rendered whatever happened to be uploaded
+    first and ignored every later re-pick -- the hourly fetch was working
+    exactly as written, it was just reading the wrong field. Candle-making is
+    the live case: its keyPhoto is the SECOND entry in photos.
+
+    keyPhoto carries the same shape as a photos[] entry (originalUrl,
+    alternateText, derived), so caption and CDN base come off it unchanged.
+    It can be absent or null, hence the fallback.
+    """
+    key = activity.get('keyPhoto') or {}
+    if (key.get('originalUrl') or '').strip():
+        return key
+    photos = activity.get('photos') or []
+    return photos[0] if photos else {}
+
+
 def cdn_base(photo):
     """The Bokun image CDN base for a photo, or '' when it has no derivatives.
 
@@ -336,10 +357,10 @@ def to_record(activity, activity_ja, availability, availability_ja, entry, corr)
             'photoBase': _agenda_photo(item)[1],
         })
 
-    photos = activity.get('photos') or []
-    cover = (photos[0].get('originalUrl') if photos else '') or ''
-    cover_base = cdn_base(photos[0]) if photos else ''
-    cover_cap = cl(photos[0].get('alternateText')) if photos else ''
+    hero = cover_photo(activity)
+    cover = (hero.get('originalUrl') or '') if hero else ''
+    cover_base = cdn_base(hero) if hero else ''
+    cover_cap = cl(hero.get('alternateText')) if hero else ''
 
     # Rate titles and pricing-category titles are localised the same way
     # title/sub/lede/route are above. Where the Japanese availability call
@@ -542,9 +563,10 @@ def fetch_records(client, cfg, registry_path=None):
         # book, so anything short of that is held back rather than published
         # in a reduced form. (This replaced the in-preparation layout, which
         # published unpriced tours: the client's call, 2026-08-28.)
-        photos = activity.get('photos') or []
         missing = []
-        if not (photos and (photos[0].get('originalUrl') or '').strip()):
+        # Resolved the same way the record is, so the gate and the renderer
+        # can never disagree about whether a tour has a usable cover.
+        if not (cover_photo(activity).get('originalUrl') or '').strip():
             missing.append('cover photo')
         if not (activity.get('description') or '').strip():
             missing.append('description')

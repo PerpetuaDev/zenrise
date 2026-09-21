@@ -270,7 +270,46 @@ class TestRecords(unittest.TestCase):
         r = self.by_slug['ikebana-ichigo-ichie']
         self.assertNotEqual(r['hoursJa'], r['hoursEn'])
 
-    def test_cover_comes_from_the_first_photo(self):
+    def test_cover_is_the_key_photo_not_the_first_upload(self):
+        """The hero a Bokun user picks is keyPhoto; photos[] stays in upload order.
+
+        Candle-making is the live proof: its keyPhoto is 11844900, the SECOND
+        entry in photos[]. Reading photos[0] renders whatever was uploaded
+        first and silently ignores every later re-pick, which is why a changed
+        hero never reached the site.
+        """
+        activity = load(f'activity-{CANDLE}-EN.json')
+        hero = activity['keyPhoto']
+        self.assertNotEqual(hero['id'], activity['photos'][0]['id'],
+                            'fixture no longer exercises the bug')
+        cover = self.by_slug['candle-making']['cover']
+        self.assertEqual(cover['url'], hero['originalUrl'])
+        self.assertNotEqual(cover['url'], activity['photos'][0]['originalUrl'])
+
+    def test_cover_cdn_base_follows_the_same_photo(self):
+        """The base is what the page actually renders, with its own ?w=&h=.
+
+        Taking the url off one photo and the base off another would serve a
+        card and a hero that disagree, so they must come from one object.
+        (The caption rides the same object; both fixtures carry a null
+        alternateText, so asserting on it here would prove nothing.)
+        """
+        activity = load(f'activity-{CANDLE}-EN.json')
+        hero = activity['keyPhoto']
+        base = self.by_slug['candle-making']['cover']['base']
+        self.assertEqual(base, bokun_source.cdn_base(hero))
+        self.assertNotEqual(base, bokun_source.cdn_base(activity['photos'][0]))
+
+    def test_cover_falls_back_to_the_first_photo_without_a_key_photo(self):
+        activity = load(f'activity-{CANDLE}-EN.json')
+        first = activity['photos'][0]
+        c = FakeClient(overrides={f'{CANDLE}-EN': {'keyPhoto': None}})
+        records, _ = bokun_source.fetch_records(c, CFG)
+        by_slug = {r['id']: r for r in records}
+        self.assertEqual(by_slug['candle-making']['cover']['url'],
+                         first['originalUrl'])
+
+    def test_cover_url_is_absolute(self):
         self.assertTrue(self.by_slug['ikebana-ichigo-ichie']['cover']['url'].startswith('http'))
 
     def test_ikebana_inclusions_are_extracted_from_the_description(self):
@@ -892,10 +931,22 @@ class TestGates(unittest.TestCase):
     # --- Gate 4: complete --------------------------------------------------
 
     def test_missing_cover_photo_is_held_back_and_named(self):
-        c = FakeClient(overrides={f'{CANDLE}-EN': {'photos': []}})
+        # Both fields: a tour has no cover only when the hero AND the uploads
+        # are gone. Blanking photos alone leaves keyPhoto standing, which is a
+        # perfectly usable cover -- see the test below.
+        c = FakeClient(overrides={f'{CANDLE}-EN': {'photos': [], 'keyPhoto': None}})
         records, warnings, _ = self._run(c, CFG, registry=tours_slug.load_registry())
         self.assertNotIn('candle-making', {r['id'] for r in records})
         self.assertTrue(any(str(CANDLE) in w and 'missing cover photo' in w for w in warnings), warnings)
+
+    def test_a_key_photo_alone_is_a_usable_cover(self):
+        """The gate must not hold back a tour whose only photo is the hero."""
+        hero = load(f'activity-{CANDLE}-EN.json')['keyPhoto']
+        c = FakeClient(overrides={f'{CANDLE}-EN': {'photos': []}})
+        records, warnings, _ = self._run(c, CFG, registry=tours_slug.load_registry())
+        by_slug = {r['id']: r for r in records}
+        self.assertIn('candle-making', by_slug)
+        self.assertEqual(by_slug['candle-making']['cover']['url'], hero['originalUrl'])
 
     def test_missing_description_is_held_back_and_named(self):
         c = FakeClient(overrides={f'{IKEBANA}-EN': {'description': ''}})
