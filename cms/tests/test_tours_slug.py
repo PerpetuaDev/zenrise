@@ -18,8 +18,10 @@ from cms import tours_slug
 # override -- the id moves, the published URL does not, which is what this map
 # exists to protect. zenrise-kamakura-cocon-custom has no line because its
 # replacement (1291274) is UNLISTED rather than PRIVATE and so does not
-# publish: that URL is dark until the Bokun panel is corrected, and the line
-# comes back when it is.
+# publish. Its slug is still reserved in the registry against 1291274 -- that
+# reservation is what lets cleanup_stale_pages retire the orphaned page, and
+# what hands the URL back the moment the panel is corrected -- but it has no
+# line here, because this map is the floor of slugs that are actually live.
 SEEDED = {
     '1272725': 'kamakura-enoshima-yokohama-local',
     '1273194': 'zen-journey',
