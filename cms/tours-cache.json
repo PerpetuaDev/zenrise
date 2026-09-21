@@ -1,152 +1,5 @@
 [
  {
-  "id": "candle-making",
-  "bokunId": 1273235,
-  "number": "02",
-  "area": "Kamakura",
-  "length": "Half-day",
-  "themes": [
-   "culture",
-   "arts"
-  ],
-  "cover": {
-   "url": "https://bokun.s3.amazonaws.com/cfe134ea-d26d-45eb-b812-8eeabf2478f8.jpeg",
-   "base": "https://imgcdn.bokun.tools/cfe134ea-d26d-45eb-b812-8eeabf2478f8.jpeg"
-  },
-  "hoursEn": "2 hours",
-  "hoursJa": "2 時間",
-  "priceEn": "from ¥58,000",
-  "priceJa": "¥58,000〜",
-  "priceRows": [
-   {
-    "category": "Group of 2 ",
-    "category_ja": "Group of 2 ",
-    "min": 1,
-    "max": null,
-    "amount": 58000,
-    "currency": "JPY",
-    "rate_title": "Price",
-    "rate_title_ja": "Price"
-   },
-   {
-    "category": "Group of 4 ",
-    "category_ja": "Group of 4 ",
-    "min": 1,
-    "max": null,
-    "amount": 82000,
-    "currency": "JPY",
-    "rate_title": "Price",
-    "rate_title_ja": "Price"
-   },
-   {
-    "category": "Group of 1 ",
-    "category_ja": "Group of 1 ",
-    "min": 1,
-    "max": null,
-    "amount": 58000,
-    "currency": "JPY",
-    "rate_title": "Price",
-    "rate_title_ja": "Price"
-   },
-   {
-    "category": "Group of 3 ",
-    "category_ja": "Group of 3 ",
-    "min": 1,
-    "max": null,
-    "amount": 70000,
-    "currency": "JPY",
-    "rate_title": "Price",
-    "rate_title_ja": "Price"
-   }
-  ],
-  "widgets": {
-   "en": "6db7a498-ed75-46ba-b4fa-6ab6abc239c0/experience-calendar/1273235"
-  },
-  "route": [
-   {
-    "title": "Pick-up",
-    "body": "Complimentary pick-up and drop-off within Kamakura and Fujisawa cities. Transfers outside these areas are available upon request for an additional fee.",
-    "titleJa": "ピックアップ",
-    "bodyJa": "鎌倉市内、藤沢市内は無料送迎。 それ以外の場所は別途ご相談に応じます。",
-    "photo": "https://imgcdn.bokun.tools/8c79f252-8e1a-4b73-a819-eadf35b541b1.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/8c79f252-8e1a-4b73-a819-eadf35b541b1.jpeg"
-   },
-   {
-    "title": "Introduction & History (60 min)",
-    "body": "Learn about the history of traditional Japanese candles ( wa-rōsoku ), how they differ from Western candles, and Meria's journey to becoming a candle artisan.",
-    "titleJa": "座学 60分",
-    "bodyJa": "和蝋燭の歴史や、洋蝋燭との違い、Meriaが蝋作家になるまでの歩みについてお話しします。",
-    "photo": "https://imgcdn.bokun.tools/661f9611-1c4f-4c35-991d-327964f78307.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/661f9611-1c4f-4c35-991d-327964f78307.jpeg"
-   },
-   {
-    "title": "Candle-Making Workshop (45 min)",
-    "body": "Receive step-by-step guidance as you dip the wick into molten wax, gradually building and shaping your own candle by hand.",
-    "titleJa": "体験 45分",
-    "bodyJa": "溶けた蝋に灯芯を浸しては形を整える工程を、実際に手を動かしながら学びます。",
-    "photo": "https://imgcdn.bokun.tools/39cfe363-0f58-4c61-9537-a90bec4d4709.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/39cfe363-0f58-4c61-9537-a90bec4d4709.jpeg"
-   },
-   {
-    "title": "Reflection & Tea Time (15 min)",
-    "body": "Light your finished candle, ask questions, and enjoy tea and relaxed conversation as you reflect on the experience.",
-    "titleJa": "雑談 15分",
-    "bodyJa": "仕上がった和蝋燭を前に、質問や雑談を楽しむ、決まった形のない締めくくりの時間です。",
-    "photo": "https://imgcdn.bokun.tools/f9e33708-fb1f-4d49-8a0f-c335d79664dc.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/f9e33708-fb1f-4d49-8a0f-c335d79664dc.jpeg"
-   },
-   {
-    "title": "Drop-off",
-    "body": "Complimentary drop-off within Kamakura and Fujisawa cities. Drop-off at other locations is available upon request for an additional fee.",
-    "titleJa": "ドロップオフ",
-    "bodyJa": "鎌倉市内、藤沢市内は無料送迎 それ以外の場所は別途ご相談に応じます。",
-    "photo": "https://imgcdn.bokun.tools/0b2a8cf8-af37-41d5-90c9-38b11a59a89c.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/0b2a8cf8-af37-41d5-90c9-38b11a59a89c.jpeg"
-   }
-  ],
-  "includedEn": "English-speaking guide\nCandle-making instruction by artisan Meria\nAll materials, tools, and venue fees\nJapanese tea\nYour handcrafted wa-rosoku candle to take home\nComplimentary pick-up and drop-off within Kamakura and Fujisawa cities",
-  "includedJa": "・英語対応ガイドの同行\n・Meriaによる指導\n・材料・道具一式、会場費\n・お茶\n・制作した和蝋燭のお持ち帰り\n・鎌倉・藤沢市内の無料送迎",
-  "notIncludedEn": "Personal food and drink expenses\nPersonal shopping expenses\nTransfers outside Kamakura and Fujisawa cities",
-  "notIncludedJa": "・個人的な飲食代\n・個人的な買い物\n・鎌倉、藤沢以外の送迎",
-  "bringEn": "Wax is used during the experience. Please wear clothes that you don't mind getting slightly dirty.",
-  "bringJa": "汚れる可能性もあるため服装にご注意ください。",
-  "knowEn": "This experience is available for solo guests, but the booking fee is based on a minimum of two guests.\nCancellation policy: 10% at 3–2 days before / 25% at 1 day before / 100% within 23 hours before departure.",
-  "knowJa": "この体験は1名様よりご参加可能ですが、ご予約料金は2名様分でのご予約となります。\nキャンセルポリシー：3日前〜2日前10%、1日前（前日）25%、23時間前以降100%のキャンセル料を頂戴いたします。",
-  "includedChipsEn": "",
-  "includedChipsJa": "",
-  "knowChipsEn": "",
-  "knowChipsJa": "",
-  "ledeParasEn": [
-   "A quiet moment with a flame can become one of the most memorable parts of a journey.",
-   "In Shonan, discover the traditional craft of Japanese candle-making through an intimate workshop led by local candle artisan Meria. Working with natural materials sourced from the region, you will shape your own Japanese candle entirely by hand.",
-   "Limited to four guests, the experience takes place in a quiet setting in Kamakura or Fujisawa — a chance to slow down, work with your hands, and experience a different rhythm of Japan.",
-   "Your finished candle is yours to take home, carrying with it the memory of your time in Shonan.",
-   "Shonan Japanese Candles",
-   "Inspired by the quiet beauty of the Shonan coast, Shonan Japanese Candles bring together local materials and a traditional Japanese craft.",
-   "Each candle is made by hand from plant-based mokurō wax, derived from the Japanese wax tree, with a natural wick made from washi and rush. As the candle burns, the wax is drawn into the wick and gradually disappears into the flame, leaving very little residue.",
-   "The natural materials allow the candle to return gently to the environment. Its larger, steady flame has long been valued in Japanese temples and tea rooms.",
-   "Meet Meria",
-   "Based in Fujisawa, Meria creates Shonan Japanese Candles using natural materials from local farmers and producers.",
-   "From developing each color to shaping and finishing every candle, she works entirely by hand, choosing a slower process over mass production. Her workshops offer a space to become absorbed in the simple act of making — where time seems to slow, and the hands take over."
-  ],
-  "ledeParasJa": [
-   "炎を静かに見つめる時間は、旅の中でも心に残るひとときになることがあります。",
-   "湘南で活動する蝋作家・Meriaとともに、日本の伝統的な和蝋燭づくりを体験します。地域の自然素材に触れながら、一本の和蝋燭をすべて手作業で仕上げます。定員4名までの少人数制。鎌倉または藤沢の静かな空間で、手を動かしながら、いつもとは少し違う日本の時間を味わいます。完成した和蝋燭は、そのままお持ち帰りいただけます。湘南で過ごした時間を思い出す、小さな灯りとして。",
-   "湘南和蝋燭について",
-   "湘南の海辺の静かな美しさと、日本の伝統技法をひとつの灯りに込めた「湘南和蝋燭」。日本の和蝋燭は、ハゼの実から採れる植物性の蝋「木蝋」と、和紙やイグサでつくられた自然素材の芯から、一本ずつ手作りされます。火を灯すと、蝋は芯に吸われながらゆっくりと燃え、最後には炎の中へと消えていきます。蝋垂れや燃え残りが少なく、自然素材ならではの美しさを持つ灯りです。大きく、安定した炎は、古くから寺院や茶室でも大切に使われてきました。",
-   "蝋作家・Meria",
-   "神奈川県藤沢市を拠点に、Meriaは湘南の自然と地域の素材を生かした「湘南和蝋燭」を制作しています。地元の農家や事業者から届く自然素材を選び、色づくりから成形、仕上げまで、すべて自身の手で行っています。大量生産ではなく、時間をかけて一つひとつをつくること。ワークショップでは、手を動かすうちに時間を忘れ、ものづくりそのものに静かに没頭できる場を大切にしています。"
-  ],
-  "titleEn": "Kamakura & Fujisawa: Japanese Candle-Making — A Handmade Light",
-  "titleJa": "鎌倉・藤沢：和蝋燭作り体験 — 手作りの灯",
-  "subEn": "A private, intimate candle-making experience in Shonan, where you can slow down and discover the quiet beauty of Japanese craftsmanship. Guided by local candle artisan Meria, create your own Japanese candle by hand using natural materials from the region.",
-  "subJa": "湘南の静かな空間で、日本の手仕事に触れながら、ゆっくりと過ごすプライベートな和蝋燭づくり体験。湘南を拠点に活動する蝋作家・Meriaとともに、地域の自然素材を使って一本の和蝋燭を手作りし、日本で過ごした時間の記憶とともに持ち帰ります。",
-  "ledeEn": "A quiet moment with a flame can become one of the most memorable parts of a journey. In Shonan, discover the traditional craft of Japanese candle-making through an intimate workshop led by local candle artisan Meria. Working with natural materials sourced from the region, you will shape your own Japanese candle entirely by hand. Limited to four guests, the experience takes place in a quiet setting in Kamakura or Fujisawa — a chance to slow down, work with your hands, and experience a different rhythm of Japan. Your finished candle is yours to take home, carrying with it the memory of your time in Shonan. Shonan Japanese Candles Inspired by the quiet beauty of the Shonan coast, Shonan Japanese Candles bring together local materials and a traditional Japanese craft. Each candle is made by hand from plant-based mokurō wax, derived from the Japanese wax tree, with a natural wick made from washi and rush. As the candle burns, the wax is drawn into the wick and gradually disappears into the flame, leaving very little residue. The natural materials allow the candle to return gently to the environment. Its larger, steady flame has long been valued in Japanese temples and tea rooms. Meet Meria Based in Fujisawa, Meria creates Shonan Japanese Candles using natural materials from local farmers and producers. From developing each color to shaping and finishing every candle, she works entirely by hand, choosing a slower process over mass production. Her workshops offer a space to become absorbed in the simple act of making — where time seems to slow, and the hands take over.",
-  "ledeJa": "炎を静かに見つめる時間は、旅の中でも心に残るひとときになることがあります。 湘南で活動する蝋作家・Meriaとともに、日本の伝統的な和蝋燭づくりを体験します。地域の自然素材に触れながら、一本の和蝋燭をすべて手作業で仕上げます。定員4名までの少人数制。鎌倉または藤沢の静かな空間で、手を動かしながら、いつもとは少し違う日本の時間を味わいます。完成した和蝋燭は、そのままお持ち帰りいただけます。湘南で過ごした時間を思い出す、小さな灯りとして。 湘南和蝋燭について 湘南の海辺の静かな美しさと、日本の伝統技法をひとつの灯りに込めた「湘南和蝋燭」。日本の和蝋燭は、ハゼの実から採れる植物性の蝋「木蝋」と、和紙やイグサでつくられた自然素材の芯から、一本ずつ手作りされます。火を灯すと、蝋は芯に吸われながらゆっくりと燃え、最後には炎の中へと消えていきます。蝋垂れや燃え残りが少なく、自然素材ならではの美しさを持つ灯りです。大きく、安定した炎は、古くから寺院や茶室でも大切に使われてきました。 蝋作家・Meria 神奈川県藤沢市を拠点に、Meriaは湘南の自然と地域の素材を生かした「湘南和蝋燭」を制作しています。地元の農家や事業者から届く自然素材を選び、色づくりから成形、仕上げまで、すべて自身の手で行っています。大量生産ではなく、時間をかけて一つひとつをつくること。ワークショップでは、手を動かすうちに時間を忘れ、ものづくりそのものに静かに没頭できる場を大切にしています。",
-  "coverCaptionEn": "",
-  "coverCaptionJa": ""
- },
- {
   "id": "zen-journey",
   "bokunId": 1273194,
   "number": "03",
@@ -377,6 +230,92 @@
   "coverCaptionJa": ""
  },
  {
+  "id": "kamakura-enoshima-yokohama-local",
+  "bokunId": 1272725,
+  "number": "05",
+  "area": "Kamakura",
+  "length": "Full / Half-day",
+  "themes": [
+   "culture",
+   "arts",
+   "walking",
+   "nature"
+  ],
+  "cover": {
+   "url": "https://bokun.s3.amazonaws.com/7ba205a2-33a3-4fba-89a0-5fb7cb6f21b2.jpeg",
+   "base": "https://imgcdn.bokun.tools/7ba205a2-33a3-4fba-89a0-5fb7cb6f21b2.jpeg"
+  },
+  "hoursEn": "8 hours",
+  "hoursJa": "8 時間",
+  "priceEn": "from ¥40,000 per group",
+  "priceJa": "¥40,000〜（1グループ）",
+  "priceRows": [
+   {
+    "category": null,
+    "category_ja": null,
+    "min": 1,
+    "max": 6,
+    "amount": 40000,
+    "currency": "JPY",
+    "per_booking": true,
+    "rate_title": "Group(1-6)Half-day(4h)",
+    "rate_title_ja": "グループ(1–6) 半日(4h)"
+   },
+   {
+    "category": null,
+    "category_ja": null,
+    "min": 1,
+    "max": 6,
+    "amount": 60000,
+    "currency": "JPY",
+    "per_booking": true,
+    "rate_title": "Group(1-6)Half-day(8h)",
+    "rate_title_ja": "グループ(1–6) 一日(8h)"
+   }
+  ],
+  "widgets": {},
+  "route": [
+   {
+    "title": "Kamakura, Enoshima & Yokohama Private Local Guide Service",
+    "body": "An experienced English-speaking local guide will accompany you to your preferred destinations. Enjoy a smooth, flexible stay at your own pace without rigid tour itineraries. Your guide can also suggest local spots, places to eat, and quieter alternatives based on your interests. Choose between a Half-Day (4 hours) or Full-Day (8 hours) service. Additional transportation fees will apply if the starting or ending location is outside of Kamakura, Fujisawa, or Yokohama.",
+    "titleJa": "鎌倉・江の島・横浜 英語対応プライベートガイドサービス",
+    "bodyJa": "地元に精通した英語対応ガイドが、お客様のご希望の場所をご案内いたします。決まったツアーコースではないため、あなたのペースで自由でスムーズな滞在を楽しめます。 お客様の興味に合わせて、ローカルならではのスポットや飲食店、より静かに過ごせる場所などもご提案します。 ツアー時間は「半日（4時間）」または「終日（8時間）」よりお選びいただけます。 鎌倉市・藤沢市・横浜市以外の場所を出発・到着地点にご指定いただく場合は、別途交通費を申し受けます。",
+    "photo": "https://imgcdn.bokun.tools/3d4cb1e2-2042-4cd4-a847-bad18e1f64e5.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/3d4cb1e2-2042-4cd4-a847-bad18e1f64e5.jpeg"
+   }
+  ],
+  "includedEn": "Private English-speaking local guide\nLocal spot recommendations by the guide\nComplimentary pick-up and drop-off within Kamakura and Fujisawa cities\nInsurance",
+  "includedJa": "・英語対応の専属ローカルガイド\n・ガイドによるおすすめスポットのご提案\n・保険（食中毒は含まれません）\n・送迎サービス：鎌倉・藤沢エリア内対応可能",
+  "notIncludedEn": "Public transportation fares\nTemple / venue admission fees\nFood and drinks\nPersonal expenses\nAdditional activity fees",
+  "notIncludedJa": "・交通費\n・拝観料・入場料\n・お食事・お飲み物代\n・個人費用",
+  "bringEn": "Cash (Japanese Yen)\nComfortable walking shoes",
+  "bringJa": "現金\n歩きやすい靴",
+  "knowEn": "Admission fees, food and drinks, public transportation fares, and other personal expenses are not included in the service fee. Please pay these expenses directly on-site by cash or credit card where available.\nCancellation policy: 20% at 10–8 days before / 30% at 7–3 days before / 40% at 2 days before / 50% at 1 day before / 100% within 23 hours before departure or no-show.",
+  "knowJa": "現地での各種お支払い： 各施設の拝観料・入場料、お食事・お飲み物代、公共交通機関の運賃などはサービス代金に含まれておりません。現地にて現金またはクレジットカードで直接お支払いください。\nキャンセルポリシー：10日前20%、7日前30%、2日前40%、1日前50%、23時間前以降100%のキャンセル料を頂戴いたします。",
+  "includedChipsEn": "",
+  "includedChipsJa": "",
+  "knowChipsEn": "",
+  "knowChipsJa": "",
+  "ledeParasEn": [
+   "This is a private local guide service for guests who already have places or an itinerary in mind.",
+   "Your guide will accompany you to your preferred destinations, helping with train transfers, communication, and local navigation along the way. No fixed itinerary is required.",
+   "Choose a Half-Day (4 hours) or Full-Day (8 hours) service for private groups of 1 to 6 guests. Your guide can also suggest local spots, places to eat, and quieter alternatives based on your interests."
+  ],
+  "ledeParasJa": [
+   "行きたい場所や大まかな旅程が決まっているお客様向けの、プライベートなローカルガイドサービスです。",
+   "ご希望の場所へガイドが同行し、電車の乗り換えや移動、コミュニケーション、現地での移動をサポートします。決められた固定の旅程はありません。",
+   "1〜6名様のプライベートグループで、半日（4時間）または1日（8時間）からお選びいただけます。お客様の興味や希望に合わせて、地元ならではのスポットや飲食店、静かに楽しめる場所などもご提案します。"
+  ],
+  "titleEn": "Kamakura, Enoshima & Yokohama Private Local Guide Service",
+  "titleJa": "鎌倉・江の島・横浜 英語対応 専属ガイドサービス",
+  "subEn": "Explore Kamakura, Enoshima, and Yokohama with an English-speaking local guide, with support for navigation, translation, and local recommendations at your own pace.",
+  "subJa": "英語対応のローカルガイドとともに、鎌倉・江ノ島・横浜を自分のペースで巡ります。移動や通訳をサポートしながら、地元ならではのおすすめスポットもご案内します。",
+  "ledeEn": "This is a private local guide service for guests who already have places or an itinerary in mind. Your guide will accompany you to your preferred destinations, helping with train transfers, communication, and local navigation along the way. No fixed itinerary is required. Choose a Half-Day (4 hours) or Full-Day (8 hours) service for private groups of 1 to 6 guests. Your guide can also suggest local spots, places to eat, and quieter alternatives based on your interests.",
+  "ledeJa": "行きたい場所や大まかな旅程が決まっているお客様向けの、プライベートなローカルガイドサービスです。 ご希望の場所へガイドが同行し、電車の乗り換えや移動、コミュニケーション、現地での移動をサポートします。決められた固定の旅程はありません。 1〜6名様のプライベートグループで、半日（4時間）または1日（8時間）からお選びいただけます。お客様の興味や希望に合わせて、地元ならではのスポットや飲食店、静かに楽しめる場所などもご提案します。",
+  "coverCaptionEn": "",
+  "coverCaptionJa": ""
+ },
+ {
   "id": "ikebana-ichigo-ichie",
   "bokunId": 1273232,
   "number": "01",
@@ -523,88 +462,149 @@
   "coverCaptionJa": ""
  },
  {
-  "id": "kamakura-enoshima-yokohama-local",
-  "bokunId": 1272725,
-  "number": "05",
+  "id": "candle-making",
+  "bokunId": 1273235,
+  "number": "02",
   "area": "Kamakura",
-  "length": "Full / Half-day",
+  "length": "Half-day",
   "themes": [
    "culture",
-   "arts",
-   "walking",
-   "nature"
+   "arts"
   ],
   "cover": {
-   "url": "https://bokun.s3.amazonaws.com/7ba205a2-33a3-4fba-89a0-5fb7cb6f21b2.jpeg",
-   "base": "https://imgcdn.bokun.tools/7ba205a2-33a3-4fba-89a0-5fb7cb6f21b2.jpeg"
+   "url": "https://bokun.s3.amazonaws.com/cfe134ea-d26d-45eb-b812-8eeabf2478f8.jpeg",
+   "base": "https://imgcdn.bokun.tools/cfe134ea-d26d-45eb-b812-8eeabf2478f8.jpeg"
   },
-  "hoursEn": "8 hours",
-  "hoursJa": "8 時間",
-  "priceEn": "from ¥40,000 per group",
-  "priceJa": "¥40,000〜（1グループ）",
+  "hoursEn": "2 hours",
+  "hoursJa": "2 時間",
+  "priceEn": "from ¥58,000",
+  "priceJa": "¥58,000〜",
   "priceRows": [
    {
-    "category": null,
-    "category_ja": null,
+    "category": "Group of 2 ",
+    "category_ja": "Group of 2 ",
     "min": 1,
-    "max": 6,
-    "amount": 40000,
+    "max": null,
+    "amount": 58000,
     "currency": "JPY",
-    "per_booking": true,
-    "rate_title": "Group(1-6)Half-day(4h)",
-    "rate_title_ja": "グループ(1–6) 半日(4h)"
+    "rate_title": "Price",
+    "rate_title_ja": "Price"
    },
    {
-    "category": null,
-    "category_ja": null,
+    "category": "Group of 4 ",
+    "category_ja": "Group of 4 ",
     "min": 1,
-    "max": 6,
-    "amount": 60000,
+    "max": null,
+    "amount": 82000,
     "currency": "JPY",
-    "per_booking": true,
-    "rate_title": "Group(1-6)Half-day(8h)",
-    "rate_title_ja": "グループ(1–6) 一日(8h)"
+    "rate_title": "Price",
+    "rate_title_ja": "Price"
+   },
+   {
+    "category": "Group of 1 ",
+    "category_ja": "Group of 1 ",
+    "min": 1,
+    "max": null,
+    "amount": 58000,
+    "currency": "JPY",
+    "rate_title": "Price",
+    "rate_title_ja": "Price"
+   },
+   {
+    "category": "Group of 3 ",
+    "category_ja": "Group of 3 ",
+    "min": 1,
+    "max": null,
+    "amount": 70000,
+    "currency": "JPY",
+    "rate_title": "Price",
+    "rate_title_ja": "Price"
    }
   ],
-  "widgets": {},
+  "widgets": {
+   "en": "6db7a498-ed75-46ba-b4fa-6ab6abc239c0/experience-calendar/1273235"
+  },
   "route": [
    {
-    "title": "Kamakura, Enoshima & Yokohama Private Local Guide Service",
-    "body": "An experienced English-speaking local guide will accompany you to your preferred destinations. Enjoy a smooth, flexible stay at your own pace without rigid tour itineraries. Your guide can also suggest local spots, places to eat, and quieter alternatives based on your interests. Choose between a Half-Day (4 hours) or Full-Day (8 hours) service. Additional transportation fees will apply if the starting or ending location is outside of Kamakura, Fujisawa, or Yokohama.",
-    "titleJa": "鎌倉・江の島・横浜 英語対応プライベートガイドサービス",
-    "bodyJa": "地元に精通した英語対応ガイドが、お客様のご希望の場所をご案内いたします。決まったツアーコースではないため、あなたのペースで自由でスムーズな滞在を楽しめます。 お客様の興味に合わせて、ローカルならではのスポットや飲食店、より静かに過ごせる場所などもご提案します。 ツアー時間は「半日（4時間）」または「終日（8時間）」よりお選びいただけます。 鎌倉市・藤沢市・横浜市以外の場所を出発・到着地点にご指定いただく場合は、別途交通費を申し受けます。",
-    "photo": "https://imgcdn.bokun.tools/3d4cb1e2-2042-4cd4-a847-bad18e1f64e5.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/3d4cb1e2-2042-4cd4-a847-bad18e1f64e5.jpeg"
+    "title": "Pick-up",
+    "body": "Complimentary pick-up and drop-off within Kamakura and Fujisawa cities. Transfers outside these areas are available upon request for an additional fee.",
+    "titleJa": "ピックアップ",
+    "bodyJa": "鎌倉市内、藤沢市内は無料送迎。 それ以外の場所は別途ご相談に応じます。",
+    "photo": "https://imgcdn.bokun.tools/8c79f252-8e1a-4b73-a819-eadf35b541b1.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/8c79f252-8e1a-4b73-a819-eadf35b541b1.jpeg"
+   },
+   {
+    "title": "Introduction & History (60 min)",
+    "body": "Learn about the history of traditional Japanese candles ( wa-rōsoku ), how they differ from Western candles, and Meria's journey to becoming a candle artisan.",
+    "titleJa": "座学 60分",
+    "bodyJa": "和蝋燭の歴史や、洋蝋燭との違い、Meriaが蝋作家になるまでの歩みについてお話しします。",
+    "photo": "https://imgcdn.bokun.tools/661f9611-1c4f-4c35-991d-327964f78307.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/661f9611-1c4f-4c35-991d-327964f78307.jpeg"
+   },
+   {
+    "title": "Candle-Making Workshop (45 min)",
+    "body": "Receive step-by-step guidance as you dip the wick into molten wax, gradually building and shaping your own candle by hand.",
+    "titleJa": "体験 45分",
+    "bodyJa": "溶けた蝋に灯芯を浸しては形を整える工程を、実際に手を動かしながら学びます。",
+    "photo": "https://imgcdn.bokun.tools/39cfe363-0f58-4c61-9537-a90bec4d4709.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/39cfe363-0f58-4c61-9537-a90bec4d4709.jpeg"
+   },
+   {
+    "title": "Reflection & Tea Time (15 min)",
+    "body": "Light your finished candle, ask questions, and enjoy tea and relaxed conversation as you reflect on the experience.",
+    "titleJa": "雑談 15分",
+    "bodyJa": "仕上がった和蝋燭を前に、質問や雑談を楽しむ、決まった形のない締めくくりの時間です。",
+    "photo": "https://imgcdn.bokun.tools/f9e33708-fb1f-4d49-8a0f-c335d79664dc.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/f9e33708-fb1f-4d49-8a0f-c335d79664dc.jpeg"
+   },
+   {
+    "title": "Drop-off",
+    "body": "Complimentary drop-off within Kamakura and Fujisawa cities. Drop-off at other locations is available upon request for an additional fee.",
+    "titleJa": "ドロップオフ",
+    "bodyJa": "鎌倉市内、藤沢市内は無料送迎 それ以外の場所は別途ご相談に応じます。",
+    "photo": "https://imgcdn.bokun.tools/0b2a8cf8-af37-41d5-90c9-38b11a59a89c.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/0b2a8cf8-af37-41d5-90c9-38b11a59a89c.jpeg"
    }
   ],
-  "includedEn": "Private English-speaking local guide\nLocal spot recommendations by the guide\nComplimentary pick-up and drop-off within Kamakura and Fujisawa cities\nInsurance",
-  "includedJa": "・英語対応の専属ローカルガイド\n・ガイドによるおすすめスポットのご提案\n・保険（食中毒は含まれません）\n・送迎サービス：鎌倉・藤沢エリア内対応可能",
-  "notIncludedEn": "Public transportation fares\nTemple / venue admission fees\nFood and drinks\nPersonal expenses\nAdditional activity fees",
-  "notIncludedJa": "・交通費\n・拝観料・入場料\n・お食事・お飲み物代\n・個人費用",
-  "bringEn": "Cash (Japanese Yen)\nComfortable walking shoes",
-  "bringJa": "現金\n歩きやすい靴",
-  "knowEn": "Admission fees, food and drinks, public transportation fares, and other personal expenses are not included in the service fee. Please pay these expenses directly on-site by cash or credit card where available.\nCancellation policy: 20% at 10–8 days before / 30% at 7–3 days before / 40% at 2 days before / 50% at 1 day before / 100% within 23 hours before departure or no-show.",
-  "knowJa": "現地での各種お支払い： 各施設の拝観料・入場料、お食事・お飲み物代、公共交通機関の運賃などはサービス代金に含まれておりません。現地にて現金またはクレジットカードで直接お支払いください。\nキャンセルポリシー：10日前20%、7日前30%、2日前40%、1日前50%、23時間前以降100%のキャンセル料を頂戴いたします。",
+  "includedEn": "English-speaking guide\nCandle-making instruction by artisan Meria\nAll materials, tools, and venue fees\nJapanese tea\nYour handcrafted wa-rosoku candle to take home\nComplimentary pick-up and drop-off within Kamakura and Fujisawa cities",
+  "includedJa": "・英語対応ガイドの同行\n・Meriaによる指導\n・材料・道具一式、会場費\n・お茶\n・制作した和蝋燭のお持ち帰り\n・鎌倉・藤沢市内の無料送迎",
+  "notIncludedEn": "Personal food and drink expenses\nPersonal shopping expenses\nTransfers outside Kamakura and Fujisawa cities",
+  "notIncludedJa": "・個人的な飲食代\n・個人的な買い物\n・鎌倉、藤沢以外の送迎",
+  "bringEn": "Wax is used during the experience. Please wear clothes that you don't mind getting slightly dirty.",
+  "bringJa": "汚れる可能性もあるため服装にご注意ください。",
+  "knowEn": "This experience is available for solo guests, but the booking fee is based on a minimum of two guests.\nCancellation policy: 10% at 3–2 days before / 25% at 1 day before / 100% within 23 hours before departure.",
+  "knowJa": "この体験は1名様よりご参加可能ですが、ご予約料金は2名様分でのご予約となります。\nキャンセルポリシー：3日前〜2日前10%、1日前（前日）25%、23時間前以降100%のキャンセル料を頂戴いたします。",
   "includedChipsEn": "",
   "includedChipsJa": "",
   "knowChipsEn": "",
   "knowChipsJa": "",
   "ledeParasEn": [
-   "This is a private local guide service for guests who already have places or an itinerary in mind.",
-   "Your guide will accompany you to your preferred destinations, helping with train transfers, communication, and local navigation along the way. No fixed itinerary is required.",
-   "Choose a Half-Day (4 hours) or Full-Day (8 hours) service for private groups of 1 to 6 guests. Your guide can also suggest local spots, places to eat, and quieter alternatives based on your interests."
+   "A quiet moment with a flame can become one of the most memorable parts of a journey.",
+   "In Shonan, discover the traditional craft of Japanese candle-making through an intimate workshop led by local candle artisan Meria. Working with natural materials sourced from the region, you will shape your own Japanese candle entirely by hand.",
+   "Limited to four guests, the experience takes place in a quiet setting in Kamakura or Fujisawa — a chance to slow down, work with your hands, and experience a different rhythm of Japan.",
+   "Your finished candle is yours to take home, carrying with it the memory of your time in Shonan.",
+   "Shonan Japanese Candles",
+   "Inspired by the quiet beauty of the Shonan coast, Shonan Japanese Candles bring together local materials and a traditional Japanese craft.",
+   "Each candle is made by hand from plant-based mokurō wax, derived from the Japanese wax tree, with a natural wick made from washi and rush. As the candle burns, the wax is drawn into the wick and gradually disappears into the flame, leaving very little residue.",
+   "The natural materials allow the candle to return gently to the environment. Its larger, steady flame has long been valued in Japanese temples and tea rooms.",
+   "Meet Meria",
+   "Based in Fujisawa, Meria creates Shonan Japanese Candles using natural materials from local farmers and producers.",
+   "From developing each color to shaping and finishing every candle, she works entirely by hand, choosing a slower process over mass production. Her workshops offer a space to become absorbed in the simple act of making — where time seems to slow, and the hands take over."
   ],
   "ledeParasJa": [
-   "行きたい場所や大まかな旅程が決まっているお客様向けの、プライベートなローカルガイドサービスです。",
-   "ご希望の場所へガイドが同行し、電車の乗り換えや移動、コミュニケーション、現地での移動をサポートします。決められた固定の旅程はありません。",
-   "1〜6名様のプライベートグループで、半日（4時間）または1日（8時間）からお選びいただけます。お客様の興味や希望に合わせて、地元ならではのスポットや飲食店、静かに楽しめる場所などもご提案します。"
+   "炎を静かに見つめる時間は、旅の中でも心に残るひとときになることがあります。",
+   "湘南で活動する蝋作家・Meriaとともに、日本の伝統的な和蝋燭づくりを体験します。地域の自然素材に触れながら、一本の和蝋燭をすべて手作業で仕上げます。定員4名までの少人数制。鎌倉または藤沢の静かな空間で、手を動かしながら、いつもとは少し違う日本の時間を味わいます。完成した和蝋燭は、そのままお持ち帰りいただけます。湘南で過ごした時間を思い出す、小さな灯りとして。",
+   "湘南和蝋燭について",
+   "湘南の海辺の静かな美しさと、日本の伝統技法をひとつの灯りに込めた「湘南和蝋燭」。日本の和蝋燭は、ハゼの実から採れる植物性の蝋「木蝋」と、和紙やイグサでつくられた自然素材の芯から、一本ずつ手作りされます。火を灯すと、蝋は芯に吸われながらゆっくりと燃え、最後には炎の中へと消えていきます。蝋垂れや燃え残りが少なく、自然素材ならではの美しさを持つ灯りです。大きく、安定した炎は、古くから寺院や茶室でも大切に使われてきました。",
+   "蝋作家・Meria",
+   "神奈川県藤沢市を拠点に、Meriaは湘南の自然と地域の素材を生かした「湘南和蝋燭」を制作しています。地元の農家や事業者から届く自然素材を選び、色づくりから成形、仕上げまで、すべて自身の手で行っています。大量生産ではなく、時間をかけて一つひとつをつくること。ワークショップでは、手を動かすうちに時間を忘れ、ものづくりそのものに静かに没頭できる場を大切にしています。"
   ],
-  "titleEn": "Kamakura, Enoshima & Yokohama Private Local Guide Service",
-  "titleJa": "鎌倉・江の島・横浜 英語対応 専属ガイドサービス",
-  "subEn": "Explore Kamakura, Enoshima, and Yokohama with an English-speaking local guide, with support for navigation, translation, and local recommendations at your own pace.",
-  "subJa": "英語対応のローカルガイドとともに、鎌倉・江ノ島・横浜を自分のペースで巡ります。移動や通訳をサポートしながら、地元ならではのおすすめスポットもご案内します。",
-  "ledeEn": "This is a private local guide service for guests who already have places or an itinerary in mind. Your guide will accompany you to your preferred destinations, helping with train transfers, communication, and local navigation along the way. No fixed itinerary is required. Choose a Half-Day (4 hours) or Full-Day (8 hours) service for private groups of 1 to 6 guests. Your guide can also suggest local spots, places to eat, and quieter alternatives based on your interests.",
-  "ledeJa": "行きたい場所や大まかな旅程が決まっているお客様向けの、プライベートなローカルガイドサービスです。 ご希望の場所へガイドが同行し、電車の乗り換えや移動、コミュニケーション、現地での移動をサポートします。決められた固定の旅程はありません。 1〜6名様のプライベートグループで、半日（4時間）または1日（8時間）からお選びいただけます。お客様の興味や希望に合わせて、地元ならではのスポットや飲食店、静かに楽しめる場所などもご提案します。",
+  "titleEn": "Kamakura & Fujisawa: Japanese Candle-Making — A Handmade Light",
+  "titleJa": "鎌倉・藤沢：和蝋燭作り体験 — 手作りの灯",
+  "subEn": "A private, intimate candle-making experience in Shonan, where you can slow down and discover the quiet beauty of Japanese craftsmanship. Guided by local candle artisan Meria, create your own Japanese candle by hand using natural materials from the region.",
+  "subJa": "湘南の静かな空間で、日本の手仕事に触れながら、ゆっくりと過ごすプライベートな和蝋燭づくり体験。湘南を拠点に活動する蝋作家・Meriaとともに、地域の自然素材を使って一本の和蝋燭を手作りし、日本で過ごした時間の記憶とともに持ち帰ります。",
+  "ledeEn": "A quiet moment with a flame can become one of the most memorable parts of a journey. In Shonan, discover the traditional craft of Japanese candle-making through an intimate workshop led by local candle artisan Meria. Working with natural materials sourced from the region, you will shape your own Japanese candle entirely by hand. Limited to four guests, the experience takes place in a quiet setting in Kamakura or Fujisawa — a chance to slow down, work with your hands, and experience a different rhythm of Japan. Your finished candle is yours to take home, carrying with it the memory of your time in Shonan. Shonan Japanese Candles Inspired by the quiet beauty of the Shonan coast, Shonan Japanese Candles bring together local materials and a traditional Japanese craft. Each candle is made by hand from plant-based mokurō wax, derived from the Japanese wax tree, with a natural wick made from washi and rush. As the candle burns, the wax is drawn into the wick and gradually disappears into the flame, leaving very little residue. The natural materials allow the candle to return gently to the environment. Its larger, steady flame has long been valued in Japanese temples and tea rooms. Meet Meria Based in Fujisawa, Meria creates Shonan Japanese Candles using natural materials from local farmers and producers. From developing each color to shaping and finishing every candle, she works entirely by hand, choosing a slower process over mass production. Her workshops offer a space to become absorbed in the simple act of making — where time seems to slow, and the hands take over.",
+  "ledeJa": "炎を静かに見つめる時間は、旅の中でも心に残るひとときになることがあります。 湘南で活動する蝋作家・Meriaとともに、日本の伝統的な和蝋燭づくりを体験します。地域の自然素材に触れながら、一本の和蝋燭をすべて手作業で仕上げます。定員4名までの少人数制。鎌倉または藤沢の静かな空間で、手を動かしながら、いつもとは少し違う日本の時間を味わいます。完成した和蝋燭は、そのままお持ち帰りいただけます。湘南で過ごした時間を思い出す、小さな灯りとして。 湘南和蝋燭について 湘南の海辺の静かな美しさと、日本の伝統技法をひとつの灯りに込めた「湘南和蝋燭」。日本の和蝋燭は、ハゼの実から採れる植物性の蝋「木蝋」と、和紙やイグサでつくられた自然素材の芯から、一本ずつ手作りされます。火を灯すと、蝋は芯に吸われながらゆっくりと燃え、最後には炎の中へと消えていきます。蝋垂れや燃え残りが少なく、自然素材ならではの美しさを持つ灯りです。大きく、安定した炎は、古くから寺院や茶室でも大切に使われてきました。 蝋作家・Meria 神奈川県藤沢市を拠点に、Meriaは湘南の自然と地域の素材を生かした「湘南和蝋燭」を制作しています。地元の農家や事業者から届く自然素材を選び、色づくりから成形、仕上げまで、すべて自身の手で行っています。大量生産ではなく、時間をかけて一つひとつをつくること。ワークショップでは、手を動かすうちに時間を忘れ、ものづくりそのものに静かに没頭できる場を大切にしています。",
   "coverCaptionEn": "",
   "coverCaptionJa": ""
  },
@@ -776,6 +776,115 @@
   "coverCaptionJa": ""
  },
  {
+  "id": "kamakura-calligraphy-write-your",
+  "bokunId": 1287563,
+  "number": "09",
+  "area": "Kamakura",
+  "length": "Half-day",
+  "themes": [
+   "culture",
+   "arts"
+  ],
+  "cover": {
+   "url": "https://bokun.s3.amazonaws.com/0ae70c7c-6d6b-48ec-82a6-0e3c5c9c38a3.jpeg",
+   "base": "https://imgcdn.bokun.tools/0ae70c7c-6d6b-48ec-82a6-0e3c5c9c38a3.jpeg"
+  },
+  "hoursEn": "1 hour",
+  "hoursJa": "1 時間",
+  "priceEn": "from ¥12,000 per adult",
+  "priceJa": "¥12,000〜（大人おひとり）",
+  "priceRows": [
+   {
+    "category": "Adult",
+    "category_ja": "Adult",
+    "min": 1,
+    "max": null,
+    "amount": 12000,
+    "currency": "JPY",
+    "rate_title": "Standard rate",
+    "rate_title_ja": "Standard rate"
+   },
+   {
+    "category": "Child(7-12)",
+    "category_ja": "Child(7-12)",
+    "min": 1,
+    "max": null,
+    "amount": 7000,
+    "currency": "JPY",
+    "rate_title": "Standard rate",
+    "rate_title_ja": "Standard rate"
+   }
+  ],
+  "widgets": {},
+  "route": [
+   {
+    "title": "Meet Your Calligraphy Artist",
+    "body": "Meet calligraphy artist Ryūhō at Daibutsu Base Kamakura and get introduced to the basics of Japanese calligraphy.",
+    "titleJa": "書道家・龍峰さんとご対面",
+    "bodyJa": "DAIBUTSU BASE KAMAKURAで書道家・龍峰さんと合流し、日本の書道について簡単にご紹介します。",
+    "photo": "https://imgcdn.bokun.tools/f8b879b7-01be-41b9-9ad9-781856eca3eb.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/f8b879b7-01be-41b9-9ad9-781856eca3eb.jpeg"
+   },
+   {
+    "title": "Learn to Write Your Name in Kanji",
+    "body": "Learn step by step how to write your name in Japanese kanji. Beginners are warmly welcome.",
+    "titleJa": "自分の名前を漢字で書いてみよう",
+    "bodyJa": "龍峰さんの指導を受けながら、自分の名前を漢字で書く練習をします。初心者の方も大歓迎です。",
+    "photo": "https://imgcdn.bokun.tools/88242f78-8e1e-4666-848e-92d6a96ec08c.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/88242f78-8e1e-4666-848e-92d6a96ec08c.jpeg"
+   },
+   {
+    "title": "Create Your Own Calligraphy Artwork",
+    "body": "Practice your calligraphy and create a personalized artwork on a shikishi board, fan, or uchiwa.",
+    "titleJa": "自分だけの書道作品を制作",
+    "bodyJa": "練習した書を、色紙・扇子・うちわなどに仕上げ、自分だけの作品を作ります。",
+    "photo": "https://imgcdn.bokun.tools/d55b15b0-59d0-4c18-b0dc-8266157711b0.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/d55b15b0-59d0-4c18-b0dc-8266157711b0.jpeg"
+   },
+   {
+    "title": "Enjoy Tea & Sweets",
+    "body": "Take a relaxing break and enjoy tea and sweets after your calligraphy experience.",
+    "titleJa": "お茶とお菓子でひと休み",
+    "bodyJa": "書道体験の後は、お茶とお菓子を楽しみながらゆっくりと休憩します。",
+    "photo": "https://imgcdn.bokun.tools/0ae70c7c-6d6b-48ec-82a6-0e3c5c9c38a3.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/0ae70c7c-6d6b-48ec-82a6-0e3c5c9c38a3.jpeg"
+   }
+  ],
+  "includedEn": "Japanese calligraphy experience\nGuidance from calligraphy artist Ryūhō\nTea and sweets\nCalligraphy artwork",
+  "includedJa": "日本の書道体験\nオリジナル作品制作\n書道家・龍峰さんによる指導\nお茶とお菓子",
+  "notIncludedEn": "",
+  "notIncludedJa": "",
+  "bringEn": "Ink may stain clothing, so please wear clothes that you don't mind getting stained.\nNo special equipment or materials are required.",
+  "bringJa": "墨が付く可能性があるため、汚れてもよい服装でお越しください。\n特別な道具を持参する必要はありません。",
+  "knowEn": "Sessions are usually held on Mondays and Fridays. Dates and times vary depending on availability, so please check your preferred schedule in advance. Same-day participation depends on availability, so advance booking is recommended.\nCancellation Policy: Refunds are not available after booking confirmation. The event may be canceled if the minimum number of participants is not met. If canceled by the organizer, a full refund will be issued.\nChildren under 6 are free, and children aged 7–12 receive a 50% discount. Guests staying at DAIBUTSU BASE KAMAKURA receive a ¥2,000 discount.\nThere is no parking at the venue. Beds cannot be used during the experience.",
+  "knowJa": "開催日は通常月曜日・金曜日です。開催日時は空き状況によって異なるため、事前にご希望の日程をご確認ください。当日参加は空き状況によります。事前予約をおすすめします。\nキャンセルポリシー：ご予約確定後の返金は致しかねます。最少催行人数に満たない場合は開催がキャンセルされることがあります。主催者都合でキャンセルとなった場合は、全額返金いたします。\n6歳未満のお子様は無料、7～12歳のお子様は半額です。DAIBUTSU BASE KAMAKURAに宿泊される方は**¥2,000割引**となります。\n会場には駐車場がありません。体験中はベッドをご利用いただけません。",
+  "includedChipsEn": "",
+  "includedChipsJa": "",
+  "knowChipsEn": "",
+  "knowChipsJa": "",
+  "ledeParasEn": [
+   "Just a short walk from Kamakura’s Great Buddha,",
+   "enjoy a Japanese calligraphy experience in a charming, traditional Japanese-style home with tatami, shoji screens, and warm wooden interiors.",
+   "Learn the art of calligraphy with artist Ryūhō and slow down as you create your own piece.",
+   "Ryūhō will guide you step by step as you learn to write your name in Japanese kanji. Beginners are warmly welcome, and you can create your own artwork on a shikishi board, f olding fan, or uchiwa.",
+   "After practicing, take a break and enjoy tea and sweets."
+  ],
+  "ledeParasJa": [
+   "鎌倉で日本の書道を体験",
+   "鎌倉大仏からほど近い、畳や障子、木のぬくもりを感じる落ち着いた和の空間で、書道家・龍峰さんと日本の書道を体験しましょう。日常の喧騒から少し離れ、ゆっくりと筆を動かしながら、日本の書道の美しさに触れるひとときをお楽しみください。",
+   "龍峰さんの丁寧な指導を受けながら、自分の名前を日本語の漢字で書く練習をします。初心者の方も大歓迎です。また、色紙、扇子、うちわなどに自分だけの作品を仕上げることができます。",
+   "書道の練習の後は、休憩しながらお茶とお菓子をお楽しみください。"
+  ],
+  "titleEn": "Kamakura Japanese Calligraphy: Write Your Name in Kanji",
+  "titleJa": "鎌倉で日本の書道体験：自分の名前を漢字で書いてみよう",
+  "subEn": "Slow down and experience Japanese calligraphy in a traditional Japanese-style home near Kamakura’s Great Buddha. Learn to write your name in kanji with artist Ryūhō and create a personal piece of Japanese art.",
+  "subJa": "鎌倉大仏の近くにある伝統的な和の空間で、ゆっくりと日本の書道に触れてみませんか。書道家・龍峰さんの指導を受けながら自分の名前を漢字で書き、自分だけの作品を作ります。",
+  "ledeEn": "Just a short walk from Kamakura’s Great Buddha, enjoy a Japanese calligraphy experience in a charming, traditional Japanese-style home with tatami, shoji screens, and warm wooden interiors. Learn the art of calligraphy with artist Ryūhō and slow down as you create your own piece. Ryūhō will guide you step by step as you learn to write your name in Japanese kanji. Beginners are warmly welcome, and you can create your own artwork on a shikishi board, f olding fan, or uchiwa. After practicing, take a break and enjoy tea and sweets.",
+  "ledeJa": "鎌倉で日本の書道を体験 鎌倉大仏からほど近い、畳や障子、木のぬくもりを感じる落ち着いた和の空間で、書道家・龍峰さんと日本の書道を体験しましょう。日常の喧騒から少し離れ、ゆっくりと筆を動かしながら、日本の書道の美しさに触れるひとときをお楽しみください。 龍峰さんの丁寧な指導を受けながら、自分の名前を日本語の漢字で書く練習をします。初心者の方も大歓迎です。また、色紙、扇子、うちわなどに自分だけの作品を仕上げることができます。 書道の練習の後は、休憩しながらお茶とお菓子をお楽しみください。",
+  "coverCaptionEn": "",
+  "coverCaptionJa": ""
+ },
+ {
   "id": "zenrise-kamakura-cocon",
   "bokunId": 1277203,
   "number": "06",
@@ -895,133 +1004,8 @@
   "coverCaptionJa": ""
  },
  {
-  "id": "zenrise-kamakura-cocon-custom",
-  "bokunId": 1281848,
-  "number": "09",
-  "area": "Kamakura",
-  "length": "Full-day",
-  "themes": [
-   "culture",
-   "arts",
-   "walking"
-  ],
-  "cover": {
-   "url": "https://bokun.s3.amazonaws.com/3d1a84d2-36ca-4c4e-913c-eab26856925f.jpeg",
-   "base": "https://imgcdn.bokun.tools/3d1a84d2-36ca-4c4e-913c-eab26856925f.jpeg"
-  },
-  "hoursEn": "8 hours",
-  "hoursJa": "8 時間",
-  "priceEn": "from ¥81,000",
-  "priceJa": "¥81,000〜",
-  "priceRows": [
-   {
-    "category": "宿泊プラン",
-    "category_ja": "宿泊プラン",
-    "min": 2,
-    "max": 6,
-    "amount": 81000,
-    "currency": "JPY",
-    "rate_title": "Accommodation Plan",
-    "rate_title_ja": "宿泊プラン"
-   }
-  ],
-  "widgets": {},
-  "route": [
-   {
-    "title": "Pick-up",
-    "body": "Complimentary pickup within Kamakura or Fujisawa City, or meet at a designated location.",
-    "titleJa": "ピックアップ",
-    "bodyJa": "鎌倉・藤沢市内無料送迎。 または指定の場所へ集合",
-    "photo": "https://imgcdn.bokun.tools/7b2fb414-66c9-4f70-a561-cfb3a4081db3.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/7b2fb414-66c9-4f70-a561-cfb3a4081db3.jpeg"
-   },
-   {
-    "title": "Custom private tours",
-    "body": "You can choose between a 4-hour or 8-hour private tour. We will create an itinerary based on your interests and preferences in consultation with you. We will contact you once your reservation is confirmed .",
-    "titleJa": "カスタムプライベートツアー",
-    "bodyJa": "4時間ツアーか8時間ツアーをお選びいただきます。旅程はお客様とご相談しながらお好みに合わせ作成いたします。ご予約確定後にご連絡いたします。",
-    "photo": "https://imgcdn.bokun.tools/d91a4685-0b32-4e4a-a003-1bec8dff317f.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/d91a4685-0b32-4e4a-a003-1bec8dff317f.jpeg"
-   },
-   {
-    "title": "Dinner at Kamakura Cocon (Restaurant Cocon)",
-    "body": "Enjoy a seasonal course dinner at the counter overlooking the open kitchen at Restaurant COCON.",
-    "titleJa": "鎌倉古今（レストランCocon）にてディナー",
-    "bodyJa": "夕食は、オープンキッチンのカウンター席で味わうRestaurant COCONのコース料理を。",
-    "photo": "https://imgcdn.bokun.tools/8ebbf472-641a-4a52-bc4d-27a4d03e23e6.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/8ebbf472-641a-4a52-bc4d-27a4d03e23e6.jpeg"
-   },
-   {
-    "title": "Accommodation at Kamakura Cocon (Breakfast Included)",
-    "body": "Spend a quiet night in Kamakura in a suite that blends historic architecture with modern comfort. The following morning, enjoy a peaceful breakfast at Kamakura Cocon.",
-    "titleJa": "鎌倉古今でのご宿泊（朝食付き）",
-    "bodyJa": "歴史ある建物を生かしたスイートルームで、鎌倉の静かな夜をお過ごしいただきます。翌朝は、鎌倉古今での朝食とともに、静かな朝の時間をお楽しみください。",
-    "photo": "https://imgcdn.bokun.tools/57749534-5c2e-4fe4-874c-b649d520b7a8.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/57749534-5c2e-4fe4-874c-b649d520b7a8.jpeg"
-   },
-   {
-    "title": "Drop-off",
-    "body": "Complimentary drop-off within Kamakura or Fujisawa City, or end the tour at a designated location.",
-    "titleJa": "ドロップオフ",
-    "bodyJa": "鎌倉・藤沢市内（無料送迎） または指定の場所で解散",
-    "photo": "https://imgcdn.bokun.tools/2da71fc5-e35d-4931-9bf6-54f9f3680d8d.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/2da71fc5-e35d-4931-9bf6-54f9f3680d8d.jpeg"
-   }
-  ],
-  "includedEn": "Dinner at Restaurant COCON\nOvernight stay at Kamakura Cocon\nBreakfast at Kamakura Cocon\nEnglish-speaking private guide\nComplimentary pick-up and drop-off within Kamakura and Fujisawa",
-  "includedJa": "Restaurant COCONでのディナー\n鎌倉古今での宿泊\n鎌倉古今での朝食\n英語対応のプライベートガイド\n鎌倉市・藤沢市内の送迎",
-  "notIncludedEn": "Meals and drinks other than the included dinner and breakfast\nTransportation and pick-up/drop-off fees outside Kamakura and Fujisawa\nPersonal expenses, such as souvenirs and shopping",
-  "notIncludedJa": "Restaurant COCONおよび鎌倉古今での朝食・ディナー以外の飲食代\n鎌倉市・藤沢市以外での送迎・交通費\nお土産やショッピングなどの個人的な費用",
-  "bringEn": "cash\nComfortable walking shoes",
-  "bringJa": "現金\n歩きやすい靴",
-  "knowEn": "Group Size: Restaurant dining is available for up to 6 guests. For stays with 3 or more guests, please contact ZENRISE in advance.\nSuites: Maisonette Suite 101 or Kura Suite 102.\nParking: If you plan to arrive by car and require parking, please let us know in advance. Parking is available for up to 3 vehicles.\nDietary Restrictions: Due to the nature of the menu and ingredients, we are unable to accommodate allergies or dietary restrictions involving flour, onions, or garlic. Please let us know about any other dietary requirements or allergies when booking.\nGuide Fee: Tour prices include a private guide fee for 1–6 guests: ¥35,000 for a half-day tour or ¥50,000 for a full-day tour.",
-  "knowJa": "ご利用人数： レストランでのお食事は最大6名様まで。3名様以上での宿泊をご希望の場合は、事前にZENRISEまでお問い合わせください。\nお部屋： メゾネットスイート101、または蔵スイート102。\n駐車場： お車でお越しの場合、駐車場をご利用の際は事前にお知らせください。最大3台までご利用いただけます。\nアレルギー・食事制限： 食材の特性上、小麦粉・玉ねぎ・にんにくに関するアレルギーや食事制限には対応いたしかねます。その他のアレルギーや食事制限がある場合は、ご予約時にお知らせください。\nガイド料： ツアー料金には、1〜6名様のグループを対象としたプライベートガイド料が含まれています。半日（4時間）は35,000円、終日（8時間）は50,000円です。",
-  "includedChipsEn": "",
-  "includedChipsJa": "",
-  "knowChipsEn": "",
-  "knowChipsJa": "",
-  "ledeParasEn": [
-   "Explore Kamakura at your own pace with a custom private tour by ZENRISE, then retreat to Kamakura Cocon in the quiet Yato valley of Nikaido.",
-   "Kamakura Cocon is an intimate all-suite auberge, lovingly restored from a historic residence built in 1855. With stone-paved paths, moss gardens, and seasonal views through traditional lattice windows, it offers a quiet place to slow down and stay awhile.",
-   "In the evening, enjoy a seasonal course dinner at Restaurant COCON, served at the open kitchen counter. The following morning, wake to breakfast at Kamakura Cocon and the quiet rhythm of a new day in Kamakura.",
-   "Places, stories, food, and a place to stay — your time in Kamakura is thoughtfully shaped around your interests and pace.",
-   "Experience Highlights",
-   "Custom Private Guided Tour",
-   "Explore Kamakura with a knowledgeable local guide and discover its history, culture, and quieter corners. Your itinerary is tailored to your interests and pace. Choose a Half-day (4-hour) or Full-day (8-hour) tour.",
-   "Dinner at Restaurant COCON",
-   "Enjoy a seven-course dinner with two desserts, served at the open kitchen counter. The menu brings together Italian culinary techniques and carefully selected seasonal ingredients from Kamakura, Shonan, and across Japan.",
-   "Stay at Kamakura Cocon",
-   "Spend the night in one of Kamakura Cocon’s historic suites: Maisonette Suite 101 or Kura Suite 102, each offering a quiet retreat within the historic residence.",
-   "Breakfast at Kamakura Cocon",
-   "Begin the following morning with breakfast at Kamakura Cocon, taking time to enjoy the calm of a new day in Kamakura."
-  ],
-  "ledeParasJa": [
-   "鎌倉を自分たちのペースで楽しむ、ZENRISEのカスタムプライベートツアー。その後は、二階堂の静かな谷戸に佇む「鎌倉古今」へ。",
-   "鎌倉古今は、1855年（安政2年）に建てられた歴史ある建物を改修した、1日2組限定のオールスイートオーベルジュです。石畳の小道、苔庭、格子窓越しに眺める四季の景色に囲まれ、鎌倉の中でゆっくりと時間を過ごすことができます。",
-   "夕食は、オープンキッチンのカウンター席で味わうRestaurant COCONのコース料理を。翌朝は、鎌倉古今での朝食とともに、静かな朝の時間をお楽しみいただきます。",
-   "訪れる場所、そこで出会う物語、食、そして滞在。鎌倉で過ごす一日と一夜を、お客様の興味やペースに合わせて組み立てます。",
-   "本体験のハイライト",
-   "オーダーメイドのプライベートガイドツアー",
-   "知識豊富なローカルガイドとともに、鎌倉の歴史や文化、静かな場所を訪れます。お客様の興味やペースに合わせて行程を組み立て、半日（4時間）または終日（8時間）からお選びいただけます。",
-   "Restaurant COCONでのディナー",
-   "オープンキッチンのカウンター席で、7品のコースと2品のデザートをお楽しみいただきます。鎌倉・湘南をはじめ、日本各地から選んだ旬の食材を、イタリア料理の技法で仕立てています。",
-   "鎌倉古今での宿泊",
-   "歴史ある建物を生かしたスイートルームで、鎌倉の静かな夜をお過ごしいただきます。メゾネットスイート101、または蔵スイート102からお選びいただけます。",
-   "鎌倉古今での朝食",
-   "滞在の翌朝は、鎌倉古今で朝食をお楽しみいただきます。鎌倉で迎える静かな朝を、ゆっくりとお過ごしください。"
-  ],
-  "titleEn": "ZENRISE × Kamakura Cocon: Custom Private Tour & Stay",
-  "titleJa": "ZENRISE × 鎌倉古今：カスタムプライベートツアー＆宿泊プラン",
-  "subEn": "Stay · Private Tour · Dinner & Breakfast A tailor-made Kamakura journey designed around your pace, combining a private ZENRISE tour with an overnight stay at Kamakura Cocon, dinner at Restaurant COCON, and breakfast the following morning.",
-  "subJa": "鎌倉で過ごす時間を、お客様のペースに合わせて丁寧に。ZENRISEのオーダーメイドツアーと、鎌倉古今での滞在、Restaurant COCONでのディナーと朝食を組み合わせた特別なプランです。",
-  "ledeEn": "Explore Kamakura at your own pace with a custom private tour by ZENRISE, then retreat to Kamakura Cocon in the quiet Yato valley of Nikaido. Kamakura Cocon is an intimate all-suite auberge, lovingly restored from a historic residence built in 1855. With stone-paved paths, moss gardens, and seasonal views through traditional lattice windows, it offers a quiet place to slow down and stay awhile. In the evening, enjoy a seasonal course dinner at Restaurant COCON, served at the open kitchen counter. The following morning, wake to breakfast at Kamakura Cocon and the quiet rhythm of a new day in Kamakura. Places, stories, food, and a place to stay — your time in Kamakura is thoughtfully shaped around your interests and pace. Experience Highlights Custom Private Guided Tour Explore Kamakura with a knowledgeable local guide and discover its history, culture, and quieter corners. Your itinerary is tailored to your interests and pace. Choose a Half-day (4-hour) or Full-day (8-hour) tour. Dinner at Restaurant COCON Enjoy a seven-course dinner with two desserts, served at the open kitchen counter. The menu brings together Italian culinary techniques and carefully selected seasonal ingredients from Kamakura, Shonan, and across Japan. Stay at Kamakura Cocon Spend the night in one of Kamakura Cocon’s historic suites: Maisonette Suite 101 or Kura Suite 102, each offering a quiet retreat within the historic residence. Breakfast at Kamakura Cocon Begin the following morning with breakfast at Kamakura Cocon, taking time to enjoy the calm of a new day in Kamakura.",
-  "ledeJa": "鎌倉を自分たちのペースで楽しむ、ZENRISEのカスタムプライベートツアー。その後は、二階堂の静かな谷戸に佇む「鎌倉古今」へ。 鎌倉古今は、1855年（安政2年）に建てられた歴史ある建物を改修した、1日2組限定のオールスイートオーベルジュです。石畳の小道、苔庭、格子窓越しに眺める四季の景色に囲まれ、鎌倉の中でゆっくりと時間を過ごすことができます。 夕食は、オープンキッチンのカウンター席で味わうRestaurant COCONのコース料理を。翌朝は、鎌倉古今での朝食とともに、静かな朝の時間をお楽しみいただきます。 訪れる場所、そこで出会う物語、食、そして滞在。鎌倉で過ごす一日と一夜を、お客様の興味やペースに合わせて組み立てます。 本体験のハイライト オーダーメイドのプライベートガイドツアー 知識豊富なローカルガイドとともに、鎌倉の歴史や文化、静かな場所を訪れます。お客様の興味やペースに合わせて行程を組み立て、半日（4時間）または終日（8時間）からお選びいただけます。 Restaurant COCONでのディナー オープンキッチンのカウンター席で、7品のコースと2品のデザートをお楽しみいただきます。鎌倉・湘南をはじめ、日本各地から選んだ旬の食材を、イタリア料理の技法で仕立てています。 鎌倉古今での宿泊 歴史ある建物を生かしたスイートルームで、鎌倉の静かな夜をお過ごしいただきます。メゾネットスイート101、または蔵スイート102からお選びいただけます。 鎌倉古今での朝食 滞在の翌朝は、鎌倉古今で朝食をお楽しみいただきます。鎌倉で迎える静かな朝を、ゆっくりとお過ごしください。",
-  "coverCaptionEn": "",
-  "coverCaptionJa": ""
- },
- {
   "id": "yokohama-anime-gaming-kawaii",
-  "bokunId": 1281308,
+  "bokunId": 1291287,
   "number": "08",
   "area": "Yokohama",
   "length": "Half-day",
@@ -1031,8 +1015,8 @@
    "walking"
   ],
   "cover": {
-   "url": "https://bokun.s3.amazonaws.com/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg",
-   "base": "https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg"
+   "url": "https://bokun.s3.amazonaws.com/c3925da2-4a71-48a8-b1d7-566d2c5e2601.jpeg",
+   "base": "https://imgcdn.bokun.tools/c3925da2-4a71-48a8-b1d7-566d2c5e2601.jpeg"
   },
   "hoursEn": "3 hours and 30 minutes",
   "hoursJa": "3 時間30 分",
@@ -1040,9 +1024,9 @@
   "priceJa": "¥15,000〜",
   "priceRows": [
    {
-    "category": "POP CULTURE Harf-Day",
-    "category_ja": "POP CULTURE Harf-Day",
-    "min": 1,
+    "category": "POP CULTURE Half-Day",
+    "category_ja": "POP CULTURE Half-Day",
+    "min": 2,
     "max": 10,
     "amount": 15000,
     "currency": "JPY",
@@ -1055,82 +1039,82 @@
    {
     "title": "Meet your guide at Yokohama Station West Exit",
     "body": "Meet your English-speaking guide and get an overview of the tour and what to expect.",
-    "titleJa": "横浜駅西口でガイドと合流。",
+    "titleJa": "横浜駅西口でガイドと合流",
     "bodyJa": "ツアーの流れと当日の体験をご案内します。",
-    "photo": "https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg"
+    "photo": "https://imgcdn.bokun.tools/82091eb0-c037-4525-b8bd-546183f556a9.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/82091eb0-c037-4525-b8bd-546183f556a9.jpeg"
    },
    {
     "title": "Explore local hobby shops",
     "body": "Browse shops featuring trading cards, figures, plush toys, board games, and more.",
-    "titleJa": "ホビーショップ探訪。",
+    "titleJa": "ホビーショップ探訪",
     "bodyJa": "カード、フィギュア、ぬいぐるみ、ボードゲームなど。",
-    "photo": "https://imgcdn.bokun.tools/287ff7eb-2ba0-4b45-8c4b-44952c271ce9.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/287ff7eb-2ba0-4b45-8c4b-44952c271ce9.jpeg"
+    "photo": "https://imgcdn.bokun.tools/a6987c19-ddc4-4c38-8443-1063ba7b5447.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/a6987c19-ddc4-4c38-8443-1063ba7b5447.jpeg"
    },
    {
     "title": "Visit trading card shops",
     "body": "Discover collections of Pokémon, Yu-Gi-Oh!, One Piece, and other popular trading cards.",
-    "titleJa": "カードショップ巡り。",
+    "titleJa": "カードショップ巡り",
     "bodyJa": "ポケモン、遊戯王、ワンピースなどのコレクションカード。",
-    "photo": "https://imgcdn.bokun.tools/ec429797-5e5a-4ff0-8220-f8772b7c9c46.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/ec429797-5e5a-4ff0-8220-f8772b7c9c46.jpeg"
+    "photo": "https://imgcdn.bokun.tools/c99f32ed-f049-44c0-81d5-d52f32643093.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/c99f32ed-f049-44c0-81d5-d52f32643093.jpeg"
    },
    {
     "title": "Explore anime merchandise shops",
     "body": "Browse character goods, figures, plush toys, and other anime merchandise.",
-    "titleJa": "アニメグッズショップ巡り。",
+    "titleJa": "アニメグッズショップ巡り",
     "bodyJa": "キャラクターグッズ、フィギュア、ぬいぐるみ。",
-    "photo": "https://imgcdn.bokun.tools/00fe4188-8672-45ba-a10a-55f408f826ec.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/00fe4188-8672-45ba-a10a-55f408f826ec.jpeg"
+    "photo": "https://imgcdn.bokun.tools/1b8bba54-72ba-4fd4-83f2-a291ae04f8ad.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/1b8bba54-72ba-4fd4-83f2-a291ae04f8ad.jpeg"
    },
    {
     "title": "Try a crane game",
     "body": "Enjoy one crane game at a Japanese arcade. Your guide will share tips to help you win.",
-    "titleJa": "ゲームセンターでクレーンゲームを1回体験。",
+    "titleJa": "ゲームセンターでクレーンゲームを1回体験",
     "bodyJa": "ガイドがコツをお伝えします。",
-    "photo": "https://imgcdn.bokun.tools/46715577-0a0e-4834-9e95-3615797c3ef3.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/46715577-0a0e-4834-9e95-3615797c3ef3.jpeg"
+    "photo": "https://imgcdn.bokun.tools/5d0484e9-b732-4cb0-b3ea-e84d410d3826.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/5d0484e9-b732-4cb0-b3ea-e84d410d3826.jpeg"
    },
    {
     "title": "Try a gachapon machine",
     "body": "Experience one gachapon machine and discover Japan's unique capsule toy culture.",
-    "titleJa": "ガチャガチャを1回体験。",
+    "titleJa": "ガチャガチャを1回体験",
     "bodyJa": "日本のカプセルトイ文化をご紹介します。",
-    "photo": "https://imgcdn.bokun.tools/0d6f9f52-433d-48b8-b4a7-f02225a82baf.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/0d6f9f52-433d-48b8-b4a7-f02225a82baf.jpeg"
+    "photo": "https://imgcdn.bokun.tools/64b1e1ea-0cbf-44a3-959f-6597a3aada88.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/64b1e1ea-0cbf-44a3-959f-6597a3aada88.jpeg"
    },
    {
     "title": "Walk through Yokohama's shopping district",
     "body": "Explore Yokohama on foot while discovering the local pop culture scene and shopping areas.",
-    "titleJa": "横浜ウォーキングツアー。",
+    "titleJa": "横浜ウォーキングツアー",
     "bodyJa": "横浜のショッピングエリアを歩きながら、地元のポップカルチャーをご案内。",
-    "photo": "https://imgcdn.bokun.tools/9854d387-53f6-40d7-9a9f-88dfb86d1ced.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/9854d387-53f6-40d7-9a9f-88dfb86d1ced.jpeg"
+    "photo": "https://imgcdn.bokun.tools/85c970c7-c54d-4de8-92d9-291b8a4042c2.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/85c970c7-c54d-4de8-92d9-291b8a4042c2.jpeg"
    },
    {
     "title": "Take a short break",
     "body": "Enjoy a selection of Japanese sweets.",
-    "titleJa": "少し休憩。",
+    "titleJa": "少し休憩",
     "bodyJa": "日本のスイーツをお楽しみいただきます。",
-    "photo": "https://imgcdn.bokun.tools/7a05b530-6d92-4c93-8039-60e8c7edce35.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/7a05b530-6d92-4c93-8039-60e8c7edce35.jpeg"
+    "photo": "https://imgcdn.bokun.tools/2357ee44-a2c4-4dfb-822d-0b5794dac592.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/2357ee44-a2c4-4dfb-822d-0b5794dac592.jpeg"
    },
    {
     "title": "Visit Pokémon Center Yokohama",
     "body": "Browse exclusive Pokémon merchandise and create your own Pokémon medal as a special souvenir.",
-    "titleJa": "ポケモンセンター ヨコハマ。",
+    "titleJa": "ポケモンセンター ヨコハマ",
     "bodyJa": "限定グッズを見て回り、限定ポケモンメダル作成体験。",
-    "photo": "https://imgcdn.bokun.tools/1d0c1cc1-68f8-4a80-87fd-0dde0d639f0b.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/1d0c1cc1-68f8-4a80-87fd-0dde0d639f0b.jpeg"
+    "photo": "https://imgcdn.bokun.tools/8486e7e4-e115-483e-8ad5-dde36ee84f0a.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/8486e7e4-e115-483e-8ad5-dde36ee84f0a.jpeg"
    },
    {
     "title": "Free time",
     "body": "Your guide will share recommendations for local shops, restaurants, and places to explore before the tour concludes.",
-    "titleJa": "フリータイム。",
+    "titleJa": "フリータイム",
     "bodyJa": "ガイドからおすすめの店や食事の情報をお伝えして終了。",
-    "photo": "https://imgcdn.bokun.tools/76677d46-7874-4b19-900e-868f397683eb.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/76677d46-7874-4b19-900e-868f397683eb.jpeg"
+    "photo": "https://imgcdn.bokun.tools/d8879924-661f-48e5-8062-f028dec0294e.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/d8879924-661f-48e5-8062-f028dec0294e.jpeg"
    }
   ],
   "includedEn": "Gachapon experience\nCrane game experience\nCreate-your-own Pokémon medal experience at Pokémon Center Yokohama\nJapanese sweets\nPokémon card souvenir (subject to availability; no specific card or regulation guaranteed)\nInsurance",
@@ -1139,8 +1123,8 @@
   "notIncludedJa": "個人的な買い物\n個人的な飲食\n交通費",
   "bringEn": "Cash\nComfortable walking shoes",
   "bringJa": "・Cash\n・歩きやすい靴",
-  "knowEn": "This is a walking tour covering approximately 3–4 km. Guests who have difficulty walking this distance are kindly asked not to participate.",
-  "knowJa": "このツアーはウォーキングツアーです。足が不自由な方、3〜4km程度の歩行が難しい方の参加はご遠慮ください。",
+  "knowEn": "This is a walking tour covering approximately 3–4 km. Guests who have difficulty walking this distance are kindly asked not to participate.\nCancellation policy: 20% at 10–8 days before / 30% at 7–3 days before / 40% at 2 days before / 50% at 1 day before / 100% within 23 hours before departure.",
+  "knowJa": "このツアーはウォーキングツアーです。足が不自由な方、3〜4km程度の歩行が難しい方の参加はご遠慮ください。\nキャンセルポリシー：10日前〜8日前20%、7日前〜3日前30%、2日前40%、1日前（前日）50%、23時間前以降100%のキャンセル料を頂戴いたします。",
   "includedChipsEn": "",
   "includedChipsJa": "",
   "knowChipsEn": "",
@@ -1168,7 +1152,7 @@
  },
  {
   "id": "tokyo-shibuya-harajuku-anime",
-  "bokunId": 1281293,
+  "bokunId": 1291292,
   "number": "07",
   "area": "Tokyo",
   "length": "Half-day",
@@ -1178,8 +1162,8 @@
    "walking"
   ],
   "cover": {
-   "url": "https://bokun.s3.amazonaws.com/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg",
-   "base": "https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg"
+   "url": "https://bokun.s3.amazonaws.com/ae052785-d196-424f-904a-6343abf4290f.jpeg",
+   "base": "https://imgcdn.bokun.tools/ae052785-d196-424f-904a-6343abf4290f.jpeg"
   },
   "hoursEn": "3 hours and 30 minutes",
   "hoursJa": "3 時間30 分",
@@ -1187,9 +1171,9 @@
   "priceJa": "¥15,000〜",
   "priceRows": [
    {
-    "category": "POP CULTURE Harf-Day",
-    "category_ja": "POP CULTURE Harf-Day",
-    "min": 1,
+    "category": "POP CULTURE Half-Day",
+    "category_ja": "POP CULTURE Half-Day",
+    "min": 2,
     "max": 10,
     "amount": 15000,
     "currency": "JPY",
@@ -1202,74 +1186,74 @@
    {
     "title": "Meet your guide at JR Harajuku Station",
     "body": "Meet your English-speaking local guide in front of WITH HARAJUKU.",
-    "titleJa": "JR原宿駅東口でガイドと合流。",
+    "titleJa": "JR原宿駅東口でガイドと合流",
     "bodyJa": "WITH HARAJUKU前でガイドと合流。",
-    "photo": "https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/16134824-24b3-44b0-9983-52a1e42bf45c.jpeg"
+    "photo": "https://imgcdn.bokun.tools/0af436a9-cd87-4281-a2bf-cebe2e8954bb.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/0af436a9-cd87-4281-a2bf-cebe2e8954bb.jpeg"
    },
    {
     "title": "Walk along Takeshita Street",
     "body": "Explore shops featuring Kawaii culture, character goods, and the latest Japanese fashion trends.",
-    "titleJa": "竹下通りを歩き",
+    "titleJa": "竹下通りを歩きます",
     "bodyJa": "Kawaiiカルチャーとトレンドファッションのショップを巡ります。",
-    "photo": "https://imgcdn.bokun.tools/0d3f8a7b-d85e-4370-bfcb-de502769e395.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/0d3f8a7b-d85e-4370-bfcb-de502769e395.jpeg"
+    "photo": "https://imgcdn.bokun.tools/ae052785-d196-424f-904a-6343abf4290f.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/ae052785-d196-424f-904a-6343abf4290f.jpeg"
    },
    {
     "title": "Purikura Experience",
     "body": "With your guide's support, take your purikura photos and print them on the spot to take home as a unique souvenir.",
     "titleJa": "プリクラ体験",
     "bodyJa": "ガイドのサポートで撮影し、その場でお持ち帰りいただけます。",
-    "photo": "https://imgcdn.bokun.tools/e3b85331-9a35-4a88-b62f-01e9b0d193ba.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/e3b85331-9a35-4a88-b62f-01e9b0d193ba.jpeg"
+    "photo": "https://imgcdn.bokun.tools/b9a8cb0b-0247-43d1-92b1-379ca396105d.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/b9a8cb0b-0247-43d1-92b1-379ca396105d.jpeg"
    },
    {
     "title": "Shopping",
     "body": "Browse character merchandise, Kawaii accessories, and Japanese souvenirs.",
     "titleJa": "ショッピング",
     "bodyJa": "キャラクターグッズ、Kawaiiアクセサリー、お土産のショッピング。",
-    "photo": "https://imgcdn.bokun.tools/9854d387-53f6-40d7-9a9f-88dfb86d1ced.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/9854d387-53f6-40d7-9a9f-88dfb86d1ced.jpeg"
+    "photo": "https://imgcdn.bokun.tools/017c7eab-a7ab-4b22-865b-ec23f8b27a71.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/017c7eab-a7ab-4b22-865b-ec23f8b27a71.jpeg"
    },
    {
     "title": "A Sweet Break",
     "body": "Take a break and enjoy a Japanese sweet, such as a famous Harajuku crepe.",
     "titleJa": "気分転換",
     "bodyJa": "原宿名物のクレープなど、日本のスイーツをお楽しみいただきます。",
-    "photo": "https://imgcdn.bokun.tools/7a05b530-6d92-4c93-8039-60e8c7edce35.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/7a05b530-6d92-4c93-8039-60e8c7edce35.jpeg"
+    "photo": "https://imgcdn.bokun.tools/91e4b34d-5756-4562-974c-e69138404007.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/91e4b34d-5756-4562-974c-e69138404007.jpeg"
    },
    {
     "title": "Walk to Shibuya",
     "body": "Walk from Harajuku to Shibuya and visit the Hachiko Statue, while learning the story behind this beloved Tokyo landmark.",
     "titleJa": "渋谷へ徒歩移動",
     "bodyJa": "忠犬ハチ公像を訪れ、由来をご紹介します。",
-    "photo": "https://imgcdn.bokun.tools/c58d3a7f-7a54-466d-8744-e117b3183200.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/c58d3a7f-7a54-466d-8744-e117b3183200.jpeg"
+    "photo": "https://imgcdn.bokun.tools/3fa3bc0b-af49-4e2b-8b25-c4e0014cff87.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/3fa3bc0b-af49-4e2b-8b25-c4e0014cff87.jpeg"
    },
    {
     "title": "Shibuya Scramble Crossing",
     "body": "Cross the famous Shibuya Scramble Crossing and continue through Center-gai, one of the area's lively shopping streets.",
     "titleJa": "スクランブル交差点通過",
     "bodyJa": "スクランブル交差点を渡り、センター街を歩きます。",
-    "photo": "https://imgcdn.bokun.tools/12d4fd10-5e5b-4d5d-8489-36a9fbc09153.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/12d4fd10-5e5b-4d5d-8489-36a9fbc09153.jpeg"
+    "photo": "https://imgcdn.bokun.tools/47a29381-f22b-4bcf-9a42-c8c636bdfd91.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/47a29381-f22b-4bcf-9a42-c8c636bdfd91.jpeg"
    },
    {
     "title": "Visit",
     "body": "Visit Nintendo TOKYO and Pokémon Center Shibuya.",
     "titleJa": "訪問",
     "bodyJa": "Nintendo TOKYO とポケモンセンターシブヤを訪問。",
-    "photo": "https://imgcdn.bokun.tools/3c9f872a-ac30-4b87-b5e4-bb66a4b50ae7.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/3c9f872a-ac30-4b87-b5e4-bb66a4b50ae7.jpeg"
+    "photo": "https://imgcdn.bokun.tools/7b289b9e-538c-4f2d-aef2-33ff7eb27513.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/7b289b9e-538c-4f2d-aef2-33ff7eb27513.jpeg"
    },
    {
     "title": "Tour Ends",
     "body": "Your guide will share recommendations for places to explore after the tour. The tour then ends, and you are free to continue exploring Shibuya at your own pace.",
     "titleJa": "解散",
     "bodyJa": "ガイドからおすすめスポットをご案内して終了。その後は自由行動です。",
-    "photo": "https://imgcdn.bokun.tools/b9e97833-b803-4c6e-b297-c3588b1abfec.jpeg?w=300&h=300",
-    "photoBase": "https://imgcdn.bokun.tools/b9e97833-b803-4c6e-b297-c3588b1abfec.jpeg"
+    "photo": "https://imgcdn.bokun.tools/4f27ac04-3d7c-47be-9ddf-385d3fafce37.jpeg?w=300&h=300",
+    "photoBase": "https://imgcdn.bokun.tools/4f27ac04-3d7c-47be-9ddf-385d3fafce37.jpeg"
    }
   ],
   "includedEn": "Purikura experience, including photos and prints\nJapanese sweets, such as a Harajuku crepe\nPokémon card souvenir (no specific card or regulation guaranteed)\nEnglish-speaking local guide to support you throughout the experiences\nInsurance",
