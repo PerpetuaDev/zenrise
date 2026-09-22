@@ -111,12 +111,68 @@ async function mailgunSend(env, msg) {
   return res.json();
 }
 
+// Cloudflare Turnstile. The endpoint is public and unauthenticated, and it
+// sends mail to an address taken from the request body -- so without this,
+// anyone can make bookings@mg.zenrise.jp deliver to a recipient of their
+// choosing. The cost of that is deliverability: a sending domain that
+// collects complaints starts putting real booking confirmations in spam.
+//
+// Must match the widget's data-action in contact.html.
+const TURNSTILE_ACTION = 'booking';
+
+async function turnstileOk(env, token, clientIp) {
+  // Deployment-specific. Never contains localhost in production: the widget
+  // issues tokens for local development, and this is what refuses them.
+  const expectedHostnames = new Set(
+    String(env.TURNSTILE_HOSTNAMES || '').split(',').map(function (h) { return h.trim(); }).filter(Boolean)
+  );
+  if (typeof token !== 'string' || token.length === 0 || token.length > 2048 ||
+      expectedHostnames.size === 0 || !env.TURNSTILE_SECRET) {
+    return false;
+  }
+
+  const form = new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token });
+  if (clientIp) form.set('remoteip', clientIp);
+
+  let result;
+  try {
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      signal: AbortSignal.timeout(10000),
+      body: form.toString(),
+    });
+    if (!r.ok) throw new Error('siteverify ' + r.status);
+    result = await r.json();
+  } catch (e) {
+    // Network error, non-2xx, or a non-JSON body. Fail closed: a siteverify
+    // outage stops bookings rather than waving everything through.
+    console.error('turnstile: ' + e.message);
+    return false;
+  }
+
+  // action and hostname both matter. Without them a token minted by this
+  // sitekey on any other surface, or replayed from another origin, passes.
+  return result.success === true &&
+    result.action === TURNSTILE_ACTION &&
+    expectedHostnames.has(result.hostname);
+}
+
 exports.main = async function (args) {
   const env = process.env;
   const b = args; // web functions merge the JSON body into args
 
   // honeypot: the form never fills "website"; bots usually do
   if (b.website) return { statusCode: 200, body: { ok: true } };
+
+  // Before field validation, so an unverified caller learns nothing about
+  // what the endpoint accepts.
+  const headers = b.__ow_headers || {};
+  const clientIp = String(headers['cf-connecting-ip'] || headers['x-forwarded-for'] || '')
+    .split(',')[0].trim();
+  if (!(await turnstileOk(env, b['cf-turnstile-response'], clientIp))) {
+    return { statusCode: 403, body: { ok: false, error: 'verification failed' } };
+  }
 
   if (!b.name || !b.email || !/.+@.+/.test(String(b.email)) || !b.ref) {
     return { statusCode: 400, body: { ok: false, error: 'missing fields' } };

@@ -749,6 +749,8 @@
   }
   .consent input:checked + .box::after { content: "✓"; }
 
+  .turnstile-box { margin: 28px 0 0; min-height: 65px; }
+
   /* Sent state */
   .sent { text-align: left; padding: 40px 0 0; }
   .sent .num {
@@ -1381,6 +1383,8 @@
           <span data-i18n-html="booking_s5_consent">I'm happy for Zenrise to email me about the trip and any follow-up, and I've read and understood the <a href="terms.html" target="_blank" style="text-decoration: underline">booking terms &amp; conditions</a>, including the cancellation and privacy policies.</span>
         </label>
 
+        <div class="turnstile-box" id="turnstile-box"></div>
+
         <div class="step-nav">
           <button class="btn-back" data-back><span class="arrow">←</span> <span data-i18n="booking_btn_back">Back</span></button>
           <button class="btn-next send" id="send-btn" disabled><span data-i18n-html="booking_btn_send">Send to Zenrise</span> <span class="arrow">→</span></button>
@@ -1449,6 +1453,16 @@
 
 </div>
 
+<script>
+  // Turnstile's api.js is async: onload can fire before the booking script at
+  // the end of this file has defined its renderer. Whichever lands first, the
+  // other drains it.
+  window.zenriseTurnstileInit = function () {
+    window.__tsReady = true;
+    if (window.__tsRender) window.__tsRender();
+  };
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=zenriseTurnstileInit&render=explicit" async defer></script>
 <script src="lang.js"></script>
 <script src="datepicker.js"></script>
 
@@ -1554,7 +1568,7 @@
       document.getElementById('notes').value = state.notes;
       document.getElementById('consent').checked = state.consent;
       var sendBtn = document.getElementById('send-btn');
-      sendBtn.disabled = !state.consent;
+      sendBtn.disabled = !sendReady();
     }
     // Mobile: the progress row lives under the current step's heading;
     // desktop keeps it as the booking grid's sidebar. The aside is moved,
@@ -1606,7 +1620,7 @@
       if (n === 3) growNotes();
       // always render the summary on entering review — covers landing
       // there on a cold reload, where no nav click has rendered it yet
-      if (n === 4) renderSummary();
+      if (n === 4) { renderSummary(); ensureTurnstile(); }
       save();
       if (window.__fit) window.__fit();
       // Mobile: the steps are tall and Continue sits at their bottom — the
@@ -1623,12 +1637,40 @@
         }
       }
     }
+    // Turnstile. Kept off `state` on purpose -- state is saved to
+    // localStorage, and a restored token is always a spent or expired one.
+    var tsToken = '';
+    var tsWidgetId = null;
+
+    function sendReady() { return state.consent && !!tsToken; }
+    function syncSend() {
+      var btn = document.getElementById('send-btn');
+      if (btn) btn.disabled = !sendReady();
+    }
+    function ensureTurnstile() {
+      if (tsWidgetId !== null || !window.turnstile) return;
+      var box = document.getElementById('turnstile-box');
+      if (!box) return;
+      // A widget rendered into a display:none step never runs its challenge,
+      // and the tsWidgetId guard above would then block the real render when
+      // the step opens. Same offsetParent test growNotes uses, same reason.
+      if (box.offsetParent === null) return;
+      tsWidgetId = window.turnstile.render(box, {
+        sitekey: '0x4AAAAAAE_jtfvAG3HK1aNR',
+        action: 'booking',
+        callback: function (tok) { tsToken = tok; syncSend(); },
+        'expired-callback': function () { tsToken = ''; syncSend(); },
+        'error-callback': function () { tsToken = ''; syncSend(); }
+      });
+    }
+    window.__tsRender = ensureTurnstile;
+
     function canAdvance() {
       if (state.step === 0) return state.region.length > 0;
       if (state.step === 1) return !!state.length;
       if (state.step === 2) return !!state.experience; // dates optional, party always set
       if (state.step === 3) return state.name.trim() && /.+@.+/.test(state.email);
-      if (state.step === 4) return state.consent;
+      if (state.step === 4) return sendReady();
       return true;
     }
     function updateNext() {
@@ -1696,7 +1738,7 @@
     // consent
     document.getElementById('consent').addEventListener('change', function (e) {
       state.consent = e.target.checked;
-      document.getElementById('send-btn').disabled = !state.consent;
+      syncSend();
       save();
     });
 
@@ -1784,7 +1826,7 @@
     // front-end-only mode: no network call, straight to the sent view.
     var RELAY_URL = 'https://faas-sgp1-18bc02ac.doserverless.co/api/v1/web/fn-a4fd4d35-da69-44b6-9770-10dbeca95109/zenrise/booking';
     document.getElementById('send-btn').addEventListener('click', function () {
-      if (!state.consent) return;
+      if (!sendReady()) return;
       var btn = this;
       state.ref = 'ZNR-' + Math.random().toString(36).slice(2, 6).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
       document.getElementById('ref-code').textContent = state.ref;
@@ -1801,6 +1843,7 @@
         party: state.party, experience: state.experience,
         name: state.name, email: state.email, from: state.from,
         interests: state.interests, notes: state.notes,
+        'cf-turnstile-response': tsToken,
       };
       fetch(RELAY_URL, {
         method: 'POST',
@@ -1812,7 +1855,11 @@
       }).catch(function () {
         alert(t('booking_send_err'));
       }).finally(function () {
-        btn.disabled = !state.consent;
+        // The token is spent whether or not the send succeeded, so a retry
+        // needs a fresh one.
+        tsToken = '';
+        if (tsWidgetId !== null && window.turnstile) window.turnstile.reset(tsWidgetId);
+        syncSend();
         label.textContent = t('booking_btn_send');
       });
     });
