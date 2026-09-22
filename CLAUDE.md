@@ -44,6 +44,13 @@ Each of these exists only here, and staging will silently undo it:
 - **`relay/`** is the source of the DigitalOcean function `contact.html` still
   POSTs to. The function runs whether or not the source is here; deleting it
   loses the source of something live.
+- **The Turnstile widget in `contact.html`.** The relay verifies a Turnstile
+  token and fails closed, so a `contact.html` without the widget does not
+  degrade gracefully — every send returns 403 and the booking form stops
+  taking enquiries with no error anywhere but the visitor's screen. Staging's
+  `contact.html` predates it. Sitekey `0x4AAAAAAE_jtfvAG3HK1aNR`, action
+  `booking`; `cms/tests/test_turnstile_embed.py` guards both halves, and the
+  action string has to match on both sides or every token is rejected.
 
 ## Build pipeline
 
@@ -80,7 +87,7 @@ so a retired CMS field cannot break a build.
 
 ## Tests
 
-`python3 -m pytest cms/tests` — 497 tests. Also `python3 -m unittest discover -s
+`python3 -m pytest cms/tests` — 526 tests. Also `python3 -m unittest discover -s
 cms/tests -t .`, which is what CI uses so the runner needs no install.
 
 **Both build workflows run them**, after the build and before the commit, so a
