@@ -34,14 +34,21 @@ PUBLISHED_NUMBERS = os.path.join(DATA, 'published-tour-numbers.json')
 
 
 def renumbered(locked, built):
-    """{slug: (was, now)} for tours whose number moved.
+    """{slug: (expected, now)} for tours whose number moved for any reason
+    other than a tour ahead of them going unpublished.
 
     Only slugs present in both are compared: a newly published tour has no
     number to keep, and an unpublished one no longer has a page to check.
+    A tour leaving is allowed to pull the ones after it up (the build closes
+    the gap -- see bokun_source.close_number_gaps), so each surviving tour is
+    expected at its rank among the locked tours that still publish. A tour
+    inserted ahead of live ones still pushes them past that rank and is caught.
     """
-    return {slug: (locked[slug], built[slug])
-            for slug in sorted(locked)
-            if slug in built and built[slug] != locked[slug]}
+    survivors = sorted((s for s in locked if s in built), key=lambda s: locked[s])
+    expected = {s: f'{i:02d}' for i, s in enumerate(survivors, 1)}
+    return {slug: (expected[slug], built[slug])
+            for slug in sorted(expected)
+            if built[slug] != expected[slug]}
 
 
 # The two surfaces a visitor reads a tour number off. The home tile is where
@@ -124,6 +131,34 @@ class TestRenumberDetection(unittest.TestCase):
 
     def test_a_newly_published_tour_is_not_a_renumbering(self):
         self.assertEqual(renumbered({'a': '01'}, {'a': '01', 'new': '02'}), {})
+
+    def test_tours_moving_up_into_an_unpublished_tours_gap_is_not_a_renumbering(self):
+        self.assertEqual(renumbered({'a': '01', 'gone': '02', 'c': '03'},
+                                    {'a': '01', 'c': '02'}), {})
+
+    def test_a_tour_inserted_after_a_removal_is_still_reported(self):
+        self.assertEqual(renumbered({'a': '01', 'gone': '02', 'c': '03'},
+                                    {'a': '01', 'new': '02', 'c': '03'}),
+                         {'c': ('02', '03')})
+
+
+class TestCloseNumberGaps(unittest.TestCase):
+    """The build closes a hole left by a tour that stopped publishing."""
+
+    def recs(self, *numbers):
+        return [{'id': f't{n}', 'number': n} for n in numbers]
+
+    def test_a_missing_number_is_closed_up_in_order(self):
+        recs = self.recs('04', '01', '02', '10', '05')
+        warnings = bokun_source.close_number_gaps(recs)
+        self.assertEqual({r['id']: r['number'] for r in recs},
+                         {'t01': '01', 't02': '02', 't04': '03', 't05': '04', 't10': '05'})
+        self.assertEqual(len(warnings), 3)
+
+    def test_a_clean_run_is_left_alone(self):
+        recs = self.recs('01', '02', '03')
+        self.assertEqual(bokun_source.close_number_gaps(recs), [])
+        self.assertEqual([r['number'] for r in recs], ['01', '02', '03'])
 
     def test_an_unpublished_tour_is_not_a_renumbering(self):
         self.assertEqual(renumbered({'a': '01', 'gone': '02'}, {'a': '01'}), {})

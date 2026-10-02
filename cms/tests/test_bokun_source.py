@@ -1004,8 +1004,11 @@ class TestGates(unittest.TestCase):
         rec = next(r for r in records if r['id'] == 'zj-num-test')
         # Ikebana, candle and sword still hold pins 01, 02 and 04, so the free
         # run is 03, 05, 06 -- and zj-num-test is appended third, after the two
-        # seeded placeholders took 03 and 05.
-        self.assertEqual(rec['number'], '06')
+        # seeded placeholders took 03 and 05. It is the only tour this fake
+        # catalogue publishes, so close_number_gaps then shows it as 01; the
+        # allocation survives in the warning that move leaves behind.
+        self.assertIn('[zj-num-test] number 06 -> 01', ' '.join(warnings))
+        self.assertEqual(rec['number'], '01')
 
     def test_explicit_config_number_still_overrides_derivation(self):
         cfg = self._cfg_without_entry(ZEN)
@@ -1013,7 +1016,8 @@ class TestGates(unittest.TestCase):
         registry = {'900001': 'placeholder-one'}
         records, warnings, _ = self._run(FakeClient(), cfg, registry=registry)
         rec = next(r for r in records if r['id'] == 'zj-num-test')
-        self.assertEqual(rec['number'], '99')
+        self.assertIn('[zj-num-test] number 99 -> 01', ' '.join(warnings))
+        self.assertEqual(rec['number'], '01')
 
 
 class TestConfigEntryIsOptional(unittest.TestCase):

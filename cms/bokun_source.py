@@ -498,6 +498,33 @@ def derive_number(pid, registry, cfg):
     return free[rank]
 
 
+def close_number_gaps(records):
+    """Renumber the published tours 01..N, keeping the order their allocated
+    numbers give them. Returns a warning per tour that moved.
+
+    An allocated number (pin or derived) can belong to a tour that does not
+    publish: one taken off the Bokun Website list, flipped from PRIVATE to
+    UNLISTED, or held back by any other gate. Rendering the allocations as-is
+    leaves a hole -- on 2026-10-02 zen-journey (pinned 03) went UNLISTED and the
+    site would have read 01, 02, 04..10. Removal is the client's call, so the
+    build closes the gap rather than failing on it: every tour after the hole
+    moves up one, and moves back the moment the missing tour returns.
+
+    Only ever shifts tours down to fill a hole, never reorders them, so the
+    published-numbers guard in test_tours_numbering still catches a real
+    renumbering (a tour inserted ahead of live ones).
+    """
+    numbered = sorted((r for r in records if r['number']), key=lambda r: r['number'])
+    moved = []
+    for i, rec in enumerate(numbered, 1):
+        label = f'{i:02d}'
+        if rec['number'] != label:
+            moved.append(f'[{rec["id"]}] number {rec["number"]} -> {label}: a tour '
+                         f'numbered ahead of it is not publishing, so the gap closed.')
+            rec['number'] = label
+    return moved
+
+
 def fetch_records(client, cfg, registry_path=None):
     """Resolve the catalogue through all four gates (spec 3.1-3.4), then build
     a record for every tour that survives them.
@@ -701,6 +728,8 @@ def fetch_records(client, cfg, registry_path=None):
 
     if registry_dirty:
         tours_slug.save_registry(registry_path, registry)
+
+    warnings += close_number_gaps(records)
 
     warnings.append(Note(f'resolved catalogue: {len(resolved)} tour(s).'))
     for pid, slug, reason in resolved:
