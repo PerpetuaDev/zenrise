@@ -423,7 +423,16 @@
     border-color: var(--bg);
     color: var(--ink);
   }
-  .card.on .tick::after { content: "✓"; }
+  /* Tick drawn as an SVG mask, not a ✓ glyph: the JA fallback font sits the
+     glyph low, so a font character never centres reliably in the circle. */
+  .card.on .tick::after,
+  .consent input:checked + .box::after {
+    content: "";
+    width: 0.85em; height: 0.85em;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4 4.8 9.2 10 3' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4 4.8 9.2 10 3' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
   .card .num {
     font-family: var(--sans);
     font-size: 12px;
@@ -747,7 +756,6 @@
     border-color: var(--ink);
     color: var(--bg);
   }
-  .consent input:checked + .box::after { content: "✓"; }
 
   .turnstile-box { margin: 28px 0 0; min-height: 65px; }
 
